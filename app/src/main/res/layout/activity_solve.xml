@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ActivityFragment.SolveActivity">
+
+    <fragment
+        android:id="@+id/DrawFragmentTwo"
+        android:name="com.example.geosolve.ActivityFragment.DrawFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/background_list" />
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent"
+        android:padding="15dp"
+        android:src="@drawable/ic_back" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/background_list"
+        android:src="@color/lightThemeColor" />
+
+    <ImageView
+        android:id="@+id/background_list"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentBottom="true"
+        android:src="@color/backgroundColor" />
+
+    <fragment
+        android:id="@+id/DrawFragment"
+        android:name="com.example.geosolve.ActivityFragment.StepListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp" />
+
+</RelativeLayout>
