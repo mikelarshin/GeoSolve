@@ -22,10 +22,11 @@ public class Node {
         this.y = y;
     }
 
-    public void containsRadius(float x, float y) {
-        boolean xBool = this.x - 40 < x && x < this.x + 40;
-        boolean yBool = this.y - 40 < y && y < this.y + 40;
+    public boolean inRadius(float x, float y) {
+        boolean xBool = this.x - 25 < x && x < this.x + 25;
+        boolean yBool = this.y - 25 < y && y < this.y + 25;
         move = xBool && yBool;
+        return move;
     }
 
     public boolean isMove() {

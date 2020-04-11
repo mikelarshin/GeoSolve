@@ -26,6 +26,9 @@ public class SolveActivity extends AppCompatActivity {
         });
 
         RecycleAdapter.addItem(new StepSlove("Выражение", "Правило"));
-        RecycleAdapter.addItem(new StepSlove("%s + %s = %s", "Сложение", "1", "1", "2"));
+        for (int i = 1; i < 100; i += i) {
+            RecycleAdapter.addItem(new StepSlove("%s + %s = %s", "Сложение",
+                    Integer.toString(i), Integer.toString(i), Integer.toString(i+i)));
+        }
     }
 }

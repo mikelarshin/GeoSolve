@@ -52,7 +52,8 @@ public class DrawCanvas extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 for (Node node : figure.getNodes()) {
-                    node.containsRadius(mx, my);
+                    if(node.inRadius(mx, my))
+                        break;
                 }
                 break;
 
