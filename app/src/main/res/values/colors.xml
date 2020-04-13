@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="boldThemeColor">#a04343</color>
-    <color name="lightThemeColor">#ceb2b2</color>
-    <color name="backgroundColor">#f7f4f4</color>
+    <color name="BoldColor">#000</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="GrayColor">#DDD</color>
 </resources>
