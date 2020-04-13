@@ -1,21 +1,23 @@
 package com.example.geosolve.model
 
 import android.util.Log
+import com.example.geosolve.status.Mode
+import com.example.geosolve.status.State
 import java.util.*
 
 class Figure {
 
     private val lines: ArrayList<Line> = ArrayList()
     val nodes: ArrayList<Node> = ArrayList()
-    var mode: String = "edit"
-    private var state: String = "did"
+    var mode: Mode = Mode.ADDMOVE
+    private var state: State = State.DID
     private var numOfCall: Int = 0
 
     fun setState(touchX: Float, touchY: Float) {
         for (node in nodes) {
             if (node.inRadius(touchX, touchY)) {
                 node.isMove = true
-                state = "move or finish"
+                state = State.ONPOINT
                 break
             }
         }
@@ -32,18 +34,18 @@ class Figure {
 
     fun addNodeIf(touchX: Float, touchY: Float) {
         when (mode) {
-            "edit" -> {
-                if (state == "did")
+            Mode.ADDMOVE -> {
+                if (state == State.DID)
                     addNode(Node(touchX, touchY))
-                else if ((state == "move or finish") and (numOfCall < 2)) {
+                else if ((state == State.ONPOINT) and (numOfCall < 2)) {
                     Log.e("tag", "finish the figure")               // finish the figure!!!
                 }
             }
-            "del" -> delNode(touchX, touchY)
+            Mode.DELMOVE -> delNode(touchX, touchY)
         }
 
         numOfCall = 0
-        state = "did"
+        state = State.DID
         stopAllNode()
     }
 
@@ -62,7 +64,7 @@ class Figure {
     private fun delNode(touchX: Float, touchY: Float) {
         for (node in nodes)
             if (node.inRadius(touchX, touchY)) {
-                val index:Int = nodes.indexOf(node)
+                val index: Int = nodes.indexOf(node)
                 nodes.removeAt(index)
                 break
             }

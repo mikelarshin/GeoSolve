@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import com.example.geosolve.status.Mode
 import com.example.geosolve.model.Figure
 
 class CanvasView : View {
@@ -27,7 +28,11 @@ class CanvasView : View {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -71,12 +76,12 @@ class CanvasView : View {
         return true
     }
 
-    fun clear(){
+    fun clear() {
         figure = Figure()
         invalidate()
     }
 
-    fun setMode(mode:String){
+    fun setMode(mode: Mode) {
         figure.mode = mode
     }
 }
