@@ -1,0 +1,7 @@
+sudo: false
+
+language: android
+
+branches:
+  only:
+    - master
