@@ -1,11 +1,25 @@
 language: android
-dist: trusty
+
+jdk: oraclejdk8
+
 android:
   components:
-    - build-tools-29.0.3
-    - android-29
-    - extra
+    - platform-tools
+    - tools
+    - build-tools-25.0.2
+    - android-25
+    - extra-android-m2repository
 
 branches:
   only:
     - master
+
+install:
+  - chmod +x ./gradlew
+
+script: ./gradlew clean assembleDebug
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
