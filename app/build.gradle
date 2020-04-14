@@ -6,6 +6,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    lintOptions {
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.example.geosolve"
         minSdkVersion 16
@@ -23,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 
 }
 
