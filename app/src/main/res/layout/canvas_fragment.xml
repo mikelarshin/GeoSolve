@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.CanvasFragment">
+    tools:context=".view.CanvasFragment">
 
     <com.example.geosolve.view.CanvasView
         android:id="@+id/canvas"
@@ -18,7 +18,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:src="@drawable/ic_calculator"
+        app:srcCompat="@drawable/ic_calculator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_clear"
+        app:srcCompat="@drawable/ic_clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -36,7 +36,7 @@
         android:id="@+id/edit_mode_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_edit_mode"
+        app:srcCompat="@drawable/ic_edit_mode"
         app:layout_constraintBottom_toBottomOf="@+id/clear_button"
         app:layout_constraintEnd_toStartOf="@+id/clear_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,7 +45,7 @@
         android:id="@+id/delete_mode_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_delete_mode"
+        app:srcCompat="@drawable/ic_delete_mode"
         app:layout_constraintBottom_toBottomOf="@+id/clear_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/clear_button" />

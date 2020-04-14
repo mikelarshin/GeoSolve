@@ -1,4 +1,4 @@
-package com.example.geosolve.status
+package com.example.geosolve.const_enum
 
 enum class Mode(s: String) {
     ADDMOVE("addmove"),
