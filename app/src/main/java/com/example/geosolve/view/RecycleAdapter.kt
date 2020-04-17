@@ -60,7 +60,7 @@ class RecycleAdapter(context: Context?) : RecyclerView.Adapter<RecycleAdapter.Re
             holder.itemView.findViewById<View>(R.id.rect).visibility = View.GONE
 
         holder.itemView.expression.text = stepSloveList[position].expression
-        holder.itemView.rule.text = stepSloveList[position].rule
+        holder.itemView.rule.text = stepSloveList[position].verbal
     }
 
     override fun getItemCount(): Int {

@@ -2,15 +2,12 @@ package com.example.geosolve.view
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.Point
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import com.example.geosolve.MainActivity
 import com.example.geosolve.Presenter
-import com.example.geosolve.const_enum.Mode
-import com.example.geosolve.model.Figure
 
 class CanvasView : View {
 

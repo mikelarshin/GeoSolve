@@ -2,13 +2,15 @@ package com.example.geosolve
 
 import android.content.Context
 import android.graphics.Canvas
-import android.view.MotionEvent
+import android.os.Bundle
 import androidx.navigation.NavController
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.geosolve.const_enum.Mode
 import com.example.geosolve.model.DrawControl
-import com.example.geosolve.model.Figure
+import com.example.geosolve.model.Solve
+import com.example.geosolve.model.figure.Figure
 import com.example.geosolve.view.CanvasView
 import com.example.geosolve.view.RecycleAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,10 +21,12 @@ class Presenter {
     lateinit var clearButton: FloatingActionButton
     lateinit var editModeButton: FloatingActionButton
     lateinit var deleteModeButton: FloatingActionButton
+    lateinit var markModeButton: FloatingActionButton
     lateinit var canvasView: CanvasView
 
     // CanvasView
-    private var figure: Figure = Figure()
+    var figure: Figure =
+        Figure()
     private var drawControl: DrawControl = DrawControl(figure)
 
     // SolveFragment
@@ -36,15 +40,15 @@ class Presenter {
     }
 
     fun onTouchDown(x: Float, y: Float){
-        drawControl.setState(x, y)
+        drawControl.onTouchDown(x, y)
     }
 
     fun onTouchMove(x: Float, y: Float){
-        drawControl.moveNode(x, y)
+        drawControl.onTouchMove(x, y)
     }
 
     fun onTouchUp(x: Float, y: Float){
-        drawControl.addNodeIf(x, y)
+        drawControl.onTouchUp(x, y)
     }
 
     fun clearButtonClick() {
@@ -61,17 +65,23 @@ class Presenter {
         }
 
         editModeButton.setOnClickListener {
-            drawControl.mode = Mode.ADDMOVE
+            drawControl.mode = Mode.ADD_MOVE_FIN
         }
 
         deleteModeButton.setOnClickListener {
-            drawControl.mode = Mode.DELMOVE
+            drawControl.mode = Mode.DEL_MOVE
+        }
+
+        markModeButton.setOnClickListener{
+            drawControl.mode = Mode.MARK_FIND
         }
     }
 
     fun setSolveButton(){
         backButton.setOnClickListener {
             navController.popBackStack()
+            RecycleAdapter.clear()
+            Solve.stepList.clear()
         }
     }
 

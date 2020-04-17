@@ -1,8 +1,11 @@
-package com.example.geosolve.model
+package com.example.geosolve.model.figure
+
+import android.graphics.Region
 
 class Node(var x: Float, var y: Float) {
     var isMove = false
-//    var neighborNodes: Node[]
+    val neighborLines: MutableList<Line> = ArrayList()
+    val neighborAngles: MutableList<Line> = ArrayList()
 
     fun moveNode(x: Float, y: Float) {
         this.x = x
@@ -10,13 +13,9 @@ class Node(var x: Float, var y: Float) {
     }
 
     fun inRadius(x: Float, y: Float): Boolean {
-        val xBool = this.x - 25 < x
-                    &&
-                    x < this.x + 25
+        val xBool = this.x - 25 < x && x < this.x + 25
 
-        val yBool = this.y - 25 < y
-                    &&
-                    y < this.y + 25
+        val yBool = this.y - 25 < y && y < this.y + 25
 
         return xBool && yBool
     }

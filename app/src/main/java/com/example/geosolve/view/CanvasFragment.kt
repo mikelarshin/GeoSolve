@@ -23,6 +23,7 @@ class CanvasFragment : Fragment() {
         presenter.clearButton = view.clear_button
         presenter.editModeButton = view.edit_mode_button
         presenter.deleteModeButton = view.delete_mode_button
+        presenter.markModeButton = view.mark_mode_button
 
         presenter.setCanvasButton()
 

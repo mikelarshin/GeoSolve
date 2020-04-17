@@ -6,23 +6,30 @@ import android.text.style.TextAppearanceSpan
 import com.example.geosolve.R
 import com.example.geosolve.view.RecycleAdapter
 
-class StepSlove(template: String, rule: String, vararg args: String) {
-    var expression: CharSequence
-    var rule: CharSequence = formatString(rule,
-        R.style.Text
-    ).subSequence(0, rule.length)
+class StepSlove(templateVerbal: String, templateExpression: String, val useList: MutableList<*>?, vararg args: String) {
+    lateinit var verbal: CharSequence
+    val expression: CharSequence
 
     init {
-        val sb = SpannableStringBuilder()
-                .append(formatString(template, R.style.Text))
+        if (args.isNotEmpty()){
+            var sb = SpannableStringBuilder()
+                    .append(formatString(templateVerbal, R.style.Text))
 
-        for (item in args) {
-            val index = sb.toString().indexOf("%")
-            sb.replace(index, index + 2, formatString(item,
-                R.style.BoldText
-            ))
+            for (item in args) {
+                val index = sb.toString().indexOf("%")
+                if (index == -1) {
+                    this.verbal = sb.subSequence(0, sb.length)
+                    sb = SpannableStringBuilder().append(formatString(templateExpression, R.style.Text))
+                }
+                sb.replace(index, index + 2, formatString(item,
+                    R.style.BoldText
+                ))
+            }
+            this.expression = sb.subSequence(0, sb.length)
+        }else{
+            this.verbal = formatString(templateExpression, R.style.Text)
+            this.expression = formatString(templateVerbal, R.style.Text)
         }
-        this.expression = sb.subSequence(0, sb.length)
     }
 
     private fun formatString(string: String, styleId: Int): SpannableString {
@@ -30,4 +37,13 @@ class StepSlove(template: String, rule: String, vararg args: String) {
         spannableString.setSpan(TextAppearanceSpan(RecycleAdapter.context, styleId), 0, string.length, 0)
         return spannableString
     }
+
+
+    //    fun useToCanvas(){
+//        for(item in useList)
+//            when(item){
+//                is Node -> canvas.drawPoint(...)
+//                is Line -> canvas.drawLine(...)
+//            }
+//    }
 }

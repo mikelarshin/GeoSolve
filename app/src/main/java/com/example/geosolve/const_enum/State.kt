@@ -1,6 +1,7 @@
 package com.example.geosolve.const_enum
 
-enum class State(s: String) {
-    DID("did"),
-    ONPOINT("onpoint")
+enum class State() {
+    ON_CANVAS,
+    ON_POINT,
+    ON_LINE
 }
