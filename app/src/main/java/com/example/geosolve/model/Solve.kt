@@ -26,8 +26,8 @@ class Solve(val figure: Figure) : Thread() {
     private fun solve(step: Int = 0): MutableList<StepSlove> {
         if ((type == null) or (step > 30))
             return mutableListOf(StepSlove(
-                "Мы не знаем как решить эту задачу",
                 "",
+                "Мы не знаем как решить эту задачу",
                 null))
         type!!.solve(figure)
         if (!when (figure.find) {

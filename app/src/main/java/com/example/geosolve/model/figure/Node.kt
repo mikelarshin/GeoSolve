@@ -5,7 +5,7 @@ import android.graphics.Region
 class Node(var x: Float, var y: Float) {
     var isMove = false
     val neighborLines: MutableList<Line> = ArrayList()
-    val neighborAngles: MutableList<Line> = ArrayList()
+    val neighborAngles: MutableList<Angle> = ArrayList()
 
     fun moveNode(x: Float, y: Float) {
         this.x = x

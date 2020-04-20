@@ -28,18 +28,39 @@ class Figure {
         for (node in mNodes)
             if (node.inRadius(touchX, touchY)) {
                 val index: Int = mNodes.indexOf(node)
-                for(line in node.neighborLines)
+                for (line in node.neighborLines) {
                     mLines.remove(line)
+                    if (find == line)
+                        find = null
+                }
 
                 mNodes.removeAt(index)
                 break
             }
     }
 
-    fun clearFigure(){
+    fun clearFigure() {
         mNodes.clear()
         mLines.clear()
         mAngles.clear()
         find = null
+    }
+
+    fun getInRadius(x: Float, y: Float): Any? {
+        var returnElem: Any? = null
+        for (line in mLines) {
+            if (line.inRadius(x, y)) {
+                returnElem = line
+                break
+            }
+        }
+        for (node in mNodes) {
+            if (node.inRadius(x, y)) {
+                returnElem = node
+                break
+            }
+        }
+
+        return returnElem
     }
 }

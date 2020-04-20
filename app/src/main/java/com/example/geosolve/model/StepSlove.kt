@@ -16,10 +16,11 @@ class StepSlove(templateVerbal: String, templateExpression: String, val useList:
                     .append(formatString(templateVerbal, R.style.Text))
 
             for (item in args) {
-                val index = sb.toString().indexOf("%")
+                var index = sb.toString().indexOf("%")
                 if (index == -1) {
                     this.verbal = sb.subSequence(0, sb.length)
                     sb = SpannableStringBuilder().append(formatString(templateExpression, R.style.Text))
+                    index = sb.toString().indexOf("%")
                 }
                 sb.replace(index, index + 2, formatString(item,
                     R.style.BoldText
@@ -27,8 +28,8 @@ class StepSlove(templateVerbal: String, templateExpression: String, val useList:
             }
             this.expression = sb.subSequence(0, sb.length)
         }else{
-            this.verbal = formatString(templateExpression, R.style.Text)
-            this.expression = formatString(templateVerbal, R.style.Text)
+            this.verbal = formatString(templateVerbal, R.style.Text)
+            this.expression = formatString(templateExpression, R.style.Text)
         }
     }
 

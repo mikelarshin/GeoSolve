@@ -22,7 +22,7 @@ object Reactangle : TypeFigure {
         val line3 = figure.mLines[2].length == null
         val line4 = figure.mLines[3].length == null
         val templateVerbal = "Присваиваем длине стороны %s длину стороны %s"
-        val templateExpression = "s% = s% = s%"
+        val templateExpression = "%s = %s = %s"
 
         if (line1 && !line3) {
             figure.mLines[0].length = figure.mLines[2].length

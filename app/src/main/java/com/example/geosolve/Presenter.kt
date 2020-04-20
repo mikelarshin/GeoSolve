@@ -2,15 +2,16 @@ package com.example.geosolve
 
 import android.content.Context
 import android.graphics.Canvas
-import android.os.Bundle
 import androidx.navigation.NavController
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.geosolve.const_enum.Mode
 import com.example.geosolve.model.DrawControl
 import com.example.geosolve.model.Solve
 import com.example.geosolve.model.figure.Figure
+import com.example.geosolve.model.figure.Line
+import com.example.geosolve.model.figure.Node
+import com.example.geosolve.view.CanvasFragment
 import com.example.geosolve.view.CanvasView
 import com.example.geosolve.view.RecycleAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,7 +23,9 @@ class Presenter {
     lateinit var editModeButton: FloatingActionButton
     lateinit var deleteModeButton: FloatingActionButton
     lateinit var markModeButton: FloatingActionButton
+    lateinit var setValueModeButton: FloatingActionButton
     lateinit var canvasView: CanvasView
+    lateinit var canvasFragment: CanvasFragment
 
     // CanvasView
     var figure: Figure =
@@ -35,19 +38,19 @@ class Presenter {
 
     lateinit var navController: NavController
 
-    fun onDraw(canvas: Canvas){
+    fun onDraw(canvas: Canvas) {
         drawControl.onDraw(canvas)
     }
 
-    fun onTouchDown(x: Float, y: Float){
+    fun onTouchDown(x: Float, y: Float) {
         drawControl.onTouchDown(x, y)
     }
 
-    fun onTouchMove(x: Float, y: Float){
+    fun onTouchMove(x: Float, y: Float) {
         drawControl.onTouchMove(x, y)
     }
 
-    fun onTouchUp(x: Float, y: Float){
+    fun onTouchUp(x: Float, y: Float) {
         drawControl.onTouchUp(x, y)
     }
 
@@ -55,7 +58,7 @@ class Presenter {
         drawControl.clearCanvas(canvasView)
     }
 
-    fun setCanvasButton(){
+    fun setCanvasButton() {
         calcButton.setOnClickListener {
             navController.navigate(R.id.ToSolveAction)
         }
@@ -72,12 +75,16 @@ class Presenter {
             drawControl.mode = Mode.DEL_MOVE
         }
 
-        markModeButton.setOnClickListener{
+        markModeButton.setOnClickListener {
             drawControl.mode = Mode.MARK_FIND
+        }
+
+        setValueModeButton.setOnClickListener {
+            drawControl.mode = Mode.SET_VAlUE
         }
     }
 
-    fun setSolveButton(){
+    fun setSolveButton() {
         backButton.setOnClickListener {
             navController.popBackStack()
             RecycleAdapter.clear()
@@ -85,7 +92,7 @@ class Presenter {
         }
     }
 
-    fun setRecyclerParam(context: Context){
+    fun setRecyclerParam(context: Context) {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
 
@@ -104,5 +111,20 @@ class Presenter {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
+    }
+
+    fun onClickWithSet(elem: Any?) {
+        when (elem) {
+            is Line -> canvasFragment.onDialog("Линии", elem)
+            is Node -> canvasFragment.onDialog("угла точки (это функция убьёт тебя)", elem)
+            else -> throw Exception()
+        }
+    }
+    fun setValue(elem: Any?, value:Float){
+        when (elem) {
+            is Line -> elem.length = value
+            is Node -> elem.neighborAngles[0].value = value
+            else -> throw Exception()
+        }
     }
 }

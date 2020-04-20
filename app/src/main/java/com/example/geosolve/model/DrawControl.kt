@@ -3,6 +3,7 @@ package com.example.geosolve.model
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import com.example.geosolve.MainActivity
 import com.example.geosolve.const_enum.Mode
 import com.example.geosolve.const_enum.State
 import com.example.geosolve.model.figure.Figure
@@ -43,16 +44,17 @@ class DrawControl(private val figure: Figure) {
             )
         }
 
-        if(figure.find is Line)
+        if (figure.find is Line)
             canvas.drawLine(
                 (figure.find as Line).startNode.x, (figure.find as Line).startNode.y,
-                (figure.find as Line).finNode.x, (figure.find as Line).finNode.y, mPaintLineMark)
+                (figure.find as Line).finNode.x, (figure.find as Line).finNode.y, mPaintLineMark
+            )
 
         for (node in figure.mNodes) {
             canvas.drawCircle(node.x, node.y, 20f, mPaintNode)
         }
 
-        if(figure.find is Node)
+        if (figure.find is Node)
             canvas.drawCircle((figure.find as Node).x, (figure.find as Node).y, 20f, mPaintNodeMark)
     }
 
@@ -82,31 +84,23 @@ class DrawControl(private val figure: Figure) {
                     State.ON_CANVAS -> {
                         figure.addNode(Node(touchX, touchY))
                         if (figure.mNodes.size > 1)
-                            figure.addLine(figure.mNodes[figure.mNodes.size - 2], figure.mNodes.last())
+                            figure.addLine(
+                                figure.mNodes[figure.mNodes.size - 2],
+                                figure.mNodes.last()
+                            )
                     }
                     State.ON_POINT -> if (numOfCall < 2)
-                        for(node in figure.mNodes)
-                            if(node.inRadius(touchX, touchY)) {
+                        for (node in figure.mNodes)
+                            if (node.inRadius(touchX, touchY)) {
                                 figure.addLine(figure.mNodes.last(), node)
                                 break
                             }
                 }
             }
             Mode.DEL_MOVE -> figure.delNode(touchX, touchY)
-            Mode.MARK_FIND ->{
-                for (line in figure.mLines) {
-                    if (line.inRadius(touchX, touchY)) {
-                        figure.find = line
-                        break
-                    }
-                }
-                for (node in figure.mNodes) {
-                    if (node.inRadius(touchX, touchY)) {
-                        figure.find = node
-                        break
-                    }
-                }
-            }
+            Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY) ?: figure.find
+            Mode.SET_VAlUE -> MainActivity.presenter.onClickWithSet(
+                figure.getInRadius(touchX, touchY))
         }
 
         numOfCall = 0

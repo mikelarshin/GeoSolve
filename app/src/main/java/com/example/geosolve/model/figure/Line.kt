@@ -27,7 +27,7 @@ class Line(val startNode: Node, val finNode: Node) {
                 (per - distanceFin) *
                 (per - lineLength)) / lineLength
 
-        return distance < 25
+        return distance < 30
     }
 
 }
