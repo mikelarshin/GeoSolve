@@ -1,15 +1,17 @@
 package open.geosolve.geosolve.presentation.presenter
 
-import android.util.Log
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.repository.enum.Mode
 import open.geosolve.geosolve.repository.enum.State
+import open.geosolve.geosolve.repository.model.Angle
 import open.geosolve.geosolve.repository.model.Figure
+import open.geosolve.geosolve.repository.model.Line
 import open.geosolve.geosolve.repository.model.Node
 
+// TODO Remove hardcoded strings, rework onTouchUp
 @InjectViewState
 class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
@@ -46,8 +48,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun onTouchDown(touchX: Float, touchY: Float) {
-        Log.d("GeoSolve", "onTouchDown")
-
         for (node in figure.mNodes) {
             if (node.inRadius(touchX, touchY)) {
                 node.isMove = true
@@ -58,8 +58,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun onTouchMove(touchX: Float, touchY: Float) {
-        Log.d("GeoSolve", "onTouchMove")
-
         for (node in figure.mNodes) {
             if (node.isMove) {
                 node.moveNode(touchX, touchY)
@@ -69,8 +67,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun onTouchUp(touchX: Float, touchY: Float) {
-        Log.d("GeoSolve", "onTouchUp")
-
         when (mode) {
             Mode.ADD_MOVE_FIN -> {
                 when (state) {
@@ -92,14 +88,26 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             }
             Mode.DEL_MOVE -> figure.delNode(touchX, touchY)
             Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY) ?: figure.find
-            Mode.SET_VAlUE -> {
-                // TODO Set value for element
-                figure.getInRadius(touchX, touchY)
-            }
+            Mode.SET_VAlUE -> setValue(touchX, touchY)
         }
 
         numOfCall = 0
         state = State.ON_CANVAS
         figure.stopAllNode()
+    }
+
+    private fun setValue(touchX: Float, touchY: Float) {
+        when (val element = figure.getInRadius(touchX, touchY)) {
+
+            is Line ->
+                viewState.showDialog("Введите длину линии") {
+                    element.length = it
+                }
+
+            is Angle ->
+                viewState.showDialog("Введите значение угла") {
+                    element.value = it
+                }
+        }
     }
 }

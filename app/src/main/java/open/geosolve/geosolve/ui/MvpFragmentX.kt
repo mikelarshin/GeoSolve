@@ -16,11 +16,11 @@ abstract class MvpFragmentX(
 
     protected lateinit var layout: View
 
-    protected val activity: MvpAppCompatActivity?
-        get() = super.getActivity() as MvpAppCompatActivity?
+    protected val activity: MvpAppCompatActivity
+        get() = getActivity() as MvpAppCompatActivity
 
     protected val app: App
-        get() = super.getActivity()!!.application as App
+        get() = activity.application as App
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +40,7 @@ abstract class MvpFragmentX(
     }
 
     protected fun finish() {
-        activity?.supportFragmentManager?.popBackStack(
+        activity.supportFragmentManager.popBackStack(
             null,
             FragmentManager.POP_BACK_STACK_INCLUSIVE
         )

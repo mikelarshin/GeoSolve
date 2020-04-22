@@ -1,6 +1,9 @@
 package open.geosolve.geosolve.ui.screens.canvasScreen
 
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
@@ -51,5 +54,20 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     override fun goToCalculationFragment() {
         findNavController().navigate(R.id.action_to_solve)
+    }
+
+    override fun showDialog(title: String, okCallback: (value: Float) -> Unit) {
+        AlertDialog.Builder(activity)
+            .setTitle(title)
+            .setView(
+                LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
+            )
+            .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                okCallback((dialog as AlertDialog).input.text.toString().toFloat())
+            }
+            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }
