@@ -20,6 +20,31 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     private val figure: Figure
         get() = app.figure
 
+    fun calculateButtonClicked() {
+        viewState.goToCalculationFragment()
+    }
+
+    fun markButtonClicked() {
+        mode = Mode.MARK_FIND
+    }
+
+    fun editButtonClicked() {
+        mode = Mode.ADD_MOVE_FIN
+    }
+
+    fun deleteButtonButton() {
+        mode = Mode.DEL_MOVE
+    }
+
+    fun setValueClicked() {
+        mode = Mode.SET_VAlUE
+    }
+
+    fun clearButtonClicked() {
+        figure.clearFigure()
+        viewState.updateCanvas()
+    }
+
     fun onTouchDown(touchX: Float, touchY: Float) {
         Log.d("GeoSolve", "onTouchDown")
 

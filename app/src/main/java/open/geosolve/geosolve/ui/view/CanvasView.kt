@@ -23,16 +23,16 @@ class CanvasView : View {
         color = Color.BLACK
     }
     private val mPaintLine = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeWidth = 5f
+        color = Color.LTGRAY
+    }
+    private val mPaintNodeMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         strokeWidth = 10f
         color = Color.parseColor("#DF1616")
     }
-    private val mPaintNodeMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeWidth = 5f
-        Color.parseColor("#DF1616")
-    }
     private val mPaintLineMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         strokeWidth = 5f
-        color = Color.parseColor("#d0d0d0")
+        color = Color.parseColor("#DF1616")
     }
 
     constructor(context: Context) : this(context, null)

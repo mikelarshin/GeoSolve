@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.ui.screens.canvasScreen
 
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
@@ -20,27 +21,35 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
 
         layout.calc_button.setOnClickListener {
-            TODO("Unimplemented")
+            presenter.calculateButtonClicked()
         }
 
         layout.mark_mode_button.setOnClickListener {
-            TODO("Unimplemented")
+            presenter.markButtonClicked()
         }
 
         layout.edit_mode_button.setOnClickListener {
-            TODO("Unimplemented")
+            presenter.editButtonClicked()
         }
 
         layout.delete_mode_button.setOnClickListener {
-            TODO("Unimplemented")
+            presenter.deleteButtonButton()
         }
 
         layout.set_value_mode_button.setOnClickListener {
-            TODO("Unimplemented")
+            presenter.setValueClicked()
         }
 
         layout.clear_button.setOnClickListener {
-            TODO("Unimplemented")
+            presenter.clearButtonClicked()
         }
+    }
+
+    override fun updateCanvas() {
+        layout.canvas.invalidate()
+    }
+
+    override fun goToCalculationFragment() {
+        findNavController().navigate(R.id.action_to_solve)
     }
 }

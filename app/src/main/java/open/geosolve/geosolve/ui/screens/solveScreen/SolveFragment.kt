@@ -6,6 +6,6 @@ import open.geosolve.geosolve.ui.MvpFragmentX
 class SolveFragment : MvpFragmentX(R.layout.fragment_solve) {
 
     override fun setupLayout() {
-        TODO("Not yet implemented")
+
     }
 }
