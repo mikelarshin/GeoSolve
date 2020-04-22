@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/canvasFragment">
+
+    <fragment
+        android:id="@+id/canvasFragment"
+        android:name="open.geosolve.geosolve.ui.screens.canvasScreen.CanvasFragment"
+        android:label="fragment_canvas"
+        tools:layout="@layout/fragment_canvas">
+        <action
+            android:id="@+id/action_to_solve"
+            app:destination="@id/solveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/solveFragment"
+        android:name="open.geosolve.geosolve.ui.screens.solveScreen.SolveFragment"
+        android:label="fragment_solve"
+        tools:layout="@layout/fragment_solve" />
+</navigation>
