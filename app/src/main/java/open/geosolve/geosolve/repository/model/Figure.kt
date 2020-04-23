@@ -21,8 +21,12 @@ class Figure {
         mNodes.add(node)
     }
 
-    fun addLine(startNode: Node, finNode: Node) {
-        mLines.add(Line(startNode, finNode))
+    fun addLine(startNode: Node, finalNode: Node) {
+        val line = Line(startNode, finalNode)
+        mLines.add(line)
+
+        startNode.neighborLines.add(line)
+        finalNode.neighborLines.add(line)
     }
 
     fun delNode(touchX: Float, touchY: Float) {

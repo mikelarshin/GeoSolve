@@ -81,7 +81,8 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                     State.ON_POINT -> if (numOfCall < 2)
                         for (node in figure.mNodes)
                             if (node.inRadius(touchX, touchY)) {
-                                figure.addLine(figure.mNodes.last(), node)
+                                if (figure.mNodes.last() != node)
+                                    figure.addLine(figure.mNodes.last(), node)
                                 break
                             }
                 }
