@@ -23,6 +23,8 @@ object SolveUtil {
     fun solve(figure: Figure) {
         setTypeSolve(figure)
 
+        zeroGraph(figure)
+
         typeSolve.setGraphs(figure)
 
         for (line in figure.mLines)
@@ -30,5 +32,13 @@ object SolveUtil {
 
         for (angle in figure.mAngles)
             angle.solve()
+    }
+    
+    private fun zeroGraph(figure: Figure){
+        for (line in figure.mLines)
+            line.onKnownFun = {}
+
+        for (angle in figure.mAngles)
+            angle.onKnownFun = {}
     }
 }
