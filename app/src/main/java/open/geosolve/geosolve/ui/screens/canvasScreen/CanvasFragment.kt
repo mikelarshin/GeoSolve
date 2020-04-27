@@ -63,7 +63,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
                 LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
             )
             .setPositiveButton(android.R.string.ok) { dialog, _ ->
-                okCallback((dialog as AlertDialog).input.text.toString().toFloat())
+                if(!(dialog as AlertDialog).input.text.isNullOrBlank())
+                    okCallback(dialog.input.text.toString().toFloat())
             }
             .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()

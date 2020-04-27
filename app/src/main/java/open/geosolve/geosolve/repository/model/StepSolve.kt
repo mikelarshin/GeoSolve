@@ -6,6 +6,8 @@ import android.text.SpannableStringBuilder
 import android.text.style.TextAppearanceSpan
 import open.geosolve.geosolve.R
 
+//TODO(delete context from constructor)
+
 class StepSolve(
     templateVerbal: String,
     templateExpression: String,
