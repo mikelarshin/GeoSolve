@@ -11,10 +11,10 @@ object Rectangle : SolveFigure {
 
     override fun setGraphs(figure: Figure) {
         for (i in 0..3)
-            figure.mLines[i].onKnownFun = {
-                if ((figure.mLines[i].getValue() != null) and (figure.mLines[(i + 2) % 4].getValue() == null))
-                    figure.mLines[(i + 2) % 4].setValueGraph(
-                        figure.mLines[i].getValue(),
+            figure.mLines[i].onKnownFun = { thisElement ->
+                if ((thisElement.getValue() != null) and (figure.mLines[(i + 2) % 4].getValue() == null))
+                    figure.mLines[(i + 2) % 4].setDependentValueGraph(
+                        figure.mLines[i].getLinkValue(),
                         listOf(figure.mLines[i])
                     )
             }

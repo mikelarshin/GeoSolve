@@ -76,26 +76,13 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     fun onTouchUp(touchX: Float, touchY: Float) {
         when (mode) {
-            Mode.ADD_MOVE_FIN -> {
+            Mode.ADD_MOVE_FIN ->
                 when (state) {
-                    State.ON_CANVAS -> {
-                        figure.addNode(Node(touchX, touchY))
-                        if (figure.mNodes.size > 1)
-                            figure.addLine(
-                                figure.mNodes[figure.mNodes.size - 2],
-                                figure.mNodes.last()
-                            )
-                        if (figure.mNodes.size > 2)
-                            figure.addAngle(
-                                figure.mNodes[figure.mNodes.size - 3],
-                                figure.mNodes[figure.mNodes.size - 2],
-                                figure.mNodes.last()
-                            )
-                    }
-                    State.ON_POINT_OR_LINE -> if (numOfCall < 2)
-                        touchOnPointOrLine(touchX, touchY)
+                    State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
+                    State.ON_POINT_OR_LINE ->
+                        if (numOfCall < 2)
+                            touchOnPointOrLine(touchX, touchY)
                 }
-            }
             Mode.DEL_MOVE -> figure.delNode(touchX, touchY)
             Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY) ?: figure.find
             Mode.SET_VAlUE -> setValue(touchX, touchY)
@@ -105,14 +92,15 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         state = State.ON_CANVAS
         figure.stopAllNode()
 
-        GlobalScope.launch(Dispatchers.Main) {
-            SolveUtil.solve(figure)
-            showTypeCallback()
-        }
+        showTypeCallback()
     }
 
     private fun showTypeCallback() {
-        viewState.showTypeFirgue()
+        val onUIlambda = {viewState.showTypeFirgue() }
+        GlobalScope.launch(Dispatchers.Main) {
+            SolveUtil.solve(figure)
+            onUIlambda()
+        }
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
@@ -121,11 +109,13 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             is Line ->
                 viewState.showDialog("Введите длину линии") {
                     element.setValueDraw(it)
+                    showTypeCallback()
                 }
 
             is Angle ->
                 viewState.showDialog("Введите значение угла") {
                     element.setValueDraw(it)
+                    showTypeCallback()
                 }
         }
     }
@@ -155,5 +145,20 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 //TODO(При нажатии на линию появляется точка на линии)
                 return
             }
+    }
+
+    fun onTouchCanvas(touchX: Float, touchY: Float) {
+        figure.addNode(Node(touchX, touchY))
+        if (figure.mNodes.size > 1)
+            figure.addLine(
+                figure.mNodes[figure.mNodes.size - 2],
+                figure.mNodes.last()
+            )
+        if (figure.mNodes.size > 2)
+            figure.addAngle(
+                figure.mNodes[figure.mNodes.size - 3],
+                figure.mNodes[figure.mNodes.size - 2],
+                figure.mNodes.last()
+            )
     }
 }
