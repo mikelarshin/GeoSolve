@@ -1,11 +1,9 @@
 package open.geosolve.geosolve.repository.model
 
-class Node(
-    var x: Float,
-    var y: Float
-) : Element {
+class Node(var x: Float, var y: Float) {
 
     var isMove = false
+
     val neighborLines: MutableList<Line> = ArrayList()
     val neighborAngles: MutableList<Angle> = ArrayList()
 

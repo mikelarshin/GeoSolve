@@ -1,5 +1,8 @@
 package open.geosolve.geosolve.presentation.presenter
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
@@ -10,6 +13,8 @@ import open.geosolve.geosolve.repository.model.Angle
 import open.geosolve.geosolve.repository.model.Figure
 import open.geosolve.geosolve.repository.model.Line
 import open.geosolve.geosolve.repository.model.Node
+import open.geosolve.geosolve.repository.solve.SolveUtil
+import open.geosolve.geosolve.repository.solve.type.UnknownFigure
 
 // TODO Remove hardcoded strings, rework onTouchUp
 @InjectViewState
@@ -43,7 +48,10 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun clearButtonClicked() {
+        SolveUtil.typeSolve =
+            UnknownFigure
         figure.clearFigure()
+        viewState.showTypeFirgue()
         viewState.updateCanvas()
     }
 
@@ -51,7 +59,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         for (node in figure.mNodes) {
             if (node.inRadius(touchX, touchY)) {
                 node.isMove = true
-                state = State.ON_POINT
+                state = State.ON_POINT_OR_LINE
                 break
             }
         }
@@ -77,14 +85,15 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                                 figure.mNodes[figure.mNodes.size - 2],
                                 figure.mNodes.last()
                             )
+                        if (figure.mNodes.size > 2)
+                            figure.addAngle(
+                                figure.mNodes[figure.mNodes.size - 3],
+                                figure.mNodes[figure.mNodes.size - 2],
+                                figure.mNodes.last()
+                            )
                     }
-                    State.ON_POINT -> if (numOfCall < 2)
-                        for (node in figure.mNodes)
-                            if (node.inRadius(touchX, touchY)) {
-                                if (figure.mNodes.last() != node)
-                                    figure.addLine(figure.mNodes.last(), node)
-                                break
-                            }
+                    State.ON_POINT_OR_LINE -> if (numOfCall < 2)
+                        touchOnPointOrLine(touchX, touchY)
                 }
             }
             Mode.DEL_MOVE -> figure.delNode(touchX, touchY)
@@ -95,6 +104,15 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         numOfCall = 0
         state = State.ON_CANVAS
         figure.stopAllNode()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            SolveUtil.solve(figure)
+            showTypeCallback()
+        }
+    }
+
+    private fun showTypeCallback() {
+        viewState.showTypeFirgue()
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
@@ -102,13 +120,40 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
             is Line ->
                 viewState.showDialog("Введите длину линии") {
-                    element.length = it
+                    element.setValueDraw(it)
                 }
 
             is Angle ->
                 viewState.showDialog("Введите значение угла") {
-                    element.value = it
+                    element.setValueDraw(it)
                 }
         }
+    }
+
+    private fun touchOnPointOrLine(touchX: Float, touchY: Float) {
+        for (node in figure.mNodes)
+            if (node.inRadius(touchX, touchY)) {
+                if (figure.mNodes.last() != node) {
+                    figure.addLine(
+                        figure.mNodes.last(),
+                        node
+                    )
+
+                    figure.addAngle(
+                        figure.mNodes[figure.mNodes.size - 2],
+                        figure.mNodes.last(),
+                        node
+                    )
+
+                    figure.addAngle(
+                        figure.mNodes.last(),
+                        node,
+                        figure.mNodes[1]
+                    ) //TODO(При соедниении с точкой на линии добавляется 3 угла)
+                }
+
+                //TODO(При нажатии на линию появляется точка на линии)
+                return
+            }
     }
 }

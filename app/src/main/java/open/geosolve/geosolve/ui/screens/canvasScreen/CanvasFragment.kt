@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
+import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
+import kotlinx.android.synthetic.main.fragment_canvas.view.text_type_figure
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
+import open.geosolve.geosolve.repository.solve.SolveUtil
 import open.geosolve.geosolve.ui.MvpFragmentX
 
 
@@ -63,7 +66,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
                 LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
             )
             .setPositiveButton(android.R.string.ok) { dialog, _ ->
-                if(!(dialog as AlertDialog).input.text.isNullOrBlank())
+                if (!(dialog as AlertDialog).input.text.isNullOrBlank())
                     okCallback(dialog.input.text.toString().toFloat())
             }
             .setNegativeButton(android.R.string.cancel) { dialog, _ ->
@@ -71,4 +74,13 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             }
             .show()
     }
+
+    override fun showTypeFirgue() {
+        text_type_figure.text =
+            if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
+                SolveUtil.typeSolve::class.simpleName
+            else
+                ""
+    }
+
 }

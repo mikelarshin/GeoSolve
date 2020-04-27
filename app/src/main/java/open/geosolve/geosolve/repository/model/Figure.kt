@@ -29,17 +29,23 @@ class Figure {
         finalNode.neighborLines.add(line)
     }
 
+    fun addAngle(startNode: Node, angleNode: Node, finalNode: Node){
+        val angle = Angle(startNode, angleNode, finalNode)
+        mAngles.add(angle)
+
+        angleNode.neighborAngles.add(angle)
+    }
+
     fun delNode(touchX: Float, touchY: Float) {
         for (node in mNodes)
             if (node.inRadius(touchX, touchY)) {
-                val index: Int = mNodes.indexOf(node)
-                for (line in node.neighborLines) {
+                for (line in node.neighborLines)
                     mLines.remove(line)
-                    if (find == line)
-                        find = null
-                }
 
-                mNodes.removeAt(index)
+                for (angle in node.neighborAngles)
+                    mAngles.remove(angle)
+
+                mNodes.remove(node)
                 break
             }
     }
@@ -52,7 +58,7 @@ class Figure {
     }
 
     fun getInRadius(x: Float, y: Float): Element? {
-        var returnElem: Element? = null
+        var returnElem: Any? = null
 
         for (line in mLines) {
             if (line.inRadius(x, y)) {
@@ -67,6 +73,9 @@ class Figure {
             }
         }
 
-        return returnElem
+        if (returnElem is Node)
+            if (returnElem.neighborAngles.size > 0)
+                return returnElem.neighborAngles[0]
+        return returnElem as Element?
     }
 }

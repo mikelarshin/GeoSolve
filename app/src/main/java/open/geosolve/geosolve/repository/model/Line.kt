@@ -1,20 +1,13 @@
 package open.geosolve.geosolve.repository.model
 
-import android.util.Log
-import kotlin.math.atan2
 import kotlin.math.hypot
-import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Line(
-    val startNode: Node,
-    val finalNode: Node
-) : Element {
+class Line(val startNode: Node, val finalNode: Node) : Element(){
 
-    var length: Float? = null
+    //    all logic solve in abstract Element
 
     init {
-        // TODO Change with check
         if (startNode == finalNode)
             throw Exception("Line constructor get the same Node")
     }
