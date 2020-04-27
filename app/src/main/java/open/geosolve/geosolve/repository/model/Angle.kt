@@ -4,6 +4,7 @@ class Angle(val startNode: Node, val angleNode: Node, val finalNode: Node) : Ele
     // all logic solve in abstract Element
 
     init {
+        // TODO(fix this bug)
         if (startNode == finalNode || startNode == angleNode || angleNode == finalNode)
             throw Exception("Angle constructor get the same Node")
     }
