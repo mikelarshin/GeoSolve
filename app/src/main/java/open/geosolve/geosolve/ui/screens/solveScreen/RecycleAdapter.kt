@@ -6,23 +6,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.repository.model.StepSolve
 import java.util.*
 
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
 
     companion object {
-        private var stepSolveViewHolderList: MutableList<StepSolveViewHolder> = ArrayList()
+        private var stepSolveList: MutableList<StepSolve> = ArrayList()
 
-        fun addItem(stepSolveViewHolder: StepSolveViewHolder) {
-            stepSolveViewHolderList.add(stepSolveViewHolder)
+        fun addItem(stepSolve: StepSolve) {
+            stepSolveList.add(stepSolve)
         }
 
         fun clear() {
-            stepSolveViewHolderList.clear()
+            stepSolveList.clear()
         }
 
-        fun addAll(stepViewHolders: List<StepSolveViewHolder>?) {
-            stepSolveViewHolderList.addAll(stepViewHolders!!)
+        fun addAll(steps: List<StepSolve>?) {
+            stepSolveList.addAll(steps!!)
         }
     }
 
@@ -49,11 +50,11 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
             }
         }
 
-        holder.itemView.expression.text = stepSolveViewHolderList[position].expression
-        holder.itemView.rule.text = stepSolveViewHolderList[position].verbal
+        holder.itemView.expression.text = stepSolveList[position].expression
+        holder.itemView.rule.text = stepSolveList[position].verbal
     }
 
     override fun getItemCount(): Int {
-        return stepSolveViewHolderList.size
+        return stepSolveList.size
     }
 }

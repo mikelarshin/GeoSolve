@@ -5,8 +5,7 @@ abstract class Element {
 
     var onKnownFun: (thisElement: Element) -> Unit = {}
 
-    var whereFromValueList = listOf<Element>()
-        private set
+    private var whereFromValueList: List<Element>? = null
 
     // setDraw - use in work with canvas
     // setGraph - use in work with solve
