@@ -4,7 +4,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_solve.view.*
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.repository.model.StepSolve
 import open.geosolve.geosolve.ui.MvpFragmentX
 
 class SolveFragment : MvpFragmentX(R.layout.fragment_solve) {
@@ -24,7 +23,7 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve) {
 
         (0..10).forEach {
             RecycleAdapter.addItem(
-                StepSolve(
+                StepSolveViewHolder(
                     "Складываем значения",
                     "%s + %s = %s",
                     null,

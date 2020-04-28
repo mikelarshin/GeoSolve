@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
-import kotlinx.android.synthetic.main.fragment_canvas.view.text_type_figure
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
@@ -75,7 +74,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             .show()
     }
 
-    override fun showTypeFirgue() {
+    override fun showTypeFigure() {
         text_type_figure.text =
             if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
                 SolveUtil.typeSolve::class.simpleName

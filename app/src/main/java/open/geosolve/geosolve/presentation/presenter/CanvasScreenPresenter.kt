@@ -7,6 +7,7 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
+import open.geosolve.geosolve.repository.UnwindCallback
 import open.geosolve.geosolve.repository.enum.Mode
 import open.geosolve.geosolve.repository.enum.State
 import open.geosolve.geosolve.repository.model.Angle
@@ -51,7 +52,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         SolveUtil.typeSolve =
             UnknownFigure
         figure.clearFigure()
-        viewState.showTypeFirgue()
+        viewState.showTypeFigure()
         viewState.updateCanvas()
     }
 
@@ -85,7 +86,11 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 }
             Mode.DEL_MOVE -> figure.delNode(touchX, touchY)
             Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY) ?: figure.find
-            Mode.SET_VAlUE -> setValue(touchX, touchY)
+            Mode.SET_VAlUE -> {
+                if (numOfCall < 2) {
+                    setValue(touchX, touchY)
+                }
+            }
         }
 
         numOfCall = 0
@@ -93,10 +98,22 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         figure.stopAllNode()
 
         showTypeCallback()
+
+        // CRUNCH
+        SolveUtil.unwindTree(figure, object : UnwindCallback {
+
+            override fun emptyElement() {
+
+            }
+
+            override fun emptyStackCallback() {
+
+            }
+        })
     }
 
     private fun showTypeCallback() {
-        val onUIlambda = {viewState.showTypeFirgue() }
+        val onUIlambda = { viewState.showTypeFigure() }
         GlobalScope.launch(Dispatchers.Main) {
             SolveUtil.solve(figure)
             onUIlambda()
