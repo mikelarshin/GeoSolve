@@ -3,7 +3,7 @@ package open.geosolve.geosolve.model.data
 import kotlin.math.hypot
 import kotlin.math.sqrt
 
-class Line(val startNode: Node, val finalNode: Node) : Element() {
+class Line(var startNode: Node, var finalNode: Node) : Element() {
 
     //    all logic solve in abstract Element
 

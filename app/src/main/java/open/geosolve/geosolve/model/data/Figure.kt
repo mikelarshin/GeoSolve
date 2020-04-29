@@ -90,4 +90,9 @@ class Figure {
             else -> null
         }
     }
+
+    // TODO(DELETE THIS DEBUGGER)
+    override fun toString(): String {
+        return "Nodes: ${mNodes.size} \nLines: ${mLines.size} \nAngles: ${mAngles.size}"
+    }
 }

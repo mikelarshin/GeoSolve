@@ -11,5 +11,5 @@ interface CanvasScreenView : MvpView {
     fun updateCanvas()
     fun showDialog(title: String, okCallback: (value: Float) -> Unit)
     fun showTypeFigure()
-    fun makeMessageForUsers(message: String)
+    fun showMessage(message: String)
 }

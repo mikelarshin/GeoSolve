@@ -58,30 +58,28 @@ open class DrawCanvasView : View {
         super.onDraw(canvas)
 
         drawLines(canvas)
-        drawTextLines(canvas)
+        drawValueLines(canvas)
         drawMarkedLine(canvas)
 
         drawNodes(canvas)
 
 //        drawAngleCircle()
-        drawTextAngle(canvas)
+        drawValueAngle(canvas)
         drawMarkedAngle(canvas)
     }
 
     private fun drawLines(canvas: Canvas) {
-        for (line in attachedFigure.mLines) {
+        for (line in attachedFigure.mLines)
             canvas.drawLine(
                 line.startNode.x, line.startNode.y,
                 line.finalNode.x, line.finalNode.y,
                 mPaintLine
             )
-        }
     }
 
     private fun drawNodes(canvas: Canvas) {
-        attachedFigure.mNodes.forEach { node ->
+        for (node in attachedFigure.mNodes)
             canvas.drawCircle(node.x, node.y, POINT_RADIUS, mPaintNode)
-        }
     }
 
     private fun drawMarkedLine(canvas: Canvas) {
@@ -113,12 +111,12 @@ open class DrawCanvasView : View {
 
     // TODO Рисовать дугу угла fun drawAngleCircle()
     // TODO Подстраивать положение текста, чтобы не наезжал на линии
-    private fun drawTextAngle(canvas: Canvas) {
+    private fun drawValueAngle(canvas: Canvas) {
         for (angle in attachedFigure.mAngles) {
             if (angle.getValue() == null) continue
 
             canvas.drawText(
-                angle.getValue().toString(),
+                getNormalizeValue(angle.getValue()!!),
                 angle.angleNode.x + 50,
                 angle.angleNode.y + 50,
                 mPaintText
@@ -126,16 +124,19 @@ open class DrawCanvasView : View {
         }
     }
 
-    private fun drawTextLines(canvas: Canvas){
+    private fun drawValueLines(canvas: Canvas) {
         for (line in attachedFigure.mLines) {
             if (line.getValue() == null) continue
 
             canvas.drawText(
-                line.getValue().toString(),
+                getNormalizeValue(line.getValue()!!),
                 (line.startNode.x + line.finalNode.x) / 2,
                 (line.startNode.y + line.finalNode.y) / 2,
                 mPaintText
             )//TODO(выровнять относительно размера текста)
         }
     }
+
+    private fun getNormalizeValue(value: Float) =
+        (if (value - value.toInt() == 0f) value.toInt() else value).toString()
 }

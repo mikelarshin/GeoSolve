@@ -81,10 +81,12 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
                 SolveUtil.typeSolve::class.simpleName
             else
                 ""
+        // TODO(DELETE THIS DEBUGGER)
+        DELETE_THIS_DEBUGGER.text = app.figure.toString()
     }
 
-    override fun makeMessageForUsers(message: String) {
-        Toast.makeText(context,"На этой точке нет угла", Toast.LENGTH_SHORT).show()
+    override fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 }

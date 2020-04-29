@@ -31,12 +31,9 @@ class Node(var x: Float, var y: Float) {
         return xBool && yBool
     }
 
-    // TODO Rewrite this
     fun stopMove(): Boolean {
-        return if (isMove) {
-            isMove = false
-            true
-        } else false
+        val answer = isMove
+        isMove = false
+        return answer
     }
-
 }

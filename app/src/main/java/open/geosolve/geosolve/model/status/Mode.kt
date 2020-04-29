@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.model.enum
+package open.geosolve.geosolve.model.status
 
 enum class Mode {
     ADD_MOVE_FIN,

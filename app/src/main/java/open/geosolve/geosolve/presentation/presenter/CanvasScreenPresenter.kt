@@ -7,8 +7,8 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.model.enum.Mode
-import open.geosolve.geosolve.model.enum.State
+import open.geosolve.geosolve.model.status.Mode
+import open.geosolve.geosolve.model.status.State
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
@@ -59,7 +59,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         for (node in figure.mNodes) {
             if (node.inRadius(touchX, touchY)) {
                 node.isMove = true
-                state = State.ON_POINT_OR_LINE
+                state = State.ON_POINT
                 break
             }
         }
@@ -80,11 +80,12 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 Mode.ADD_MOVE_FIN ->
                     when (state) {
                         State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
-                        State.ON_POINT_OR_LINE -> touchOnPointOrLine(touchX, touchY)
+                        State.ON_POINT -> touchOnPoint(touchX, touchY)
+                        State.ON_LINE -> TODO()
                     }
                 Mode.DELETE -> figure.delNode(touchX, touchY)
                 Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY)
-                { viewState.makeMessageForUsers("Нельзя задать искомое, на этой точке нет угла") }
+                { viewState.showMessage("Нельзя задать искомое, на этой точке нет угла") }
                     ?: figure.find
                 Mode.SET_VAlUE -> setValue(touchX, touchY)
             }
@@ -94,63 +95,64 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         state = State.ON_CANVAS
         figure.stopAllNode()
 
-        showTypeCallback()
+        solve()
     }
 
-    private fun showTypeCallback() {
-        val onUIlambda = { viewState.showTypeFigure() }
+    private fun solve() {
+        val uiCallBack = { viewState.showTypeFigure() }
         GlobalScope.launch(Dispatchers.Main) {
             SolveUtil.solve(figure)
-            onUIlambda()
+            uiCallBack()
         }
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
         when (val element = figure.getInRadius(touchX, touchY)
-        { viewState.makeMessageForUsers("Нельзя задать значение, на этой точке нет угла") }) {
+        { viewState.showMessage("Нельзя задать значение, на этой точке нет угла") }) {
 
             is Line ->
                 viewState.showDialog("Введите длину линии") {
                     element.setValueDraw(it)
-                    showTypeCallback()
+                    solve()
                 }
 
             is Angle ->
                 viewState.showDialog("Введите значение угла") {
                     element.setValueDraw(it)
-                    showTypeCallback()
+                    solve()
                 }
         }
     }
 
-    private fun touchOnPointOrLine(touchX: Float, touchY: Float) {
+    private fun touchOnPoint(touchX: Float, touchY: Float) {
         for (node in figure.mNodes)
             if (node.inRadius(touchX, touchY)) {
                 if (figure.mNodes.last() != node) {
-                    figure.addLine(
-                        figure.mNodes.last(),
-                        node
-                    )
+                    if (node == figure.mNodes[0]) {
+                        figure.addLine(
+                            figure.mNodes.last(),
+                            node
+                        )
 
-                    figure.addAngle(
-                        figure.mNodes[figure.mNodes.size - 2],
-                        figure.mNodes.last(),
-                        node
-                    )
+                        figure.addAngle(
+                            figure.mNodes[figure.mNodes.size - 2],
+                            figure.mNodes.last(),
+                            node
+                        )
 
-                    figure.addAngle(
-                        figure.mNodes.last(),
-                        node,
-                        figure.mNodes[1]
-                    ) //TODO(При соедниении с точкой на линии добавляется 3 угла)
+                        figure.addAngle(
+                            figure.mNodes.last(),
+                            node,
+                            figure.mNodes[1]
+                        )
+                    } else
+                        viewState.showMessage("Пока что, заканчивать фигуру можно только в её начале")
                 }
-
-                //TODO(При нажатии на линию появляется точка на линии)
-                return
+                break
             }
     }
 
-    fun onTouchCanvas(touchX: Float, touchY: Float) {
+    private fun onTouchCanvas(touchX: Float, touchY: Float) {
         figure.addNode(Node(touchX, touchY))
         if (figure.mNodes.size > 1)
             figure.addLine(
