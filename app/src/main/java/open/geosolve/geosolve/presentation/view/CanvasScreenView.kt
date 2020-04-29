@@ -10,5 +10,6 @@ interface CanvasScreenView : MvpView {
     fun goToCalculationFragment()
     fun updateCanvas()
     fun showDialog(title: String, okCallback: (value: Float) -> Unit)
-    fun showTypeFirgue()
+    fun showTypeFigure()
+    fun makeMessageForUsers(message: String)
 }

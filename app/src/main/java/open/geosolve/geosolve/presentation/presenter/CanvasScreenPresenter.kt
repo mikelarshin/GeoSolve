@@ -7,14 +7,14 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.repository.enum.Mode
-import open.geosolve.geosolve.repository.enum.State
-import open.geosolve.geosolve.repository.model.Angle
-import open.geosolve.geosolve.repository.model.Figure
-import open.geosolve.geosolve.repository.model.Line
-import open.geosolve.geosolve.repository.model.Node
-import open.geosolve.geosolve.repository.solve.SolveUtil
-import open.geosolve.geosolve.repository.solve.type.UnknownFigure
+import open.geosolve.geosolve.model.enum.Mode
+import open.geosolve.geosolve.model.enum.State
+import open.geosolve.geosolve.model.data.Angle
+import open.geosolve.geosolve.model.data.Figure
+import open.geosolve.geosolve.model.data.Line
+import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.solve.SolveUtil
+import open.geosolve.geosolve.model.solve.type.UnknownFigure
 
 // TODO Remove hardcoded strings, rework onTouchUp
 @InjectViewState
@@ -40,7 +40,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun deleteButtonButton() {
-        mode = Mode.DEL_MOVE
+        mode = Mode.DELETE
     }
 
     fun setValueClicked() {
@@ -51,7 +51,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         SolveUtil.typeSolve =
             UnknownFigure
         figure.clearFigure()
-        viewState.showTypeFirgue()
+        viewState.showTypeFigure()
         viewState.updateCanvas()
     }
 
@@ -75,17 +75,19 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun onTouchUp(touchX: Float, touchY: Float) {
-        when (mode) {
-            Mode.ADD_MOVE_FIN ->
-                when (state) {
-                    State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
-                    State.ON_POINT_OR_LINE ->
-                        if (numOfCall < 2)
-                            touchOnPointOrLine(touchX, touchY)
-                }
-            Mode.DEL_MOVE -> figure.delNode(touchX, touchY)
-            Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY) ?: figure.find
-            Mode.SET_VAlUE -> setValue(touchX, touchY)
+        if (numOfCall < 3) {
+            when (mode) {
+                Mode.ADD_MOVE_FIN ->
+                    when (state) {
+                        State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
+                        State.ON_POINT_OR_LINE -> touchOnPointOrLine(touchX, touchY)
+                    }
+                Mode.DELETE -> figure.delNode(touchX, touchY)
+                Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY)
+                { viewState.makeMessageForUsers("Нельзя задать искомое, на этой точке нет угла") }
+                    ?: figure.find
+                Mode.SET_VAlUE -> setValue(touchX, touchY)
+            }
         }
 
         numOfCall = 0
@@ -96,7 +98,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun showTypeCallback() {
-        val onUIlambda = {viewState.showTypeFirgue() }
+        val onUIlambda = { viewState.showTypeFigure() }
         GlobalScope.launch(Dispatchers.Main) {
             SolveUtil.solve(figure)
             onUIlambda()
@@ -104,7 +106,8 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
-        when (val element = figure.getInRadius(touchX, touchY)) {
+        when (val element = figure.getInRadius(touchX, touchY)
+        { viewState.makeMessageForUsers("Нельзя задать значение, на этой точке нет угла") }) {
 
             is Line ->
                 viewState.showDialog("Введите длину линии") {
