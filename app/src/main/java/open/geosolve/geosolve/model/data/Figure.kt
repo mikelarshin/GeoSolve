@@ -9,14 +9,6 @@ class Figure {
     val mLines: MutableList<Line> = ArrayList()
     val mAngles: MutableList<Angle> = ArrayList()
 
-    fun stopAllNode(): Boolean {
-        var answer = false
-        for (node in mNodes) {
-            answer = answer || node.stopMove()
-        }
-        return answer
-    }
-
     fun addNode(node: Node) {
         mNodes.add(node)
     }

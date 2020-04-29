@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.model.solve
+package open.geosolve.geosolve.view.screens.solveScreen
 
 import android.content.Context
 import android.text.SpannableString
@@ -6,7 +6,8 @@ import android.text.SpannableStringBuilder
 import android.text.style.TextAppearanceSpan
 import open.geosolve.geosolve.R
 
-//TODO(delete context from constructor)
+// TODO(delete context from constructor)
+// TODO(create util method solve_format(String, args) -> CharSequence)
 
 class StepSolve(
     templateVerbal: String,

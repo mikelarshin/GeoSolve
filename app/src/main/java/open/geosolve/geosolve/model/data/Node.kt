@@ -2,8 +2,6 @@ package open.geosolve.geosolve.model.data
 
 class Node(var x: Float, var y: Float) {
 
-    var isMove = false
-
     var startLine: Line? = null
     var finalLine: Line? = null
     var startAngle: Angle? = null
@@ -29,11 +27,5 @@ class Node(var x: Float, var y: Float) {
         val yBool = this.y - 25 < y && y < this.y + 25
 
         return xBool && yBool
-    }
-
-    fun stopMove(): Boolean {
-        val answer = isMove
-        isMove = false
-        return answer
     }
 }

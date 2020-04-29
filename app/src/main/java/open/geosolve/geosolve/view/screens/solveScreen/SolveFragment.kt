@@ -4,7 +4,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_solve.view.*
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.solve.StepSolve
 import open.geosolve.geosolve.view.MvpFragmentX
 
 class SolveFragment : MvpFragmentX(R.layout.fragment_solve) {

@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.model.status.Mode
 import open.geosolve.geosolve.model.status.State
@@ -23,6 +24,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     private var mode = Mode.ADD_MOVE_FIN
     private var state = State.ON_CANVAS
     private var numOfCall = 0
+    private var moveNode: Node? = null
 
     private val figure: Figure
         get() = app.figure
@@ -58,7 +60,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     fun onTouchDown(touchX: Float, touchY: Float) {
         for (node in figure.mNodes) {
             if (node.inRadius(touchX, touchY)) {
-                node.isMove = true
+                moveNode = node
                 state = State.ON_POINT
                 break
             }
@@ -66,11 +68,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun onTouchMove(touchX: Float, touchY: Float) {
-        for (node in figure.mNodes) {
-            if (node.isMove) {
-                node.moveNode(touchX, touchY)
-            }
-        }
+        moveNode?.moveNode(touchX, touchY)
         numOfCall++
     }
 
@@ -79,21 +77,21 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             when (mode) {
                 Mode.ADD_MOVE_FIN ->
                     when (state) {
-                        State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
-                        State.ON_POINT -> touchOnPoint(touchX, touchY)
+                        State.ON_CANVAS -> onEditTouchCanvas(touchX, touchY)
+                        State.ON_POINT -> editTouchOnPoint(touchX, touchY)
                         State.ON_LINE -> TODO()
                     }
                 Mode.DELETE -> figure.delNode(touchX, touchY)
-                Mode.MARK_FIND -> figure.find = figure.getInRadius(touchX, touchY)
-                { viewState.showMessage("Нельзя задать искомое, на этой точке нет угла") }
-                    ?: figure.find
+                Mode.MARK_FIND -> figure.find =
+                    figure.getInRadius(touchX, touchY) { viewState.showMessage(R.string.app_name) }
+                    ?: figure.find // elvis operator
                 Mode.SET_VAlUE -> setValue(touchX, touchY)
             }
         }
 
+        // crutch
         numOfCall = 0
         state = State.ON_CANVAS
-        figure.stopAllNode()
 
         solve()
     }
@@ -107,24 +105,25 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
-        when (val element = figure.getInRadius(touchX, touchY)
-        { viewState.showMessage("Нельзя задать значение, на этой точке нет угла") }) {
+        val element = figure.getInRadius(touchX, touchY)
+        { viewState.showMessage(R.string.toast_not_set_value) }
 
+        when (element) {
             is Line ->
-                viewState.showDialog("Введите длину линии") {
+                viewState.showDialog(R.string.alert_set_line) {
                     element.setValueDraw(it)
                     solve()
                 }
-
             is Angle ->
-                viewState.showDialog("Введите значение угла") {
+                viewState.showDialog(R.string.alert_set_angle) {
                     element.setValueDraw(it)
                     solve()
                 }
         }
     }
 
-    private fun touchOnPoint(touchX: Float, touchY: Float) {
+    //TODO(rewrite magic)
+    private fun editTouchOnPoint(touchX: Float, touchY: Float) {
         for (node in figure.mNodes)
             if (node.inRadius(touchX, touchY)) {
                 if (figure.mNodes.last() != node) {
@@ -146,19 +145,22 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                             figure.mNodes[1]
                         )
                     } else
-                        viewState.showMessage("Пока что, заканчивать фигуру можно только в её начале")
+                        viewState.showMessage(R.string.CRUTCH_FOR_NOW)
                 }
                 break
             }
     }
 
-    private fun onTouchCanvas(touchX: Float, touchY: Float) {
+    //TODO(rewrite magic)
+    private fun onEditTouchCanvas(touchX: Float, touchY: Float) {
         figure.addNode(Node(touchX, touchY))
+
         if (figure.mNodes.size > 1)
             figure.addLine(
                 figure.mNodes[figure.mNodes.size - 2],
                 figure.mNodes.last()
             )
+
         if (figure.mNodes.size > 2)
             figure.addAngle(
                 figure.mNodes[figure.mNodes.size - 3],

@@ -9,7 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface CanvasScreenView : MvpView {
     fun goToCalculationFragment()
     fun updateCanvas()
-    fun showDialog(title: String, okCallback: (value: Float) -> Unit)
+    fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit)
     fun showTypeFigure()
-    fun showMessage(message: String)
+    fun showMessage(messageID: Int)
 }

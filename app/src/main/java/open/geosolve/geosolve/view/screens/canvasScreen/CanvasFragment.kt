@@ -59,15 +59,15 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         findNavController().navigate(R.id.action_to_solve)
     }
 
-    override fun showDialog(title: String, okCallback: (value: Float) -> Unit) {
+    override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
         AlertDialog.Builder(activity)
-            .setTitle(title)
+            .setTitle(getText(titleID))
             .setView(
                 LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
             )
             .setPositiveButton(android.R.string.ok) { dialog, _ ->
                 if (!(dialog as AlertDialog).input.text.isNullOrBlank())
-                    okCallback(dialog.input.text.toString().toFloat())
+                    inputCallback(dialog.input.text.toString().toFloat())
             }
             .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
@@ -85,8 +85,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         DELETE_THIS_DEBUGGER.text = app.figure.toString()
     }
 
-    override fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    override fun showMessage(messageID: Int) {
+        Toast.makeText(context, getText(messageID), Toast.LENGTH_SHORT).show()
     }
 
 }
