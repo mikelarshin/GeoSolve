@@ -1,11 +1,24 @@
 package open.geosolve.geosolve.model.data
 
-class Angle(val startNode: Node, val angleNode: Node, val finalNode: Node) : Element() {
+class Angle(private val startLine: Line, private val finalLine: Line) : Element() {
     // all logic solve in abstract Element
 
+    val startNode: Node
+        get() = startLine.startNode
+    val angleNode: Node
+        get() = startLine.finalNode
+    val finalNode: Node
+        get() = finalLine.finalNode
+
     init {
-        if (startNode == finalNode || startNode == angleNode || angleNode == finalNode)
+        if (startNode == finalNode)
             throw Exception("Angle constructor get the same Node")
+        if (startNode == angleNode)
+            throw Exception("Angle constructor get the same Node")
+        if (angleNode == finalNode)
+            throw Exception("Angle constructor get the same Node")
+        if (startLine.finalNode != finalLine.startNode)
+            throw Exception("Angle constructor get wrong Line") // TODO(Fix this)
     }
 
     fun delConnection(){

@@ -84,7 +84,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 Mode.DELETE -> figure.delNode(touchX, touchY)
                 Mode.MARK_FIND -> figure.find =
                     figure.getInRadius(touchX, touchY) { viewState.showMessage(R.string.app_name) }
-                    ?: figure.find // elvis operator
+                    ?: figure.find
                 Mode.SET_VAlUE -> setValue(touchX, touchY)
             }
         }
@@ -128,22 +128,13 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             if (node.inRadius(touchX, touchY)) {
                 if (figure.mNodes.last() != node) {
                     if (node == figure.mNodes[0]) {
-                        figure.addLine(
-                            figure.mNodes.last(),
-                            node
-                        )
+                        figure.addLine(figure.mNodes.last(), node)
 
-                        figure.addAngle(
-                            figure.mNodes[figure.mNodes.size - 2],
-                            figure.mNodes.last(),
-                            node
-                        )
+                        figure.addAngle(node.startLine?.startNode?.startLine!!, node.startLine!!)
 
-                        figure.addAngle(
-                            figure.mNodes.last(),
-                            node,
-                            figure.mNodes[1]
-                        )
+                        if (figure.mAngles.size > 2) // TODO(Fix CRUTCH)
+                            figure.addAngle(node.startLine!!, node.finalLine!!)
+
                     } else
                         viewState.showMessage(R.string.CRUTCH_FOR_NOW)
                 }
@@ -161,11 +152,10 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 figure.mNodes.last()
             )
 
-        if (figure.mNodes.size > 2)
+        if (figure.mLines.size > 1)
             figure.addAngle(
-                figure.mNodes[figure.mNodes.size - 3],
-                figure.mNodes[figure.mNodes.size - 2],
-                figure.mNodes.last()
+                figure.mLines[figure.mLines.size - 2],
+                figure.mLines.last()
             )
     }
 }

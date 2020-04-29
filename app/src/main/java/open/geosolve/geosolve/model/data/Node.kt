@@ -4,6 +4,7 @@ class Node(var x: Float, var y: Float) {
 
     var startLine: Line? = null
     var finalLine: Line? = null
+
     var startAngle: Angle? = null
     var centerAngle: Angle? = null
     var finalAngle: Angle? = null
@@ -11,6 +12,7 @@ class Node(var x: Float, var y: Float) {
     fun delConnection(){
         startLine?.delConnection()
         finalLine?.delConnection()
+
         startAngle?.delConnection()
         centerAngle?.delConnection()
         finalAngle?.delConnection()

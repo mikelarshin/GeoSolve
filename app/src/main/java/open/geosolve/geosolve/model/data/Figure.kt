@@ -17,17 +17,17 @@ class Figure {
         val line = Line(startNode, finalNode)
         mLines.add(line)
 
-        startNode.startLine = line
-        finalNode.finalLine = line
+        startNode.finalLine = line
+        finalNode.startLine = line
     }
 
-    fun addAngle(startNode: Node, angleNode: Node, finalNode: Node) {
-        val angle = Angle(startNode, angleNode, finalNode)
+    fun addAngle(startLine: Line, finalLine: Line) {
+        val angle = Angle(startLine, finalLine)
         mAngles.add(angle)
 
-        startNode.startAngle = angle
-        angleNode.centerAngle = angle
-        finalNode.finalAngle = angle
+        startLine.startNode.startAngle = angle
+        startLine.finalNode.centerAngle = angle
+        finalLine.finalNode.finalAngle = angle
     }
 
     fun delNode(touchX: Float, touchY: Float) {
