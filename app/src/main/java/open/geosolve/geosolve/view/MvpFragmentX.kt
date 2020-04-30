@@ -22,14 +22,12 @@ abstract class MvpFragmentX(
     protected val app: App
         get() = activity.application as App
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         layout = inflater.inflate(layoutRes, container, false)
         setupLayout()
+
         return layout
     }
 
@@ -40,9 +38,6 @@ abstract class MvpFragmentX(
     }
 
     protected fun finish() {
-        activity.supportFragmentManager.popBackStack(
-            null,
-            FragmentManager.POP_BACK_STACK_INCLUSIVE
-        )
+        activity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

@@ -1,13 +1,17 @@
 package open.geosolve.geosolve.view.screens.canvasScreen
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
+import kotlinx.coroutines.*
 import moxy.ktx.moxyPresenter
+import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
@@ -49,6 +53,15 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.clear_button.setOnClickListener {
             presenter.clearButtonClicked()
         }
+
+        // TODO CRUTCH
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(50)
+            App.widthCanvas = canvas.width
+            App.heightCanvas = canvas.height
+
+            updateCanvas()
+        }
     }
 
     override fun goToSolveScreen() {
@@ -56,7 +69,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun updateCanvas() {
-        layout.canvas.invalidate()
+        canvas.invalidate()
     }
 
     override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {

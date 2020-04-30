@@ -85,6 +85,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     fun onTouchMove(touchX: Float, touchY: Float) {
         moveNode?.moveNode(touchX, touchY)
         numOfCall++
+        viewState.showTypeFigure()
     }
 
     fun onTouchUp(touchX: Float, touchY: Float) {

@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.App
 import java.util.*
 
 class Figure {
@@ -85,6 +86,10 @@ class Figure {
 
     // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {
-        return "Nodes: ${mNodes.size} \nLines: ${mLines.size} \nAngles: ${mAngles.size}"
+        return "Nodes: ${mNodes.size} \n" +
+                "Lines: ${mLines.size} \n" +
+                "Angles: ${mAngles.size} \n\n" +
+                "x: ${if(mNodes.isNotEmpty()) mNodes[0].x else ""} \n" +
+                "y: ${if(mNodes.isNotEmpty()) mNodes[0].y else ""}"
     }
 }

@@ -6,26 +6,28 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
+import open.geosolve.geosolve.model.status.SystemCoordinate
 
 open class DrawCanvasView : View {
 
     companion object {
-        private const val POINT_RADIUS: Float = 20f
+        const val POINT_SIZE: Float = 20f
         private const val LINE_WIDTH: Float = 5f
-        private const val TEXT_SIZE: Float = 42f
+        private const val TEXT_SIZE: Float = 40f
     }
 
     private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.color_node)
-        strokeWidth = POINT_RADIUS
+        strokeWidth = POINT_SIZE
     }
     private val mPaintNodeMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.color_mark)
-        strokeWidth = POINT_RADIUS
+        strokeWidth = POINT_SIZE
     }
     private val mPaintLine = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.color_line)
@@ -42,11 +44,7 @@ open class DrawCanvasView : View {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     private lateinit var attachedFigure: Figure
 
@@ -56,6 +54,7 @@ open class DrawCanvasView : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        App.systemCoordinate = SystemCoordinate.ABSOLUTE
 
         drawLines(canvas)
         drawValueLines(canvas)
@@ -67,6 +66,8 @@ open class DrawCanvasView : View {
 //        drawAngleCircle()
         drawValueAngle(canvas)
         drawMarkedAngle(canvas)
+
+        App.systemCoordinate = SystemCoordinate.DECART
     }
 
     private fun drawLines(canvas: Canvas) {
@@ -80,7 +81,7 @@ open class DrawCanvasView : View {
 
     private fun drawNodes(canvas: Canvas) {
         for (node in attachedFigure.mNodes)
-            canvas.drawCircle(node.x, node.y, POINT_RADIUS, mPaintNode)
+            canvas.drawCircle(node.x, node.y, POINT_SIZE, mPaintNode)
     }
 
     private fun drawMarkedLine(canvas: Canvas) {
@@ -105,7 +106,7 @@ open class DrawCanvasView : View {
         canvas.drawCircle(
             markedAngle.angleNode.x,
             markedAngle.angleNode.y,
-            POINT_RADIUS,
+            POINT_SIZE,
             mPaintNodeMark
         )
     }
