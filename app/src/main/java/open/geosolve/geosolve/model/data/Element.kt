@@ -52,10 +52,4 @@ abstract class Element {
         if (value.float != null)
             onKnownFun(this)
     }
-
-    fun zeroing(){
-        onKnownFun = {}
-        verbal = "Если ты видишь это то в системе произошла ошибка, не все графы заполнены"
-        expression = "Если ты видишь это то в системе произошла ошибка, не все графы заполнены"
-    }
 }

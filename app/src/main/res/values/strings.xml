@@ -4,6 +4,8 @@
     // Toast
     <string name="toast_not_set_value">Нельзя задать значение, на этой точке нет угла</string>
     <string name="toast_not_mark_find">Нельзя задать значение, на этой точке нет угла</string>
+    <string name="find_not_mark">Вы не поставили искомое</string>
+    <string name="solve_not_found">Мы не знаем как решить эту задачу</string>
     <string name="CRUTCH_FOR_NOW">Пока что, заканчивать фигуру можно только в её начале</string>
 
     // Alert title
@@ -12,9 +14,11 @@
     
     // Verbal Template
     <string name="verbal_rectangle_parallel_line_2">Присваиваем линии %s значение противоположной линии %s</string>
+    <string name="verbal_rectangle_angle_90_1">Присваиваем углу %s 90° так у прямоугольника все углы прямые</string>
 
 
     // Expression Template
     <string name="expression_rectangle_parallel_line_2">%s = %s</string>
+    <string name="expression_rectangle_angle_90_1">%s = 90°</string>
 
 </resources>

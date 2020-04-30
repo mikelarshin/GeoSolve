@@ -7,6 +7,7 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.CallBackSolveUi
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.model.status.Mode
 import open.geosolve.geosolve.model.status.State
@@ -16,6 +17,7 @@ import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
+import open.geosolve.geosolve.view.screens.solveScreen.RecycleAdapter
 
 // TODO(maybe divided onClickButton method and touch cycle???)
 // TODO rework onTouchUp
@@ -29,6 +31,22 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     private val figure: Figure
         get() = app.figure
+
+    fun solveButtonClicked(){
+        SolveUtil.showStepSolveList(figure, object : CallBackSolveUi {
+            override fun findNotMark() {
+                viewState.showMessage(R.string.find_not_mark)
+            }
+
+            override fun solveIsNotFound() {
+                viewState.showMessage(R.string.solve_not_found)
+            }
+
+            override fun solveIsFound() {
+                viewState.goToSolveScreen()
+            }
+        })
+    }
 
     fun markButtonClicked() {
         mode = Mode.MARK_FIND
@@ -47,8 +65,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun clearButtonClicked() {
-        SolveUtil.typeSolve =
-            UnknownFigure
+        SolveUtil.typeSolve = UnknownFigure
         figure.clearFigure()
         viewState.showTypeFigure()
         viewState.updateCanvas()
@@ -91,6 +108,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         numOfCall = 0
         moveNode = null
 
+        setChars()
         solve()
     }
 
@@ -100,6 +118,12 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             SolveUtil.solve(figure)
             uiCallBack()
         }
+    }
+
+    private fun setChars(){
+        val charRange = ('A'..'Z').toList()
+        for (i in 0 until figure.mNodes.size)
+            figure.mNodes[i].char = charRange[i]
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
@@ -130,8 +154,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
                         figure.addAngle(node.startLine?.startNode?.startLine!!, node.startLine!!)
 
-                        if (figure.mAngles.size > 2) // TODO(Fix CRUTCH)
-                            figure.addAngle(node.startLine!!, node.finalLine!!)
+                        figure.addAngle(node.startLine!!, node.finalLine!!)
 
                     } else
                         viewState.showMessage(R.string.CRUTCH_FOR_NOW)

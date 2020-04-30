@@ -27,7 +27,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
 
         layout.calc_button.setOnClickListener {
-            findNavController().navigate(R.id.action_to_solve)
+            presenter.solveButtonClicked()
         }
 
         layout.mark_mode_button.setOnClickListener {
@@ -49,6 +49,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.clear_button.setOnClickListener {
             presenter.clearButtonClicked()
         }
+    }
+
+    override fun goToSolveScreen() {
+        findNavController().navigate(R.id.action_to_solve)
     }
 
     override fun updateCanvas() {

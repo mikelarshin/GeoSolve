@@ -62,6 +62,7 @@ open class DrawCanvasView : View {
         drawMarkedLine(canvas)
 
         drawNodes(canvas)
+        drawNodesName(canvas)
 
 //        drawAngleCircle()
         drawValueAngle(canvas)
@@ -107,6 +108,17 @@ open class DrawCanvasView : View {
             POINT_RADIUS,
             mPaintNodeMark
         )
+    }
+
+    private fun drawNodesName(canvas: Canvas) {
+        for (node in attachedFigure.mNodes) {
+            canvas.drawText(
+                node.char.toString(),
+                node.x - 50,
+                node.y - 50,
+                mPaintText
+            )
+        }
     }
 
     // TODO Рисовать дугу угла fun drawAngleCircle()

@@ -18,6 +18,7 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
 
         layout.back_button.setOnClickListener {
             findNavController().popBackStack()
+            RecycleAdapter.clear()
         }
 
         setupRecycler()

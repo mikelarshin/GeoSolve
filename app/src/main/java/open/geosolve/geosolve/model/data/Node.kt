@@ -1,6 +1,10 @@
 package open.geosolve.geosolve.model.data
 
+import kotlin.properties.Delegates
+
 class Node(var x: Float, var y: Float) {
+
+    var char by Delegates.notNull<Char>()
 
     var startLine: Line? = null
     var finalLine: Line? = null
