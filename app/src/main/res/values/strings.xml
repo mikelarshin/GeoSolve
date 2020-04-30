@@ -3,16 +3,18 @@
 
     // Toast
     <string name="toast_not_set_value">Нельзя задать значение, на этой точке нет угла</string>
+    <string name="toast_not_mark_find">Нельзя задать значение, на этой точке нет угла</string>
     <string name="CRUTCH_FOR_NOW">Пока что, заканчивать фигуру можно только в её начале</string>
 
     // Alert title
     <string name="alert_set_line">Введите длину линии</string>
     <string name="alert_set_angle">Введите значение угла</string>
-
-
+    
     // Verbal Template
-
+    <string name="verbal_rectangle_parallel_line_2">Присваиваем линии %s значение противоположной линии %s</string>
 
 
     // Expression Template
+    <string name="expression_rectangle_parallel_line_2">%s = %s</string>
+
 </resources>

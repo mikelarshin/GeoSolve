@@ -13,8 +13,8 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
     }
 
     fun delConnection(){
-        startNode.startLine = null
-        finalNode.finalLine = null
+        startNode.finalLine = null
+        finalNode.startLine = null
     }
 
     // TODO Doc this

@@ -5,7 +5,7 @@ import open.geosolve.geosolve.model.solve.type.AngleFigure
 import open.geosolve.geosolve.model.solve.type.Rectangle
 import open.geosolve.geosolve.model.solve.type.Triangle
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
-import open.geosolve.geosolve.view.screens.solveScreen.StepSolve
+import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil
 
 object SolveUtil {
 
@@ -36,14 +36,11 @@ object SolveUtil {
     }
     
     private fun zeroGraph(figure: Figure){
-        for (line in figure.mLines)
-            line.onKnownFun = {}
-
-        for (angle in figure.mAngles)
-            angle.onKnownFun = {}
+        figure.mLines.map { it.zeroing() }
+        figure.mAngles.map { it.zeroing() }
     }
 
-    fun getStepSolveList(): List<StepSolve> {
+    fun getStepSolveList(): List<DesignUtil> {
         return emptyList()
     }
 }

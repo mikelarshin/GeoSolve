@@ -12,13 +12,15 @@ class Angle(private val startLine: Line, private val finalLine: Line) : Element(
 
     init {
         if (startNode == finalNode)
-            throw Exception("Angle constructor get the same Node")
+            throw Exception("Angle constructor get the same startNode & finalNode")
         if (startNode == angleNode)
-            throw Exception("Angle constructor get the same Node")
+            throw Exception("Angle constructor get the same startNode & angleNode")
         if (angleNode == finalNode)
-            throw Exception("Angle constructor get the same Node")
+            throw Exception("Angle constructor get the same angleNode & finalNode")
+        if (startLine == finalLine)
+            throw Exception("Angle constructor get the same Line")
         if (startLine.finalNode != finalLine.startNode)
-            throw Exception("Angle constructor get wrong Line") // TODO(Fix this)
+            throw Exception("Angle constructor get wrong Line") // TODO(This bug happens when you create Node in the completed figure)
     }
 
     fun delConnection(){

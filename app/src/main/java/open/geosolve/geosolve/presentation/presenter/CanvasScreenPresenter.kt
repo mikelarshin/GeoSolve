@@ -17,7 +17,8 @@ import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
 
-// TODO Remove hardcoded strings, rework onTouchUp
+// TODO(maybe divided onClickButton method and touch cycle???)
+// TODO rework onTouchUp
 @InjectViewState
 class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
@@ -28,10 +29,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     private val figure: Figure
         get() = app.figure
-
-    fun calculateButtonClicked() {
-        viewState.goToCalculationFragment()
-    }
 
     fun markButtonClicked() {
         mode = Mode.MARK_FIND
@@ -58,6 +55,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun onTouchDown(touchX: Float, touchY: Float) {
+        state = State.ON_CANVAS
         for (node in figure.mNodes) {
             if (node.inRadius(touchX, touchY)) {
                 moveNode = node
@@ -83,7 +81,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                     }
                 Mode.DELETE -> figure.delNode(touchX, touchY)
                 Mode.MARK_FIND -> figure.find =
-                    figure.getInRadius(touchX, touchY) { viewState.showMessage(R.string.app_name) }
+                    figure.getInRadius(touchX, touchY) { viewState.showMessage(R.string.toast_not_mark_find) }
                     ?: figure.find
                 Mode.SET_VAlUE -> setValue(touchX, touchY)
             }
@@ -91,7 +89,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
         // crutch
         numOfCall = 0
-        state = State.ON_CANVAS
+        moveNode = null
 
         solve()
     }

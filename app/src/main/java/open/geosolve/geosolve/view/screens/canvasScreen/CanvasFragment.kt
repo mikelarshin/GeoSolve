@@ -27,7 +27,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
 
         layout.calc_button.setOnClickListener {
-            presenter.calculateButtonClicked()
+            findNavController().navigate(R.id.action_to_solve)
         }
 
         layout.mark_mode_button.setOnClickListener {
@@ -53,10 +53,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     override fun updateCanvas() {
         layout.canvas.invalidate()
-    }
-
-    override fun goToCalculationFragment() {
-        findNavController().navigate(R.id.action_to_solve)
     }
 
     override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
@@ -86,7 +82,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showMessage(messageID: Int) {
-        Toast.makeText(context, getText(messageID), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, messageID, Toast.LENGTH_SHORT).show()
     }
 
 }

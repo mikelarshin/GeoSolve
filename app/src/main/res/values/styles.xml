@@ -3,19 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/BoldColor</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/GrayColor</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Text" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/BoldColor</item>
+    <style name="TemplateText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="BoldText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/BoldColor</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.data.Element
 import java.util.*
 
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
 
     companion object {
-        private var stepSolveList: MutableList<StepSolve> = ArrayList()
+        private var stepSolveList: MutableList<Element> = ArrayList()
 
-        fun addItem(stepSolve: StepSolve) {
+        fun addItem(stepSolve: Element) {
             stepSolveList.add(stepSolve)
         }
 
@@ -21,14 +22,13 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
             stepSolveList.clear()
         }
 
-        fun addAll(steps: List<StepSolve>?) {
-            stepSolveList.addAll(steps!!)
+        fun addAll(steps: List<Element>) {
+            stepSolveList.addAll(steps)
         }
     }
 
     class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var isOpen = false
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {

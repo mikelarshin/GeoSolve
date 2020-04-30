@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="BoldColor">#000</color>
+    <color name="colorPrimary">#000</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="GrayColor">#DDD</color>
+    <color name="colorAccent">#DDD</color>
 
     <color name="color_node">#000</color>
     <color name="color_line">#CCCCCC</color>

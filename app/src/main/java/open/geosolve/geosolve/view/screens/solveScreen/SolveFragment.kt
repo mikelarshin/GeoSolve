@@ -1,38 +1,29 @@
 package open.geosolve.geosolve.view.screens.solveScreen
 
+import android.text.style.TextAppearanceSpan
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_solve.view.*
+import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.presentation.presenter.SolveScreenPresenter
+import open.geosolve.geosolve.presentation.view.SolveScreenView
 import open.geosolve.geosolve.view.MvpFragmentX
 
-class SolveFragment : MvpFragmentX(R.layout.fragment_solve) {
+class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
+
+    private val presenter by moxyPresenter { SolveScreenPresenter(app) }
 
     override fun setupLayout() {
-
-        setupRecycler()
 
         layout.back_button.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        setupRecycler()
     }
 
     private fun setupRecycler() {
-
-        val adapter = RecycleAdapter()
-
-        (0..10).forEach {
-            RecycleAdapter.addItem(
-                StepSolve(
-                    "Складываем значения",
-                    "%s + %s = %s",
-                    null,
-                    it.toString(), it.toString(), (it + it).toString(),
-                    context = app
-                )
-            )
-        }
-
         layout.recycler.adapter = RecycleAdapter()
         layout.recycler.layoutManager = LinearLayoutManager(activity)
         layout.recycler.addItemDecoration(DividerItemDecoration(activity))
