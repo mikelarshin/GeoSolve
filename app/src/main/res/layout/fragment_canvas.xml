@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <open.geosolve.geosolve.view.view.TouchCanvasView
+        android:id="@+id/canvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <!--TODO(DELETE THIS DEBUGGER)-->
     <TextView
         android:id="@+id/DELETE_THIS_DEBUGGER"
@@ -23,11 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/canvas" />
-
-    <open.geosolve.geosolve.view.view.TouchCanvasView
-        android:id="@+id/canvas"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/calc_button"

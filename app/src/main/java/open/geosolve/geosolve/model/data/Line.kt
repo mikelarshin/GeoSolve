@@ -18,6 +18,7 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
     }
 
     // TODO Doc this
+    // TODO fix this
     fun inRadius(x: Float, y: Float): Boolean {
 
         val dist = { x1: Float, y1: Float,

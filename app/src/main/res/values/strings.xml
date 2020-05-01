@@ -14,7 +14,7 @@
     
     // Verbal Template
     <string name="verbal_rectangle_parallel_line_2">Присваиваем линии %s значение противоположной линии %s</string>
-    <string name="verbal_rectangle_angle_90_1">Присваиваем углу %s 90° так у прямоугольника все углы прямые</string>
+    <string name="verbal_rectangle_angle_90_1">Присваиваем углу %s 90° так как у прямоугольника все углы прямые</string>
 
 
     // Expression Template

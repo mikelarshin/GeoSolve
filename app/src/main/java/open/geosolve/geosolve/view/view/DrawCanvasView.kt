@@ -19,6 +19,7 @@ open class DrawCanvasView : View {
         const val POINT_SIZE: Float = 20f
         private const val LINE_WIDTH: Float = 5f
         private const val TEXT_SIZE: Float = 40f
+        private lateinit var attachedFigure: Figure
     }
 
     private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -45,8 +46,6 @@ open class DrawCanvasView : View {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-
-    private lateinit var attachedFigure: Figure
 
     fun attachFigure(figure: Figure) {
         attachedFigure = figure
