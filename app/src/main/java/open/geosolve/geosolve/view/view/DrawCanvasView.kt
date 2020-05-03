@@ -150,5 +150,5 @@ open class DrawCanvasView : View {
     }
 
     private fun getNormalizeValue(value: Float) =
-        (if (value - value.toInt() == 0f) value.toInt() else value).toString()
+        if (value - value.toInt() == 0f) value.toInt().toString() else "%.1f".format(value)
 }

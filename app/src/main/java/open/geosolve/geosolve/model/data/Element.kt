@@ -1,19 +1,20 @@
 package open.geosolve.geosolve.model.data
 
 abstract class Element {
-    private var value: LinkFloat = LinkFloat()
 
-    lateinit var formula: CharSequence
-        private set
-    lateinit var verbal: CharSequence
-        private set
-    lateinit var expression: () -> CharSequence
-        private set
-
-    var onKnownFunList: MutableList<(thisElement: Element) -> Unit> = mutableListOf()
+    private var value: Float? = null
     private var dependence: (Float?) -> Float? = {value -> value}
 
+    var onKnownFunList: MutableList<(thisElement: Element) -> Unit> = mutableListOf()
+
     var whereFromValueList: List<Element>? = null
+        private set
+
+    lateinit var getFormula: () -> CharSequence
+        private set
+    lateinit var getVerbal: () -> CharSequence
+        private set
+    lateinit var getExpression: () -> CharSequence
         private set
 
     // setDraw - use it in work with canvas
@@ -21,40 +22,37 @@ abstract class Element {
     // setDependent - use it if you want to set a value dependency
     // set - use it if you want to simple set a value
     fun setValueDraw(value: Float) {
-        this.value.float = value
+        this.value = value
     }
 
     fun setDependentValueDraw(dependence: (Float?) -> Float?) {
         this.dependence = dependence
     }
 
-    fun setValueGraph(value: Float, whereFromValueList: List<Element>,
-                      verbal: CharSequence, formula: CharSequence, expression: () -> CharSequence) {
-        this.value.float = value
-        setValue(whereFromValueList, verbal, formula, expression)
+    fun setValueGraph(value: Float, whereFromValueList: List<Element>, args: Array<out () -> CharSequence> ) {
+        this.value = value
+        setValue(whereFromValueList, args)
     }
 
     fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<Element>,
-                               verbal: CharSequence, formula: CharSequence, expression: () -> CharSequence) {
+                               args: Array<out () -> CharSequence>) {
         this.dependence = dependence
-        setValue(whereFromValueList,verbal, formula, expression)
+        setValue(whereFromValueList, args)
     }
 
     private fun setValue(whereFromValueList: List<Element>,
-                         verbal: CharSequence,
-                         formula: CharSequence,
-                         expression: () -> CharSequence){
+                         args: Array<out () -> CharSequence>){
         this.whereFromValueList = whereFromValueList
-        this.formula = formula
-        this.verbal = verbal
-        this.expression = expression
+        this.getFormula = args[0]
+        this.getVerbal = args[1]
+        this.getExpression = args[2]
         for (onKnownFun in onKnownFunList)
             onKnownFun(this)
     }
 
-    fun getLinkValue() = value
-
-    fun getValue() = value.float ?: dependence(value.float)
+    fun getValue() =
+        value ?:
+        dependence(value)
 
     fun solve() {
         if (getValue() != null)

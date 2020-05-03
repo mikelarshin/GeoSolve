@@ -25,29 +25,18 @@ object Triangle : SolveFigure {
 
                     val known_angles = figure.mAngles.filter { it.getValue() != null }
                     val valueGetter: (Float?) -> Float? = {180 - (known_angles[0].getValue()!! + known_angles[1].getValue()!!)}
-                    val unknown_angle =
-                        figure.mAngles.filter { it.getValue() == null }[0].toString()
+                    val unknown_angle = figure.mAngles.filter { it.getValue() == null }[0]
 
                     figure.mAngles.filter { it.getValue() == null }[0].setDependentValueGraph(
                         valueGetter,
                         known_angles,
                         formatSolve(
                             R.string.verbal_triangle_2_known_angle_1_unknown_2,
-                            unknown_angle,
-                            valueGetter(0f).toString()
-                        ),
-                        formatSolve(
                             R.string.expression_triangle_2_known_angle_1_unknown_3,
                             unknown_angle,
-                            known_angles[0].toString(),
-                            known_angles[1].toString()
-                        ),
-                        {formatSolve(
-                            R.string.expression_triangle_2_known_angle_1_unknown_3,
-                            valueGetter(0f).toString(),
-                            known_angles[0].getValue().toString(),
-                            known_angles[1].getValue().toString()
-                        )}
+                            known_angles[0],
+                            known_angles[1]
+                        )
                     )
                 }
             }

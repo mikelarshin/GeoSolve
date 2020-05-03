@@ -74,6 +74,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     fun clearButtonClicked() {
         SolveUtil.typeSolve = UnknownFigure
+        SolveUtil.subTypeSolve = UnknownFigure
         figure.clearFigure()
         viewState.showTypeFigure()
         viewState.updateCanvas()

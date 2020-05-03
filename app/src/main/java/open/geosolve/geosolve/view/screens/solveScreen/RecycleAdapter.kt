@@ -49,9 +49,9 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
             }
         }
 
-        holder.itemView.formula.text = stepSolveList[position].formula
-        holder.itemView.verbal.text = stepSolveList[position].verbal
-        holder.itemView.expression.text = stepSolveList[position].expression()
+        holder.itemView.formula.text = stepSolveList[position].getFormula()
+        holder.itemView.verbal.text = stepSolveList[position].getVerbal()
+        holder.itemView.expression.text = stepSolveList[position].getExpression()
     }
 
     override fun getItemCount(): Int {

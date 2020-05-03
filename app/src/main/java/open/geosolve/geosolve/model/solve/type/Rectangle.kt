@@ -23,19 +23,10 @@ object Rectangle : SolveFigure {
                         listOf(thisElement),
                         formatSolve(
                             R.string.verbal_rectangle_parallel_line_2,
-                            figure.mLines[(i + 2) % 4].toString(),
-                            thisElement.toString()
-                        ),
-                        formatSolve(
                             R.string.expression_rectangle_parallel_line_2,
-                            figure.mLines[(i + 2) % 4].toString(),
-                            thisElement.toString()
-                        ),
-                        {formatSolve(
-                            R.string.expression_rectangle_parallel_line_2,
-                            figure.mLines[(i + 2) % 4].getValue().toString(),
-                            thisElement.getValue().toString()
-                        )}
+                            figure.mLines[(i + 2) % 4],
+                            thisElement
+                        )
                     )
             }
 
@@ -48,16 +39,9 @@ object Rectangle : SolveFigure {
                             emptyList(),
                             formatSolve(
                                 R.string.verbal_rectangle_angle_90_1,
-                                figure.mAngles[(i + j) % 4].toString()
-                            ),
-                            formatSolve(
                                 R.string.expression_rectangle_angle_90_1,
-                                figure.mAngles[(i + j) % 4].toString()
-                            ),
-                            {formatSolve(
-                                R.string.expression_rectangle_angle_90_1,
-                                figure.mAngles[(i + j) % 4].getValue().toString()
-                            )}
+                                figure.mAngles[(i + j) % 4]
+                            )
                         )
             }
         }

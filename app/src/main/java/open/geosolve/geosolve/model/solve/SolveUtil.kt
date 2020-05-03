@@ -58,20 +58,19 @@ object SolveUtil {
             }
         }
 
-        RecycleAdapter.addAll(getList(figure.find!!))
+        RecycleAdapter.addAll(getList(figure.find!!).reversed())
         callbackUi.solveIsFound()
     }
 
-    private fun getList(
-        found: Element,
-        stepList: MutableList<Element> = mutableListOf()
-    ): List<Element> {
+    private fun getList(found: Element, stepList: MutableList<Element> = mutableListOf()): List<Element> {
         if (found.whereFromValueList == null)
-            return stepList
+            return listOf() // dead end graph
 
         for (element in found.whereFromValueList!!)
             stepList += getList(element, stepList)
 
+        if (stepList.contains(found))
+            return stepList
         return listOf(found) + stepList
     }
 }
