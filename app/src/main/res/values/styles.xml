@@ -13,9 +13,9 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="BoldText" parent="TextAppearance.AppCompat">
+    <style name="Bold" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

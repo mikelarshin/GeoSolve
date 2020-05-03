@@ -1,7 +1,5 @@
 package open.geosolve.geosolve.model.solve
 
-import android.util.Log
-import open.geosolve.geosolve.model.CallBackSolveUi
 import open.geosolve.geosolve.model.data.Element
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.type.AngleFigure
@@ -12,8 +10,8 @@ import open.geosolve.geosolve.view.screens.solveScreen.RecycleAdapter
 
 object SolveUtil {
 
-    var typeSolve: SolveFigure =
-        UnknownFigure
+    var typeSolve: SolveFigure = UnknownFigure
+    var subTypeSolve: SolveFigure = UnknownFigure
 
     private fun setTypeSolve(figure: Figure) {
         typeSolve = when {
@@ -22,6 +20,7 @@ object SolveUtil {
             AngleFigure.isMatch(figure) -> AngleFigure
             else -> UnknownFigure
         }
+        subTypeSolve = UnknownFigure
     }
 
     fun solve(figure: Figure) {
@@ -39,14 +38,18 @@ object SolveUtil {
     }
 
     private fun zeroGraph(figure: Figure) {
-        figure.mLines.map { it.onKnownFun = {} }
-        figure.mAngles.map { it.onKnownFun = {} }
+        figure.mLines.map { it.onKnownFunList.clear() }
+        figure.mAngles.map { it.onKnownFunList.clear() }
     }
 
-    fun showStepSolveList(figure: Figure, callbackUi: CallBackSolveUi){
+    fun showStepSolveList(figure: Figure, callbackUi: CallBackSolveUi) {
         when {
             figure.find == null -> {
                 callbackUi.findNotMark()
+                return
+            }
+            figure.find?.getValue() != null && figure.find!!.whereFromValueList == null -> {
+                callbackUi.userInputValue()
                 return
             }
             figure.find!!.whereFromValueList == null -> {
@@ -59,11 +62,14 @@ object SolveUtil {
         callbackUi.solveIsFound()
     }
 
-    private fun getList(found: Element, stepList: MutableList<Element> = mutableListOf()): List<Element>{
+    private fun getList(
+        found: Element,
+        stepList: MutableList<Element> = mutableListOf()
+    ): List<Element> {
         if (found.whereFromValueList == null)
             return stepList
 
-        for(element in found.whereFromValueList!!)
+        for (element in found.whereFromValueList!!)
             stepList += getList(element, stepList)
 
         return listOf(found) + stepList

@@ -1,8 +1,6 @@
 package open.geosolve.geosolve.view.screens.canvasScreen
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
@@ -43,7 +41,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         }
 
         layout.delete_mode_button.setOnClickListener {
-            presenter.deleteButtonButton()
+            presenter.deleteButtonClicked()
         }
 
         layout.set_value_mode_button.setOnClickListener {
@@ -54,12 +52,16 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             presenter.clearButtonClicked()
         }
 
-        // TODO CRUTCH
+        layout.move_mode_button.setOnClickListener{
+            presenter.moveButtonClicked()
+        }
+
         GlobalScope.launch(Dispatchers.Main) {
             delay(50)
             App.widthCanvas = canvas.width
             App.heightCanvas = canvas.height
 
+            showTypeFigure()
             updateCanvas()
         }
     }
@@ -89,11 +91,20 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showTypeFigure() {
-        text_type_figure.text =
-            if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
-                SolveUtil.typeSolve::class.simpleName
-            else
-                ""
+        val typeFigure = if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
+            SolveUtil.typeSolve::class.simpleName
+        else
+            ""
+        val subTypeFigure = if (SolveUtil.subTypeSolve::class.simpleName != "UnknownFigure")
+            SolveUtil.subTypeSolve::class.simpleName
+        else
+            ""
+
+        text_type_figure.text =  if (subTypeFigure != "")
+            "$typeFigure : $subTypeFigure"
+        else
+            typeFigure
+
         // TODO(DELETE THIS DEBUGGER)
         DELETE_THIS_DEBUGGER.text = app.figure.toString()
     }
@@ -101,5 +112,4 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     override fun showMessage(messageID: Int) {
         Toast.makeText(context, messageID, Toast.LENGTH_SHORT).show()
     }
-
 }

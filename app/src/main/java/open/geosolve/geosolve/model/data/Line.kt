@@ -7,6 +7,8 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
 
     //    all logic solve in abstract Element
 
+    override fun toString(): String = (startNode.char + finalNode.char.toString())
+
     init {
         if (startNode == finalNode)
             throw Exception("Line constructor get the same Node")
@@ -45,7 +47,7 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
 
         return when{
             dot(x - startNode.x, y - startNode.y, finalNode.x - startNode.x, finalNode.y - startNode.y) >= 0 &&
-                    dot(x - finalNode.x, y - finalNode.y, startNode.x - finalNode.x, startNode.y - finalNode.y) >= 0 -> distance < 10
+                    dot(x - finalNode.x, y - finalNode.y, startNode.x - finalNode.x, startNode.y - finalNode.y) >= 0 -> distance < 0.5
 
             else -> false
         }

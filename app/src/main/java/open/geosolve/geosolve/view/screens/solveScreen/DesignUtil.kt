@@ -13,7 +13,7 @@ object DesignUtil {
 
         for (replacer in formatArgs) {
             val index = sb.indexOf("%")
-            sb.replace(index, index + 2, formatText(replacer, R.style.BoldText))
+            sb.replace(index, index + 2, formatText(replacer, R.style.Bold))
         }
 
         return sb.subSequence(0, sb.length)

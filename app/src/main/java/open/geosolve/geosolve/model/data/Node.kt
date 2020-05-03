@@ -11,6 +11,7 @@ class Node(foundX: Float, foundY: Float) {
         get() = App.systemCoordinate.transformationMethodY(field)
 
     var char by Delegates.notNull<Char>()
+    override fun toString(): String = char.toString()
 
     var startLine: Line? = null
     var finalLine: Line? = null
@@ -34,9 +35,9 @@ class Node(foundX: Float, foundY: Float) {
     }
 
     fun inRadius(x: Float, y: Float): Boolean {
-        val xBool = this.x - 1 < x && x < this.x + 1
+        val xBool = this.x - 0.5 < x && x < this.x + 0.5
 
-        val yBool = this.y - 1 < y && y < this.y + 1
+        val yBool = this.y - 0.5 < y && y < this.y + 0.5
 
         return xBool && yBool
     }

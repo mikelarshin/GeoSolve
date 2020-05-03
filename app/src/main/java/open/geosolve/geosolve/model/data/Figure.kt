@@ -6,6 +6,7 @@ import java.util.*
 class Figure {
 
     var find: Element? = null
+    var closeFigure: Boolean = false
     val mNodes: MutableList<Node> = ArrayList()
     val mLines: MutableList<Line> = ArrayList()
     val mAngles: MutableList<Angle> = ArrayList()
@@ -56,6 +57,7 @@ class Figure {
         mLines.clear()
         mAngles.clear()
         find = null
+        closeFigure = false
     }
 
     fun getInRadius(x: Float, y: Float, callback: () -> Unit): Element? {
@@ -86,10 +88,11 @@ class Figure {
 
     // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {
-        return "Nodes: ${mNodes.size} \n" +
-                "Lines: ${mLines.size} \n" +
-                "Angles: ${mAngles.size} \n\n" +
-                "x: ${if(mNodes.isNotEmpty()) mNodes[0].x else ""} \n" +
-                "y: ${if(mNodes.isNotEmpty()) mNodes[0].y else ""}"
+//        return "Nodes: ${mNodes.size} \n" +
+//                "Lines: ${mLines.size} \n" +
+//                "Angles: ${mAngles.size} \n\n" +
+//                "x: ${if (mNodes.isNotEmpty()) mNodes[0].x else ""} \n" +
+//                "y: ${if (mNodes.isNotEmpty()) mNodes[0].y else ""} \n"
+        return ""
     }
 }

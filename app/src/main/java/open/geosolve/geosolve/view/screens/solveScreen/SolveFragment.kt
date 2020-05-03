@@ -1,10 +1,13 @@
 package open.geosolve.geosolve.view.screens.solveScreen
 
-import android.text.style.TextAppearanceSpan
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_canvas.*
+import kotlinx.android.synthetic.main.fragment_solve.*
 import kotlinx.android.synthetic.main.fragment_solve.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
@@ -24,6 +27,14 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
         }
 
         setupRecycler()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(50)
+            App.widthCanvas = canvas.width
+            App.heightCanvas = canvas.height
+
+            canvas.invalidate()
+        }
     }
 
     private fun setupRecycler() {

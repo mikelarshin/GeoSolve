@@ -3,12 +3,15 @@ package open.geosolve.geosolve.model.data
 abstract class Element {
     private var value: LinkFloat = LinkFloat()
 
+    lateinit var formula: CharSequence
+        private set
     lateinit var verbal: CharSequence
         private set
-    lateinit var expression: CharSequence
+    lateinit var expression: () -> CharSequence
         private set
 
-    var onKnownFun: (thisElement: Element) -> Unit = {}
+    var onKnownFunList: MutableList<(thisElement: Element) -> Unit> = mutableListOf()
+    private var dependence: (Float?) -> Float? = {value -> value}
 
     var whereFromValueList: List<Element>? = null
         private set
@@ -21,35 +24,41 @@ abstract class Element {
         this.value.float = value
     }
 
-    fun setDependentValueDraw(value: LinkFloat) {
-        this.value = value
+    fun setDependentValueDraw(dependence: (Float?) -> Float?) {
+        this.dependence = dependence
     }
 
-    fun setValueGraph(value: Float?, whereFromValueList: List<Element>,
-                      verbal: CharSequence, expression: CharSequence) {
+    fun setValueGraph(value: Float, whereFromValueList: List<Element>,
+                      verbal: CharSequence, formula: CharSequence, expression: () -> CharSequence) {
         this.value.float = value
-        setValue(whereFromValueList,verbal, expression)
+        setValue(whereFromValueList, verbal, formula, expression)
     }
 
-    fun setDependentValueGraph(value: LinkFloat, whereFromValueList: List<Element>,
-                               verbal: CharSequence, expression: CharSequence) {
-        this.value = value
-        setValue(whereFromValueList,verbal, expression)
+    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<Element>,
+                               verbal: CharSequence, formula: CharSequence, expression: () -> CharSequence) {
+        this.dependence = dependence
+        setValue(whereFromValueList,verbal, formula, expression)
     }
 
-    private fun setValue(whereFromValueList: List<Element>,verbal: CharSequence, expression: CharSequence){
+    private fun setValue(whereFromValueList: List<Element>,
+                         verbal: CharSequence,
+                         formula: CharSequence,
+                         expression: () -> CharSequence){
         this.whereFromValueList = whereFromValueList
+        this.formula = formula
         this.verbal = verbal
         this.expression = expression
-        onKnownFun(this)
+        for (onKnownFun in onKnownFunList)
+            onKnownFun(this)
     }
 
     fun getLinkValue() = value
 
-    fun getValue() = value.float
+    fun getValue() = value.float ?: dependence(value.float)
 
     fun solve() {
-        if (value.float != null)
-            onKnownFun(this)
+        if (getValue() != null)
+            for (onKnownFun in onKnownFunList)
+                onKnownFun(this)
     }
 }

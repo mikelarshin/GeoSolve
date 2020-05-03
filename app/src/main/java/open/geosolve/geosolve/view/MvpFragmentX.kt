@@ -32,12 +32,4 @@ abstract class MvpFragmentX(
     }
 
     protected abstract fun setupLayout()
-
-    protected fun unimplemented() {
-        Toast.makeText(context, "\uD83D\uDE48 Unimplemented", Toast.LENGTH_LONG).show()
-    }
-
-    protected fun finish() {
-        activity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    }
 }

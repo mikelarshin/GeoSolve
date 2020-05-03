@@ -7,8 +7,8 @@ import open.geosolve.geosolve.App.Companion.widthCanvas
 
 enum class SystemCoordinate(val transformationMethodX: (Float) -> Float,
                             val transformationMethodY: (Float) -> Float) {
-    ABSOLUTE({ value -> (widthCanvas / 2f) - (scaleForX * -value) },
-        { value -> (heightCanvas / 2f) - (scaleForY * value) }),
+    ABSOLUTE({ value -> widthCanvas / 2 - (scaleForX * -value) },
+        { value -> heightCanvas / 2 - (scaleForY * value) }),
 
     DECART({ value -> value },
         { value -> value })

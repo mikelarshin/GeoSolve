@@ -4,5 +4,6 @@ enum class Mode {
     ADD_MOVE_FIN,
     DELETE,
     MARK_FIND,
-    SET_VAlUE
+    SET_VAlUE,
+    MOVE_CANVAS
 }
