@@ -16,19 +16,19 @@
     // Verbal Template
     <string name="verbal_rectangle_parallel_line_2">Присваиваем линии %s значение противоположной линии %s, так как у прямоугольника противоположные линии равны.</string>
     <string name="verbal_rectangle_angle_90_1">Присваиваем углу %s градус 90°, так как у прямоугольника все углы прямые.</string>
-    <string name="verbal_triangle_2_known_angle_1_unknown_2">Присваиваем углу %s градус угла %s так как в треугольнике сумма углов равна 180°.</string>
-    <string name="verbal_triangle_right_pythagorean_theorem_3">Присваиваем гипотенузе %s корень из суммы квадратов катетов %s и %s(Теорема Пифагора "ссылка на учебник").</string>
+    <string name="verbal_triangle_2_known_angle_1_unknown_2">Присваиваем углу %s разность 180° и сумму %s и %s, так как в треугольнике сумма углов равна 180°.</string>
+    <string name="verbal_triangle_right_pythagorean_theorem_3">Присваиваем гипотенузе %s корень из суммы квадратов катетов %s и %s.</string>
     <string name="verbal_triangle_right_30_degrees_2">Присваиваем катету %s протвоположному углу в 30° длину половины длины гипотенузы %s.</string>
-    <string name="verbal_triangle_right_find_leg_known_leg_hypot_3">Присваиваем катету %s корень разности квадратов гипотенузы %s и катета %s(Теорема Пифагора "ссылка на учебник").</string>
+    <string name="verbal_triangle_right_find_leg_known_leg_hypot_3">Присваиваем катету %s корень разности квадратов гипотенузы %s и катета %s.</string>
 
 
     // Expression Template
     <string name="expression_rectangle_parallel_line_2">%s = %s</string>
-    <string name="expression_rectangle_angle_90_1">%s = <Bold>90°</Bold></string>
-    <string name="expression_triangle_2_known_angle_1_unknown_3">%s = <font>180°</font> - (%s + %s)</string>
+    <string name="expression_rectangle_angle_90_1">%s = 90°</string>
+    <string name="expression_triangle_2_known_angle_1_unknown_3">%s = 180° - (%s + %s)</string>
     <string name="expression_triangle_right_pythagorean_theorem_3">%s = √(%s² + %s²)</string>
     <string name="expression_triangle_right_30_degrees_2">%s = %s / 2</string>
     <string name="expression_triangle_right_find_leg_known_leg_hypot_3">%s = √(%s² - %s²)</string>
 
-    // needs symbol ∠ °
+    // needs symbol °
 </resources>
