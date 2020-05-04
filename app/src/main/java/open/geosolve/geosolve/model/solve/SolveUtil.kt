@@ -58,7 +58,10 @@ object SolveUtil {
             }
         }
 
-        RecycleAdapter.addAll(getList(figure.find!!).reversed())
+        val list = getList(figure.find!!).reversed() + listOf(figure.find!!)
+
+        RecycleAdapter.addAll(list)
+
         callbackUi.solveIsFound()
     }
 
@@ -66,8 +69,12 @@ object SolveUtil {
         if (found.whereFromValueList == null)
             return listOf() // dead end graph
 
-        for (element in found.whereFromValueList!!)
-            stepList += getList(element, stepList)
+        for (element in found.whereFromValueList!!) {
+            val addStepList = getList(element, stepList)
+            for (addStep in addStepList)
+                if (!stepList.contains(addStep))
+                    stepList += addStep
+        }
 
         if (stepList.contains(found))
             return stepList

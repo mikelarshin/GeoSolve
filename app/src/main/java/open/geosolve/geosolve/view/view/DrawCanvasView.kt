@@ -12,6 +12,7 @@ import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.status.SystemCoordinate
+import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
 
 open class DrawCanvasView : View {
 
@@ -20,6 +21,7 @@ open class DrawCanvasView : View {
         private const val LINE_WIDTH: Float = 5f
         private const val TEXT_SIZE: Float = 40f
         private lateinit var attachedFigure: Figure
+        private val TEXT_MARGIN = 30f
     }
 
     private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -56,8 +58,8 @@ open class DrawCanvasView : View {
         App.systemCoordinate = SystemCoordinate.ABSOLUTE
 
         drawLines(canvas)
-        drawValueLines(canvas)
         drawMarkedLine(canvas)
+        drawValueLines(canvas)
 
         drawNodes(canvas)
         drawNodesName(canvas)
@@ -114,8 +116,8 @@ open class DrawCanvasView : View {
         for (node in attachedFigure.mNodes) {
             canvas.drawText(
                 node.char.toString(),
-                node.x - 50,
-                node.y - 50,
+                node.x - TEXT_MARGIN,
+                node.y - TEXT_MARGIN,
                 mPaintText
             )
         }
@@ -128,9 +130,9 @@ open class DrawCanvasView : View {
             if (angle.getValue() == null) continue
 
             canvas.drawText(
-                getNormalizeValue(angle.getValue()!!),
-                angle.angleNode.x + 50,
-                angle.angleNode.y + 50,
+                formatValueString(angle),
+                angle.angleNode.x + TEXT_MARGIN,
+                angle.angleNode.y + TEXT_MARGIN,
                 mPaintText
             )
         }
@@ -140,15 +142,14 @@ open class DrawCanvasView : View {
         for (line in attachedFigure.mLines) {
             if (line.getValue() == null) continue
 
+            val text = formatValueString(line)
+
             canvas.drawText(
-                getNormalizeValue(line.getValue()!!),
-                (line.startNode.x + line.finalNode.x) / 2,
-                (line.startNode.y + line.finalNode.y) / 2,
+                text,
+                ((line.startNode.x + line.finalNode.x) / 2) - (TEXT_SIZE * text.length) / 3.5f,
+                ((line.startNode.y + line.finalNode.y) / 2) + TEXT_SIZE / 3.5f,
                 mPaintText
             )//TODO(выровнять относительно размера текста)
         }
     }
-
-    private fun getNormalizeValue(value: Float) =
-        if (value - value.toInt() == 0f) value.toInt().toString() else "%.1f".format(value)
 }

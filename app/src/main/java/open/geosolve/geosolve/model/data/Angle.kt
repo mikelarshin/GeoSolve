@@ -4,7 +4,7 @@ class Angle(private val startLine: Line, private val finalLine: Line) : Element(
 
     // all logic solve in abstract Element
 
-    override fun toString(): String = (startNode.char.toString() + angleNode.char + finalNode.char)
+    override fun toString(): String = "∠${(startNode.char.toString() + angleNode.char + finalNode.char)}"
 
     val startNode: Node
         get() = startLine.startNode
