@@ -6,7 +6,7 @@ import open.geosolve.geosolve.model.solve.type.AngleFigure
 import open.geosolve.geosolve.model.solve.type.Rectangle
 import open.geosolve.geosolve.model.solve.type.Triangle
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
-import open.geosolve.geosolve.view.screens.solveScreen.RecycleAdapter
+import open.geosolve.geosolve.ui.solve.RecycleAdapter
 
 object SolveUtil {
 

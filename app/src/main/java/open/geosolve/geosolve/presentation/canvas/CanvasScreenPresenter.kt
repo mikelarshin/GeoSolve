@@ -1,21 +1,16 @@
-package open.geosolve.geosolve.presentation.presenter
+package open.geosolve.geosolve.presentation.canvas
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
-import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.solve.SolveUtil
-import open.geosolve.geosolve.presentation.view.CanvasScreenView
+import open.geosolve.geosolve.presentation.global.MvpPresenterX
 
-// TODO(maybe divided onClickButton method and touch cycle???)
-// TODO rework onTouchUp
 @InjectViewState
-class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
+class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
 
     private var figureClosed = false
     private var movedNode: Node? = null
@@ -48,6 +43,21 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     fun onMoveFinished(x: Float, y: Float) {
         movedNode = null
+    }
+
+    fun onTouch(x: Float, y: Float) {
+
+        val isCanvasTouch = !isNode(x, y)
+
+        if (!figureClosed) {
+            if (isCanvasTouch)
+                touchCanvas(x, y)
+            else
+                touchPoint(x, y)
+        }
+
+        updateNodesNames()
+        solve()
     }
 
     private fun isNode(x: Float, y: Float): Boolean {
@@ -101,31 +111,18 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         }
     }
 
-    fun onTouch(x: Float, y: Float) {
+    private fun updateNodesNames() {
+        val charRange = ('A'..'Z').iterator()
 
-        var isCanvasTouch = !isNode(x, y)
-
-        if (isCanvasTouch && !figureClosed) {
-            touchCanvas(x, y)
-        } else {
-            touchPoint(x, y)
-        }
-
-        setNodeChars()
-        solve()
-    }
-
-    private fun solve() {
-        val uiCallBack = { viewState.showTypeFigure() }
-        GlobalScope.launch(Dispatchers.Main) {
-            SolveUtil.solve(figure)
-            uiCallBack()
+        figure.mNodes.forEach { node ->
+            node.char = charRange.nextChar()
         }
     }
 
-    private fun setNodeChars() {
-        val charRange = ('A'..'Z').toList()
-        for (i in 0 until figure.mNodes.size)
-            figure.mNodes[i].char = charRange[i]
+    private fun solve() = launch {
+
+        SolveUtil.solve(figure)
+
+        viewState.showTypeFigure()
     }
 }

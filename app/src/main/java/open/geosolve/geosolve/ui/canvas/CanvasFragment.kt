@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.screens.canvasScreen
+package open.geosolve.geosolve.ui.canvas
 
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -10,15 +10,20 @@ import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.solve.SolveUtil
-import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
-import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.view.MvpFragmentX
+import open.geosolve.geosolve.presentation.canvas.CanvasScreenPresenter
+import open.geosolve.geosolve.presentation.canvas.CanvasScreenView
+import open.geosolve.geosolve.ui.global.MvpFragmentX
 import open.v0gdump.field.InteractiveFieldCallback
 
 
-class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
+class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas),
+    CanvasScreenView {
 
-    private val presenter by moxyPresenter { CanvasScreenPresenter(app) }
+    private val presenter by moxyPresenter {
+        CanvasScreenPresenter(
+            app
+        )
+    }
 
     override fun setupLayout() {
         layout.field.attach(app.figure)

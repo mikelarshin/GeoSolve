@@ -4,8 +4,7 @@ import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.SolveFigure
 import open.geosolve.geosolve.model.solve.SolveUtil.subTypeSolve
-import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatSolve
-import java.lang.Exception
+import open.geosolve.geosolve.ui.solve.DesignUtil.formatSolve
 
 object Triangle : SolveFigure {
     override fun isMatch(figure: Figure): Boolean {

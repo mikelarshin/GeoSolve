@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.view
+package open.geosolve.geosolve.ui.canvas
 
 import android.content.Context
 import android.graphics.Canvas
@@ -11,7 +11,7 @@ import open.geosolve.geosolve.model.data.Node
 import open.v0gdump.field.InteractiveFieldView
 import open.v0gdump.field.TextAnchor
 
-class FigureInteractiveFieldView : InteractiveFieldView {
+class FigureFieldView : InteractiveFieldView {
 
     //region Drawing data
 

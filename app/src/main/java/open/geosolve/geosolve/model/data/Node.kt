@@ -1,15 +1,10 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.properties.Delegates
 
-class Node(foundX: Float, foundY: Float) {
+class Node(var x: Float, var y: Float) {
 
-    var x: Float = foundX
-        get() = App.systemCoordinate.transformationMethodX(field)
-    var y: Float = foundY
-        get() = App.systemCoordinate.transformationMethodY(field)
+    private val POINT_SIZE = 20f
 
     var char by Delegates.notNull<Char>()
     override fun toString(): String = char.toString()
@@ -21,13 +16,13 @@ class Node(foundX: Float, foundY: Float) {
     var centerAngle: Angle? = null
     var finalAngle: Angle? = null
 
-    fun delConnection(){
+    fun delConnection() {
         startLine?.delConnection()
         finalLine?.delConnection()
 
-        startAngle?.delConnection()
-        centerAngle?.delConnection()
-        finalAngle?.delConnection()
+        startAngle?.deleteConnections()
+        centerAngle?.deleteConnections()
+        finalAngle?.deleteConnections()
     }
 
     fun moveNode(x: Float, y: Float) {

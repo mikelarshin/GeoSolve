@@ -3,7 +3,7 @@ package open.geosolve.geosolve.model.data
 abstract class Element {
 
     private var value: Float? = null
-    private var dependence: (Float?) -> Float? = {value -> value}
+    private var dependence: (Float?) -> Float? = { value -> value }
 
     var onKnownFunList: MutableList<(thisElement: Element) -> Unit> = mutableListOf()
 

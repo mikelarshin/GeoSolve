@@ -1,6 +1,5 @@
-package open.geosolve.geosolve.view.screens.solveScreen
+package open.geosolve.geosolve.ui.solve
 
-import android.app.ActionBar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Element
-import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatAnswer
+import open.geosolve.geosolve.ui.solve.DesignUtil.formatAnswer
 import java.util.*
 
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
@@ -36,7 +35,9 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_step, parent, false)
-        return RecycleViewHolder(view)
+        return RecycleViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {

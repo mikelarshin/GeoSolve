@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.screens.solveScreen
+package open.geosolve.geosolve.ui.solve
 
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -14,11 +14,21 @@ object DesignUtil {
             : Array<out () -> CharSequence> {
 
         fun getFormat(templateId: Int, by: (Element) -> String = { element -> element.toString() }): CharSequence {
-            val sb = SpannableStringBuilder().append(formatText(App.instance.getString(templateId), R.style.TemplateText))
+            val sb = SpannableStringBuilder().append(
+                formatText(
+                    App.instance.getString(templateId),
+                    R.style.TemplateText
+                )
+            )
 
             for (i in 0 until sb.filter { it == '%' }.length) {
                 val index = sb.indexOf('%')
-                sb.replace(index, index + 2, formatText(by(formatArgs[i]), R.style.Bold))
+                sb.replace(
+                    index, index + 2,
+                    formatText(
+                        by(formatArgs[i]), R.style.Bold
+                    )
+                )
             }
             return sb.subSequence(0, sb.length)
         }
@@ -29,7 +39,13 @@ object DesignUtil {
         return arrayOf(
             { formula },
             { verbal },
-            { getFormat(templateExpressionId, { element -> formatValueString(element) }) })
+            {
+                getFormat(templateExpressionId, { element ->
+                    formatValueString(
+                        element
+                    )
+                })
+            })
     }
 
     private fun formatText(string: String, styleId: Int): SpannableString {
@@ -40,9 +56,26 @@ object DesignUtil {
 
     fun formatAnswer(element: Element): CharSequence {
         val sb = SpannableStringBuilder()
-            .append(formatText(element.toString(), R.style.AnswerText))
-            .append(formatText(" = ", R.style.TemplateText))
-            .append(formatText(formatValueString(element), R.style.AnswerText))
+            .append(
+                formatText(
+                    element.toString(),
+                    R.style.AnswerText
+                )
+            )
+            .append(
+                formatText(
+                    " = ",
+                    R.style.TemplateText
+                )
+            )
+            .append(
+                formatText(
+                    formatValueString(
+                        element
+                    ),
+                    R.style.AnswerText
+                )
+            )
 
         return sb.subSequence(0, sb.length)
     }

@@ -1,10 +1,9 @@
-package open.geosolve.geosolve.presentation.view
+package open.geosolve.geosolve.presentation.canvas
 
 import moxy.MvpView
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-// TODO Presenter sets ui vars!!!
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface CanvasScreenView : MvpView {
     fun goToSolveScreen()
