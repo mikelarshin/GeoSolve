@@ -71,9 +71,11 @@ object SolveUtil {
 
         for (element in found.whereFromValueList!!) {
             val addStepList = getList(element, stepList)
-            for (addStep in addStepList)
-                if (!stepList.contains(addStep))
-                    stepList += addStep
+            for (addStep in addStepList) {
+                if (stepList.contains(addStep))
+                    stepList.remove(addStep)
+                stepList += addStep
+            }
         }
 
         if (stepList.contains(found))

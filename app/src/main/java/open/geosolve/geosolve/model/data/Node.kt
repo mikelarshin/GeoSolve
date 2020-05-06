@@ -1,6 +1,7 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.properties.Delegates
 
 class Node(foundX: Float, foundY: Float) {
@@ -35,9 +36,10 @@ class Node(foundX: Float, foundY: Float) {
     }
 
     fun inRadius(x: Float, y: Float): Boolean {
-        val xBool = this.x - 0.5 < x && x < this.x + 0.5
+        val radius = POINT_SIZE / 20
+        val xBool = this.x - radius < x && x < this.x + radius
 
-        val yBool = this.y - 0.5 < y && y < this.y + 0.5
+        val yBool = this.y - radius < y && y < this.y + radius
 
         return xBool && yBool
     }

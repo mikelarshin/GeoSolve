@@ -17,11 +17,13 @@ import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueStr
 open class DrawCanvasView : View {
 
     companion object {
-        const val POINT_SIZE: Float = 20f
-        private const val LINE_WIDTH: Float = 5f
-        private const val TEXT_SIZE: Float = 40f
+        private fun getDimen(dimenId: Int) = App.instance.resources.getDimension(dimenId)
+
+        val POINT_SIZE: Float = getDimen(R.dimen.POINT_SIZE)
+        private val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)
+        private val TEXT_SIZE: Float = getDimen(R.dimen.TEXT_SIZE)
+        private val TEXT_MARGIN = getDimen(R.dimen.TEXT_MARGIN)
         private lateinit var attachedFigure: Figure
-        private val TEXT_MARGIN = 30f
     }
 
     private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
