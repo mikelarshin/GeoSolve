@@ -1,5 +1,7 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.view.view.DrawCanvasView
+import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.math.hypot
 import kotlin.math.sqrt
 
@@ -47,7 +49,7 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
 
         return when{
             dot(x - startNode.x, y - startNode.y, finalNode.x - startNode.x, finalNode.y - startNode.y) >= 0 &&
-                    dot(x - finalNode.x, y - finalNode.y, startNode.x - finalNode.x, startNode.y - finalNode.y) >= 0 -> distance < 0.5
+                    dot(x - finalNode.x, y - finalNode.y, startNode.x - finalNode.x, startNode.y - finalNode.y) >= 0 -> distance < POINT_SIZE / 40
 
             else -> false
         }
