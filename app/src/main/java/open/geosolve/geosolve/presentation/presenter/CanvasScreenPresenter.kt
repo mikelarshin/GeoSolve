@@ -7,11 +7,11 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
 import open.geosolve.geosolve.model.status.Mode
@@ -30,6 +30,25 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     private val figure: Figure
         get() = app.figure
+
+    fun isUsedByContent(x: Float, y: Float): Boolean {
+        return true // TODO
+    }
+
+    fun onMove(x: Float, y: Float) {
+    }
+
+    fun onMoveFinished(x: Float, y: Float) {
+
+    }
+
+    fun onMoveStart(x: Float, y: Float) {
+
+    }
+
+    fun onTouch(x: Float, y: Float) {
+
+    }
 
     fun solveButtonClicked() {
         SolveUtil.showStepSolveList(figure, object :

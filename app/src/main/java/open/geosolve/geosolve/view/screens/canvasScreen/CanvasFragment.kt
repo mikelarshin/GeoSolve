@@ -7,14 +7,13 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
-import kotlinx.coroutines.*
 import moxy.ktx.moxyPresenter
-import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.view.MvpFragmentX
+import open.v0gdump.field.InteractiveFieldCallback
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
@@ -22,47 +21,29 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     private val presenter by moxyPresenter { CanvasScreenPresenter(app) }
 
     override fun setupLayout() {
+        layout.field.attach(app.figure)
+        layout.field.callback = object : InteractiveFieldCallback {
 
-        layout.canvas.attachFigure(app.figure)
-        layout.canvas.onTouchUp = { x, y -> presenter.onTouchUp(x, y) }
-        layout.canvas.onTouchDown = { x, y -> presenter.onTouchDown(x, y) }
-        layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
+            override fun isUsedByContent(x: Float, y: Float): Boolean {
+                return presenter.isUsedByContent(x, y)
+            }
 
-        layout.calc_button.setOnClickListener {
-            presenter.solveButtonClicked()
-        }
+            override fun onMove(x: Float, y: Float) {
+                presenter.onMove(x, y)
+            }
 
-        layout.mark_mode_button.setOnClickListener {
-            presenter.markButtonClicked()
-        }
+            override fun onMoveFinished(x: Float, y: Float) {
+                presenter.onMoveFinished(x, y)
+            }
 
-        layout.edit_mode_button.setOnClickListener {
-            presenter.editButtonClicked()
-        }
+            override fun onMoveStart(x: Float, y: Float) {
+                presenter.onMoveStart(x, y)
+            }
 
-        layout.delete_mode_button.setOnClickListener {
-            presenter.deleteButtonClicked()
-        }
+            override fun onTouch(x: Float, y: Float) {
+                presenter.onTouch(x, y)
+            }
 
-        layout.set_value_mode_button.setOnClickListener {
-            presenter.setValueClicked()
-        }
-
-        layout.clear_button.setOnClickListener {
-            presenter.clearButtonClicked()
-        }
-
-        layout.move_mode_button.setOnClickListener{
-            presenter.moveButtonClicked()
-        }
-
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(50)
-            App.widthCanvas = canvas.width
-            App.heightCanvas = canvas.height
-
-            showTypeFigure()
-            updateCanvas()
         }
     }
 
@@ -71,7 +52,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun updateCanvas() {
-        canvas.invalidate()
+        field.invalidate()
     }
 
     override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
@@ -91,22 +72,21 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showTypeFigure() {
+
         val typeFigure = if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
             SolveUtil.typeSolve::class.simpleName
         else
             ""
+
         val subTypeFigure = if (SolveUtil.subTypeSolve::class.simpleName != "UnknownFigure")
             SolveUtil.subTypeSolve::class.simpleName
         else
             ""
 
-        text_type_figure.text =  if (subTypeFigure != "")
+        text_figure_type.text = if (subTypeFigure?.isNotEmpty() == true)
             "$typeFigure : $subTypeFigure"
         else
             typeFigure
-
-        // TODO(DELETE THIS DEBUGGER)
-        DELETE_THIS_DEBUGGER.text = app.figure.toString()
     }
 
     override fun showMessage(messageID: Int) {

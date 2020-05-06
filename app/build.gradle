@@ -64,6 +64,9 @@ dependencies {
     implementation "com.github.moxy-community:moxy-ktx:$moxyVersion"
     kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
 
+    // UI
+    implementation 'com.github.0gdump:android-cartesian-field:-SNAPSHOT'
+
     // Test
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
