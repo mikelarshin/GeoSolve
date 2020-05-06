@@ -7,15 +7,9 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
-import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil
-import open.geosolve.geosolve.model.solve.type.UnknownFigure
-import open.geosolve.geosolve.model.status.Mode
-import open.geosolve.geosolve.model.status.State
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 
 // TODO(maybe divided onClickButton method and touch cycle???)
@@ -23,125 +17,99 @@ import open.geosolve.geosolve.presentation.view.CanvasScreenView
 @InjectViewState
 class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
-    private var mode = Mode.ADD_MOVE_FIN
-    private var state = State.ON_CANVAS
-    private var numOfCall = 0
-    private var moveNode: Node? = null
+    private var figureClosed = false
+    private var movedNode: Node? = null
 
     private val figure: Figure
         get() = app.figure
 
     fun isUsedByContent(x: Float, y: Float): Boolean {
-        return true // TODO
-    }
+        figure.mNodes.forEach { node ->
+            if (node.inRadius(x, y)) return true
+        }
 
-    fun onMove(x: Float, y: Float) {
-    }
-
-    fun onMoveFinished(x: Float, y: Float) {
-
+        return false
     }
 
     fun onMoveStart(x: Float, y: Float) {
-
-    }
-
-    fun onTouch(x: Float, y: Float) {
-
-    }
-
-    fun solveButtonClicked() {
-        SolveUtil.showStepSolveList(figure, object :
-            CallBackSolveUi {
-            override fun findNotMark() {
-                viewState.showMessage(R.string.find_not_mark)
+        figure.mNodes.forEach { node ->
+            if (node.inRadius(x, y)) {
+                movedNode = node
+                return
             }
+        }
 
-            override fun solveIsNotFound() {
-                viewState.showMessage(R.string.solve_not_found)
+        throw RuntimeException("Node not found, but isUsed work's")
+    }
+
+    fun onMove(x: Float, y: Float) {
+        movedNode?.moveNode(x, y)
+    }
+
+    fun onMoveFinished(x: Float, y: Float) {
+        movedNode = null
+    }
+
+    private fun isNode(x: Float, y: Float): Boolean {
+        figure.mNodes.forEach { node ->
+            if (node.inRadius(x, y)) {
+                return true
             }
+        }
 
-            override fun userInputValue() {
-                viewState.showMessage(R.string.user_input_value)
-            }
-
-            override fun solveIsFound() {
-                viewState.goToSolveScreen()
-            }
-        })
+        return false
     }
 
-    fun markButtonClicked() {
-        mode = Mode.MARK_FIND
+    private fun touchCanvas(x: Float, y: Float) {
+
+        figure.addNode(Node(x, y))
+
+        if (figure.mNodes.size > 1) {
+            figure.addLine(
+                figure.mNodes[figure.mNodes.size - 2],
+                figure.mNodes.last()
+            )
+        }
+
+        if (figure.mLines.size > 1) {
+            figure.addAngle(
+                figure.mLines[figure.mLines.size - 2],
+                figure.mLines.last()
+            )
+        }
     }
 
-    fun editButtonClicked() {
-        mode = Mode.ADD_MOVE_FIN
-    }
-
-    fun deleteButtonClicked() {
-        mode = Mode.DELETE
-    }
-
-    fun moveButtonClicked() {
-        mode = Mode.MOVE_CANVAS
-    }
-
-    fun setValueClicked() {
-        mode = Mode.SET_VAlUE
-    }
-
-    fun clearButtonClicked() {
-        SolveUtil.typeSolve = UnknownFigure
-        SolveUtil.subTypeSolve = UnknownFigure
-        figure.clearFigure()
-        viewState.showTypeFigure()
-        viewState.updateCanvas()
-    }
-
-    fun onTouchDown(touchX: Float, touchY: Float) {
-        state = State.ON_CANVAS
+    private fun touchPoint(x: Float, y: Float) {
         for (node in figure.mNodes) {
-            if (node.inRadius(touchX, touchY)) {
-                moveNode = node
-                state = State.ON_POINT
+            if (node.inRadius(x, y)) {
+                if (figure.mNodes.last() == node) continue
+
+                if (node == figure.mNodes.first()) {
+                    figure.closeFigure = true
+                    figure.addLine(figure.mNodes.last(), node)
+
+                    figure.addAngle(node.startLine?.startNode?.startLine!!, node.startLine!!)
+
+                    figure.addAngle(node.startLine!!, node.finalLine!!)
+
+                } else {
+                    viewState.showMessage(R.string.CRUTCH_FOR_NOW)
+                }
+
                 break
             }
         }
     }
 
-    fun onTouchMove(touchX: Float, touchY: Float) {
-        moveNode?.moveNode(touchX, touchY)
-        numOfCall++
-        viewState.showTypeFigure()
-    }
+    fun onTouch(x: Float, y: Float) {
 
-    fun onTouchUp(touchX: Float, touchY: Float) {
-        if (numOfCall < 5) {
-            when (mode) {
-                Mode.ADD_MOVE_FIN ->
-                    when (state) {
-                        State.ON_CANVAS -> if (!figure.closeFigure) onEditTouchCanvas(
-                            touchX,
-                            touchY
-                        ) // TODO(create new figure)
-                        State.ON_POINT -> editTouchOnPoint(touchX, touchY)
-                        State.ON_LINE -> TODO()
-                    }
-                Mode.DELETE -> figure.delNode(touchX, touchY)
-                Mode.MARK_FIND -> figure.find =
-                    figure.getInRadius(
-                        touchX,
-                        touchY
-                    ) { viewState.showMessage(R.string.toast_not_mark_find) }
-                        ?: figure.find
-                Mode.SET_VAlUE -> setValue(touchX, touchY)
-            }
+        var isCanvasTouch = !isNode(x, y)
+
+        if (isCanvasTouch && !figureClosed) {
+            touchCanvas(x, y)
+        } else {
+            touchPoint(x, y)
         }
-
-        // crutch
-        numOfCall = 0
-        moveNode = null
 
         setNodeChars()
         solve()
@@ -159,60 +127,5 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         val charRange = ('A'..'Z').toList()
         for (i in 0 until figure.mNodes.size)
             figure.mNodes[i].char = charRange[i]
-    }
-
-    private fun setValue(touchX: Float, touchY: Float) {
-        val element = figure.getInRadius(touchX, touchY)
-        { viewState.showMessage(R.string.toast_not_set_value) }
-
-        when (element) {
-            is Line ->
-                viewState.showDialog(R.string.alert_set_line) {
-                    element.setValueDraw(it)
-                    solve()
-                }
-            is Angle ->
-                viewState.showDialog(R.string.alert_set_angle) {
-                    element.setValueDraw(it)
-                    solve()
-                }
-        }
-    }
-
-    //TODO(rewrite magic)
-    private fun editTouchOnPoint(touchX: Float, touchY: Float) {
-        for (node in figure.mNodes)
-            if (node.inRadius(touchX, touchY)) {
-                if (figure.mNodes.last() != node) {
-                    if (node == figure.mNodes[0]) {
-                        figure.closeFigure = true
-                        figure.addLine(figure.mNodes.last(), node)
-
-                        figure.addAngle(node.startLine?.startNode?.startLine!!, node.startLine!!)
-
-                        figure.addAngle(node.startLine!!, node.finalLine!!)
-
-                    } else
-                        viewState.showMessage(R.string.CRUTCH_FOR_NOW)
-                }
-                break
-            }
-    }
-
-    //TODO(rewrite magic)
-    private fun onEditTouchCanvas(touchX: Float, touchY: Float) {
-        figure.addNode(Node(touchX, touchY))
-
-        if (figure.mNodes.size > 1)
-            figure.addLine(
-                figure.mNodes[figure.mNodes.size - 2],
-                figure.mNodes.last()
-            )
-
-        if (figure.mLines.size > 1)
-            figure.addAngle(
-                figure.mLines[figure.mLines.size - 2],
-                figure.mLines.last()
-            )
     }
 }
