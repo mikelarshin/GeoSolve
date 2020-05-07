@@ -16,13 +16,12 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
             throw Exception("Line constructor get the same Node")
     }
 
-    fun delConnection(){
+    override fun delConnection(){
         startNode.finalLine = null
         finalNode.startLine = null
     }
 
-    // TODO Doc this
-    // TODO fix this
+    // TODO rewrite magic
     fun inRadius(x: Float, y: Float): Boolean {
 
         val dist = { x1: Float, y1: Float,

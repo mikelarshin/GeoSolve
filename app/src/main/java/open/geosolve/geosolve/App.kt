@@ -8,11 +8,10 @@ import kotlin.properties.Delegates
 
 
 class App : Application() {
-    var figure = Figure()
-
     companion object {
         lateinit var instance: App
             private set
+        var figure = Figure()
         val scaleForY get() = heightCanvas / POINT_SIZE // 1 coordinate unit equals 1 Node
         val scaleForX get() = widthCanvas / POINT_SIZE // 1 coordinate unit equals 1 Node
         var systemCoordinate: SystemCoordinate = SystemCoordinate.DECART

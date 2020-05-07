@@ -21,13 +21,8 @@ class Node(foundX: Float, foundY: Float) {
     var centerAngle: Angle? = null
     var finalAngle: Angle? = null
 
-    fun delConnection(){
-        startLine?.delConnection()
-        finalLine?.delConnection()
-
-        startAngle?.delConnection()
-        centerAngle?.delConnection()
-        finalAngle?.delConnection()
+    fun getConnectionList(): List<Element?> {
+        return listOf(startLine, finalLine, startAngle, centerAngle, finalAngle)
     }
 
     fun moveNode(x: Float, y: Float) {

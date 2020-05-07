@@ -4,7 +4,7 @@
 
     // Toast
     <string name="toast_not_set_value">Нельзя задать значение, на этой точке нет угла</string>
-    <string name="toast_not_mark_find">Нельзя задать значение, на этой точке нет угла</string>
+    <string name="toast_not_mark_find">Нельзя задать искомое, на этой точке нет угла</string>
     <string name="find_not_mark">Вы не поставили искомое</string>
     <string name="solve_not_found">Мы не знаем как решить эту задачу</string>
     <string name="user_input_value">Значение искомого введено пользователем</string>

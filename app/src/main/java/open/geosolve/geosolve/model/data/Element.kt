@@ -17,6 +17,8 @@ abstract class Element {
     lateinit var getExpression: () -> CharSequence
         private set
 
+    abstract fun delConnection()
+
     // setDraw - use it in work with canvas
     // setGraph - use it in work with solve
     // setDependent - use it if you want to set a value dependency
@@ -50,9 +52,7 @@ abstract class Element {
             onKnownFun(this)
     }
 
-    fun getValue() =
-        value ?:
-        dependence(value)
+    fun getValue() = value ?: dependence(value)
 
     fun solve() {
         if (getValue() != null)

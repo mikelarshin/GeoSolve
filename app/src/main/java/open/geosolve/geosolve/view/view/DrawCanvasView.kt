@@ -23,7 +23,8 @@ open class DrawCanvasView : View {
         private val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)
         private val TEXT_SIZE: Float = getDimen(R.dimen.TEXT_SIZE)
         private val TEXT_MARGIN = getDimen(R.dimen.TEXT_MARGIN)
-        private lateinit var attachedFigure: Figure
+        private val figure: Figure
+            get() = App.figure
     }
 
     private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -51,10 +52,6 @@ open class DrawCanvasView : View {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    fun attachFigure(figure: Figure) {
-        attachedFigure = figure
-    }
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         App.systemCoordinate = SystemCoordinate.ABSOLUTE
@@ -74,7 +71,7 @@ open class DrawCanvasView : View {
     }
 
     private fun drawLines(canvas: Canvas) {
-        for (line in attachedFigure.mLines)
+        for (line in figure.mLines)
             canvas.drawLine(
                 line.startNode.x, line.startNode.y,
                 line.finalNode.x, line.finalNode.y,
@@ -83,14 +80,14 @@ open class DrawCanvasView : View {
     }
 
     private fun drawNodes(canvas: Canvas) {
-        for (node in attachedFigure.mNodes)
+        for (node in figure.mNodes)
             canvas.drawCircle(node.x, node.y, POINT_SIZE, mPaintNode)
     }
 
     private fun drawMarkedLine(canvas: Canvas) {
-        if (attachedFigure.find !is Line) return
+        if (figure.find !is Line) return
 
-        val markedLine = attachedFigure.find as Line
+        val markedLine = figure.find as Line
 
         canvas.drawLine(
             markedLine.startNode.x,
@@ -102,9 +99,9 @@ open class DrawCanvasView : View {
     }
 
     private fun drawMarkedAngle(canvas: Canvas) {
-        if (attachedFigure.find !is Angle) return
+        if (figure.find !is Angle) return
 
-        val markedAngle = attachedFigure.find as Angle
+        val markedAngle = figure.find as Angle
 
         canvas.drawCircle(
             markedAngle.angleNode.x,
@@ -115,7 +112,7 @@ open class DrawCanvasView : View {
     }
 
     private fun drawNodesName(canvas: Canvas) {
-        for (node in attachedFigure.mNodes) {
+        for (node in figure.mNodes) {
             canvas.drawText(
                 node.char.toString(),
                 node.x - TEXT_MARGIN,
@@ -128,7 +125,7 @@ open class DrawCanvasView : View {
     // TODO Рисовать дугу угла fun drawAngleCircle()
     // TODO Подстраивать положение текста, чтобы не наезжал на линии
     private fun drawValueAngle(canvas: Canvas) {
-        for (angle in attachedFigure.mAngles) {
+        for (angle in figure.mAngles) {
             if (angle.getValue() == null) continue
 
             canvas.drawText(
@@ -141,7 +138,7 @@ open class DrawCanvasView : View {
     }
 
     private fun drawValueLines(canvas: Canvas) {
-        for (line in attachedFigure.mLines) {
+        for (line in figure.mLines) {
             if (line.getValue() == null) continue
 
             val text = formatValueString(line)

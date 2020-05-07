@@ -14,6 +14,7 @@ import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.model.solve.SolveUtil
+import open.geosolve.geosolve.model.status.Mode
 import open.geosolve.geosolve.view.MvpFragmentX
 
 
@@ -23,7 +24,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     override fun setupLayout() {
 
-        layout.canvas.attachFigure(app.figure)
         layout.canvas.onTouchUp = { x, y -> presenter.onTouchUp(x, y) }
         layout.canvas.onTouchDown = { x, y -> presenter.onTouchDown(x, y) }
         layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
@@ -33,27 +33,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         }
 
         layout.mark_mode_button.setOnClickListener {
-            presenter.markButtonClicked()
+            presenter.setMode(Mode.MARK_FIND)
         }
 
         layout.edit_mode_button.setOnClickListener {
-            presenter.editButtonClicked()
+            presenter.setMode(Mode.ADD_MOVE_FIN)
         }
 
         layout.delete_mode_button.setOnClickListener {
-            presenter.deleteButtonClicked()
+            presenter.setMode(Mode.DELETE)
         }
 
         layout.set_value_mode_button.setOnClickListener {
-            presenter.setValueClicked()
+            presenter.setMode(Mode.SET_VALUE)
         }
 
         layout.clear_button.setOnClickListener {
             presenter.clearButtonClicked()
-        }
-
-        layout.move_mode_button.setOnClickListener{
-            presenter.moveButtonClicked()
         }
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -72,6 +68,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     override fun updateCanvas() {
         canvas.invalidate()
+    }
+
+    override fun showMessage(messageID: Int) {
+        Toast.makeText(context, messageID, Toast.LENGTH_SHORT).show()
     }
 
     override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
@@ -106,10 +106,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             typeFigure
 
         // TODO(DELETE THIS DEBUGGER)
-        DELETE_THIS_DEBUGGER.text = app.figure.toString()
-    }
-
-    override fun showMessage(messageID: Int) {
-        Toast.makeText(context, messageID, Toast.LENGTH_SHORT).show()
+        DELETE_THIS_DEBUGGER.text = App.figure.toString()
     }
 }

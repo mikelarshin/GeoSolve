@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-class Angle(private val startLine: Line, private val finalLine: Line) : Element() {
+class Angle(val startLine: Line, val finalLine: Line) : Element() {
 
     // all logic solve in abstract Element
 
@@ -26,7 +26,7 @@ class Angle(private val startLine: Line, private val finalLine: Line) : Element(
             throw Exception("Angle constructor get wrong Line")
     }
 
-    fun delConnection(){
+    override fun delConnection(){
         startNode.startAngle = null
         angleNode.centerAngle = null
         finalNode.finalAngle = null
