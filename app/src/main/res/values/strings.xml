@@ -32,4 +32,12 @@
     <string name="expression_triangle_right_find_leg_known_leg_hypot_3">%s = √(%s² - %s²)</string>
 
     // needs symbol °
+
+
+    // Tools
+    <string name="tool_pen">Карандаш</string>
+    <string name="tool_eraser">Ластик</string>
+    <string name="tool_set_value">Задать значение</string>
+    <string name="tool_mark">Выделить решаемое</string>
+
 </resources>

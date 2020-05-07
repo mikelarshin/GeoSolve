@@ -76,13 +76,13 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
     private fun updateValue(element: Element) {
         when (element) {
             is Line -> {
-                viewState.showDialog(R.string.alert_set_line) {
+                viewState.showInputDialog(R.string.alert_set_line) {
                     element.setValueDraw(it)
                     solve()
                 }
             }
             is Angle -> {
-                viewState.showDialog(R.string.alert_set_angle) {
+                viewState.showInputDialog(R.string.alert_set_angle) {
                     element.setValueDraw(it)
                     solve()
                 }
@@ -101,7 +101,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
     private fun solve() = launch {
         SolveUtil.solve(figure)
 
-        viewState.showTypeFigure()
+        viewState.showFigureType()
         viewState.updateCanvas()
     }
 }

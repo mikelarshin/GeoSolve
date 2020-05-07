@@ -1,9 +1,8 @@
 package open.geosolve.geosolve.ui.canvas
 
 import android.view.LayoutInflater
-import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
@@ -16,10 +15,28 @@ import open.geosolve.geosolve.ui.global.MvpFragmentX
 import open.v0gdump.field.InteractiveFieldCallback
 
 
-class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas),
-    CanvasScreenView {
+class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
     private val presenter by moxyPresenter { CanvasScreenPresenter(app) }
+
+    private val tools = listOf(
+        ToolAbstraction(
+            R.string.tool_pen,
+            R.drawable.ic_tool_pen
+        ),
+        ToolAbstraction(
+            R.string.tool_eraser,
+            R.drawable.ic_tool_eraser
+        ),
+        ToolAbstraction(
+            R.string.tool_set_value,
+            R.drawable.ic_tool_set_value
+        ),
+        ToolAbstraction(
+            R.string.tool_mark,
+            R.drawable.ic_tool_mark
+        )
+    )
 
     override fun setupLayout() {
         layout.field.attach(app.figure)
@@ -48,23 +65,21 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas),
         }
     }
 
-    override fun goToSolveScreen() {
-        findNavController().navigate(R.id.action_to_solve)
-    }
+    override fun updateCanvas() = field.invalidate()
 
-    override fun updateCanvas() {
-        field.invalidate()
-    }
-
-    override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
+    override fun showInputDialog(
+        @StringRes titleID: Int,
+        callback: (value: Float) -> Unit
+    ) {
         AlertDialog.Builder(activity)
             .setTitle(getText(titleID))
             .setView(
                 LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
             )
             .setPositiveButton(android.R.string.ok) { dialog, _ ->
-                if (!(dialog as AlertDialog).input.text.isNullOrBlank())
-                    inputCallback(dialog.input.text.toString().toFloat())
+                if (!(dialog as AlertDialog).input.text.isNullOrBlank()) {
+                    callback(dialog.input.text.toString().toFloat())
+                }
             }
             .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
@@ -72,25 +87,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas),
             .show()
     }
 
-    override fun showTypeFigure() {
+    override fun showFigureType() {
 
-        val typeFigure = if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
-            SolveUtil.typeSolve::class.simpleName
-        else
-            ""
+        val typeFigure =
+            if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
+                SolveUtil.typeSolve::class.simpleName
+            else
+                ""
 
-        val subTypeFigure = if (SolveUtil.subTypeSolve::class.simpleName != "UnknownFigure")
-            SolveUtil.subTypeSolve::class.simpleName
-        else
-            ""
+        val subTypeFigure =
+            if (SolveUtil.subTypeSolve::class.simpleName != "UnknownFigure")
+                SolveUtil.subTypeSolve::class.simpleName
+            else
+                ""
 
         text_figure_type.text = if (subTypeFigure?.isNotEmpty() == true)
             "$typeFigure : $subTypeFigure"
         else
             typeFigure
-    }
-
-    override fun showMessage(messageID: Int) {
-        Toast.makeText(context, messageID, Toast.LENGTH_SHORT).show()
     }
 }
