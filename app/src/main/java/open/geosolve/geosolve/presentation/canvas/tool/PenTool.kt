@@ -39,7 +39,7 @@ class PenTool : Tool {
         closeFigure(figure)
     }
 
-    // FIXME Is this algorithm correctly?
+    // FIXME(CHECK) Проверить корректность алгоритма
     private fun closeFigure(figure: Figure) {
         val node = figure.nodes.last()
 

@@ -11,6 +11,11 @@ import open.geosolve.geosolve.model.data.Element
 import open.geosolve.geosolve.ui.solve.DesignUtil.formatAnswer
 import java.util.*
 
+/*
+ * FIXME(CODE) Переписать код ViewHolder
+ * FIXME(CODE) Не хранить шаги решения статично!
+ * TODO(CODE) Использовать для сворачивающихся блоков библиотеку
+ */
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
 
     companion object {

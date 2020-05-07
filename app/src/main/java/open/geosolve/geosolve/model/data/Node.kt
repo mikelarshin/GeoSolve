@@ -2,12 +2,18 @@ package open.geosolve.geosolve.model.data
 
 import kotlin.properties.Delegates
 
-class Node(var x: Float, var y: Float) {
+/*
+ * TODO(CODE) Убрать хардкод POINT_SIZE
+ */
+
+class Node(
+    var x: Float,
+    var y: Float
+) {
 
     private val POINT_SIZE = 20f
 
     var char by Delegates.notNull<Char>()
-    override fun toString(): String = char.toString()
 
     var startLine: Line? = null
     var finalLine: Line? = null
@@ -17,8 +23,8 @@ class Node(var x: Float, var y: Float) {
     var finalAngle: Angle? = null
 
     fun deleteConnections() {
-        startLine?.delConnection()
-        finalLine?.delConnection()
+        startLine?.deleteConnections()
+        finalLine?.deleteConnections()
 
         startAngle?.deleteConnections()
         centerAngle?.deleteConnections()
@@ -32,10 +38,12 @@ class Node(var x: Float, var y: Float) {
 
     fun inRadius(x: Float, y: Float): Boolean {
         val radius = POINT_SIZE / 20
-        val xBool = this.x - radius < x && x < this.x + radius
 
+        val xBool = this.x - radius < x && x < this.x + radius
         val yBool = this.y - radius < y && y < this.y + radius
 
         return xBool && yBool
     }
+
+    override fun toString(): String = char.toString()
 }

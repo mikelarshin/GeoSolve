@@ -9,6 +9,6 @@ object AngleFigure : SolveFigure {
     }
 
     override fun setGraphs(figure: Figure) {
-        // TODO(create graph)
+        // TODO(CODE) Create graph
     }
 }

@@ -16,6 +16,9 @@ import open.geosolve.geosolve.presentation.global.MvpPresenterX
 @InjectViewState
 class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
 
+    //region Инструменты
+
+    var selectedTool = 0
     private val tools = listOf(
         PenTool(),
         EraserTool(),
@@ -23,11 +26,12 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
         MarkTool()
     )
 
-    var selectedTool = 0
-    private var movedNode: Node? = null
+    //endregion
 
     private val figure: Figure
         get() = app.figure
+
+    private var movedNode: Node? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -36,7 +40,9 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
 
     fun isUsedByContent(x: Float, y: Float): Boolean {
         figure.nodes.forEach { node ->
-            if (node.inRadius(x, y)) return true
+            if (node.inRadius(x, y)) {
+                return true
+            }
         }
 
         return false
@@ -50,7 +56,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
             }
         }
 
-        throw RuntimeException("Node not found, but isUsed work's")
+        throw RuntimeException("Точка не найдена, но isUsedByContent сработал")
     }
 
     fun onMove(x: Float, y: Float) {

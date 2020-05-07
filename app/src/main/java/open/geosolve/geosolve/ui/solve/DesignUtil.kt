@@ -8,6 +8,10 @@ import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Element
 
+/*
+ * TODO(DOC) Документировать класс
+ */
+
 object DesignUtil {
 
     fun formatSolve(templateVerbalId: Int, templateExpressionId: Int, vararg formatArgs: Element)

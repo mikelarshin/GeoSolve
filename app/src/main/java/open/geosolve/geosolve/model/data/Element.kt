@@ -1,5 +1,10 @@
 package open.geosolve.geosolve.model.data
 
+/*
+ * TODO(CODE) Провести рефакторинг
+ * TODO(DOC) Документировать алгоритм решения задачи
+ */
+
 abstract class Element {
 
     private var value: Float? = null

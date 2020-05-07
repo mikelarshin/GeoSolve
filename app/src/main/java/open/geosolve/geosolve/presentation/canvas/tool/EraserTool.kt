@@ -16,6 +16,6 @@ class EraserTool : Tool {
     }
 
     override fun onTouchLine(figure: Figure, line: Line) {
-        /* FIXME Unimplemented. Remove line and (suspend) node */
+        /* TODO(CODE) Нереализовано. Удалять линию вместе с "повисшей" точкой */
     }
 }

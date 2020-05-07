@@ -21,6 +21,10 @@ import open.geosolve.geosolve.ui.global.MvpFragmentX
 import open.v0gdump.field.InteractiveFieldCallback
 import kotlin.math.roundToInt
 
+/*
+ * TODO(CODE) Перенести все FAB в отдельную view и переключать состояние внутри
+ * TODO(BUG) Снизить задержку при первом появлении диалога showInputDialog
+ */
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
@@ -76,9 +80,19 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
         }
 
+        createTools()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        updateToolsButtonsColors()
+    }
+
+    private fun createTools() {
         tools.forEachIndexed { index, tool ->
             layout.tool_container.addView(
                 FloatingActionButton(activity).apply {
+
                     layoutParams = LinearLayoutCompat.LayoutParams(
                         LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
                         LinearLayoutCompat.LayoutParams.WRAP_CONTENT
@@ -90,19 +104,14 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
                     setOnClickListener {
                         presenter.selectedTool = index
-                        updateColor()
+                        updateToolsButtonsColors()
                     }
                 }
             )
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        updateColor()
-    }
-
-    private fun updateColor() {
+    private fun updateToolsButtonsColors() {
         for (i in 0 until tool_container.childCount) {
             tool_container.getChildAt(i).backgroundTintList =
                 if (presenter.selectedTool == i) {

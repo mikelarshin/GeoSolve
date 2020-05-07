@@ -5,7 +5,10 @@ import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
 
-// TODO Doc this class
+/*
+ * TODO(DOC) Документировать
+ * TODO(CODE) Использовать @inject в Figure, избегая пробрасываний
+ */
 
 @Suppress("MemberVisibilityCanBePrivate")
 object FigureManipulator {

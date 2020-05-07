@@ -12,6 +12,10 @@ import open.geosolve.geosolve.ui.solve.DesignUtil.formatValueString
 import open.v0gdump.field.InteractiveFieldView
 import open.v0gdump.field.TextAnchor
 
+/*
+ * TODO Рисовать недостающие части фигуры
+ */
+
 class FigureFieldView : InteractiveFieldView {
 
     //region Drawing data

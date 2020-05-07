@@ -2,6 +2,10 @@ package open.geosolve.geosolve.model.data
 
 import java.util.*
 
+/*
+ * TODO(DOC) Документировать хранение фигуры в классе
+ */
+
 class Figure {
 
     var figureClosed = false
