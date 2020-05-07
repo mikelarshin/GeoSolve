@@ -16,7 +16,7 @@ class Node(var x: Float, var y: Float) {
     var centerAngle: Angle? = null
     var finalAngle: Angle? = null
 
-    fun delConnection() {
+    fun deleteConnections() {
         startLine?.delConnection()
         finalLine?.delConnection()
 

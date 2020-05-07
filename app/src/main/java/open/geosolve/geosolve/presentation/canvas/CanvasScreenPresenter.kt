@@ -5,6 +5,7 @@ import moxy.InjectViewState
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.*
+import open.geosolve.geosolve.model.helper.FigureManipulator
 import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.presentation.canvas.tool.EraserTool
 import open.geosolve.geosolve.presentation.canvas.tool.MarkTool
@@ -22,18 +23,19 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
         MarkTool()
     )
 
-    private var selectedTool = 0
+    var selectedTool = 0
     private var movedNode: Node? = null
 
     private val figure: Figure
         get() = app.figure
 
-    init {
-        check(selectedTool in tools.indices, { "Incorrect selectedTool value." })
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.showFigureType()
     }
 
     fun isUsedByContent(x: Float, y: Float): Boolean {
-        figure.mNodes.forEach { node ->
+        figure.nodes.forEach { node ->
             if (node.inRadius(x, y)) return true
         }
 
@@ -41,7 +43,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
     }
 
     fun onMoveStart(x: Float, y: Float) {
-        figure.mNodes.forEach { node ->
+        figure.nodes.forEach { node ->
             if (node.inRadius(x, y)) {
                 movedNode = node
                 return
@@ -61,7 +63,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
 
     fun onTouch(x: Float, y: Float) {
 
-        val nodeOnTouch = figure.findNode(x, y)
+        val nodeOnTouch = FigureManipulator.findNode(x, y)
 
         if (nodeOnTouch == null) {
             tools[selectedTool].onTouchCanvas(figure, x, y)
@@ -93,7 +95,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
     private fun updateNodesNames() {
         val charRange = ('A'..'Z').iterator()
 
-        figure.mNodes.forEach { node ->
+        figure.nodes.forEach { node ->
             node.char = charRange.nextChar()
         }
     }

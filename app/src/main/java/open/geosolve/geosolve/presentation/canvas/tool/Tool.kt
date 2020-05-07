@@ -9,7 +9,7 @@ interface Tool {
     fun onTouchCanvas(figure: Figure, x: Float, y: Float)
 
     fun onTouchNode(figure: Figure, node: Node)
-    fun onTouchLine(figure: Figure, line: Line)
+    fun onTouchLine(figure: Figure, line: Line) // FIXME Unimplemented
     /* FIXME Unimplemented onTouchInFigure in CanvasScreenPresenter
        fun onTouchInFigure(figure: Figure)
      */

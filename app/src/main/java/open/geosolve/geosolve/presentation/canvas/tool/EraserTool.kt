@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.presentation.canvas.tool
 
-import android.util.Log
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.helper.FigureManipulator
 
 class EraserTool : Tool {
 
@@ -12,8 +12,7 @@ class EraserTool : Tool {
     }
 
     override fun onTouchNode(figure: Figure, node: Node) {
-        Log.d("GeoSolve", "HMMMMM")
-        figure.delNode(node)
+        FigureManipulator.deleteNode(node)
     }
 
     override fun onTouchLine(figure: Figure, line: Line) {

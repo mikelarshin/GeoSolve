@@ -30,16 +30,16 @@ object SolveUtil {
 
         typeSolve.setGraphs(figure)
 
-        for (line in figure.mLines)
+        for (line in figure.lines)
             line.solve()
 
-        for (angle in figure.mAngles)
+        for (angle in figure.angles)
             angle.solve()
     }
 
     private fun zeroGraph(figure: Figure) {
-        figure.mLines.map { it.onKnownFunList.clear() }
-        figure.mAngles.map { it.onKnownFunList.clear() }
+        figure.lines.map { it.onKnownFunList.clear() }
+        figure.angles.map { it.onKnownFunList.clear() }
     }
 
     fun showStepSolveList(figure: Figure, callbackUi: CallBackSolveUi) {

@@ -12,18 +12,18 @@ import kotlin.math.sqrt
 
 object RightTriangle : SolveFigure {
     override fun isMatch(figure: Figure): Boolean {
-        return figure.mAngles.filter { it.getValue() == 90f }.size == 1
+        return figure.angles.filter { it.getValue() == 90f }.size == 1
     }
 
     override fun setGraphs(figure: Figure) {
-        val rightAngle = figure.mAngles.filter { it.getValue() == 90f }[0]
+        val rightAngle = figure.angles.filter { it.getValue() == 90f }[0]
         if (rightAngle.startNode.startLine != rightAngle.finalNode.finalLine)
             throw Exception("Wrong Triangle")
 
         val legs: List<Line> =
             listOf(rightAngle.angleNode.startLine!!, rightAngle.angleNode.finalLine!!)
         val hypotenuse = rightAngle.startNode.startLine!!
-        val noRightAngles: List<Angle> = figure.mAngles.filter { it != rightAngle }
+        val noRightAngles: List<Angle> = figure.angles.filter { it != rightAngle }
 
         legs2KnownHypotUnknownRule(legs, hypotenuse)
         degrees30Rule(noRightAngles, legs, hypotenuse)

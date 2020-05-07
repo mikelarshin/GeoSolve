@@ -72,7 +72,7 @@ class FigureFieldView : InteractiveFieldView {
     }
 
     private fun drawLines(canvas: Canvas) {
-        for (line in attachedFigure.mLines) {
+        for (line in attachedFigure.lines) {
             drawLine(
                 canvas,
                 line.startNode.x, line.startNode.y,
@@ -83,7 +83,7 @@ class FigureFieldView : InteractiveFieldView {
     }
 
     private fun drawNodes(canvas: Canvas) {
-        attachedFigure.mNodes.forEach { node ->
+        attachedFigure.nodes.forEach { node ->
             drawNode(canvas, node)
             drawNodesName(canvas)
         }
@@ -94,7 +94,7 @@ class FigureFieldView : InteractiveFieldView {
     }
 
     private fun drawNodesName(canvas: Canvas) {
-        for (node in attachedFigure.mNodes) {
+        for (node in attachedFigure.nodes) {
             drawText(
                 node.char.toString(),
                 canvas,
@@ -108,7 +108,7 @@ class FigureFieldView : InteractiveFieldView {
     }
 
     private fun drawAngle(canvas: Canvas) {
-        for (angle in attachedFigure.mAngles) {
+        for (angle in attachedFigure.angles) {
             if (angle.getValue() == null) continue
 
             drawText(

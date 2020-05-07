@@ -5,9 +5,6 @@ class Angle(
     private val finalLine: Line
 ) : Element() {
 
-    override fun toString() =
-        "∠${(startNode.char.toString() + angleNode.char + finalNode.char)}"
-
     val startNode: Node
         get() = startLine.startNode
 
@@ -41,4 +38,7 @@ class Angle(
         angleNode.centerAngle = null
         finalNode.finalAngle = null
     }
+
+    override fun toString() =
+        "∠${startNode.char}${angleNode.char}${finalNode.char}"
 }
