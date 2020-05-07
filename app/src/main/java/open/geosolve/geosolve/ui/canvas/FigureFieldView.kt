@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.ui.solve.DesignUtil.formatValueString
 import open.v0gdump.field.InteractiveFieldView
 import open.v0gdump.field.TextAnchor
 
@@ -65,6 +66,7 @@ class FigureFieldView : InteractiveFieldView {
 
         drawLines(canvas)
         drawNodes(canvas)
+        drawAngle(canvas)
 
         super.drawNotations(canvas)
     }
@@ -87,6 +89,10 @@ class FigureFieldView : InteractiveFieldView {
         }
     }
 
+    private fun drawNode(canvas: Canvas, node: Node) {
+        drawCircle(canvas, node.x, node.y, pointRadius, paintNode)
+    }
+
     private fun drawNodesName(canvas: Canvas) {
         for (node in attachedFigure.mNodes) {
             drawText(
@@ -101,7 +107,17 @@ class FigureFieldView : InteractiveFieldView {
         }
     }
 
-    private fun drawNode(canvas: Canvas, node: Node) {
-        drawCircle(canvas, node.x, node.y, pointRadius, paintNode)
+    private fun drawAngle(canvas: Canvas) {
+        for (angle in attachedFigure.mAngles) {
+            if (angle.getValue() == null) continue
+
+            drawText(
+                formatValueString(angle),
+                canvas,
+                angle.angleNode.x,
+                angle.angleNode.y,
+                paintAngle
+            )
+        }
     }
 }

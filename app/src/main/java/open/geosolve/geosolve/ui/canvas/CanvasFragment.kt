@@ -19,11 +19,7 @@ import open.v0gdump.field.InteractiveFieldCallback
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas),
     CanvasScreenView {
 
-    private val presenter by moxyPresenter {
-        CanvasScreenPresenter(
-            app
-        )
-    }
+    private val presenter by moxyPresenter { CanvasScreenPresenter(app) }
 
     override fun setupLayout() {
         layout.field.attach(app.figure)
