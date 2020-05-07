@@ -1,8 +1,12 @@
 package open.geosolve.geosolve.model
 
+import open.geosolve.geosolve.App.Companion.figureList
+import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.*
 
-class FigureController(val figure: Figure) {
+class FigureController {
+
+    val figure: Figure get() = figureList.last()
 
     fun addNode(node: Node) {
         figure.mNodes.add(node)
@@ -25,74 +29,20 @@ class FigureController(val figure: Figure) {
         finalLine.finalNode.finalAngle = angle
     }
 
-    fun addCircle(touchX1: Float, touchY1: Float, touchX2: Float, touchY2: Float): Circle{
-        val circle = Circle(Node(touchX1, touchY1), Node(touchX2, touchY2))
-        figure.mCircles.add(circle)
-        return circle
-    }
-
-    fun delNode(touchX: Float, touchY: Float) {
-        getNode(touchX, touchY)?.let { node ->
-            for (element in node.getConnectionList()) {
-                if (figure.find == element)
-                    figure.find = null
-                element?.delConnection()
-                figure.mAngles.remove(element)
-                figure.mLines.remove(element)
-            }
-
-            figure.mNodes.remove(node)
-        }
-    }
-
-    fun clearFigure() {
-        figure.mNodes.clear()
-        figure.mLines.clear()
-        figure.mAngles.clear()
-        figure.mCircles.clear()
-        figure.find = null
-    }
-
-    fun getNode(touchX: Float, touchY: Float): Node? {
-        var outNode: Node? = null
-        for (node in figure.mNodes)
-            if (node.inRadius(touchX, touchY)) {
-                outNode = node
-                break
-            }
-        return outNode
-    }
-
-    private fun getLine(touchX: Float, touchY: Float): Line? {
-        var outLine: Line? = null
-        for (line in figure.mLines)
-            if (line.inRadius(touchX, touchY)) {
-                outLine = line
-                break
-            }
-        return outLine
-    }
-
-    fun getElement(x: Float, y: Float, unSelectableCallback: () -> Unit): Element? {
-
-        getNode(x, y)?.let { node ->
-            if (node.centerAngle != null)
-                return node.centerAngle
-            else
-                unSelectableCallback()
-        }
-
-        getLine(x, y)?.let { line ->
-            return line
-        }
-
-        return null
+    fun addCircle(touchX1: Float, touchY1: Float, touchX2: Float, touchY2: Float){
+        figure.mCircle = Circle(Node(touchX1, touchY1), Node(touchX2, touchY2))
     }
 
     fun closeFigureInStartPoint(){
-        val closeNode = figure.mNodes[0]
+        val closeNode = figure.mNodes.first()
         addLine(figure.mNodes.last(), closeNode)
         addAngle(closeNode.startLine?.startNode?.startLine!!, closeNode.startLine!!)
         addAngle(closeNode.startLine!!, closeNode.finalLine!!)
+    }
+
+    fun removeDependent(){
+        for (element in figure.mAngles + figure.mLines)
+            if (find == element)
+                find = null
     }
 }

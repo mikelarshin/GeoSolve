@@ -16,7 +16,7 @@ object RightTriangle : SolveFigure {
     }
 
     override fun setGraphs(figure: Figure) {
-        val rightAngle = figure.mAngles.filter { it.getValue() == 90f }[0]
+        val rightAngle = figure.mAngles.filter { it.getValue() == 90f }.first()
         if (rightAngle.startNode.startLine != rightAngle.finalNode.finalLine)
             throw Exception("Wrong Triangle")
 
@@ -59,9 +59,10 @@ object RightTriangle : SolveFigure {
                 if (thisElement.getValue() == 30f && hypotenuse.getValue() != null) {
                     val otherAngle = noRightAngles[(i + 1) % 2]
 
-                    val unknownLeg = legs.filter {
+                    val unknownLeg = legs.first {
                         it == otherAngle.angleNode.finalLine ||
-                                it == otherAngle.angleNode.startLine }[0]
+                                it == otherAngle.angleNode.startLine
+                    }
                     if (unknownLeg.getValue() == null) {
                         val valueGetter: (Float?) -> Float? = { hypotenuse.getValue()!! / 2 }
 

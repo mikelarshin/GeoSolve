@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.view.view.DrawCanvasView
 import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.math.hypot
 import kotlin.math.sqrt

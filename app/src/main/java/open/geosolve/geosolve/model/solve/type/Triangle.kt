@@ -27,7 +27,7 @@ object Triangle : SolveFigure {
                     val valueGetter: (Float?) -> Float? = {180 - (known_angles[0].getValue()!! + known_angles[1].getValue()!!)}
                     val unknown_angle = figure.mAngles.filter { it.getValue() == null }[0]
 
-                    figure.mAngles.filter { it.getValue() == null }[0].setDependentValueGraph(
+                    figure.mAngles.first { it.getValue() == null }.setDependentValueGraph(
                         valueGetter,
                         known_angles,
                         formatSolve(

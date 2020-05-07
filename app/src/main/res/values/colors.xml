@@ -7,6 +7,7 @@
     <color name="color_node">#000</color>
     <color name="color_line">#CCC</color>
     <color name="color_circle">#CCC</color>
+    <color name="color_angle_arc">#CCC</color>
     <color name="color_mark">#DF1616</color>
 
     <color name="canvas_text_color">#000</color>

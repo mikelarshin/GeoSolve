@@ -4,4 +4,5 @@
     <dimen name="POINT_SIZE">17dp</dimen>
     <dimen name="LINE_WIDTH">4.5dp</dimen>
     <dimen name="TEXT_MARGIN">20dp</dimen>
+    <dimen name="ANGLE_ARC_RADIUS">50dp</dimen>
 </resources>

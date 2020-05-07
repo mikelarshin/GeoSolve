@@ -3,16 +3,24 @@ package open.geosolve.geosolve.view.view
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.App.Companion.allAngles
+import open.geosolve.geosolve.App.Companion.allCircles
+import open.geosolve.geosolve.App.Companion.allLines
+import open.geosolve.geosolve.App.Companion.allNodes
+import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
+import kotlin.math.atan2
+
 
 open class DrawCanvasView : View {
 
@@ -23,8 +31,7 @@ open class DrawCanvasView : View {
         private val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)
         private val TEXT_SIZE: Float = getDimen(R.dimen.TEXT_SIZE)
         private val TEXT_MARGIN = getDimen(R.dimen.TEXT_MARGIN)
-        private val figure: Figure
-            get() = App.figure
+        private val ANGLE_ARC_RADIUS = getDimen(R.dimen.ANGLE_ARC_RADIUS)
     }
 
     private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -52,6 +59,11 @@ open class DrawCanvasView : View {
         color = ContextCompat.getColor(context, R.color.canvas_text_color)
         textSize = TEXT_SIZE
     }
+    private val mPaintAngle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = ContextCompat.getColor(context, R.color.color_angle_arc)
+        strokeWidth = LINE_WIDTH
+        style = Paint.Style.STROKE
+    }
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -61,58 +73,59 @@ open class DrawCanvasView : View {
         super.onDraw(canvas)
         App.systemCoordinate = SystemCoordinate.ABSOLUTE
 
+        drawAngleCircle(canvas)
         drawLines(canvas)
-        drawMarkedLine(canvas)
-        drawValueLines(canvas)
-
         drawCircles(canvas)
-
         drawNodes(canvas)
-        drawNodesName(canvas)
 
-//        drawAngleCircle()
-        drawValueAngle(canvas)
+        drawMarkedLine(canvas)
         drawMarkedAngle(canvas)
+
+        drawValueAngle(canvas)
+        drawValueLines(canvas)
+        drawNodesName(canvas)
 
         App.systemCoordinate = SystemCoordinate.DECART
     }
 
     private fun drawLines(canvas: Canvas) {
-        for (line in figure.mLines)
-            canvas.drawLine(
-                line.startNode.x, line.startNode.y,
-                line.finalNode.x, line.finalNode.y,
-                mPaintLine
-            )
+        for (line in allLines)
+            if (line != find)
+                canvas.drawLine(
+                    line.startNode.x, line.startNode.y,
+                    line.finalNode.x, line.finalNode.y,
+                    mPaintLine
+                )
     }
 
     private fun drawNodes(canvas: Canvas) {
-        for (node in figure.mNodes)
+        for (node in allNodes)
             canvas.drawCircle(node.x, node.y, POINT_SIZE, mPaintNode)
     }
 
     private fun drawCircles(canvas: Canvas) {
-        for (circle in figure.mCircles){
-            circle.centerNode
+        for (circle in allCircles) {
 
             canvas.drawCircle(
                 circle.centerNode.x,
                 circle.centerNode.y,
                 circle.drawRadius,
-                mPaintCircle)
+                mPaintCircle
+            )
 
             canvas.drawCircle(
                 circle.centerNode.x,
                 circle.centerNode.y,
                 POINT_SIZE,
-                mPaintNode)
+                mPaintNode
+            )
         }
     }
 
     private fun drawMarkedLine(canvas: Canvas) {
-        if (figure.find !is Line) return
+        if (find !is Line) return
 
-        val markedLine = figure.find as Line
+        val markedLine = find as Line
 
         canvas.drawLine(
             markedLine.startNode.x,
@@ -124,9 +137,9 @@ open class DrawCanvasView : View {
     }
 
     private fun drawMarkedAngle(canvas: Canvas) {
-        if (figure.find !is Angle) return
+        if (find !is Angle) return
 
-        val markedAngle = figure.find as Angle
+        val markedAngle = find as Angle
 
         canvas.drawCircle(
             markedAngle.angleNode.x,
@@ -137,7 +150,7 @@ open class DrawCanvasView : View {
     }
 
     private fun drawNodesName(canvas: Canvas) {
-        for (node in figure.mNodes) {
+        for (node in allNodes) {
             canvas.drawText(
                 node.char.toString(),
                 node.x - TEXT_MARGIN,
@@ -148,7 +161,7 @@ open class DrawCanvasView : View {
     }
 
     private fun drawValueLines(canvas: Canvas) {
-        for (line in figure.mLines) {
+        for (line in allLines) {
             if (line.getValue() == null) continue
 
             val text = formatValueString(line)
@@ -162,10 +175,26 @@ open class DrawCanvasView : View {
         }
     }
 
-    // TODO Рисовать дугу угла fun drawAngleCircle()
-    // TODO Подстраивать положение текста, чтобы не наезжал на линии
+    private fun drawAngleCircle(canvas: Canvas) {
+        for (angle in allAngles) {
+//
+//            val centerX = angle.angleNode.x
+//            val centerY = angle.angleNode.y
+//
+//            val oval = RectF(
+//                centerX - ANGLE_ARC_RADIUS,
+//                centerY - ANGLE_ARC_RADIUS,
+//                centerX + ANGLE_ARC_RADIUS,
+//                centerY + ANGLE_ARC_RADIUS) TODO(Сделать отрисовку углов)
+//
+//            val start = (360 / Math.PI * atan2(angle.finalNode.y - angle.startNode.y, angle.finalNode.y - angle.startNode.x)).toFloat()
+//
+//            canvas.drawArc(oval, start, -100f, false, mPaintAngle)
+        }
+    }
+
     private fun drawValueAngle(canvas: Canvas) {
-        for (angle in figure.mAngles) {
+        for (angle in allAngles) {
             if (angle.getValue() == null) continue
 
             canvas.drawText(

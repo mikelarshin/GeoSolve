@@ -2,13 +2,13 @@ package open.geosolve.geosolve.model.data
 
 class Figure {
 
-    var find: Element? = null
     val mNodes: MutableList<Node> = mutableListOf()
     val mLines: MutableList<Line> = mutableListOf()
     val mAngles: MutableList<Angle> = mutableListOf()
-    val mCircles: MutableList<Circle> = mutableListOf()
+    var mCircle: Circle? = null
 
-    fun isClose(): Boolean = if (mLines.size != 0) mLines.first().startNode == mLines.last().finalNode else false
+    fun isComplete(): Boolean = isClose() || mCircle != null
+    private fun isClose(): Boolean = if (mLines.size != 0) mLines.first().startNode == mLines.last().finalNode else false
 
     // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {

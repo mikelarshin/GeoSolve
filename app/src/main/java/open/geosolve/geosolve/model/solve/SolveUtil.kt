@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.model.solve
 
+import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.Element
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.type.AngleFigure
@@ -44,21 +45,21 @@ object SolveUtil {
 
     fun showStepSolveList(figure: Figure, callbackUi: CallBackSolveUi) {
         when {
-            figure.find == null -> {
+            find == null -> {
                 callbackUi.findNotMark()
                 return
             }
-            figure.find?.getValue() != null && figure.find!!.whereFromValueList == null -> {
+            find?.getValue() != null && find!!.whereFromValueList == null -> {
                 callbackUi.userInputValue()
                 return
             }
-            figure.find!!.whereFromValueList == null -> {
+            find!!.whereFromValueList == null -> {
                 callbackUi.solveIsNotFound()
                 return
             }
         }
 
-        val list = getList(figure.find!!).reversed() + listOf(figure.find!!)
+        val list = getList(find!!).reversed() + listOf(find!!)
 
         RecycleAdapter.addAll(list)
 

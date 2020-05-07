@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import kotlinx.coroutines.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
@@ -106,6 +107,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             typeFigure
 
         // TODO(DELETE THIS DEBUGGER)
-        DELETE_THIS_DEBUGGER.text = App.figure.toString()
+        DELETE_THIS_DEBUGGER.text = figureList.first().toString()
     }
 }
