@@ -31,13 +31,18 @@ open class DrawCanvasView : View {
         color = ContextCompat.getColor(context, R.color.color_node)
         strokeWidth = POINT_SIZE
     }
-    private val mPaintNodeMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_mark)
-        strokeWidth = POINT_SIZE
-    }
     private val mPaintLine = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.color_line)
         strokeWidth = LINE_WIDTH
+    }
+    private val mPaintCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = ContextCompat.getColor(context, R.color.color_circle)
+        style = Paint.Style.STROKE
+        strokeWidth = LINE_WIDTH
+    }
+    private val mPaintNodeMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = ContextCompat.getColor(context, R.color.color_mark)
+        strokeWidth = POINT_SIZE
     }
     private val mPaintLineMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.color_mark)
@@ -59,6 +64,8 @@ open class DrawCanvasView : View {
         drawLines(canvas)
         drawMarkedLine(canvas)
         drawValueLines(canvas)
+
+        drawCircles(canvas)
 
         drawNodes(canvas)
         drawNodesName(canvas)
@@ -82,6 +89,24 @@ open class DrawCanvasView : View {
     private fun drawNodes(canvas: Canvas) {
         for (node in figure.mNodes)
             canvas.drawCircle(node.x, node.y, POINT_SIZE, mPaintNode)
+    }
+
+    private fun drawCircles(canvas: Canvas) {
+        for (circle in figure.mCircles){
+            circle.centerNode
+
+            canvas.drawCircle(
+                circle.centerNode.x,
+                circle.centerNode.y,
+                circle.drawRadius,
+                mPaintCircle)
+
+            canvas.drawCircle(
+                circle.centerNode.x,
+                circle.centerNode.y,
+                POINT_SIZE,
+                mPaintNode)
+        }
     }
 
     private fun drawMarkedLine(canvas: Canvas) {
@@ -122,21 +147,6 @@ open class DrawCanvasView : View {
         }
     }
 
-    // TODO Рисовать дугу угла fun drawAngleCircle()
-    // TODO Подстраивать положение текста, чтобы не наезжал на линии
-    private fun drawValueAngle(canvas: Canvas) {
-        for (angle in figure.mAngles) {
-            if (angle.getValue() == null) continue
-
-            canvas.drawText(
-                formatValueString(angle),
-                angle.angleNode.x + TEXT_MARGIN,
-                angle.angleNode.y + TEXT_MARGIN,
-                mPaintText
-            )
-        }
-    }
-
     private fun drawValueLines(canvas: Canvas) {
         for (line in figure.mLines) {
             if (line.getValue() == null) continue
@@ -149,6 +159,21 @@ open class DrawCanvasView : View {
                 ((line.startNode.y + line.finalNode.y) / 2) + TEXT_SIZE / 3.5f,
                 mPaintText
             )//TODO(выровнять относительно размера текста)
+        }
+    }
+
+    // TODO Рисовать дугу угла fun drawAngleCircle()
+    // TODO Подстраивать положение текста, чтобы не наезжал на линии
+    private fun drawValueAngle(canvas: Canvas) {
+        for (angle in figure.mAngles) {
+            if (angle.getValue() == null) continue
+
+            canvas.drawText(
+                formatValueString(angle),
+                angle.angleNode.x + TEXT_MARGIN,
+                angle.angleNode.y + TEXT_MARGIN,
+                mPaintText
+            )
         }
     }
 }

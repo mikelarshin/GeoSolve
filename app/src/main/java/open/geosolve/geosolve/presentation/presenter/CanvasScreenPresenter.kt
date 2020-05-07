@@ -8,11 +8,8 @@ import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.FigureController
+import open.geosolve.geosolve.model.data.*
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Figure
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
 import open.geosolve.geosolve.model.status.Mode
@@ -26,6 +23,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     private var state = State.ON_CANVAS
     private var moveQuantity = 0
     private var selectNode: Node? = null
+    private var selectCircle: Circle? = null
 
     private val figure: Figure
         get() = App.figure
@@ -74,7 +72,10 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     fun onTouchMove(touchX: Float, touchY: Float) {
         selectNode?.moveNode(touchX, touchY)
+        selectCircle?.moveDisplayRadius(touchX, touchY)
         moveQuantity++
+        if (moveQuantity == 5 && selectNode == null)
+            selectCircle = figureController.addCircle(touchX, touchY, touchX, touchY)
     }
 
     fun onTouchUp(touchX: Float, touchY: Float) {
@@ -98,6 +99,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
         moveQuantity = 0
         selectNode = null
+        selectCircle = null
 
         setNodeChars()
         solve()

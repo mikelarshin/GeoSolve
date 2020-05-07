@@ -25,6 +25,12 @@ class FigureController(val figure: Figure) {
         finalLine.finalNode.finalAngle = angle
     }
 
+    fun addCircle(touchX1: Float, touchY1: Float, touchX2: Float, touchY2: Float): Circle{
+        val circle = Circle(Node(touchX1, touchY1), Node(touchX2, touchY2))
+        figure.mCircles.add(circle)
+        return circle
+    }
+
     fun delNode(touchX: Float, touchY: Float) {
         getNode(touchX, touchY)?.let { node ->
             for (element in node.getConnectionList()) {
@@ -43,6 +49,7 @@ class FigureController(val figure: Figure) {
         figure.mNodes.clear()
         figure.mLines.clear()
         figure.mAngles.clear()
+        figure.mCircles.clear()
         figure.find = null
     }
 

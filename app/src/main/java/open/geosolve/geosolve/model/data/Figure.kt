@@ -6,6 +6,7 @@ class Figure {
     val mNodes: MutableList<Node> = mutableListOf()
     val mLines: MutableList<Line> = mutableListOf()
     val mAngles: MutableList<Angle> = mutableListOf()
+    val mCircles: MutableList<Circle> = mutableListOf()
 
     fun isClose(): Boolean = if (mLines.size != 0) mLines.first().startNode == mLines.last().finalNode else false
 
