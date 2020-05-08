@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <open.geosolve.geosolve.ui.canvas.FigureFieldView
+    <open.geosolve.geosolve.ui.canvas.view.FigureFieldView
         android:id="@+id/field"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -67,7 +67,15 @@
         app:layout_constraintStart_toStartOf="@id/tools_container" />
 
     <!-- Tools container -->
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <open.geosolve.geosolve.ui.canvas.view.FloatingActionSwitchesView
+        android:id="@+id/tools_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <!--<androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tools_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +84,7 @@
         android:orientation="vertical"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <!-- endregion -->
 

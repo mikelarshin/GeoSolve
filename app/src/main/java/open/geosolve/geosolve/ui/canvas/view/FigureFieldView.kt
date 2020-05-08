@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.ui.canvas
+package open.geosolve.geosolve.ui.canvas.view
 
 import android.content.Context
 import android.graphics.Canvas

@@ -1,15 +1,11 @@
 package open.geosolve.geosolve.ui.canvas
 
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
@@ -21,7 +17,6 @@ import open.geosolve.geosolve.presentation.canvas.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.canvas.CanvasScreenView
 import open.geosolve.geosolve.ui.global.MvpFragmentX
 import open.v0gdump.field.InteractiveFieldCallback
-import kotlin.math.roundToInt
 
 /*
  * TODO(CODE) Перенести все FAB в отдельную view и переключать состояние внутри
@@ -84,58 +79,17 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
         createTools()
 
-        layout.solve.setOnClickListener {
-            presenter.solve()
-        }
-
+        layout.solve.setOnClickListener { presenter.solve() }
         layout.clear_field.setOnClickListener { presenter.clearFigure() }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        updateToolsButtonsColors()
     }
 
     private fun createTools() {
         tools.forEachIndexed { index, tool ->
-            layout.tools_container.addView(
-                FloatingActionButton(activity).apply {
-
-                    layoutParams = LinearLayoutCompat.LayoutParams(
-                        LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
-                        LinearLayoutCompat.LayoutParams.WRAP_CONTENT
-                    ).apply {
-                        setMargins(0, 0, 0, dpToPx(12))
-                    }
-
-                    setImageResource(tool.icon)
-
-                    setOnClickListener {
-                        presenter.selectedTool = index
-                        updateToolsButtonsColors()
-                    }
-                }
-            )
+            layout.tools_container.addSwitch(index, tool.name, tool.icon)
         }
-    }
 
-    private fun updateToolsButtonsColors() {
-        for (i in 0 until tools_container.childCount) {
-            tools_container.getChildAt(i).backgroundTintList =
-                if (presenter.selectedTool == i) {
-                    ColorStateList.valueOf(resources.getColor(R.color.color_selected))
-                } else {
-                    ColorStateList.valueOf(resources.getColor(R.color.colorAccent))
-                }
-        }
+        layout.tools_container.onSwitchSelected = { index -> presenter.selectedTool = index }
     }
-
-    private fun dpToPx(dp: Int): Int =
-        TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp.toFloat(),
-            resources.displayMetrics
-        ).roundToInt()
 
     override fun updateCanvas() = field.invalidate()
 
