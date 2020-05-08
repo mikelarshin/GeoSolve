@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -83,7 +84,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
         createTools()
 
-        layout.solve.setOnClickListener { findNavController().navigate(R.id.action_to_solve) }
+        layout.solve.setOnClickListener {
+            presenter.solve()
+        }
+
         layout.clear_field.setOnClickListener { presenter.clearFigure() }
     }
 
@@ -173,5 +177,13 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             "$typeFigure : $subTypeFigure"
         else
             typeFigure
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun goToSolveScreen() {
+        findNavController().navigate(R.id.action_to_solve)
     }
 }

@@ -6,16 +6,20 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-@StateStrategyType(AddToEndSingleStrategy::class)
+@StateStrategyType(OneExecutionStateStrategy::class)
 interface CanvasScreenView : MvpView {
 
-    @StateStrategyType(OneExecutionStateStrategy::class)
     fun updateCanvas()
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showFigureType()
 
     fun showInputDialog(
         @StringRes titleRes: Int,
         callback: (value: Float) -> Unit
     )
+
+    fun showMessage(message: String)
+
+    fun goToSolveScreen()
 }

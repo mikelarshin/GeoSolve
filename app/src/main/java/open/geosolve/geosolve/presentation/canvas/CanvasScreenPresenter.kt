@@ -78,7 +78,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
         }
 
         updateNodesNames()
-        solve()
+        updateFigure()
     }
 
     private fun updateValue(element: Element) {
@@ -86,13 +86,13 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
             is Line -> {
                 viewState.showInputDialog(R.string.alert_set_line) {
                     element.setValueDraw(it)
-                    solve()
+                    updateFigure()
                 }
             }
             is Angle -> {
                 viewState.showInputDialog(R.string.alert_set_angle) {
                     element.setValueDraw(it)
-                    solve()
+                    updateFigure()
                 }
             }
         }
@@ -106,11 +106,19 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
         }
     }
 
-    private fun solve() = launch {
+    private fun updateFigure() = launch {
         SolveUtil.solve(figure)
 
         viewState.showFigureType()
         viewState.updateCanvas()
+    }
+
+    fun solve() {
+        if (figure.find == null) {
+            viewState.showMessage("Не выделено искомое")
+        } else {
+            viewState.goToSolveScreen()
+        }
     }
 
     fun clearFigure() {
