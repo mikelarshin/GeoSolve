@@ -8,7 +8,7 @@ import open.geosolve.geosolve.model.helper.FigureManipulator
 class PenTool : Tool {
 
     override fun onTouchCanvas(figure: Figure, x: Float, y: Float) {
-        if (figure.figureClosed) return
+        if (figure.isClose) return
 
         FigureManipulator.addNode(Node(x, y))
 
@@ -30,23 +30,21 @@ class PenTool : Tool {
     }
 
     override fun onTouchNode(figure: Figure, node: Node) {
-        if (figure.figureClosed) return
+        if (figure.isClose) return
         closeFigure(figure)
     }
 
     override fun onTouchLine(figure: Figure, line: Line) {
-        if (figure.figureClosed) return
+        if (figure.isClose) return
         closeFigure(figure)
     }
 
     // FIXME(CHECK) Проверить корректность алгоритма
     private fun closeFigure(figure: Figure) {
-        val node = figure.nodes.last()
+        val node = figure.nodes.first()
 
-        FigureManipulator.addLine(figure.nodes.last(), figure.nodes.first())
+        FigureManipulator.addLine(figure.nodes.last(), node)
         FigureManipulator.addAngle(node.startLine?.startNode?.startLine!!, node.startLine!!)
         FigureManipulator.addAngle(node.startLine!!, node.finalLine!!)
-
-        figure.figureClosed = true
     }
 }

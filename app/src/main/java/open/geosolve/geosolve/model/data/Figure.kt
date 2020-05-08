@@ -8,7 +8,7 @@ import java.util.*
 
 class Figure {
 
-    var figureClosed = false
+    val isClose: Boolean get() = if (lines.size != 0) lines.first().startNode == lines.last().finalNode else false
 
     var find: Element? = null
     val nodes: MutableList<Node> = ArrayList()
@@ -16,8 +16,6 @@ class Figure {
     val angles: MutableList<Angle> = ArrayList()
 
     fun clear() {
-        figureClosed = false
-
         find = null
         nodes.clear()
         lines.clear()
