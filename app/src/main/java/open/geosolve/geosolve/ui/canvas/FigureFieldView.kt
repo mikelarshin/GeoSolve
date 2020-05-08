@@ -40,11 +40,6 @@ class FigureFieldView : InteractiveFieldView {
         strokeWidth = lineThickness
     }
 
-    private val paintAngle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_angle)
-        textSize = lineThickness
-    }
-
     //endregion
 
     //region Figure
@@ -120,7 +115,9 @@ class FigureFieldView : InteractiveFieldView {
                 canvas,
                 angle.angleNode.x,
                 angle.angleNode.y,
-                paintAngle
+                paintNotations,
+                TextAnchor.BottomRight,
+                pointRadius
             )
         }
     }
