@@ -9,12 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- region Figure type -->
+
+    <!-- Background -->
     <View
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@drawable/ic_background"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Name -->
     <TextView
         android:id="@+id/text_figure_type"
         android:layout_width="wrap_content"
@@ -26,14 +30,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- endregion -->
+
+    <!-- region Tools -->
+
+    <!-- Tools container -->
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/tool_container"
+        android:id="@+id/tools_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- endregion -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

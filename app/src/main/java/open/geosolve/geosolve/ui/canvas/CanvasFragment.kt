@@ -90,14 +90,14 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     private fun createTools() {
         tools.forEachIndexed { index, tool ->
-            layout.tool_container.addView(
+            layout.tools_container.addView(
                 FloatingActionButton(activity).apply {
 
                     layoutParams = LinearLayoutCompat.LayoutParams(
                         LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
                         LinearLayoutCompat.LayoutParams.WRAP_CONTENT
                     ).apply {
-                        setMargins(0, dpToPx(8), 0, dpToPx(8))
+                        setMargins(0, 0, 0, dpToPx(12))
                     }
 
                     setImageResource(tool.icon)
@@ -112,8 +112,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     private fun updateToolsButtonsColors() {
-        for (i in 0 until tool_container.childCount) {
-            tool_container.getChildAt(i).backgroundTintList =
+        for (i in 0 until tools_container.childCount) {
+            tools_container.getChildAt(i).backgroundTintList =
                 if (presenter.selectedTool == i) {
                     ColorStateList.valueOf(resources.getColor(R.color.color_selected))
                 } else {
