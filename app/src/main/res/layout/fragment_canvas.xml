@@ -34,6 +34,29 @@
 
     <!-- region Tools -->
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clear_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toTopOf="@id/tools_separator"
+        app:layout_constraintEnd_toEndOf="@id/tools_container"
+        app:layout_constraintStart_toStartOf="@id/tools_container" />
+
+    <!-- Separator -->
+    <View
+        android:id="@+id/tools_separator"
+        android:layout_width="24dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/tools_container"
+        app:layout_constraintEnd_toEndOf="@id/tools_container"
+        app:layout_constraintStart_toStartOf="@id/tools_container" />
+
     <!-- Tools container -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tools_container"

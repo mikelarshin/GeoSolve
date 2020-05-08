@@ -81,6 +81,11 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         }
 
         createTools()
+
+        layout.clear_field.setOnTouchListener { _, _ ->
+            presenter.clearFigure()
+            true
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

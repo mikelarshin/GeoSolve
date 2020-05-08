@@ -112,4 +112,11 @@ class CanvasScreenPresenter(val app: App) : MvpPresenterX<CanvasScreenView>() {
         viewState.showFigureType()
         viewState.updateCanvas()
     }
+
+    fun clearFigure() {
+        figure.clear()
+
+        viewState.showFigureType()
+        viewState.updateCanvas()
+    }
 }
