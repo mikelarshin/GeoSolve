@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
@@ -82,10 +83,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
         createTools()
 
-        layout.clear_field.setOnTouchListener { _, _ ->
-            presenter.clearFigure()
-            true
-        }
+        layout.solve.setOnClickListener { findNavController().navigate(R.id.action_to_solve) }
+        layout.clear_field.setOnClickListener { presenter.clearFigure() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -170,7 +169,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             else
                 ""
 
-        text_figure_type.text = if (subTypeFigure?.isNotEmpty() == true)
+        figure_type.text = if (subTypeFigure?.isNotEmpty() == true)
             "$typeFigure : $subTypeFigure"
         else
             typeFigure

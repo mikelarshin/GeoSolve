@@ -9,10 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/solve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_math"
+        app:layout_constraintBottom_toBottomOf="@id/figure_type_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/figure_type_background" />
+
     <!-- region Figure type -->
 
     <!-- Background -->
     <View
+        android:id="@+id/figure_type_background"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@drawable/ic_background"
@@ -20,7 +31,7 @@
 
     <!-- Name -->
     <TextView
-        android:id="@+id/text_figure_type"
+        android:id="@+id/figure_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
@@ -38,7 +49,6 @@
         android:id="@+id/clear_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toTopOf="@id/tools_separator"
@@ -50,7 +60,6 @@
         android:id="@+id/tools_separator"
         android:layout_width="24dp"
         android:layout_height="1dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:background="@color/black"
         app:layout_constraintBottom_toTopOf="@id/tools_container"
