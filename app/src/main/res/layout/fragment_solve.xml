@@ -5,38 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <open.geosolve.geosolve.ui.view.TouchCanvasView
-        android:id="@+id/canvas"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/black_line"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/black_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/recycler"
-        app:layout_constraintTop_toBottomOf="@+id/canvas"
-        tools:layout_editor_absoluteX="34dp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/black_line" />
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close"
+        app:srcCompat="@drawable/ic_back"
         tools:ignore="VectorDrawableCompat" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
