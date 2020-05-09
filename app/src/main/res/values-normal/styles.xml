@@ -4,6 +4,7 @@
     <style name="TemplateText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="Bold" parent="TextAppearance.AppCompat">

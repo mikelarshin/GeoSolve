@@ -6,7 +6,6 @@ import open.geosolve.geosolve.model.solve.type.AngleFigure
 import open.geosolve.geosolve.model.solve.type.Rectangle
 import open.geosolve.geosolve.model.solve.type.Triangle
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
-import open.geosolve.geosolve.ui.solve.RecycleAdapter
 
 object SolveUtil {
 
@@ -42,30 +41,26 @@ object SolveUtil {
         figure.angles.map { it.onKnownFunList.clear() }
     }
 
-    fun showStepSolveList(figure: Figure, callbackUi: CallBackSolveUi) {
-        when {
-            figure.find == null -> {
-                callbackUi.findNotMark()
-                return
-            }
-            figure.find?.getValue() != null && figure.find!!.whereFromValueList == null -> {
-                callbackUi.userInputValue()
-                return
-            }
-            figure.find!!.whereFromValueList == null -> {
-                callbackUi.solveIsNotFound()
-                return
-            }
+    fun getSolveSteps(figure: Figure, solveCallback: SolveCallback) {
+
+        val valuePresented = figure.find?.getValue() != null
+        val isNoSolve = figure.find!!.whereFromValueList == null
+
+        if (figure.find == null) {
+            solveCallback.noSearchedElement()
+        } else if (valuePresented && isNoSolve) {
+            solveCallback.userValue()
+        } else if (isNoSolve) {
+            solveCallback.notFound()
+        } else {
+            solveCallback.found(getList(figure.find!!).reversed() + listOf(figure.find!!))
         }
-
-        val list = getList(figure.find!!).reversed() + listOf(figure.find!!)
-
-        RecycleAdapter.addAll(list)
-
-        callbackUi.solveIsFound()
     }
 
-    private fun getList(found: Element, stepList: MutableList<Element> = mutableListOf()): List<Element> {
+    private fun getList(
+        found: Element,
+        stepList: MutableList<Element> = mutableListOf()
+    ): List<Element> {
         if (found.whereFromValueList == null)
             return listOf() // dead end graph
 
