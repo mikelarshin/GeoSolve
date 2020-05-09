@@ -31,12 +31,22 @@ class FigureFieldView : InteractiveFieldView {
     //region Paints
 
     private val paintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_node)
+        color = ContextCompat.getColor(context, R.color.field_node)
         strokeWidth = pointRadius
     }
 
     private val paintLine = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_line)
+        color = ContextCompat.getColor(context, R.color.field_line)
+        strokeWidth = lineThickness
+    }
+
+    private val paintMarkNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = ContextCompat.getColor(context, R.color.field_mark)
+        strokeWidth = pointRadius
+    }
+
+    private val paintMarkLine = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = ContextCompat.getColor(context, R.color.field_mark)
         strokeWidth = lineThickness
     }
 
@@ -76,7 +86,10 @@ class FigureFieldView : InteractiveFieldView {
                 canvas,
                 line.startNode.x, line.startNode.y,
                 line.finalNode.x, line.finalNode.y,
-                paintLine
+                if (attachedFigure.find == line)
+                    paintMarkLine
+                else
+                    paintLine
             )
         }
     }
@@ -89,7 +102,16 @@ class FigureFieldView : InteractiveFieldView {
     }
 
     private fun drawNode(canvas: Canvas, node: Node) {
-        drawCircle(canvas, node.x, node.y, pointRadius, paintNode)
+        drawCircle(
+            canvas,
+            node.x,
+            node.y,
+            pointRadius,
+            if (attachedFigure.find == node.centerAngle && node.centerAngle != null)
+                paintMarkNode
+            else
+                paintNode
+        )
     }
 
     private fun drawNodesName(canvas: Canvas) {
