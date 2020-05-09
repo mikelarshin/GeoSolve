@@ -72,7 +72,7 @@ class FloatingActionSwitchesView : LinearLayoutCompat {
             if (index == selectedSwitch) {
                 ColorStateList.valueOf(resources.getColor(R.color.color_selected))
             } else {
-                ColorStateList.valueOf(resources.getColor(R.color.colorAccent))
+                ColorStateList.valueOf(resources.getColor(R.color.color_unselected))
             }
     }
 
