@@ -1,8 +1,7 @@
 package open.geosolve.geosolve.ui.solve
 
-import android.util.Log
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.refactor.multistatelayout.MultiStateLayout
 import kotlinx.android.synthetic.main.fragment_solve.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
@@ -24,10 +23,10 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     }
 
     private fun setupListeners() {
-        layout.back_button.setOnClickListener {
+        /*layout.back_button.setOnClickListener {
             findNavController().popBackStack()
             RecycleAdapter.clear()
-        }
+        }*/
     }
 
     private fun setupRecycler() {
@@ -46,15 +45,15 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
             }
 
             override fun solveIsNotFound() {
-                Log.d("GeoSolve", "Решение не найдено")
+                layout.state_layout.state = MultiStateLayout.State.EMPTY
             }
 
             override fun userInputValue() {
-                Log.d("GeoSolve", "Значение задано пользователем")
+                layout.state_layout.state = MultiStateLayout.State.ERROR
             }
 
             override fun solveIsFound() {
-                Log.d("GeoSolve", "Значение найдено")
+                layout.state_layout.state = MultiStateLayout.State.CONTENT
             }
         })
     }
