@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:padding="8dp"
         android:src="@drawable/ic_no_data"
-        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintBottom_toTopOf="@+id/back_button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent=".4"
@@ -27,7 +27,7 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintBottom_toTopOf="@+id/back_button1"
         app:layout_constraintEnd_toEndOf="@+id/illustration"
         app:layout_constraintStart_toStartOf="@+id/illustration"
         app:layout_constraintTop_toBottomOf="@+id/illustration" />
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/back_button"
+        android:id="@+id/back_button1"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

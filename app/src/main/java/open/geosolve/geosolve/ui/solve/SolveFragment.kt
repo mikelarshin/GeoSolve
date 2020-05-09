@@ -1,8 +1,11 @@
 package open.geosolve.geosolve.ui.solve
 
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.refactor.multistatelayout.MultiStateLayout
 import kotlinx.android.synthetic.main.fragment_solve.view.*
+import kotlinx.android.synthetic.main.state_solve_unknown.view.*
+import kotlinx.android.synthetic.main.state_solve_user_value.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
@@ -17,16 +20,15 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     private val presenter by moxyPresenter { SolveScreenPresenter() }
 
     override fun setupLayout() {
-        setupListeners()
+        setupBackButtons()
         setupRecycler()
         showSolve()
     }
 
-    private fun setupListeners() {
-        /*layout.back_button.setOnClickListener {
-            findNavController().popBackStack()
-            RecycleAdapter.clear()
-        }*/
+    private fun setupBackButtons() {
+        layout.back_button.setOnClickListener { back() }
+        layout.state_layout.emptyView.back_button1.setOnClickListener { back() }
+        layout.state_layout.errorView.back_button2.setOnClickListener { back() }
     }
 
     private fun setupRecycler() {
@@ -56,5 +58,9 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
                 layout.state_layout.state = MultiStateLayout.State.CONTENT
             }
         })
+    }
+
+    private fun back() {
+        findNavController().popBackStack()
     }
 }
