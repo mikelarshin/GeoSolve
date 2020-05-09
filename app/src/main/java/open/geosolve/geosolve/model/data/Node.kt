@@ -4,7 +4,7 @@ import open.geosolve.geosolve.App
 import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.properties.Delegates
 
-class Node(foundX: Float, foundY: Float) {
+class Node(foundX: Float, foundY: Float) : Movable {
 
     var x: Float = foundX
         get() = App.systemCoordinate.transformationMethodX(field)
@@ -25,7 +25,7 @@ class Node(foundX: Float, foundY: Float) {
         return listOf(startLine, finalLine, startAngle, centerAngle, finalAngle)
     }
 
-    fun moveNode(x: Float, y: Float) {
+    override fun move(x: Float, y: Float) {
         this.x = x
         this.y = y
     }

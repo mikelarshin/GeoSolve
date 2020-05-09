@@ -5,9 +5,7 @@ import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
-import open.geosolve.geosolve.model.data.Element
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.data.*
 
 object DrawControl {
 
@@ -25,24 +23,37 @@ object DrawControl {
         }
     }
 
-    fun getNode(touchX: Float, touchY: Float): Node? {
-        var outNode: Node? = null
-        for (node in allNodes + allCircles.map { it.centerNode }) // TODO(сделать нормальное перемешение окружности)
-            if (node.inRadius(touchX, touchY)) {
-                outNode = node
-                break
-            }
-        return outNode
+    private fun getNode(touchX: Float, touchY: Float): Node? {
+        for (node in allNodes + allCircles.map { it.centerNode })
+            if (node.inRadius(touchX, touchY))
+                return node
+        return null
     }
 
     private fun getLine(touchX: Float, touchY: Float): Line? {
-        var outLine: Line? = null
         for (line in allLines)
-            if (line.inRadius(touchX, touchY)) {
-                outLine = line
-                break
-            }
-        return outLine
+            if (line.inRadius(touchX, touchY))
+                return line
+        return null
+    }
+
+    private fun getCircleByLine(touchX: Float, touchY: Float): Circle? {
+        for (circle in allCircles)
+            if (circle.inRadiusLine(touchX, touchY))
+                return circle
+        return null
+    }
+
+    fun getMovable(x: Float, y: Float): Movable? {
+        getNode(x, y)?.let { node ->
+            return node
+        }
+
+        getCircleByLine(x, y)?.let { circle ->
+            return circle
+        }
+
+        return null
     }
 
     fun getElement(x: Float, y: Float, unSelectableCallback: () -> Unit): Element? {
@@ -52,6 +63,10 @@ object DrawControl {
                 return node.centerAngle
             else
                 unSelectableCallback()
+        }
+
+        getCircleByLine(x, y)?.let{ circle ->
+            return circle
         }
 
         getLine(x, y)?.let { line ->

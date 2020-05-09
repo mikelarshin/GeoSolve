@@ -1,31 +1,44 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.App
+import open.geosolve.geosolve.model.status.SystemCoordinate
+import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.math.hypot
 
-class Circle(val centerNode: Node, val radiusNode: Node) : Element(){
+class Circle(val centerNode: Node) : Element(), Movable {
 
     // all logic solve in abstract Element
 
-    val drawRadius: Float
-        get() = hypot(centerNode.x - radiusNode.x, centerNode.y - radiusNode.y)
-
-    fun moveDisplayRadius(x: Float, y: Float){
-        radiusNode.moveNode(x, y)
-    }
+    var drawRadius: Float = 0f
+    private var decartRadius: Float = 0f // TODO(Rewrite this)
 
     override fun delConnection() {
         TODO("Not yet implemented")
     }
 
-//    fun inRadiusLine(x: Float, y: Float): Boolean {
-//    }
+    override fun move(x: Float, y: Float) {
+        App.systemCoordinate = SystemCoordinate.ABSOLUTE
+        drawRadius = hypot(centerNode.x - App.systemCoordinate.transformationMethodX(x),
+            centerNode.y - App.systemCoordinate.transformationMethodY(y))
+        App.systemCoordinate = SystemCoordinate.DECART
+        decartRadius = hypot(centerNode.x - App.systemCoordinate.transformationMethodX(x),
+            centerNode.y - App.systemCoordinate.transformationMethodY(y)) // TODO(Rewrite this)
 
-//    fun inRadiusPoint(x: Float, y: Float): Boolean {
-//        val radius = DrawCanvasView.POINT_SIZE / 20
-//        val xBool = this.x - radius < x && x < this.x + radius
-//
-//        val yBool = this.y - radius < y && y < this.y + radius
-//
-//        return xBool && yBool
-//    }
+        // так как drawRadius это значение для отрисовки высчитывающееся статически, мы записываем его с помошью Абсолютной системе координат
+    }
+
+    fun inRadiusLine(x: Float, y: Float): Boolean {
+        val distanceToCenter = hypot(centerNode.x - App.systemCoordinate.transformationMethodX(x),
+            centerNode.y - App.systemCoordinate.transformationMethodY(y))
+
+        val distanceToCircle =
+            if (decartRadius < distanceToCenter)
+                distanceToCenter - decartRadius
+            else
+                decartRadius - distanceToCenter
+
+        val bufferUseTouch = POINT_SIZE / 20
+        // FIXME(не всегда детектит нажатие на окружность)
+        return distanceToCircle < bufferUseTouch
+    }
 }

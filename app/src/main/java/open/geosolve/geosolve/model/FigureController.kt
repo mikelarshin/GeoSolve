@@ -29,8 +29,8 @@ class FigureController {
         finalLine.finalNode.finalAngle = angle
     }
 
-    fun addCircle(touchX1: Float, touchY1: Float, touchX2: Float, touchY2: Float){
-        figure.mCircle = Circle(Node(touchX1, touchY1), Node(touchX2, touchY2))
+    fun addCircle(x: Float, y: Float){
+        figure.mCircle = Circle(Node(x, y))
     }
 
     fun closeFigureInStartPoint(){
@@ -41,7 +41,7 @@ class FigureController {
     }
 
     fun removeDependent(){
-        for (element in figure.mAngles + figure.mLines)
+        for (element in figure.mAngles + figure.mLines + figure.mCircle)
             if (find == element)
                 find = null
     }

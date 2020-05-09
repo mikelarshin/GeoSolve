@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.presentation.presenter
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     private var mode = Mode.ADD_MOVE_FIN
     private var state = State.ON_CANVAS
     private var moveQuantity = 0
-    private var selectNode: Node? = null
+    private var selectMovable: Movable? = null
 
     private val figure: Figure
         get() = figureList.last()
@@ -72,18 +73,23 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     fun onTouchDown(touchX: Float, touchY: Float) {
         state = State.ON_CANVAS
-        DrawControl.getNode(touchX, touchY)?.let { node ->
-            selectNode = node
-            state = State.ON_POINT
+
+        DrawControl.getMovable(touchX, touchY)?.let { movable ->
+            selectMovable = movable
+            when(movable) {
+                is Node -> state = State.ON_POINT
+                is Circle -> state = State.ON_CIRCLE
+            }
         }
     }
 
     fun onTouchMove(touchX: Float, touchY: Float) {
-        selectNode?.moveNode(touchX, touchY)
-        figure.mCircle?.moveDisplayRadius(touchX, touchY)
+        selectMovable?.move(touchX, touchY)
+        figure.mCircle?.move(touchX, touchY) // rewrite
+
         moveQuantity++
-        if (moveQuantity == 6 && selectNode == null)
-            figureController.addCircle(touchX, touchY, touchX, touchY)
+        if (moveQuantity == 6 && selectMovable == null)
+            figureController.addCircle(touchX, touchY)
     }
 
     fun onTouchUp(touchX: Float, touchY: Float) {
@@ -92,8 +98,9 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 Mode.ADD_MOVE_FIN ->
                     when (state) {
                         State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
-                        State.ON_POINT -> onTouchPoint(selectNode!!)
-                        State.ON_LINE -> TODO()
+                        State.ON_POINT -> onTouchPoint(selectMovable!! as Node) // TODO(Rewrite)
+                        State.ON_LINE -> TODO() // onTouchLine()
+                        State.ON_CIRCLE -> TODO() // onTouchCircleLine()
                     }
                 Mode.DELETE -> DrawControl.delNode(touchX, touchY)
                 Mode.MARK_FIND -> DrawControl.getElement(touchX, touchY)
@@ -106,17 +113,20 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
 
         moveQuantity = 0
-        selectNode = null
+        selectMovable = null
 
         setNodeChars()
         solve()
 
         if (figure.isComplete())
-            figureList.add(Figure())
+            figureList.add(Figure()) // переход на следующую фигуру
     }
 
     private fun solve() {
-        val uiCallBack = { viewState.showTypeFigure() }
+        val uiCallBack = {
+            viewState.showTypeFigure()
+            viewState.updateCanvas()
+        }
         GlobalScope.launch(Dispatchers.Main) {
             for (figureI in figureList)
                 SolveUtil.solve(figureI)
@@ -137,10 +147,10 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 val message = when (element) {
                     is Line -> R.string.alert_set_line
                     is Angle -> R.string.alert_set_angle
-                    else -> null
+                    else -> null!!
                 }
 
-                viewState.showDialog(message!!) {
+                viewState.showDialog(message) {
                     element.setValueDraw(it)
                     solve()
                 }
@@ -148,12 +158,20 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun onTouchPoint(node: Node) {
-        if (node != figure.mNodes.last()) { // чтобы не делать линию из точки в эту же точку
-            if (node == figure.mNodes.first()) {// если фигура заканчивается в её начале
+        if (node != if (figure.mNodes.isNotEmpty()) figure.mNodes.last() else node) { // чтобы не делать линию из точки в эту же точку
+            if (node == figure.mNodes.first()) { // если фигура заканчивается в её начале TODO(обработать другие случаи)
                 figureController.closeFigureInStartPoint()
             } else
                 viewState.showMessage(R.string.CRUTCH_FOR_NOW) // TODO(обработать случай когда фигура закнчивается не в начале)
         }
+    }
+
+    private fun onTouchLine(line: Line) {
+        Log.e("OnTouchLine is use:", line.toString())
+    }
+
+    private fun onTouchCircleLine(circle: Circle) {
+        Log.e("onTouchCircle is use:", circle.toString())
     }
 
     private fun onTouchCanvas(touchX: Float, touchY: Float) {

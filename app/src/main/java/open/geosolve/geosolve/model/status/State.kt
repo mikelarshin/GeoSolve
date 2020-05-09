@@ -4,5 +4,5 @@ enum class State {
     ON_CANVAS,
     ON_POINT,
     ON_LINE,
-    ON_CANVAS_PULL
+    ON_CIRCLE
 }

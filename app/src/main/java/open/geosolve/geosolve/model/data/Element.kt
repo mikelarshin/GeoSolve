@@ -31,7 +31,8 @@ abstract class Element {
         this.dependence = dependence
     }
 
-    fun setValueGraph(value: Float, whereFromValueList: List<Element>, args: Array<out () -> CharSequence> ) {
+    fun setValueGraph(value: Float, whereFromValueList: List<Element>,
+                      args: Array<out () -> CharSequence> ) {
         this.value = value
         setValue(whereFromValueList, args)
     }

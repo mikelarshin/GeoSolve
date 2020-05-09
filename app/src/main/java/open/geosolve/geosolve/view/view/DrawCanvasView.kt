@@ -3,8 +3,6 @@ package open.geosolve.geosolve.view.view
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -16,10 +14,10 @@ import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
+import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
-import kotlin.math.atan2
 
 
 open class DrawCanvasView : View {
@@ -55,6 +53,11 @@ open class DrawCanvasView : View {
         color = ContextCompat.getColor(context, R.color.color_mark)
         strokeWidth = LINE_WIDTH
     }
+    private val mPaintMarkCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = ContextCompat.getColor(context, R.color.color_mark)
+        style = Paint.Style.STROKE
+        strokeWidth = LINE_WIDTH
+    }
     private val mPaintText = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.canvas_text_color)
         textSize = TEXT_SIZE
@@ -76,9 +79,11 @@ open class DrawCanvasView : View {
         drawAngleCircle(canvas)
         drawLines(canvas)
         drawCircles(canvas)
-        drawNodes(canvas)
 
         drawMarkedLine(canvas)
+        drawMarkedCircle(canvas)
+
+        drawNodes(canvas)
         drawMarkedAngle(canvas)
 
         drawValueAngle(canvas)
@@ -120,6 +125,19 @@ open class DrawCanvasView : View {
                 mPaintNode
             )
         }
+    }
+
+    private fun drawMarkedCircle(canvas: Canvas) {
+        if (find !is Circle) return
+
+        val markedCircle = find as Circle
+
+        canvas.drawCircle(
+            markedCircle.centerNode.x,
+            markedCircle.centerNode.y,
+            markedCircle.drawRadius,
+            mPaintMarkCircle
+        )
     }
 
     private fun drawMarkedLine(canvas: Canvas) {
