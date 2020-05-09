@@ -15,9 +15,10 @@ import kotlin.math.roundToInt
 class FloatingActionSwitchesView : LinearLayoutCompat {
 
     var selectedSwitch: Int = 0
-        private set(value) {
+        set(value) {
             check(value >= 0) { "selectedSwitch should be more or equal 0. selectedSwitch = $selectedSwitch" }
             field = value
+            updateHighlight()
         }
 
     var onSwitchSelected: ((Int) -> Unit)? = null
@@ -58,8 +59,6 @@ class FloatingActionSwitchesView : LinearLayoutCompat {
             setOnClickListener {
                 selectedSwitch = index
                 onSwitchSelected?.invoke(index)
-
-                updateHighlight()
             }
         }
     )

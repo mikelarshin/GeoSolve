@@ -84,6 +84,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     private fun createTools() {
+        layout.tools_container.selectedSwitch = presenter.selectedTool
+
         tools.forEachIndexed { index, tool ->
             layout.tools_container.addSwitch(index, tool.name, tool.icon)
         }
