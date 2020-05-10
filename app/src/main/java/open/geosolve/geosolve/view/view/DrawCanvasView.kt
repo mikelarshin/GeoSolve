@@ -114,7 +114,7 @@ open class DrawCanvasView : View {
             canvas.drawCircle(
                 circle.centerNode.x,
                 circle.centerNode.y,
-                circle.drawRadius,
+                circle.getDrawRadius(),
                 mPaintCircle
             )
 
@@ -135,7 +135,7 @@ open class DrawCanvasView : View {
         canvas.drawCircle(
             markedCircle.centerNode.x,
             markedCircle.centerNode.y,
-            markedCircle.drawRadius,
+            markedCircle.getDrawRadius(),
             mPaintMarkCircle
         )
     }
