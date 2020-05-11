@@ -4,7 +4,7 @@ import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.*
 
-class FigureController {
+object FigureController {
 
     val figure: Figure get() = figureList.last()
 
@@ -12,32 +12,23 @@ class FigureController {
         figure.mNodes.add(node)
     }
 
-    fun addLine(startNode: Node, finalNode: Node) {
-        val line = Line(startNode, finalNode)
+    fun addLine(line: Line) {
         figure.mLines.add(line)
 
-        startNode.finalLine = line
-        finalNode.startLine = line
+        line.startNode.finalLine = line
+        line.finalNode.startLine = line
     }
 
-    fun addAngle(startLine: Line, finalLine: Line) {
-        val angle = Angle(startLine, finalLine)
+    fun addAngle(angle: Angle) {
         figure.mAngles.add(angle)
 
-        startLine.startNode.startAngle = angle
-        startLine.finalNode.centerAngle = angle
-        finalLine.finalNode.finalAngle = angle
+        angle.startLine.startNode.startAngle = angle
+        angle.startLine.finalNode.centerAngle = angle
+        angle.finalLine.finalNode.finalAngle = angle
     }
 
     fun addCircle(x: Float, y: Float){
         figure.mCircle = Circle(Node(x, y))
-    }
-
-    fun closeFigureInStartPoint(){
-        val closeNode = figure.mNodes.first()
-        addLine(figure.mNodes.last(), closeNode)
-        addAngle(closeNode.startLine?.startNode?.startLine!!, closeNode.startLine!!)
-        addAngle(closeNode.startLine!!, closeNode.finalLine!!)
     }
 
     fun removeDependent(){

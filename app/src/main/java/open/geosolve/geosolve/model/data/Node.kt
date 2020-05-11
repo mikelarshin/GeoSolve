@@ -1,6 +1,7 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.properties.Delegates
 
@@ -25,9 +26,26 @@ class Node(foundX: Float, foundY: Float) : Movable {
         return listOf(startLine, finalLine, startAngle, centerAngle, finalAngle)
     }
 
+    var bind: Bind? = null
+        set(value) {
+            field?.bindNodeList?.remove(this)
+            value?.bindNodeList?.add(this)
+            field = value
+            updateXYbyBind()
+        }
+
+    fun updateXYbyBind() {
+        bind?.toBindNodeXY(this, x, y)
+    }
+
     override fun move(x: Float, y: Float) {
-        this.x = x
-        this.y = y
+        if (bind != null)
+            bind?.toBindNodeXY(this, x, y)
+        else {
+            this.x = x
+            this.y = y
+        }
+        allNodes.forEach{it.updateXYbyBind()}
     }
 
     fun inRadius(x: Float, y: Float): Boolean {

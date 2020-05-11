@@ -4,6 +4,7 @@ import open.geosolve.geosolve.App.Companion.allAngles
 import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
+import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.*
 
@@ -15,11 +16,17 @@ object DrawControl {
                 if (find == element)
                     find = null
                 element?.delConnection()
-                allAngles.remove(element)
-                allLines.remove(element)
+                for (figure in figureList) {
+                    if (figure.mLines.contains(element))
+                        figure.mLines.remove(element)
+                    if (figure.mAngles.contains(element))
+                        figure.mAngles.remove(element)
+                }
             }
 
-            allNodes.remove(node)
+            for (figure in figureList)
+                if (figure.mNodes.contains(node))
+                    figure.mNodes.remove(node)
         }
     }
 

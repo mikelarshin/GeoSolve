@@ -1,7 +1,5 @@
 package open.geosolve.geosolve.model.data
 
-import kotlin.math.atan2
-
 class Angle(val startLine: Line, val finalLine: Line) : Element() {
 
     // all logic solve in abstract Element

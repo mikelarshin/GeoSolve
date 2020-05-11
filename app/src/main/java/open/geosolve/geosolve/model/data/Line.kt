@@ -2,9 +2,10 @@ package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.math.hypot
+import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Line(var startNode: Node, var finalNode: Node) : Element() {
+class Line(var startNode: Node, var finalNode: Node) : Element(), Bind {
 
     //    all logic solve in abstract Element
 
@@ -15,10 +16,21 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
             throw Exception("Line constructor get the same Node")
     }
 
-    override fun delConnection(){
+    override fun delConnection() {
         startNode.finalLine = null
         finalNode.startLine = null
     }
+
+    // Bind
+    override val bindNodeList: MutableList<Node> = mutableListOf()
+
+    override fun updateAllBind() {
+    }
+
+    override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
+
+    }
+
 
     // TODO rewrite magic
     fun inRadius(x: Float, y: Float): Boolean {
@@ -45,9 +57,19 @@ class Line(var startNode: Node, var finalNode: Node) : Element() {
                     (per - lineLength)
         ) / lineLength
 
-        return when{
-            dot(x - startNode.x, y - startNode.y, finalNode.x - startNode.x, finalNode.y - startNode.y) >= 0 &&
-                    dot(x - finalNode.x, y - finalNode.y, startNode.x - finalNode.x, startNode.y - finalNode.y) >= 0 -> distance < POINT_SIZE / 40
+        return when {
+            dot(
+                x - startNode.x,
+                y - startNode.y,
+                finalNode.x - startNode.x,
+                finalNode.y - startNode.y
+            ) >= 0 &&
+                    dot(
+                        x - finalNode.x,
+                        y - finalNode.y,
+                        startNode.x - finalNode.x,
+                        startNode.y - finalNode.y
+                    ) >= 0 -> distance < POINT_SIZE / 40
 
             else -> false
         }

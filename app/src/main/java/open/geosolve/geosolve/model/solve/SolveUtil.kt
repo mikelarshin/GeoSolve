@@ -1,5 +1,9 @@
 package open.geosolve.geosolve.model.solve
 
+import open.geosolve.geosolve.App.Companion.allAngles
+import open.geosolve.geosolve.App.Companion.allCircles
+import open.geosolve.geosolve.App.Companion.allLines
+import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.Element
 import open.geosolve.geosolve.model.data.Figure
@@ -24,18 +28,15 @@ object SolveUtil {
         subTypeSolve = UnknownFigure
     }
 
-    fun solve(figure: Figure) {
-        setTypeSolve(figure)
+    fun solve(figureList: List<Figure>) {
+        for (figure in figureList) {
+            setTypeSolve(figure)
+            zeroGraph(figure)
+            typeSolve.setGraphs(figure)
+        }
 
-        zeroGraph(figure)
-
-        typeSolve.setGraphs(figure)
-
-        for (line in figure.mLines)
-            line.solve()
-
-        for (angle in figure.mAngles)
-            angle.solve()
+        for (element in allLines + allAngles + allCircles)
+            element.solve()
     }
 
     private fun zeroGraph(figure: Figure) {
@@ -61,9 +62,7 @@ object SolveUtil {
 
         val list = getList(find!!).reversed() + listOf(find!!)
 
-        RecycleAdapter.addAll(list)
-
-        callbackUi.solveIsFound()
+        callbackUi.solveIsFound(list)
     }
 
     private fun getList(found: Element, stepList: MutableList<Element> = mutableListOf()): List<Element> {

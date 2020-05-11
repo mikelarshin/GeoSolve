@@ -34,17 +34,17 @@ abstract class Element {
     fun setValueGraph(value: Float, whereFromValueList: List<Element>,
                       args: Array<out () -> CharSequence> ) {
         this.value = value
-        setValue(whereFromValueList, args)
+        setValueGraph(whereFromValueList, args)
     }
 
     fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<Element>,
                                args: Array<out () -> CharSequence>) {
         this.dependence = dependence
-        setValue(whereFromValueList, args)
+        setValueGraph(whereFromValueList, args)
     }
 
-    private fun setValue(whereFromValueList: List<Element>,
-                         args: Array<out () -> CharSequence>){
+    private fun setValueGraph(whereFromValueList: List<Element>,
+                              args: Array<out () -> CharSequence>){
         this.whereFromValueList = whereFromValueList
         this.getFormula = args[0]
         this.getVerbal = args[1]

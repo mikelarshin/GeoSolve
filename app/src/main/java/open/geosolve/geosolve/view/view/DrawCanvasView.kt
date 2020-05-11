@@ -110,19 +110,27 @@ open class DrawCanvasView : View {
 
     private fun drawCircles(canvas: Canvas) {
         for (circle in allCircles) {
+            val centerNode = circle.centerNode
 
             canvas.drawCircle(
-                circle.centerNode.x,
-                circle.centerNode.y,
+                centerNode.x,
+                centerNode.y,
                 circle.drawRadius,
                 mPaintCircle
             )
 
             canvas.drawCircle(
-                circle.centerNode.x,
-                circle.centerNode.y,
+                centerNode.x,
+                centerNode.y,
                 POINT_SIZE,
                 mPaintNode
+            )
+
+            canvas.drawText(
+                centerNode.char.toString(),
+                centerNode.x - TEXT_MARGIN,
+                centerNode.y - TEXT_MARGIN,
+                mPaintText
             )
         }
     }
