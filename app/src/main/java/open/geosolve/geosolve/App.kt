@@ -23,11 +23,10 @@ class App : Application() {
         val allCircles: MutableList<Circle>
             get() = figureList.flatMap { listOf(it.mCircle) }.filterNotNull().toMutableList()
 
-        val scaleForY get() = heightCanvas / POINT_SIZE // 1 coordinate unit equals 1 Node
-        val scaleForX get() = widthCanvas / POINT_SIZE // 1 coordinate unit equals 1 Node
+        val scale get() = (heightCanvas + widthCanvas) / 2 / POINT_SIZE // 1 coordinate unit equals 1 Node
 
-        var widthCanvas by Delegates.notNull<Int>()
-        var heightCanvas by Delegates.notNull<Int>()
+        var widthCanvas: Int = 0
+        var heightCanvas: Int = 0
 
         var systemCoordinate: SystemCoordinate = SystemCoordinate.DECART
     }

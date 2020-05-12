@@ -12,6 +12,8 @@ import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
+import open.geosolve.geosolve.App.Companion.scale
+import open.geosolve.geosolve.App.Companion.systemCoordinate
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
@@ -74,7 +76,7 @@ open class DrawCanvasView : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        App.systemCoordinate = SystemCoordinate.ABSOLUTE
+        systemCoordinate = SystemCoordinate.ABSOLUTE
 
         drawAngleCircle(canvas)
         drawLines(canvas)
@@ -90,7 +92,7 @@ open class DrawCanvasView : View {
         drawValueLines(canvas)
         drawNodesName(canvas)
 
-        App.systemCoordinate = SystemCoordinate.DECART
+        systemCoordinate = SystemCoordinate.DECART
     }
 
     private fun drawLines(canvas: Canvas) {

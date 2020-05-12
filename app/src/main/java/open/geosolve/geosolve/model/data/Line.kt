@@ -1,8 +1,7 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
-import kotlin.math.hypot
-import kotlin.math.pow
 import kotlin.math.sqrt
 
 class Line(var startNode: Node, var finalNode: Node) : Element(), Bind {
@@ -35,19 +34,14 @@ class Line(var startNode: Node, var finalNode: Node) : Element(), Bind {
     // TODO rewrite magic
     fun inRadius(x: Float, y: Float): Boolean {
 
-        val dist = { x1: Float, y1: Float,
-                     x2: Float, y2: Float ->
-            hypot(x1 - x2, y1 - y2)
-        }
-
         val dot = { x1: Float, y1: Float,
                     x2: Float, y2: Float ->
             (x1 * x2) + (y1 * y2)
         }
 
-        val distanceStart: Float = dist(startNode.x, startNode.y, x, y)
-        val distanceFin: Float = dist(finalNode.x, finalNode.y, x, y)
-        val lineLength: Float = dist(startNode.x, startNode.y, finalNode.x, finalNode.y)
+        val distanceStart: Float = distanceBetweenPoints(startNode, x, y)
+        val distanceFin: Float = distanceBetweenPoints(finalNode, x, y)
+        val lineLength: Float = distanceBetweenPoints(startNode, finalNode)
 
         val per: Float = (distanceStart + distanceFin + lineLength) / 2
 

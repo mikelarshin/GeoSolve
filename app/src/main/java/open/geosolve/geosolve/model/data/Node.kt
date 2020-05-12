@@ -8,9 +8,9 @@ import kotlin.properties.Delegates
 class Node(foundX: Float, foundY: Float) : Movable {
 
     var x: Float = foundX
-        get() = App.systemCoordinate.transformationMethodX(field)
+        get() = App.systemCoordinate.convertX(field)
     var y: Float = foundY
-        get() = App.systemCoordinate.transformationMethodY(field)
+        get() = App.systemCoordinate.convertY(field)
 
     var char by Delegates.notNull<Char>()
     override fun toString(): String = char.toString()

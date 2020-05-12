@@ -3,9 +3,7 @@ package open.geosolve.geosolve.view.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.App.Companion.scaleForX
-import open.geosolve.geosolve.App.Companion.scaleForY
+import open.geosolve.geosolve.App.Companion.scale
 
 class TouchCanvasView : DrawCanvasView {
 
@@ -19,8 +17,8 @@ class TouchCanvasView : DrawCanvasView {
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
-        val mx = (event.x - width / 2) / scaleForX
-        val my = (height / 2 - event.y) / scaleForY
+        val mx = (event.x - width / 2) / scale
+        val my = (height / 2 - event.y) / scale
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> onTouchDown?.invoke(mx, my)
