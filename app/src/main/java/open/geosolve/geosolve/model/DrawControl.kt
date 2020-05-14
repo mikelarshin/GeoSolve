@@ -1,34 +1,16 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.App.Companion.allAngles
+import open.geosolve.geosolve.App
 import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.figureList
-import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.*
+import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.data.generalized.Movable
 
 object DrawControl {
-
-    fun delNode(touchX: Float, touchY: Float) {
-        getNode(touchX, touchY)?.let { node ->
-            for (element in node.getConnectionList()) {
-                if (find == element)
-                    find = null
-                element?.delConnection()
-                for (figure in figureList) {
-                    if (figure.mLines.contains(element))
-                        figure.mLines.remove(element)
-                    if (figure.mAngles.contains(element))
-                        figure.mAngles.remove(element)
-                }
-            }
-
-            for (figure in figureList)
-                if (figure.mNodes.contains(node))
-                    figure.mNodes.remove(node)
-        }
-    }
 
     private fun getNode(touchX: Float, touchY: Float): Node? {
         for (node in allNodes + allCircles.map { it.centerNode })
@@ -44,11 +26,18 @@ object DrawControl {
         return null
     }
 
-    private fun getCircleByLine(touchX: Float, touchY: Float): Circle? {
+    private fun getCircle(touchX: Float, touchY: Float): Circle? {
         for (circle in allCircles)
-            if (circle.inRadiusLine(touchX, touchY))
+            if (circle.inRadius(touchX, touchY))
                 return circle
         return null
+    }
+
+    fun delNode(touchX: Float, touchY: Float) {
+        getNode(touchX, touchY)?.let { node ->
+            node.delConnection()
+            App.delElement(node)
+        }
     }
 
     fun getMovable(x: Float, y: Float): Movable? {
@@ -56,28 +45,25 @@ object DrawControl {
             return node
         }
 
-        getCircleByLine(x, y)?.let { circle ->
+        getCircle(x, y)?.let { circle ->
             return circle
         }
 
         return null
     }
 
-    fun getElement(x: Float, y: Float, unSelectableCallback: () -> Unit): Element? {
+    fun getGraphElement(x: Float, y: Float): SolveGraph? {
 
-        getNode(x, y)?.let { node ->
-            if (node.centerAngle != null)
-                return node.centerAngle
-            else
-                unSelectableCallback()
-        }
-
-        getCircleByLine(x, y)?.let{ circle ->
-            return circle
+        getNode(x, y)?.centerAngle?.let { angle ->
+            return angle
         }
 
         getLine(x, y)?.let { line ->
             return line
+        }
+
+        getCircle(x, y)?.let { circle ->
+            return circle
         }
 
         return null

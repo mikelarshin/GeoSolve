@@ -6,14 +6,14 @@ import android.text.style.TextAppearanceSpan
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Element
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
 
 object DesignUtil {
 
-    fun formatSolve(templateVerbalId: Int, templateExpressionId: Int, vararg formatArgs: Element)
+    fun formatSolve(templateVerbalId: Int, templateExpressionId: Int, vararg formatArgs: SolveGraph)
             : Array<out () -> CharSequence> {
 
-        fun getFormat(templateId: Int, by: (Element) -> String = { element -> element.toString() }): CharSequence {
+        fun getFormat(templateId: Int, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
             val sb = SpannableStringBuilder().append(formatText(App.instance.getString(templateId), R.style.TemplateText))
 
             for (i in 0 until sb.filter { it == '%' }.length) {
@@ -38,19 +38,19 @@ object DesignUtil {
         return spannableString
     }
 
-    fun formatAnswer(element: Element): CharSequence {
+    fun formatAnswer(solveGraph: SolveGraph): CharSequence {
         val sb = SpannableStringBuilder()
-            .append(formatText(element.toString(), R.style.AnswerText))
+            .append(formatText(solveGraph.toString(), R.style.AnswerText))
             .append(formatText(" = ", R.style.TemplateText))
-            .append(formatText(formatValueString(element), R.style.AnswerText))
+            .append(formatText(formatValueString(solveGraph), R.style.AnswerText))
 
         return sb.subSequence(0, sb.length)
     }
 
-    fun formatValueString(element: Element): String {
-        val value: Float = element.getValue()!!
+    fun formatValueString(solveGraph: SolveGraph): String {
+        val value: Float = solveGraph.getValue()!!
 
-        val add_note =  if (element is Angle) "°" else ""
+        val add_note =  if (solveGraph is Angle) "°" else ""
 
         return (if (value - value.toInt() < 0.1f) value.toInt().toString() else "%.1f".format(value)) + add_note
     }

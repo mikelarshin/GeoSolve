@@ -3,15 +3,13 @@ package open.geosolve.geosolve.model.solve
 import open.geosolve.geosolve.App.Companion.allAngles
 import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
-import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
-import open.geosolve.geosolve.model.data.Element
 import open.geosolve.geosolve.model.data.Figure
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.type.AngleFigure
 import open.geosolve.geosolve.model.solve.type.Rectangle
 import open.geosolve.geosolve.model.solve.type.Triangle
 import open.geosolve.geosolve.model.solve.type.UnknownFigure
-import open.geosolve.geosolve.view.screens.solveScreen.RecycleAdapter
 
 object SolveUtil {
 
@@ -35,7 +33,8 @@ object SolveUtil {
             typeSolve.setGraphs(figure)
         }
 
-        for (element in allLines + allAngles + allCircles)
+        val loopList = (allLines + allAngles + allCircles) as List<SolveGraph>
+        for (element in loopList)
             element.solve()
     }
 
@@ -44,28 +43,28 @@ object SolveUtil {
         figure.mAngles.map { it.onKnownFunList.clear() }
     }
 
-    fun showStepSolveList(figure: Figure, callbackUi: CallBackSolveUi) {
+    fun showStepSolveList(callback: CallBackSolveUi) {
         when {
             find == null -> {
-                callbackUi.findNotMark()
+                callback.findNotMark()
                 return
             }
             find?.getValue() != null && find!!.whereFromValueList == null -> {
-                callbackUi.userInputValue()
+                callback.userInputValue()
                 return
             }
             find!!.whereFromValueList == null -> {
-                callbackUi.solveIsNotFound()
+                callback.solveIsNotFound()
                 return
             }
         }
 
         val list = getList(find!!).reversed() + listOf(find!!)
 
-        callbackUi.solveIsFound(list)
+        callback.solveIsFound(list)
     }
 
-    private fun getList(found: Element, stepList: MutableList<Element> = mutableListOf()): List<Element> {
+    private fun getList(found: SolveGraph, stepList: MutableList<SolveGraph> = mutableListOf()): List<SolveGraph> {
         if (found.whereFromValueList == null)
             return listOf() // dead end graph
 

@@ -1,13 +1,13 @@
-package open.geosolve.geosolve.model.data
+package open.geosolve.geosolve.model.data.generalized
 
-abstract class Element {
+abstract class SolveGraph {
 
     private var value: Float? = null
     private var dependence: (Float?) -> Float? = {value -> value}
 
-    var onKnownFunList: MutableList<(thisElement: Element) -> Unit> = mutableListOf()
+    var onKnownFunList: MutableList<(SolveGraph: SolveGraph) -> Unit> = mutableListOf()
 
-    var whereFromValueList: List<Element>? = null
+    var whereFromValueList: List<SolveGraph>? = null
         private set
 
     lateinit var getFormula: () -> CharSequence
@@ -16,8 +16,6 @@ abstract class Element {
         private set
     lateinit var getExpression: () -> CharSequence
         private set
-
-    abstract fun delConnection()
 
     // setDraw - use it in work with canvas
     // setGraph - use it in work with solve
@@ -31,19 +29,19 @@ abstract class Element {
         this.dependence = dependence
     }
 
-    fun setValueGraph(value: Float, whereFromValueList: List<Element>,
+    fun setValueGraph(value: Float, whereFromValueList: List<SolveGraph>,
                       args: Array<out () -> CharSequence> ) {
         this.value = value
         setValueGraph(whereFromValueList, args)
     }
 
-    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<Element>,
+    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<SolveGraph>,
                                args: Array<out () -> CharSequence>) {
         this.dependence = dependence
         setValueGraph(whereFromValueList, args)
     }
 
-    private fun setValueGraph(whereFromValueList: List<Element>,
+    private fun setValueGraph(whereFromValueList: List<SolveGraph>,
                               args: Array<out () -> CharSequence>){
         this.whereFromValueList = whereFromValueList
         this.getFormula = args[0]

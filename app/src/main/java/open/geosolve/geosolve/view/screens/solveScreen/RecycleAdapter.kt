@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.view.screens.solveScreen
 
-import android.app.ActionBar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,16 +7,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.data.Element
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatAnswer
 import java.util.*
 
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
 
     companion object {
-        private var stepSolveList: MutableList<Element> = ArrayList()
+        private var stepSolveList: MutableList<SolveGraph> = ArrayList()
 
-        fun addItem(stepSolve: Element) {
+        fun addItem(stepSolve: SolveGraph) {
             stepSolveList.add(stepSolve)
         }
 
@@ -25,7 +24,7 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
             stepSolveList.clear()
         }
 
-        fun addAll(steps: List<Element>) {
+        fun addAll(steps: List<SolveGraph>) {
             stepSolveList.addAll(steps)
         }
     }

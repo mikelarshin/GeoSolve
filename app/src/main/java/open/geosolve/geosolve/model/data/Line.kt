@@ -1,38 +1,38 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
+import open.geosolve.geosolve.model.data.generalized.Bind
+import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
 import kotlin.math.sqrt
 
-class Line(var startNode: Node, var finalNode: Node) : Element(), Bind {
-
-    //    all logic solve in abstract Element
+class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Element {
 
     override fun toString(): String = (startNode.char + finalNode.char.toString())
 
     init {
-        if (startNode == finalNode)
-            throw Exception("Line constructor get the same Node")
-    }
-
-    override fun delConnection() {
-        startNode.finalLine = null
-        finalNode.startLine = null
+        check(startNode != finalNode){"Line constructor get the same Node"}
     }
 
     // Bind
     override val bindNodeList: MutableList<Node> = mutableListOf()
 
     override fun updateAllBind() {
+        TODO()
     }
 
     override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
-
+        TODO()
     }
 
+    // Element
+    override fun delConnection() {
+        startNode.finalLine = null
+        finalNode.startLine = null
+    }
 
-    // TODO rewrite magic
-    fun inRadius(x: Float, y: Float): Boolean {
+    override fun inRadius(x: Float, y: Float): Boolean {
 
         val dot = { x1: Float, y1: Float,
                     x2: Float, y2: Float ->
@@ -51,20 +51,17 @@ class Line(var startNode: Node, var finalNode: Node) : Element(), Bind {
                     (per - lineLength)
         ) / lineLength
 
-        return when {
-            dot(
-                x - startNode.x,
-                y - startNode.y,
-                finalNode.x - startNode.x,
-                finalNode.y - startNode.y
-            ) >= 0 &&
-                    dot(
-                        x - finalNode.x,
-                        y - finalNode.y,
-                        startNode.x - finalNode.x,
-                        startNode.y - finalNode.y
-                    ) >= 0 -> distance < POINT_SIZE / 40
+        val angleLeft = dot(
+            x - startNode.x, y - startNode.y,
+            finalNode.x - startNode.x, finalNode.y - startNode.y
+        )
+        val angleRight = dot(
+            x - finalNode.x, y - finalNode.y,
+            startNode.x - finalNode.x, startNode.y - finalNode.y
+        )
 
+        return when {
+            angleLeft >= 0 && angleRight >= 0 -> distance < POINT_SIZE / 40
             else -> false
         }
     }

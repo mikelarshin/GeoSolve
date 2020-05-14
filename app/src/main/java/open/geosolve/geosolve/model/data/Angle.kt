@@ -1,6 +1,9 @@
 package open.geosolve.geosolve.model.data
 
-class Angle(val startLine: Line, val finalLine: Line) : Element() {
+import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
+
+class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
 
     // all logic solve in abstract Element
 
@@ -14,16 +17,16 @@ class Angle(val startLine: Line, val finalLine: Line) : Element() {
         get() = finalLine.finalNode
 
     init {
-        if (startNode == finalNode)
-            throw Exception("Angle constructor get the same startNode & finalNode")
-        if (startNode == angleNode)
-            throw Exception("Angle constructor get the same startNode & angleNode")
-        if (angleNode == finalNode)
-            throw Exception("Angle constructor get the same angleNode & finalNode")
-        if (startLine == finalLine)
-            throw Exception("Angle constructor get the same Line")
-        if (startLine.finalNode != finalLine.startNode)
-            throw Exception("Angle constructor get wrong Line")
+        check(startNode != finalNode){"Angle constructor get the same startNode & finalNode"}
+        check(startNode != angleNode){"Angle constructor get the same startNode & angleNode"}
+        check(angleNode != finalNode){"Angle constructor get the same angleNode & finalNode"}
+        check(startLine != finalLine){"Angle constructor get the same Line"}
+        check(startLine.finalNode == finalLine.startNode){"Angle constructor get wrong Line"}
+    }
+
+    // Element
+    override fun inRadius(x: Float, y: Float): Boolean {
+        TODO("Not yet implemented")
     }
 
     override fun delConnection(){
