@@ -6,13 +6,10 @@ import open.geosolve.geosolve.model.solve.SolveFigure
 import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatSolve
 
 object Rectangle : SolveFigure {
-    override fun isMatch(figure: Figure): Boolean {
-        return figure.mNodes.size == 4
-                && figure.mLines.size == 4
-                && figure.mAngles.size == 4
-                && figure.mAngles.filter { it.getValue() == 90f }.size >= 2
+    override fun isMatch(figure: Figure): Boolean =
+        figure.mAngles.filter { it.getValue() == 90f }.size >= 2
                 && figure.mAngles.none { if (it.getValue() != null) it.getValue() != 90f else false }
-    }
+
 
     override fun setGraphs(figure: Figure) {
         for (i in 0..3)

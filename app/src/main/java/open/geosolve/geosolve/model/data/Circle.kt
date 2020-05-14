@@ -19,8 +19,6 @@ class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
     var drawRadius: Float = 0f
     var decartRadius: Float = 0f
 
-    override fun toString(): String = "debug Circle with decartRadius - $decartRadius"
-
     // Bind
     override val bindNodeList: MutableList<Node> = mutableListOf()
 

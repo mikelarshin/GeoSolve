@@ -12,10 +12,10 @@ object SolveUtil {
 
     private fun setTypeSolve(figure: Figure) {
         figure.typeFigure = when {
-            Rectangle.isMatch(figure) -> Rectangle
+            CircleFigure.isMatch(figure) -> CircleFigure
+            Quadrangle.isMatch(figure) -> Quadrangle
             Triangle.isMatch(figure) -> Triangle
             AngleFigure.isMatch(figure) -> AngleFigure
-            CircleFigure.isMatch(figure) -> CircleFigure
             else -> UnknownFigure
         }
         figure.typeFigure.setSubType(figure)

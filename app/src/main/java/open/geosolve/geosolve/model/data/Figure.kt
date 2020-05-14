@@ -30,7 +30,7 @@ class Figure {
                             "Lines: ${mLines.joinToString { "$it" }}   \n" +
                             "Angles: ${mAngles.joinToString { "$it" }}"
 
-                    else -> "Circle $mCircle"
+                    else -> "Circle"
                 }
 
     }

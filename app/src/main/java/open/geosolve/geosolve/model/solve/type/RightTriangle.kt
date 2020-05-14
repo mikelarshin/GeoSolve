@@ -109,10 +109,5 @@ object RightTriangle : SolveFigure {
                 }
             }
         }
-
-//        hypotenuse.onKnownFunList.add {
-//            for (i in 0..1)
-//                if (legs[i].getValue() != null && legs[(i + 1) % 2].getValue() != null)
-//        }
     }
 }
