@@ -15,7 +15,7 @@ class Figure {
 
     fun isComplete(): Boolean = isClose() || mCircle != null
     fun isClose(): Boolean = if (mLines.size != 0) mLines.first().startNode == mLines.last().finalNode else false
-    fun isEmpty(): Boolean = mNodes.isEmpty() || mLines.isEmpty() || mAngles.isEmpty() || mCircle == null
+    fun isEmpty(): Boolean = mNodes.isEmpty() && mLines.isEmpty() && mAngles.isEmpty() && mCircle == null
 
     // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {
@@ -23,12 +23,15 @@ class Figure {
 //        val subTypeFigureName = subTypeFigure::class.simpleName
 
         return "$typeFigureName\n" +
-        if (mCircle == null)
-            "Nodes: ${mNodes.joinToString { "$it" }}   \n" +
-                    "Lines: ${mLines.joinToString { "$it" }}   \n" +
-                    "Angles: ${mAngles.joinToString { "$it" }}"
-        else
-            "Circle $mCircle"
+                when {
+                    isEmpty() -> ""
+
+                    mCircle == null -> "Nodes: ${mNodes.joinToString { "$it" }}   \n" +
+                            "Lines: ${mLines.joinToString { "$it" }}   \n" +
+                            "Angles: ${mAngles.joinToString { "$it" }}"
+
+                    else -> "Circle $mCircle"
+                }
 
     }
 }

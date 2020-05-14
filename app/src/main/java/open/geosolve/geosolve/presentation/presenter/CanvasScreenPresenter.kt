@@ -6,19 +6,20 @@ import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.App.Companion.allAngles
+import open.geosolve.geosolve.App.Companion.allLines
+import open.geosolve.geosolve.App.Companion.delElement
 import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.DrawControl
 import open.geosolve.geosolve.model.FigureController
-import open.geosolve.geosolve.model.ToolUtil.setNodeChars
 import open.geosolve.geosolve.model.data.*
 import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.data.generalized.Movable
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil
-import open.geosolve.geosolve.model.solve.type.UnknownFigure
 import open.geosolve.geosolve.model.status.Mode
 import open.geosolve.geosolve.model.status.State
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
@@ -63,12 +64,15 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun clearButtonClicked() {
+        if (figureList.size > 1 && figure.isEmpty()) {
+            FigureController.removeDependent()
+            figureList.remove(figure)
+        }
         if (figureList.isNotEmpty()) {
             FigureController.removeDependent()
             figureList.remove(figure)
         }
-        if (figureList.isEmpty())
-            figureList.add(Figure())
+        figureList.add(Figure())
 
         lastNode = null // TODO(rewrite this)
         lastLine = null
@@ -94,8 +98,10 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         figure.mCircle?.move(touchX, touchY) // rewrite
 
         moveQuantity++
-        if (moveQuantity == 6 && selectMovable == null)
+        if (moveQuantity == 6 && selectMovable == null) {
+            if (!figure.isEmpty()) figureList.add(Figure()) // переходим на следующую фигуру
             FigureController.addCircle(touchX, touchY)
+        }
     }
 
     fun onTouchUp(touchX: Float, touchY: Float) {
@@ -106,11 +112,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                         State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
                         State.ON_POINT -> onTouchPoint(selectMovable!! as Node)
                         State.ON_LINE -> TODO("onTouchLine()")
-                        State.ON_CIRCLE -> onTouchCircleLine(
-                            selectMovable!! as Circle,
-                            touchX,
-                            touchY
-                        )
+                        State.ON_CIRCLE -> onTouchCircleLine(selectMovable!! as Circle, touchX, touchY)
                     }
                 Mode.DELETE -> {
                     DrawControl.delNode(touchX, touchY); lastNode = null
@@ -145,7 +147,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         }
     }
 
-    fun setValue(touchX: Float, touchY: Float) {
+    private fun setValue(touchX: Float, touchY: Float) {
         DrawControl.getGraphElement(touchX, touchY)?.let { element ->
             val message = when (element) {
                 is Line -> R.string.alert_set_line
@@ -160,18 +162,22 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         }
     }
 
-    private fun onTouchPoint(touchNode: Node) {
-        if (lastNode != null) { // TODO(rewrite this shit)
+    private fun onTouchPoint(touchNode: Node) { // TODO(rewrite this shit code)
+        if (lastNode != null) {
             if (touchNode != if (figure.mNodes.isNotEmpty()) figure.mNodes.last() else touchNode) { // чтобы не делать линию из точки в эту же точку
+
+                if (!figure.mNodes.contains(touchNode))
+                    figure.mNodes.add(touchNode)
 
                 val newLine = Line(lastNode!!, touchNode)
                 FigureController.addLine(newLine)
 
-                val newAngle1 = Angle(touchNode.startLine?.startNode?.startLine!!, touchNode.startLine!!)
-                val newAngle2 = Angle(touchNode.startLine!!, touchNode.finalLine!!)
+                figure.mAngles.clear()
 
-                FigureController.addAngle(newAngle1)
-                FigureController.addAngle(newAngle2)
+                for (startLine in figure.mLines) // FIXME()
+                    for (finalLine in figure.mLines)
+                        if (finalLine != startLine && startLine.finalNode == finalLine.startNode)
+                            FigureController.addAngle(Angle(startLine, finalLine))
             }
         }
         lastNode = touchNode
@@ -208,5 +214,11 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         }
 
         lastNode = newNode
+    }
+
+    private fun setNodeChars() {
+        val charRange = ('A'..'Z').toList()
+        for (i in App.allNodes.indices)
+            App.allNodes[i].char = charRange[i]
     }
 }
