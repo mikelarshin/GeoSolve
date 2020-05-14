@@ -29,9 +29,8 @@ object SolveUtil {
             figure.subTypeFigure.setGraphs(figure)
         }
 
-        val loopList = (allLines + allAngles + allCircles) as List<SolveGraph>
-        for (element in loopList)
-            element.solve()
+        for (element in (allLines + allAngles + allCircles))
+            (element as SolveGraph).solve()
     }
 
     private fun zeroGraph(figure: Figure) {

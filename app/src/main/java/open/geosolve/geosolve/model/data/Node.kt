@@ -50,11 +50,11 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
 
     // Element
     override fun delConnection() {
-        for (element in listOf(startLine, finalLine, startAngle, centerAngle, finalAngle) as List<Element?>) {
+        for (element in listOf(startLine, finalLine, startAngle, centerAngle, finalAngle)) {
             if (App.find == element)
                 App.find = null
-            element?.delConnection()
-            element?.let { App.delElement(it) }
+            (element as Element?)?.delConnection()
+            (element as Element?)?.let { App.delElement(it) }
         }
     }
 

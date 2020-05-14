@@ -33,7 +33,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     private var moveQuantity = 0
     private var selectMovable: Movable? = null
     private var lastNode: Node? = null
-    private var lastLine: Line? = null
 
     private val figure: Figure
         get() = figureList.last()
@@ -75,7 +74,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         figureList.add(Figure())
 
         lastNode = null // TODO(rewrite this)
-        lastLine = null
 
         viewState.showTypeFigure()
         viewState.updateCanvas()
@@ -128,10 +126,9 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         setNodeChars()
         solve()
 
-        if (figure.isClose()) {
+        if (figure.isClose())
             lastNode = null
-            lastLine = null
-        }
+
         if (figure.isComplete())
             figureList.add(Figure()) // переход на следующую фигуру
     }
@@ -172,27 +169,19 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 val newLine = Line(lastNode!!, touchNode)
                 FigureController.addLine(newLine)
 
-                figure.mAngles.clear()
-
-                for (startLine in figure.mLines) // FIXME()
-                    for (finalLine in figure.mLines)
-                        if (finalLine != startLine && startLine.finalNode == finalLine.startNode)
-                            FigureController.addAngle(Angle(startLine, finalLine))
+                updateAngles() // FIXME(updateAngles)
             }
         }
         lastNode = touchNode
     }
 
-    private fun onTouchLine(line: Line, x: Float, y: Float) {
-        onTouch(x, y, line)
-    }
+    private fun updateAngles() { // FIXME(updateAngles)
+        figure.mAngles.clear()
 
-    private fun onTouchCircleLine(circle: Circle, x: Float, y: Float) {
-        onTouch(x, y, circle)
-    }
-
-    private fun onTouchCanvas(touchX: Float, touchY: Float) {
-        onTouch(touchX, touchY)
+        for (startLine in figure.mLines) // FIXME(updateAngles)
+            for (finalLine in figure.mLines)
+                if (finalLine != startLine && startLine.finalNode == finalLine.startNode)
+                    FigureController.addAngle(Angle(startLine, finalLine))
     }
 
     private fun onTouch(touchX: Float, touchY: Float, bind: Bind? = null) {
@@ -205,15 +194,22 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             val newLine = Line(lastNode!!, newNode)
             FigureController.addLine(newLine)
 
-            lastLine?.let {
-                val newAngle = Angle(lastLine!!, newLine)
-                FigureController.addAngle(newAngle)
-            }
-
-            lastLine = newLine
+            updateAngles() // FIXME(updateAngles)
         }
 
         lastNode = newNode
+    }
+
+    private fun onTouchLine(line: Line, x: Float, y: Float) {
+        onTouch(x, y, line)
+    }
+
+    private fun onTouchCircleLine(circle: Circle, x: Float, y: Float) {
+        onTouch(x, y, circle)
+    }
+
+    private fun onTouchCanvas(touchX: Float, touchY: Float) {
+        onTouch(touchX, touchY)
     }
 
     private fun setNodeChars() {
