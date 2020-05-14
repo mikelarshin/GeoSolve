@@ -3,8 +3,10 @@ package open.geosolve.geosolve.model.solve.type
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.SolveFigure
 
-object UnknownFigure : SolveFigure {
-    override fun isMatch(figure: Figure) = false
+object CircleFigure : SolveFigure {
+    override fun isMatch(figure: Figure) =
+        (figure.mNodes.isEmpty() && figure.mLines.isEmpty() && figure.mAngles.isEmpty())
+                && figure.mCircle != null
     override fun setGraphs(figure: Figure) {}
     override fun setSubType(figure: Figure) {}
 }

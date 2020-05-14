@@ -30,6 +30,8 @@ object RightTriangle : SolveFigure {
         findLegKnownLegAndHypotRule(hypotenuse, legs)
     }
 
+    override fun setSubType(figure: Figure) {}
+
     private fun legs2KnownHypotUnknownRule(legs: List<Line>, hypotenuse: Line) {
         for (i in 0..1) {
             legs[i].onKnownFunList.add { oneLeg ->

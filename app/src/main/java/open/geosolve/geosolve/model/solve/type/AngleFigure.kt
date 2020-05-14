@@ -8,7 +8,6 @@ object AngleFigure : SolveFigure {
         return figure.mNodes.size == 3 && figure.mAngles.size == 1 && figure.mLines.size == 2
     }
 
-    override fun setGraphs(figure: Figure) {
-        // TODO(create graph)
-    }
+    override fun setGraphs(figure: Figure) {}
+    override fun setSubType(figure: Figure) {}
 }

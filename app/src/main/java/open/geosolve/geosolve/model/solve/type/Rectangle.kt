@@ -46,5 +46,7 @@ object Rectangle : SolveFigure {
             }
         }
     }
+
+    override fun setSubType(figure: Figure) {}
 }
 

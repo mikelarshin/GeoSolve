@@ -63,16 +63,14 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun clearButtonClicked() {
-        SolveUtil.typeSolve = UnknownFigure
-        SolveUtil.subTypeSolve = UnknownFigure
+        if (figureList.isNotEmpty()) {
+            FigureController.removeDependent()
+            figureList.remove(figure)
+        }
+        if (figureList.isEmpty())
+            figureList.add(Figure())
 
-        FigureController.removeDependent()
-        if (figureList.size > 1)
-            figureList.removeAt(figureList.lastIndex)
-        else
-            figureList[0] = Figure()
-
-        lastNode = null
+        lastNode = null // TODO(rewrite this)
         lastLine = null
 
         viewState.showTypeFigure()

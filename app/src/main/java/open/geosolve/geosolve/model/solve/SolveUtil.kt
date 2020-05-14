@@ -6,31 +6,27 @@ import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.solve.type.AngleFigure
-import open.geosolve.geosolve.model.solve.type.Rectangle
-import open.geosolve.geosolve.model.solve.type.Triangle
-import open.geosolve.geosolve.model.solve.type.UnknownFigure
+import open.geosolve.geosolve.model.solve.type.*
 
 object SolveUtil {
 
-    var typeSolve: SolveFigure = UnknownFigure
-    var subTypeSolve: SolveFigure = UnknownFigure
-
     private fun setTypeSolve(figure: Figure) {
-        typeSolve = when {
+        figure.typeFigure = when {
             Rectangle.isMatch(figure) -> Rectangle
             Triangle.isMatch(figure) -> Triangle
             AngleFigure.isMatch(figure) -> AngleFigure
+            CircleFigure.isMatch(figure) -> CircleFigure
             else -> UnknownFigure
         }
-        subTypeSolve = UnknownFigure
+        figure.typeFigure.setSubType(figure)
     }
 
     fun solve(figureList: List<Figure>) {
         for (figure in figureList) {
             setTypeSolve(figure)
             zeroGraph(figure)
-            typeSolve.setGraphs(figure)
+            figure.typeFigure.setGraphs(figure)
+            figure.subTypeFigure.setGraphs(figure)
         }
 
         val loopList = (allLines + allAngles + allCircles) as List<SolveGraph>

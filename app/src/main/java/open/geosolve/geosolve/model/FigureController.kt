@@ -27,13 +27,14 @@ object FigureController {
         angle.finalLine.finalNode.finalAngle = angle
     }
 
-    fun addCircle(x: Float, y: Float){
+    fun addCircle(x: Float, y: Float) {
         figure.mCircle = Circle(Node(x, y))
     }
 
-    fun removeDependent(){
+    fun removeDependent() {
         for (element in figure.mAngles + figure.mLines + figure.mCircle)
             if (find == element)
                 find = null
+
     }
 }
