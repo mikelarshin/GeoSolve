@@ -7,8 +7,6 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.App.Companion.allAngles
-import open.geosolve.geosolve.App.Companion.allLines
-import open.geosolve.geosolve.App.Companion.delElement
 import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.R
@@ -159,29 +157,40 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         }
     }
 
-    private fun onTouchPoint(touchNode: Node) { // TODO(rewrite this shit code)
-        if (lastNode != null) {
-            if (touchNode != if (figure.mNodes.isNotEmpty()) figure.mNodes.last() else touchNode) { // чтобы не делать линию из точки в эту же точку
+    private fun onTouchPoint(touchNode: Node) {
+        if (touchNode != lastNode && lastNode != null) {  // если стартовая и конечная точка линии не равны и прошлая точка есть
+                val newLine = Line(lastNode!!, touchNode)
+                FigureController.addLine(newLine)
 
                 if (!figure.mNodes.contains(touchNode))
                     figure.mNodes.add(touchNode)
 
-                val newLine = Line(lastNode!!, touchNode)
-                FigureController.addLine(newLine)
-
                 updateAngles() // FIXME(updateAngles)
-            }
         }
         lastNode = touchNode
     }
 
-    private fun updateAngles() { // FIXME(updateAngles)
-        figure.mAngles.clear()
+    private fun updateAngles() {
+        fun equalsContains(newAngle: Angle): Boolean{
+            for (angle in allAngles)
+                if (angle.startNode == newAngle.startNode &&
+                    angle.finalNode == newAngle.finalNode &&
+                    angle.angleNode == newAngle.angleNode)
+                    return true
+            return false
+        }
 
-        for (startLine in figure.mLines) // FIXME(updateAngles)
+        for (startLine in figure.mLines)
             for (finalLine in figure.mLines)
-                if (finalLine != startLine && startLine.finalNode == finalLine.startNode)
-                    FigureController.addAngle(Angle(startLine, finalLine))
+                if (finalLine != startLine && startLine.finalNode == finalLine.startNode) {
+                    val newAngle = Angle(startLine, finalLine)
+                    if (!equalsContains(newAngle))
+                        FigureController.addAngle(newAngle)
+                }
+
+        // Простой перебор по всем вариантам углов которые есть в фигуре
+        // Это система работает не всегда и в будующем принесёт много бед
+        // Нужно её переписать FIXME(updateAngles)
     }
 
     private fun onTouch(touchX: Float, touchY: Float, bind: Bind? = null) {
