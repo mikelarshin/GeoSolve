@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#000</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimaryDark">#3213FF</color>
     <color name="colorAccent">#DDD</color>
 
-    <color name="color_node">#000</color>
-    <color name="all_lines">#3B000000</color>
+    <color name="all_lines">#CCC</color> // #3B000000
+
+    <color name="color_node">@color/colorPrimary</color>
+    <color name="color_mark">@color/colorPrimaryDark</color>
+
     <color name="color_line">@color/all_lines</color>
     <color name="color_circle">@color/all_lines</color>
     <color name="color_angle_arc">@color/all_lines</color>
-    <color name="color_mark">#DF1616</color>
 
-    <color name="canvas_text_color">#000</color>
+    <color name="canvas_text_color">@color/colorPrimary</color>
 </resources>

@@ -18,7 +18,8 @@ object DesignUtil {
 
             for (i in 0 until sb.filter { it == '%' }.length) {
                 val index = sb.indexOf('%')
-                sb.replace(index, index + 2, formatText(by(formatArgs[i]), R.style.Bold))
+                val style = if (i == 0) R.style.AnswerText else R.style.Bold
+                sb.replace(index, index + 2, formatText(by(formatArgs[i]), style))
             }
             return sb.subSequence(0, sb.length)
         }

@@ -5,8 +5,7 @@ import open.geosolve.geosolve.model.data.*
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.status.SystemCoordinate
-import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
-
+import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
 
 class App : Application() {
     companion object {
@@ -24,7 +23,7 @@ class App : Application() {
         val allCircles: Set<Circle>
             get() = figureList.flatMap { listOf(it.mCircle) }.filterNotNull().toSet()
 
-        val scale get() = (heightCanvas + widthCanvas) / 2 / POINT_SIZE // 1 coordinate unit equals 1 Node
+        val scale get() = ((heightCanvas + widthCanvas) / 2) / POINT_SIZE // 1 coordinate unit equals 1 Node
 
         var widthCanvas: Int = 0
         var heightCanvas: Int = 0

@@ -4,7 +4,7 @@ import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.model.data.generalized.*
 import open.geosolve.geosolve.model.status.SystemCoordinate.ABSOLUTE
 import open.geosolve.geosolve.model.status.SystemCoordinate.DECART
-import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
+import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
 import kotlin.math.pow
 import kotlin.math.sqrt
 

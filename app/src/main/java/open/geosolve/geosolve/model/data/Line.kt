@@ -4,7 +4,7 @@ import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
+import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
 import kotlin.math.sqrt
 
 class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Element {

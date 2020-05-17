@@ -1,10 +1,11 @@
 package open.geosolve.geosolve.model.data
 
-import android.util.Log
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.App.Companion.allNodes
-import open.geosolve.geosolve.model.data.generalized.*
-import open.geosolve.geosolve.view.view.DrawCanvasView.Companion.POINT_SIZE
+import open.geosolve.geosolve.model.data.generalized.Bind
+import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.data.generalized.Movable
+import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
 import kotlin.properties.Delegates
 
 class Node(foundX: Float, foundY: Float) : Movable, Element {

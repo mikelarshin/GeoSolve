@@ -2,19 +2,15 @@ package open.geosolve.geosolve.view.view
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
-import open.geosolve.geosolve.App
 import open.geosolve.geosolve.App.Companion.allAngles
 import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.App.Companion.systemCoordinate
-import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.MathUtil.getAngle
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
@@ -22,59 +18,29 @@ import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
+import open.geosolve.geosolve.view.view.PaintConstant.ANGLE_ARC_RADIUS
+import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
+import open.geosolve.geosolve.view.view.PaintConstant.TEXT_MARGIN
+import open.geosolve.geosolve.view.view.PaintConstant.TEXT_SIZE
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintAngle
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintCircle
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintLine
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintLineMark
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintMarkCircle
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintNode
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintNodeMark
+import open.geosolve.geosolve.view.view.PaintConstant.mPaintText
 
 
 open class DrawCanvasView : View {
 
-    companion object {
-        private fun getDimen(dimenId: Int) = App.instance.resources.getDimension(dimenId)
-
-        val POINT_SIZE: Float = getDimen(R.dimen.POINT_SIZE)
-        private val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)
-        private val TEXT_SIZE: Float = getDimen(R.dimen.TEXT_SIZE)
-        private val TEXT_MARGIN = getDimen(R.dimen.TEXT_MARGIN)
-        private val ANGLE_ARC_RADIUS = getDimen(R.dimen.ANGLE_ARC_RADIUS)
-    }
-
-    private val mPaintNode = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_node)
-        strokeWidth = POINT_SIZE
-    }
-    private val mPaintLine = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_line)
-        strokeWidth = LINE_WIDTH
-    }
-    private val mPaintCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_circle)
-        style = Paint.Style.STROKE
-        strokeWidth = LINE_WIDTH
-    }
-    private val mPaintNodeMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_mark)
-        strokeWidth = POINT_SIZE
-    }
-    private val mPaintLineMark = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_mark)
-        strokeWidth = LINE_WIDTH
-    }
-    private val mPaintMarkCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_mark)
-        style = Paint.Style.STROKE
-        strokeWidth = LINE_WIDTH
-    }
-    private val mPaintText = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.canvas_text_color)
-        textSize = TEXT_SIZE
-    }
-    private val mPaintAngle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, R.color.color_angle_arc)
-        strokeWidth = LINE_WIDTH
-        style = Paint.Style.STROKE
-    }
-
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    init {
+        PaintConstant.context = context
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -201,7 +167,7 @@ open class DrawCanvasView : View {
                 ((line.startNode.x + line.finalNode.x) / 2) - (TEXT_SIZE * text.length) / 3.5f,
                 ((line.startNode.y + line.finalNode.y) / 2) + TEXT_SIZE / 3.5f,
                 mPaintText
-            )//TODO(выровнять относительно размера текста)
+            )
         }
     }
 
