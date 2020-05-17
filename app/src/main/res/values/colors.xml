@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#3213FF</color>
     <color name="colorAccent">#DDD</color>
 
-    <color name="all_lines">#CCC</color> // #3B000000
+    <color name="all_lines">#3000</color> // #ССС
 
     <color name="color_node">@color/colorPrimary</color>
     <color name="color_mark">@color/colorPrimaryDark</color>
