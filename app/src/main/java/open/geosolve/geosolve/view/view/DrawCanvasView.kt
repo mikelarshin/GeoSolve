@@ -15,12 +15,11 @@ import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.App.Companion.systemCoordinate
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.MathUtil
-import open.geosolve.geosolve.model.MathUtil.getDrawAngleValue
-import open.geosolve.geosolve.model.MathUtil.getStartAngle
+import open.geosolve.geosolve.model.MathUtil.getAngle
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Line
+import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
 
@@ -219,8 +218,13 @@ open class DrawCanvasView : View {
                 centerY + ANGLE_ARC_RADIUS
             )
 
-            val sweepAngle = getDrawAngleValue(angle)
-            val startAngle = getStartAngle(angle) - 90f // I don't know why -25
+            val sweepAngle = getAngle(angle.startNode, angle.angleNode, angle.finalNode)
+
+            systemCoordinate = SystemCoordinate.DECART
+            val startNode = Node(angle.angleNode.x, angle.angleNode.y + 1f) // TODO(Replace Node with MathPoint)
+            systemCoordinate = SystemCoordinate.ABSOLUTE
+
+            val startAngle = getAngle(startNode, angle.angleNode, angle.startNode) - 90f
 
             canvas.drawArc(oval, startAngle, sweepAngle, false, mPaintAngle)
         }

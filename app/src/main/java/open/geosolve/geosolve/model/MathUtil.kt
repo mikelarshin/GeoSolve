@@ -1,36 +1,16 @@
 package open.geosolve.geosolve.model
 
-import android.util.Log
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.App.Companion.systemCoordinate
-import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.status.SystemCoordinate
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.atan2
+import kotlin.math.hypot
 
 object MathUtil {
     fun distanceBetweenPoints(a: Node, b: Node) = hypot(a.x - b.x, a.y - b.y)
     fun distanceBetweenPoints(a: Node, x: Float, y: Float) = hypot(a.x - x, a.y - y)
     fun distanceBetweenPoints(x1: Float, y1: Float, x2: Float, y2: Float) = hypot(x1 - x2, y1 - y2)
 
-    fun getDrawAngleValue(angle: Angle): Float {
-        return getAngle(angle.startNode, angle.angleNode, angle.finalNode).absoluteValue
-    }
-
-    fun getStartAngle(angle: Angle): Float {
-        systemCoordinate = SystemCoordinate.DECART
-        val startNode = Node(angle.angleNode.x, angle.angleNode.y + 1f)
-        systemCoordinate = SystemCoordinate.ABSOLUTE
-
-        val angleToStart = getAngle(startNode, angle.angleNode, angle.startNode)
-        val angleToFinal = getAngle(startNode, angle.angleNode, angle.finalNode)
-
-        Log.e("angles", "angleToStart: ${angleToStart + 65f}, angleToFinal: ${angleToFinal + 65f}")
-
-        return min(angleToStart, angleToFinal)
-    }
-
-    private fun getAngle(startNode: Node, centerNode: Node, finalNode: Node): Float {
+    fun getAngle(startNode: Node, centerNode: Node, finalNode: Node): Float {
         val startVector = getVectorNode(centerNode, startNode)
         val finalVector = getVectorNode(centerNode, finalNode)
 
