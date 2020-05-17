@@ -74,7 +74,11 @@ open class DrawCanvasView : View {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -211,22 +215,39 @@ open class DrawCanvasView : View {
             val centerX = angle.angleNode.x
             val centerY = angle.angleNode.y
 
-            val oval = RectF(
-                centerX - ANGLE_ARC_RADIUS,
-                centerY - ANGLE_ARC_RADIUS,
-                centerX + ANGLE_ARC_RADIUS,
-                centerY + ANGLE_ARC_RADIUS
-            )
+            // Данный код деактивирован до появления блокировки перемещения угла
+            if (angle.getValue() == 90f && false) {
+                canvas.drawRect(
+                    RectF(
+                        centerX,
+                        centerY - ANGLE_ARC_RADIUS,
+                        centerX + ANGLE_ARC_RADIUS,
+                        centerY
+                    ),
+                    mPaintAngle
+                )
+            } else {
 
-            val sweepAngle = getAngle(angle.startNode, angle.angleNode, angle.finalNode)
+                val oval = RectF(
+                    centerX - ANGLE_ARC_RADIUS,
+                    centerY - ANGLE_ARC_RADIUS,
+                    centerX + ANGLE_ARC_RADIUS,
+                    centerY + ANGLE_ARC_RADIUS
+                )
 
-            systemCoordinate = SystemCoordinate.DECART
-            val startNode = Node(angle.angleNode.x, angle.angleNode.y + 1f) // TODO(Replace Node with MathPoint)
-            systemCoordinate = SystemCoordinate.ABSOLUTE
+                val sweepAngle = getAngle(angle.startNode, angle.angleNode, angle.finalNode)
 
-            val startAngle = getAngle(startNode, angle.angleNode, angle.startNode) - 90f
+                systemCoordinate = SystemCoordinate.DECART
+                val startNode = Node(
+                    angle.angleNode.x,
+                    angle.angleNode.y + 1f
+                ) // TODO(Replace Node with MathPoint)
+                systemCoordinate = SystemCoordinate.ABSOLUTE
 
-            canvas.drawArc(oval, startAngle, sweepAngle, false, mPaintAngle)
+                val startAngle = getAngle(startNode, angle.angleNode, angle.startNode) - 90f
+
+                canvas.drawArc(oval, startAngle, sweepAngle, false, mPaintAngle)
+            }
         }
     }
 
