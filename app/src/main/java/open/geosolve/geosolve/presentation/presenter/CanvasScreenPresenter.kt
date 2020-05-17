@@ -256,7 +256,8 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     private fun setNodeChars() {
         val charRange = ('A'..'Z').toList()
-        for (i in App.allNodes.indices)
-            App.allNodes[i].char = charRange[i]
+        App.allNodes.forEachIndexed { index, node ->
+            node.char = charRange[index]
+        }
     }
 }

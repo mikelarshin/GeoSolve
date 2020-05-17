@@ -15,14 +15,14 @@ class App : Application() {
         var figureList: MutableList<Figure> = mutableListOf(Figure())
         var find: SolveGraph? = null
 
-        val allNodes: List<Node>
-            get() = figureList.flatMap { it.mNodes }.toMutableList()
-        val allLines: List<Line>
-            get() = figureList.flatMap { it.mLines }.toMutableList()
-        val allAngles: List<Angle>
-            get() = figureList.flatMap { it.mAngles }.toMutableList()
-        val allCircles: List<Circle>
-            get() = figureList.flatMap { listOf(it.mCircle) }.filterNotNull().toMutableList()
+        val allNodes: Set<Node>
+            get() = figureList.flatMap { it.mNodes }.toSet()
+        val allLines: Set<Line>
+            get() = figureList.flatMap { it.mLines }.toSet()
+        val allAngles: Set<Angle>
+            get() = figureList.flatMap { it.mAngles }.toSet()
+        val allCircles: Set<Circle>
+            get() = figureList.flatMap { listOf(it.mCircle) }.filterNotNull().toSet()
 
         val scale get() = (heightCanvas + widthCanvas) / 2 / POINT_SIZE // 1 coordinate unit equals 1 Node
 
