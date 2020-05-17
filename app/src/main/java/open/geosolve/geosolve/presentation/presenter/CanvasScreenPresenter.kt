@@ -148,21 +148,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         }
     }
 
-    private fun setValue(touchX: Float, touchY: Float) {
-        DrawControl.getGraphElement(touchX, touchY)?.let { element ->
-            val message = when (element) {
-                is Line -> R.string.alert_set_line
-                is Angle -> R.string.alert_set_angle
-                else -> null!!
-            }
-
-            viewState.showDialog(message) {
-                element.setValueDraw(it)
-                solve()
-            }
-        }
-    }
-
     private fun onTouchPoint(touchNode: Node) {
         if (touchNode != lastNode && lastNode != null) {  // если стартовая и конечная точка линии не равны и прошлая точка есть
 
@@ -170,13 +155,55 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             if (!equalsContainsLine(newLine)) {
                 FigureController.addLine(newLine)
 
+                if (!figure.mNodes.contains(lastNode!!))
+                    figure.mNodes.add(lastNode!!)
                 if (!figure.mNodes.contains(touchNode))
                     figure.mNodes.add(touchNode)
 
+                updateLines()
                 updateAngles() // FIXME(updateAngles)
             }
         }
         lastNode = touchNode
+    }
+
+    private fun onTouch(touchX: Float, touchY: Float, bind: Bind? = null) {
+        val newNode = Node(touchX, touchY)
+        newNode.bind = bind
+
+        FigureController.addNode(newNode)
+
+        lastNode?.let {
+            val newLine = Line(lastNode!!, newNode)
+            FigureController.addLine(newLine)
+
+            if (!figure.mNodes.contains(lastNode!!))
+                figure.mNodes.add(lastNode!!)
+
+            updateLines()
+            updateAngles() // FIXME(updateAngles)
+        }
+
+        lastNode = newNode
+    }
+
+    private fun onTouchCanvas(touchX: Float, touchY: Float) {
+        onTouch(touchX, touchY)
+    }
+
+    private fun onTouchLine(line: Line, x: Float, y: Float) {
+        onTouch(x, y, line)
+    }
+
+    private fun onTouchCircleLine(circle: Circle, x: Float, y: Float) {
+        onTouch(x, y, circle)
+    }
+
+    private fun updateLines() {
+        val lineList = allLines - figure.mLines
+        for (line in lineList)
+            if (figure.mNodes.contains(line.startNode) && figure.mNodes.contains(line.finalNode))
+                FigureController.addLine(line)
     }
 
     private fun updateAngles() {
@@ -191,40 +218,6 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         // Простой перебор по всем вариантам углов которые есть в фигуре
         // Это система работает не всегда и в будующем принесёт много бед
         // Нужно её переписать FIXME(updateAngles)
-    }
-
-    private fun onTouch(touchX: Float, touchY: Float, bind: Bind? = null) {
-        val newNode = Node(touchX, touchY)
-        newNode.bind = bind
-
-        FigureController.addNode(newNode)
-
-        lastNode?.let {
-            val newLine = Line(lastNode!!, newNode)
-            FigureController.addLine(newLine)
-
-            updateAngles() // FIXME(updateAngles)
-        }
-
-        lastNode = newNode
-    }
-
-    private fun onTouchLine(line: Line, x: Float, y: Float) {
-        onTouch(x, y, line)
-    }
-
-    private fun onTouchCircleLine(circle: Circle, x: Float, y: Float) {
-        onTouch(x, y, circle)
-    }
-
-    private fun onTouchCanvas(touchX: Float, touchY: Float) {
-        onTouch(touchX, touchY)
-    }
-
-    private fun setNodeChars() {
-        val charRange = ('A'..'Z').toList()
-        for (i in App.allNodes.indices)
-            App.allNodes[i].char = charRange[i]
     }
 
     private fun equalsContainsAngle(newAngle: Angle): Boolean {
@@ -244,5 +237,26 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             )
                 return true
         return false
+    }
+
+    private fun setValue(touchX: Float, touchY: Float) {
+        DrawControl.getGraphElement(touchX, touchY)?.let { element ->
+            val message = when (element) {
+                is Line -> R.string.alert_set_line
+                is Angle -> R.string.alert_set_angle
+                else -> null!!
+            }
+
+            viewState.showDialog(message) {
+                element.setValueDraw(it)
+                solve()
+            }
+        }
+    }
+
+    private fun setNodeChars() {
+        val charRange = ('A'..'Z').toList()
+        for (i in App.allNodes.indices)
+            App.allNodes[i].char = charRange[i]
     }
 }

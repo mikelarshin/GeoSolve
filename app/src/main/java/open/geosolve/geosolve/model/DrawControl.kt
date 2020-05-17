@@ -19,6 +19,10 @@ object DrawControl {
         return null
     }
 
+    private fun getAngle(touchX: Float, touchY: Float): Angle? {
+        return getNode(touchX, touchY)?.centerAngle
+    }
+
     private fun getLine(touchX: Float, touchY: Float): Line? {
         for (line in allLines)
             if (line.inRadius(touchX, touchY))
@@ -54,7 +58,7 @@ object DrawControl {
 
     fun getGraphElement(x: Float, y: Float): SolveGraph? {
 
-        getNode(x, y)?.centerAngle?.let { angle ->
+        getAngle(x, y)?.let { angle ->
             return angle
         }
 
