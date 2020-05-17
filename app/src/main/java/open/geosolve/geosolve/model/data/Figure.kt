@@ -10,6 +10,8 @@ class Figure {
     val mAngles: MutableList<Angle> = mutableListOf()
     var mCircle: Circle? = null
 
+    var square: Int? = null
+
     var typeFigure: SolveFigure = UnknownFigure
     var subTypeFigure: SolveFigure = UnknownFigure
 

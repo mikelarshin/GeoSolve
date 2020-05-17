@@ -7,6 +7,7 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.App.Companion.allAngles
+import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.R
@@ -97,6 +98,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         if (moveQuantity == 6 && selectMovable == null) {
             if (!figure.isEmpty()) figureList.add(Figure()) // переходим на следующую фигуру
             FigureController.addCircle(touchX, touchY)
+            onTouchPoint(figure.mCircle!!.centerNode)
         }
     }
 
@@ -108,7 +110,11 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                         State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
                         State.ON_POINT -> onTouchPoint(selectMovable!! as Node)
                         State.ON_LINE -> TODO("onTouchLine()")
-                        State.ON_CIRCLE -> onTouchCircleLine(selectMovable!! as Circle, touchX, touchY)
+                        State.ON_CIRCLE -> onTouchCircleLine(
+                            selectMovable!! as Circle,
+                            touchX,
+                            touchY
+                        )
                     }
                 Mode.DELETE -> {
                     DrawControl.delNode(touchX, touchY); lastNode = null
@@ -159,32 +165,26 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     private fun onTouchPoint(touchNode: Node) {
         if (touchNode != lastNode && lastNode != null) {  // если стартовая и конечная точка линии не равны и прошлая точка есть
-                val newLine = Line(lastNode!!, touchNode)
+
+            val newLine = Line(lastNode!!, touchNode)
+            if (!equalsContainsLine(newLine)) {
                 FigureController.addLine(newLine)
 
                 if (!figure.mNodes.contains(touchNode))
                     figure.mNodes.add(touchNode)
 
                 updateAngles() // FIXME(updateAngles)
+            }
         }
         lastNode = touchNode
     }
 
     private fun updateAngles() {
-        fun equalsContains(newAngle: Angle): Boolean{
-            for (angle in allAngles)
-                if (angle.startNode == newAngle.startNode &&
-                    angle.finalNode == newAngle.finalNode &&
-                    angle.angleNode == newAngle.angleNode)
-                    return true
-            return false
-        }
-
         for (startLine in figure.mLines)
             for (finalLine in figure.mLines)
                 if (finalLine != startLine && startLine.finalNode == finalLine.startNode) {
                     val newAngle = Angle(startLine, finalLine)
-                    if (!equalsContains(newAngle))
+                    if (!equalsContainsAngle(newAngle))
                         FigureController.addAngle(newAngle)
                 }
 
@@ -225,5 +225,24 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         val charRange = ('A'..'Z').toList()
         for (i in App.allNodes.indices)
             App.allNodes[i].char = charRange[i]
+    }
+
+    private fun equalsContainsAngle(newAngle: Angle): Boolean {
+        for (angle in allAngles)
+            if (angle.startNode == newAngle.startNode &&
+                angle.finalNode == newAngle.finalNode &&
+                angle.angleNode == newAngle.angleNode
+            )
+                return true
+        return false
+    }
+
+    private fun equalsContainsLine(newLine: Line): Boolean {
+        for (line in allLines)
+            if ((line.startNode == newLine.startNode && line.finalNode == newLine.finalNode) ||
+                (line.startNode == newLine.finalNode && line.finalNode == newLine.startNode)
+            )
+                return true
+        return false
     }
 }

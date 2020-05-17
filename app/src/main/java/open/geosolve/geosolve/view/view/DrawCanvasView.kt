@@ -3,6 +3,7 @@ package open.geosolve.geosolve.view.view
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -12,9 +13,11 @@ import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.App.Companion.find
-import open.geosolve.geosolve.App.Companion.scale
 import open.geosolve.geosolve.App.Companion.systemCoordinate
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.MathUtil
+import open.geosolve.geosolve.model.MathUtil.getDrawAngleValue
+import open.geosolve.geosolve.model.MathUtil.getStartAngle
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Line
@@ -205,19 +208,21 @@ open class DrawCanvasView : View {
 
     private fun drawAngleCircle(canvas: Canvas) {
         for (angle in allAngles) {
-//
-//            val centerX = angle.angleNode.x
-//            val centerY = angle.angleNode.y
-//
-//            val oval = RectF(
-//                centerX - ANGLE_ARC_RADIUS,
-//                centerY - ANGLE_ARC_RADIUS,
-//                centerX + ANGLE_ARC_RADIUS,
-//                centerY + ANGLE_ARC_RADIUS) TODO(Сделать отрисовку углов)
-//
-//            val start = (360 / Math.PI * atan2(angle.finalNode.y - angle.startNode.y, angle.finalNode.y - angle.startNode.x)).toFloat()
-//
-//            canvas.drawArc(oval, start, -100f, false, mPaintAngle)
+
+            val centerX = angle.angleNode.x
+            val centerY = angle.angleNode.y
+
+            val oval = RectF(
+                centerX - ANGLE_ARC_RADIUS,
+                centerY - ANGLE_ARC_RADIUS,
+                centerX + ANGLE_ARC_RADIUS,
+                centerY + ANGLE_ARC_RADIUS
+            )
+
+            val sweepAngle = getDrawAngleValue(angle)
+            val startAngle = getStartAngle(angle) - 90f // I don't know why -25
+
+            canvas.drawArc(oval, startAngle, sweepAngle, false, mPaintAngle)
         }
     }
 

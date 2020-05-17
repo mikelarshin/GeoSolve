@@ -55,6 +55,7 @@ class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Eleme
             x - startNode.x, y - startNode.y,
             finalNode.x - startNode.x, finalNode.y - startNode.y
         )
+
         val angleRight = dot(
             x - finalNode.x, y - finalNode.y,
             startNode.x - finalNode.x, startNode.y - finalNode.y
