@@ -1,10 +1,11 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.App
 import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.model.data.generalized.*
 import open.geosolve.geosolve.model.status.SystemCoordinate.ABSOLUTE
 import open.geosolve.geosolve.model.status.SystemCoordinate.DECART
-import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
+import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -48,7 +49,8 @@ class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
 
     // Element
     override fun delConnection() {
-        TODO("Not yet implemented")
+        centerNode.delConnection()
+        App.delElementFromFigure(centerNode)
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {
@@ -64,7 +66,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
             else
                 decartRadius - getRadius
 
-        val bufferUseTouch = POINT_SIZE / 20
+        val bufferUseTouch = LINE_WIDTH / 10
         return distanceToCircle < bufferUseTouch
     }
 }

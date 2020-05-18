@@ -5,7 +5,7 @@ import android.graphics.Paint
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
+import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
 import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_SIZE
 import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintLine
 import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintLineMark

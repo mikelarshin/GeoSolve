@@ -15,16 +15,16 @@ object FigureController {
     fun addLine(line: Line) {
         figure.mLines.add(line)
 
-        line.startNode.finalLine = line
-        line.finalNode.startLine = line
+        line.startNode.neighborLines.add(line)
+        line.finalNode.neighborLines.add(line)
     }
 
     fun addAngle(angle: Angle) {
         figure.mAngles.add(angle)
 
-        angle.startLine.startNode.startAngle = angle
+        angle.startLine.startNode.neighborAngles.add(angle)
         angle.startLine.finalNode.centerAngle = angle
-        angle.finalLine.finalNode.finalAngle = angle
+        angle.finalLine.finalNode.neighborAngles.add(angle)
     }
 
     fun addCircle(x: Float, y: Float) {

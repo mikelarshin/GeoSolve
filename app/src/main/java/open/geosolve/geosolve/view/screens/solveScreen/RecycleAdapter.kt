@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatAnswer
+import open.geosolve.geosolve.view.screens.DesignUtil.formatAnswer
 import java.util.*
 
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {

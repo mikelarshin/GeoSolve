@@ -12,6 +12,8 @@ import open.geosolve.geosolve.App.Companion.figureList
 import open.geosolve.geosolve.App.Companion.find
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.DrawControl
+import open.geosolve.geosolve.model.ElementGetter.getGraphElement
+import open.geosolve.geosolve.model.ElementGetter.getMovable
 import open.geosolve.geosolve.model.FigureController
 import open.geosolve.geosolve.model.data.*
 import open.geosolve.geosolve.model.data.generalized.Bind
@@ -81,7 +83,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     fun onTouchDown(touchX: Float, touchY: Float) {
         state = State.ON_CANVAS
 
-        DrawControl.getMovable(touchX, touchY)?.let { movable ->
+        getMovable(touchX, touchY)?.let { movable ->
             selectMovable = movable
             when (movable) {
                 is Node -> state = State.ON_POINT
@@ -119,7 +121,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                 Mode.DELETE -> {
                     DrawControl.delNode(touchX, touchY); lastNode = null
                 }
-                Mode.MARK_FIND -> DrawControl.getGraphElement(touchX, touchY)?.let { find = it }
+                Mode.MARK_FIND -> getGraphElement(touchX, touchY)?.let { find = it }
                 Mode.SET_VALUE -> setValue(touchX, touchY)
             }
         }
@@ -240,7 +242,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun setValue(touchX: Float, touchY: Float) {
-        DrawControl.getGraphElement(touchX, touchY)?.let { element ->
+        getGraphElement(touchX, touchY)?.let { element ->
             val message = when (element) {
                 is Line -> R.string.alert_set_line
                 is Angle -> R.string.alert_set_angle

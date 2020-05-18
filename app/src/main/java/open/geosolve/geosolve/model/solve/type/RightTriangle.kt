@@ -5,7 +5,7 @@ import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatSolve
+import open.geosolve.geosolve.view.screens.DesignUtil.formatSolve
 import kotlin.math.hypot
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -16,13 +16,10 @@ object RightTriangle : SolveFigure {
     }
 
     override fun setGraphs(figure: Figure) {
-        val rightAngle = figure.mAngles.filter { it.getValue() == 90f }.first()
-        if (rightAngle.startNode.startLine != rightAngle.finalNode.finalLine)
-            throw Exception("Wrong Triangle")
+        val rightAngle = figure.mAngles.first { it.getValue() == 90f }
 
-        val legs: List<Line> =
-            listOf(rightAngle.angleNode.startLine!!, rightAngle.angleNode.finalLine!!)
-        val hypotenuse = rightAngle.startNode.startLine!!
+        val legs: List<Line> = listOf(rightAngle.startLine, rightAngle.finalLine)
+        val hypotenuse = figure.mLines.first { !legs.contains(it) }
         val noRightAngles: List<Angle> = figure.mAngles.filter { it != rightAngle }
 
         legs2KnownHypotUnknownRule(legs, hypotenuse)
@@ -37,7 +34,8 @@ object RightTriangle : SolveFigure {
             legs[i].onKnownFunList.add { oneLeg ->
                 val twoLeg = legs[(i + 1) % 2]
                 if (twoLeg.getValue() != null && hypotenuse.getValue() == null) {
-                    val valueGetter: (Float?) -> Float? = { hypot(oneLeg.getValue()!!, twoLeg.getValue()!!) }
+                    val valueGetter: (Float?) -> Float? =
+                        { hypot(oneLeg.getValue()!!, twoLeg.getValue()!!) }
 
                     hypotenuse.setDependentValueGraph(
                         valueGetter,
@@ -57,42 +55,39 @@ object RightTriangle : SolveFigure {
 
     private fun degrees30Rule(noRightAngles: List<Angle>, legs: List<Line>, hypotenuse: Line) {
         for (i in 0..1)
-            noRightAngles[i].onKnownFunList.add { thisElement ->
-                if (thisElement.getValue() == 30f && hypotenuse.getValue() != null) {
-                    val otherAngle = noRightAngles[(i + 1) % 2]
+            noRightAngles[i].onKnownFunList.add { thisAngle ->
+                val unknownLeg = legs.firstOrNull { it.getValue() == null }
 
-                    val unknownLeg = legs.first {
-                        it == otherAngle.angleNode.finalLine ||
-                                it == otherAngle.angleNode.startLine
-                    }
-                    if (unknownLeg.getValue() == null) {
-                        val valueGetter: (Float?) -> Float? = { hypotenuse.getValue()!! / 2 }
+                if (thisAngle.getValue() == 30f && hypotenuse.getValue() != null && unknownLeg != null) {
+                    val valueGetter: (Float?) -> Float? = { hypotenuse.getValue()!! / 2 }
 
-                        unknownLeg.setDependentValueGraph(
-                            valueGetter,
-                            listOf(thisElement, hypotenuse),
-                            formatSolve(
-                                R.string.verbal_triangle_right_30_degrees_2,
-                                R.string.expression_triangle_right_30_degrees_2,
-                                unknownLeg,
-                                hypotenuse
-                            )
+                    unknownLeg.setDependentValueGraph(
+                        valueGetter,
+                        listOf(thisAngle, hypotenuse),
+                        formatSolve(
+                            R.string.verbal_triangle_right_30_degrees_2,
+                            R.string.expression_triangle_right_30_degrees_2,
+                            unknownLeg,
+                            hypotenuse
                         )
-                    }
+                    )
                 }
             }
     }
 
-    private fun findLegKnownLegAndHypotRule(hypotenuse: Line, legs: List<Line>){
-        for (i in 0..1){
-            legs[i].onKnownFunList.add {thisLeg ->
+    private fun findLegKnownLegAndHypotRule(hypotenuse: Line, legs: List<Line>) {
+        for (i in 0..1) {
+            legs[i].onKnownFunList.add { thisLeg ->
                 if (hypotenuse.getValue() != null) {
                     val unknownLeg = legs[(i + 1) % 2]
 
                     if (unknownLeg.getValue() == null) {
                         val valueGetter: (Float?) -> Float? = {
-                            sqrt(hypotenuse.getValue()!!.pow(2) -
-                                    thisLeg.getValue()!!.pow(2)) }
+                            sqrt(
+                                hypotenuse.getValue()!!.pow(2) -
+                                        thisLeg.getValue()!!.pow(2)
+                            )
+                        }
 
                         unknownLeg.setDependentValueGraph(
                             valueGetter,

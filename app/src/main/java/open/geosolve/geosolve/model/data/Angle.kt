@@ -5,6 +5,7 @@ import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
+import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
 import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 
 class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
@@ -42,13 +43,16 @@ class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
             else
                 ANGLE_ARC_RADIUS - getRadius
 
-        val useTouchZone = POINT_SIZE / 20
+        val useTouchZone = LINE_WIDTH / 20
         return distanceToAngleArc < useTouchZone
     }
 
     override fun delConnection(){
-        startNode.startAngle = null
-        angleNode.centerAngle = null
-        finalNode.finalAngle = null
+        val nodeList = listOf(startNode, angleNode, finalNode)
+        for (node in nodeList) {
+            if (node.centerAngle == this)
+                node.centerAngle = null
+            node.neighborAngles.remove(this)
+        }
     }
 }

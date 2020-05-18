@@ -5,7 +5,7 @@ abstract class SolveGraph {
     private var value: Float? = null
     private var dependence: (Float?) -> Float? = {value -> value}
 
-    var onKnownFunList: MutableList<(SolveGraph: SolveGraph) -> Unit> = mutableListOf()
+    var onKnownFunList: MutableList<(knownGraph: SolveGraph) -> Unit> = mutableListOf()
 
     var whereFromValueList: List<SolveGraph>? = null
         private set

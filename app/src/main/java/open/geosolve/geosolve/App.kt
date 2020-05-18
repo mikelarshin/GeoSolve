@@ -30,7 +30,7 @@ class App : Application() {
 
         var systemCoordinate: SystemCoordinate = SystemCoordinate.DECART
 
-        fun delElement(element: Element) {
+        fun delElementFromFigure(element: Element) {
             for (figure in figureList) {
                 if (figure.mLines.contains(element))
                     figure.mLines.remove(element)

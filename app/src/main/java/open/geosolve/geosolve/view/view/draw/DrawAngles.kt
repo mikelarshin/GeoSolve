@@ -10,7 +10,7 @@ import open.geosolve.geosolve.model.MathUtil.getAngle
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.status.SystemCoordinate
-import open.geosolve.geosolve.view.screens.solveScreen.DesignUtil.formatValueString
+import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
 import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
 import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_MARGIN
 import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintAngle

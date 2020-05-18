@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.view.screens.canvasScreen
 
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -19,6 +20,7 @@ import open.geosolve.geosolve.model.status.Mode
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.MvpFragmentX
+import open.geosolve.geosolve.view.screens.DesignUtil
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
@@ -78,8 +80,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
+        val alertMessage = DesignUtil.formatAlertMessage(titleID)
+
         AlertDialog.Builder(activity)
-            .setTitle(getText(titleID))
+            .setTitle(alertMessage)
             .setView(
                 LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
             )
