@@ -1,6 +1,7 @@
 package open.geosolve.geosolve.model
 
 import open.geosolve.geosolve.App
+import open.geosolve.geosolve.App.Companion.allAngles
 import open.geosolve.geosolve.App.Companion.allCircles
 import open.geosolve.geosolve.App.Companion.allLines
 import open.geosolve.geosolve.App.Companion.allNodes
@@ -21,6 +22,10 @@ object DrawControl {
 
     private fun getAngle(touchX: Float, touchY: Float): Angle? {
         return getNode(touchX, touchY)?.centerAngle
+//        for (angle in allAngles)
+//            if (angle.inRadius(touchX, touchY))
+//                return angle
+//        return null
     }
 
     private fun getLine(touchX: Float, touchY: Float): Line? {

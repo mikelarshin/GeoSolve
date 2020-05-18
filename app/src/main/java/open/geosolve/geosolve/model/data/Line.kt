@@ -1,11 +1,11 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
+import open.geosolve.geosolve.model.MathUtil.getDistanceToLine
+import open.geosolve.geosolve.model.MathUtil.isTouchOnSegment
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
-import kotlin.math.sqrt
+import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 
 class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Element {
 
@@ -33,37 +33,11 @@ class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Eleme
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {
+        val useTouchZone = POINT_SIZE / 40
 
-        val dot = { x1: Float, y1: Float,
-                    x2: Float, y2: Float ->
-            (x1 * x2) + (y1 * y2)
-        }
-
-        val distanceStart: Float = distanceBetweenPoints(startNode, x, y)
-        val distanceFin: Float = distanceBetweenPoints(finalNode, x, y)
-        val lineLength: Float = distanceBetweenPoints(startNode, finalNode)
-
-        val per: Float = (distanceStart + distanceFin + lineLength) / 2
-
-        val distance: Float = sqrt(
-            per * (per - distanceStart) *
-                    (per - distanceFin) *
-                    (per - lineLength)
-        ) / lineLength
-
-        val angleLeft = dot(
-            x - startNode.x, y - startNode.y,
-            finalNode.x - startNode.x, finalNode.y - startNode.y
-        )
-
-        val angleRight = dot(
-            x - finalNode.x, y - finalNode.y,
-            startNode.x - finalNode.x, startNode.y - finalNode.y
-        )
-
-        return when {
-            angleLeft >= 0 && angleRight >= 0 -> distance < POINT_SIZE / 40
-            else -> false
-        }
+        return if (isTouchOnSegment(this, x, y))
+             getDistanceToLine(this, x, y) < useTouchZone
+        else
+            false
     }
 }

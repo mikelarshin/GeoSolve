@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.view
+package open.geosolve.geosolve.view.view.draw
 
 import android.content.Context
 import android.graphics.Paint
@@ -9,11 +9,12 @@ object PaintConstant {
     var mPaintNode:       Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintLine:       Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintCircle:     Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    var mPaintAngle:      Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintNodeMark:   Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintLineMark:   Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintMarkCircle: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    var mPaintAngleMark:  Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintText:       Paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    var mPaintAngle:      Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     var context: Context? = null
         set(value) {
@@ -51,6 +52,11 @@ object PaintConstant {
             }
             mPaintAngle.apply {
                 color = context!!.getColor(R.color.color_angle_arc) // Not error
+                strokeWidth = LINE_WIDTH
+                style = Paint.Style.STROKE
+            }
+            mPaintAngleMark.apply {
+                color = context!!.getColor(R.color.color_mark) // Not error
                 strokeWidth = LINE_WIDTH
                 style = Paint.Style.STROKE
             }

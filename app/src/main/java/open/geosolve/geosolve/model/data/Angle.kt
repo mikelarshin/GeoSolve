@@ -1,7 +1,11 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.model.MathUtil
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.status.SystemCoordinate
+import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
+import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 
 class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
 
@@ -26,7 +30,20 @@ class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
 
     // Element
     override fun inRadius(x: Float, y: Float): Boolean {
-        TODO("Not yet implemented")
+        val getRadius = MathUtil.distanceBetweenPoints(
+            angleNode,
+            SystemCoordinate.DECART.convertX(x),
+            SystemCoordinate.DECART.convertX(y)
+        )
+
+        val distanceToAngleArc =
+            if (ANGLE_ARC_RADIUS < getRadius)
+                getRadius - ANGLE_ARC_RADIUS
+            else
+                ANGLE_ARC_RADIUS - getRadius
+
+        val useTouchZone = POINT_SIZE / 20
+        return distanceToAngleArc < useTouchZone
     }
 
     override fun delConnection(){

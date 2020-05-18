@@ -5,7 +5,7 @@ import open.geosolve.geosolve.App.Companion.allNodes
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.Movable
-import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
+import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 import kotlin.properties.Delegates
 
 class Node(foundX: Float, foundY: Float) : Movable, Element {
@@ -60,11 +60,11 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {
-        val radius = POINT_SIZE / 20
+        val useTouchZone = POINT_SIZE / 20
 
-        val xBool = this.x - radius < x && x < this.x + radius
+        val xBool = this.x - useTouchZone < x && x < this.x + useTouchZone
 
-        val yBool = this.y - radius < y && y < this.y + radius
+        val yBool = this.y - useTouchZone < y && y < this.y + useTouchZone
 
         return xBool && yBool
     }

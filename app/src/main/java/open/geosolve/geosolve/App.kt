@@ -5,7 +5,7 @@ import open.geosolve.geosolve.model.data.*
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.status.SystemCoordinate
-import open.geosolve.geosolve.view.view.PaintConstant.POINT_SIZE
+import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 
 class App : Application() {
     companion object {
