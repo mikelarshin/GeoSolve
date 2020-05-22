@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.ui.canvas
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -11,8 +10,6 @@ import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.helper.FigureManipulator
-import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.presentation.canvas.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.canvas.CanvasScreenView
 import open.geosolve.geosolve.ui.global.MvpFragmentX
@@ -27,32 +24,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     private val presenter by moxyPresenter { CanvasScreenPresenter(app) }
 
-    private val tools = listOf(
-        ToolAbstraction(
-            R.string.tool_pen,
-            R.drawable.ic_tool_pen
-        ),
-        ToolAbstraction(
-            R.string.tool_eraser,
-            R.drawable.ic_tool_eraser
-        ),
-        ToolAbstraction(
-            R.string.tool_set_value,
-            R.drawable.ic_tool_set_value
-        ),
-        ToolAbstraction(
-            R.string.tool_mark,
-            R.drawable.ic_tool_mark
-        )
-    )
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        FigureManipulator.linkFigure(app.figure)
-    }
-
     override fun setupLayout() {
-        layout.field.attach(app.figure)
         layout.field.callback = object : InteractiveFieldCallback {
 
             override fun isUsedByContent(x: Float, y: Float): Boolean {
@@ -76,21 +48,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             }
 
         }
-
-        createTools()
-
-        layout.solve.setOnClickListener { presenter.solve() }
-        layout.clear_field.setOnClickListener { presenter.clearFigure() }
-    }
-
-    private fun createTools() {
-        layout.tools_container.selectedSwitch = presenter.selectedTool
-
-        tools.forEachIndexed { index, tool ->
-            layout.tools_container.addSwitch(index, tool.name, tool.icon)
-        }
-
-        layout.tools_container.onSwitchSelected = { index -> presenter.selectedTool = index }
     }
 
     override fun updateCanvas() = field.invalidate()
@@ -113,26 +70,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
                 dialog.dismiss()
             }
             .show()
-    }
-
-    override fun showFigureType() {
-
-        val typeFigure =
-            if (SolveUtil.typeSolve::class.simpleName != "UnknownFigure")
-                SolveUtil.typeSolve::class.simpleName
-            else
-                "Неизвестная фигура"
-
-        val subTypeFigure =
-            if (SolveUtil.subTypeSolve::class.simpleName != "UnknownFigure")
-                SolveUtil.subTypeSolve::class.simpleName
-            else
-                ""
-
-        figure_type.text = if (subTypeFigure?.isNotEmpty() == true)
-            "$typeFigure : $subTypeFigure"
-        else
-            typeFigure
     }
 
     override fun showMessage(message: String) {

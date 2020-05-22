@@ -15,11 +15,14 @@ import open.geosolve.geosolve.ui.global.recyclerview.DividerItemDecoration
 
 class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
 
-    private val presenter by moxyPresenter { SolveScreenPresenter(app) }
+    private val presenter by moxyPresenter { SolveScreenPresenter() }
 
     override fun setupLayout() {
         setupBackButtons()
         setupRecycler()
+
+        // FIXME: Temp
+        showError()
     }
 
     private fun setupBackButtons() {
@@ -42,7 +45,7 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     }
 
     override fun showContent() {
-        layout.recycler.adapter = SolveStepsAdapter(presenter.solveSteps)
+        //layout.recycler.adapter =
         layout.state_layout.state = MultiStateLayout.State.CONTENT
     }
 
