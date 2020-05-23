@@ -1,4 +1,4 @@
-package open.geosolve.euclid2d.primitive.metric
+package open.geosolve.euclid2d.element.primitive.metric
 
 import open.geosolve.euclid2d.helper.LimitFloat
 

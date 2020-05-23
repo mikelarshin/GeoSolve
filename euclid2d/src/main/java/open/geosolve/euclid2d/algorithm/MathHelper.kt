@@ -1,6 +1,6 @@
 package open.geosolve.euclid2d.algorithm
 
-import open.geosolve.euclid2d.primitive.Point
+import open.geosolve.euclid2d.element.primitive.Point
 import kotlin.math.pow
 import kotlin.math.sqrt
 
