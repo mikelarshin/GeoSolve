@@ -11,5 +11,9 @@ data class Line(
     val length: Float
         get() = distance(first, second)
 
+    private fun belongs(x: Float, y: Float) {
+        TODO("Принадлежит ли точка прямой? ")
+    }
+
     override fun toString(): String = "$name { length: $length }\n\t$first\n\t$second\n"
 }

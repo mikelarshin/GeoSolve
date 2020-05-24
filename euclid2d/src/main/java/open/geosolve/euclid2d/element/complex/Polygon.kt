@@ -32,6 +32,14 @@ class Polygon : ComplexElement() {
             }
         }
 
+    override fun isDescribedAround(element: ComplexElement): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun isInscribedInto(element: ComplexElement): Boolean {
+        TODO("Not yet implemented")
+    }
+
     fun appendPoint(x: Float, y: Float) {
 
         check(!isPolygonClosed) { "Polygon already closed" }
