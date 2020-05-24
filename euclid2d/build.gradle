@@ -45,5 +45,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     // Tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0-RC1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0-RC1'
 }

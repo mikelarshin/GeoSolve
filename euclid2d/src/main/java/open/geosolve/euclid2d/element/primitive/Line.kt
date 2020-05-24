@@ -6,10 +6,10 @@ data class Line(
     val first: Point,
     val second: Point,
     var name: String = "[${first.name}${second.name}]"
-) : PrimitiveElement {
+) : PrimitiveElement() {
 
     val length: Float
         get() = distance(first, second)
 
-    override fun toString(): String = "$name { length: $length }\n\t$first\n\t$second"
+    override fun toString(): String = "$name { length: $length }\n\t$first\n\t$second\n"
 }
