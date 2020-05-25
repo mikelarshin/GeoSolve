@@ -8,6 +8,18 @@ class Plane {
     val elements: List<ComplexElement> get() = _elements
 
     fun append(element: ComplexElement) {
+        _elements.forEach {
+            if (it.isDescribedAround(element)) {
+                it.inscribedInto += element
+                element.describedAround += it
+            }
+
+            if (it.isInscribedInto(element)) {
+                it.describedAround += element
+                element.inscribedInto += it
+            }
+        }
+
         _elements += element
     }
 }
