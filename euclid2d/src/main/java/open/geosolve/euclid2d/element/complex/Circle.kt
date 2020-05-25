@@ -22,11 +22,17 @@ class Circle(
         }
     }
 
-    private fun belongs(x: Float, y: Float) =
-        (x - center.x).pow(2) + (y - center.y).pow(2) <= radius * radius
+    private fun belongs(x: Float, y: Float): Boolean =
+        ((x - center.x).pow(2) + (y - center.y).pow(2)) - (radius * radius) < 0.001
 
     override fun isInscribedInto(element: ComplexElement): Boolean {
-        TODO("Not yet implemented")
+        return when (element) {
+            is Polygon -> {
+                element.lines.find { it.distance(center.x, center.y) != radius } == null
+            }
+
+            else -> false
+        }
     }
 
     override fun toString(): String = "\uD83D\uDF8A ${center.name} { radius: $radius }"

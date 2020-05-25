@@ -33,11 +33,31 @@ class Polygon : ComplexElement() {
         }
 
     override fun isDescribedAround(element: ComplexElement): Boolean {
-        TODO("Not yet implemented")
+        return when (element) {
+            is Polygon -> {
+                element.points.forEach { p ->
+                    if (lines.find { !it.belongs(p.x, p.y) } != null) return false
+                }
+
+                true
+            }
+
+            else -> element.isInscribedInto(this)
+        }
     }
 
     override fun isInscribedInto(element: ComplexElement): Boolean {
-        TODO("Not yet implemented")
+        return when (element) {
+            is Polygon -> {
+                points.forEach { p ->
+                    if (element.lines.find { !it.belongs(p.x, p.y) } != null) return false
+                }
+
+                true
+            }
+
+            else -> element.isDescribedAround(this)
+        }
     }
 
     fun appendPoint(x: Float, y: Float) {
@@ -67,7 +87,7 @@ class Polygon : ComplexElement() {
     }
 
     override fun toString(): String {
-        var str = "Lines: \n"
+        var str = "Полигон: \n"
 
         lines.forEach { str += it }
 
