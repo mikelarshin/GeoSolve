@@ -1,8 +1,11 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.App
+import open.geosolve.geosolve.GlobalFiguresController
 import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
-import open.geosolve.geosolve.model.data.generalized.*
+import open.geosolve.geosolve.model.data.generalized.Bind
+import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.data.generalized.Movable
+import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.status.SystemCoordinate.ABSOLUTE
 import open.geosolve.geosolve.model.status.SystemCoordinate.DECART
 import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
@@ -12,7 +15,7 @@ import kotlin.math.sqrt
 class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
 
     init {
-        centerNode.char = 'O'
+        centerNode.char = "O"
     }
 
     var radiusLineList: MutableList<Line> = mutableListOf() // TODO(implement this)
@@ -48,9 +51,9 @@ class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
     }
 
     // Element
-    override fun delConnection() {
-        centerNode.delConnection()
-        App.delElementFromFigure(centerNode)
+    override fun remove() {
+        centerNode.remove()
+        GlobalFiguresController.removeElementGlobal(this)
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {

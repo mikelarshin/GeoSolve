@@ -1,20 +1,20 @@
 package open.geosolve.geosolve.presentation.presenter
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
-import open.geosolve.geosolve.App.Companion.allAngles
-import open.geosolve.geosolve.App.Companion.allLines
-import open.geosolve.geosolve.App.Companion.figureList
-import open.geosolve.geosolve.App.Companion.find
+import open.geosolve.geosolve.GlobalFiguresController.allAngles
+import open.geosolve.geosolve.GlobalFiguresController.allLines
+import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.DrawControl
 import open.geosolve.geosolve.model.ElementGetter.getGraphElement
 import open.geosolve.geosolve.model.ElementGetter.getMovable
+import open.geosolve.geosolve.model.EventControl
+import open.geosolve.geosolve.model.EventControl.setNodeChars
+import open.geosolve.geosolve.model.EventControl.solve
 import open.geosolve.geosolve.model.FigureController
+import open.geosolve.geosolve.model.FigureController.figure
 import open.geosolve.geosolve.model.data.*
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Movable
@@ -29,16 +29,13 @@ import open.geosolve.geosolve.view.screens.solveScreen.RecycleAdapter
 @InjectViewState
 class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
-    private var mode = Mode.ADD_MOVE_FIN
+    private var mode = Mode.ADD
     private var state = State.ON_CANVAS
     private var moveQuantity = 0
     private var selectMovable: Movable? = null
     private var lastNode: Node? = null
 
-    private val figure: Figure
-        get() = figureList.last()
-
-    fun solveButtonClicked() {
+    fun showSolveClick() {
         SolveUtil.showStepSolveList(object : CallBackSolveUi {
             override fun findNotMark() {
                 viewState.showMessage(R.string.find_not_mark)
@@ -65,11 +62,11 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     fun clearButtonClicked() {
         if (figureList.size > 1 && figure.isEmpty()) {
-            FigureController.removeDependent()
+            FigureController.updateFind()
             figureList.remove(figure)
         }
         if (figureList.isNotEmpty()) {
-            FigureController.removeDependent()
+            FigureController.updateFind()
             figureList.remove(figure)
         }
         figureList.add(Figure())
@@ -98,7 +95,8 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
         moveQuantity++
         if (moveQuantity == 6 && selectMovable == null) {
-            if (!figure.isEmpty()) figureList.add(Figure()) // переходим на следующую фигуру
+            if (!figure.isEmpty())
+                figureList.add(Figure()) // переходим на следующую фигуру
             FigureController.addCircle(touchX, touchY)
             onTouchPoint(figure.mCircle!!.centerNode)
         }
@@ -107,7 +105,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     fun onTouchUp(touchX: Float, touchY: Float) {
         if (moveQuantity < 5) {
             when (mode) {
-                Mode.ADD_MOVE_FIN ->
+                Mode.ADD ->
                     when (state) {
                         State.ON_CANVAS -> onTouchCanvas(touchX, touchY)
                         State.ON_POINT -> onTouchPoint(selectMovable!! as Node)
@@ -119,7 +117,8 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
                         )
                     }
                 Mode.DELETE -> {
-                    DrawControl.delNode(touchX, touchY); lastNode = null
+                    EventControl.delete(touchX, touchY);
+                    lastNode = null
                 }
                 Mode.MARK_FIND -> getGraphElement(touchX, touchY)?.let { find = it }
                 Mode.SET_VALUE -> setValue(touchX, touchY)
@@ -130,7 +129,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
         selectMovable = null
 
         setNodeChars()
-        solve()
+        solveAndCallBack()
 
         if (figure.isClose())
             lastNode = null
@@ -139,15 +138,12 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             figureList.add(Figure()) // переход на следующую фигуру
     }
 
-    private fun solve() {
-        val uiCallBack = {
-            viewState.showTypeFigure()
-            viewState.updateCanvas()
-        }
-        GlobalScope.launch(Dispatchers.Main) {
-            SolveUtil.solve(figureList)
-            uiCallBack()
-        }
+    private fun solveAndCallBack() { // TODO(нужно чтобы эта функция не выполнялась когда мы двигаем точки)
+        solve(
+            solveUiCallBack = {
+                viewState.showTypeFigure()
+                viewState.updateCanvas()
+            })
     }
 
     private fun onTouchPoint(touchNode: Node) {
@@ -251,15 +247,8 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
             viewState.showDialog(message) {
                 element.setValueDraw(it)
-                solve()
+                solveAndCallBack()
             }
-        }
-    }
-
-    private fun setNodeChars() {
-        val charRange = ('A'..'Z').toList()
-        App.allNodes.forEachIndexed { index, node ->
-            node.char = charRange[index]
         }
     }
 }

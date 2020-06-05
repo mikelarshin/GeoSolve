@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.App.Companion.allAngles
-import open.geosolve.geosolve.App.Companion.allCircles
-import open.geosolve.geosolve.App.Companion.allLines
-import open.geosolve.geosolve.App.Companion.find
+import open.geosolve.geosolve.GlobalFiguresController.allAngles
+import open.geosolve.geosolve.GlobalFiguresController.allCircles
+import open.geosolve.geosolve.GlobalFiguresController.allLines
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.type.*

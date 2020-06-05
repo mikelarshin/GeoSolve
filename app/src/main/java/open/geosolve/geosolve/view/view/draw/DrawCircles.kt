@@ -1,12 +1,13 @@
 package open.geosolve.geosolve.view.view.draw
 
 import android.graphics.Canvas
-import open.geosolve.geosolve.App
+import open.geosolve.geosolve.GlobalFiguresController.allCircles
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Circle
 
 object DrawCircles {
     fun drawCircles(canvas: Canvas) {
-        for (circle in App.allCircles) {
+        for (circle in allCircles) {
             val centerNode = circle.centerNode
 
             canvas.drawCircle(
@@ -24,7 +25,7 @@ object DrawCircles {
             )
 
             canvas.drawText(
-                centerNode.char.toString(),
+                centerNode.char,
                 centerNode.x - PaintConstant.TEXT_MARGIN,
                 centerNode.y - PaintConstant.TEXT_MARGIN,
                 PaintConstant.mPaintText
@@ -33,9 +34,9 @@ object DrawCircles {
     }
 
     fun drawCirclesMark(canvas: Canvas) {
-        if (App.find !is Circle) return
+        if (find !is Circle) return
 
-        val markedCircle = App.find as Circle
+        val markedCircle = find as Circle
 
         canvas.drawCircle(
             markedCircle.centerNode.x,

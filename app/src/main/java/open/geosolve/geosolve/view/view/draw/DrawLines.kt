@@ -2,8 +2,8 @@ package open.geosolve.geosolve.view.view.draw
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import open.geosolve.geosolve.App.Companion.allLines
-import open.geosolve.geosolve.App.Companion.find
+import open.geosolve.geosolve.GlobalFiguresController.allLines
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
 import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_SIZE

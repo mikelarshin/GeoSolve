@@ -1,9 +1,10 @@
 package open.geosolve.geosolve.view.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import open.geosolve.geosolve.App.Companion.scale
+import open.geosolve.geosolve.view.view.draw.DrawConstant.scale
 
 class TouchCanvasView : DrawCanvasView {
 
@@ -15,6 +16,7 @@ class TouchCanvasView : DrawCanvasView {
     var onTouchMove: ((x: Float, y: Float) -> Unit)? = null
     var onTouchUp: ((x: Float, y: Float) -> Unit)? = null
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
         val mx = (event.x - width / 2) / scale

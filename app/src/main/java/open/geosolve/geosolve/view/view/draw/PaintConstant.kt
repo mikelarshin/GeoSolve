@@ -2,6 +2,8 @@ package open.geosolve.geosolve.view.view.draw
 
 import android.content.Context
 import android.graphics.Paint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 
@@ -16,47 +18,48 @@ object PaintConstant {
     var mPaintAngleMark:  Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var mPaintText:       Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    var context: Context? = null
+    var canvasContext: Context? = null
+        @RequiresApi(Build.VERSION_CODES.M)
         set(value) {
             field = value!!
 
             mPaintNode.apply {
-                color = context!!.getColor(R.color.color_node) // Not error
+                color = canvasContext!!.getColor(R.color.color_node) // Not error
                 strokeWidth = POINT_SIZE
             }
             mPaintLine.apply {
-                color = context!!.getColor(R.color.color_line) // Not error
+                color = canvasContext!!.getColor(R.color.color_line) // Not error
                 strokeWidth = LINE_WIDTH
             }
             mPaintCircle.apply {
-                color = context!!.getColor(R.color.color_circle) // Not error
+                color = canvasContext!!.getColor(R.color.color_circle) // Not error
                 style = Paint.Style.STROKE
                 strokeWidth = LINE_WIDTH
             }
             mPaintNodeMark.apply {
-                color = context!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark) // Not error
                 strokeWidth = POINT_SIZE
             }
             mPaintLineMark.apply {
-                color = context!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark) // Not error
                 strokeWidth = LINE_WIDTH
             }
             mPaintMarkCircle.apply {
-                color = context!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark) // Not error
                 style = Paint.Style.STROKE
                 strokeWidth = LINE_WIDTH
             }
             mPaintText.apply {
-                color = context!!.getColor(R.color.canvas_text_color) // Not error
+                color = canvasContext!!.getColor(R.color.canvas_text_color) // Not error
                 textSize = TEXT_SIZE
             }
             mPaintAngle.apply {
-                color = context!!.getColor(R.color.color_angle_arc) // Not error
+                color = canvasContext!!.getColor(R.color.color_angle_arc) // Not error
                 strokeWidth = LINE_WIDTH
                 style = Paint.Style.STROKE
             }
             mPaintAngleMark.apply {
-                color = context!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark) // Not error
                 strokeWidth = LINE_WIDTH
                 style = Paint.Style.STROKE
             }

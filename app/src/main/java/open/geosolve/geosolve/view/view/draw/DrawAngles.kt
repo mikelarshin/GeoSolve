@@ -3,14 +3,14 @@ package open.geosolve.geosolve.view.view.draw
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import open.geosolve.geosolve.App.Companion.allAngles
-import open.geosolve.geosolve.App.Companion.find
-import open.geosolve.geosolve.App.Companion.systemCoordinate
+import open.geosolve.geosolve.GlobalFiguresController.allAngles
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.MathUtil.getAngle
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
+import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
 import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_MARGIN
 import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintAngle
@@ -33,7 +33,7 @@ object DrawAngles {
     fun drawAnglesValue(canvas: Canvas) {
         for (angle in allAngles) {
             if (angle.getValue() == null) continue
-
+                // TODO() сделать отрисовку относительно угла
             canvas.drawText(
                 formatValueString(angle),
                 angle.angleNode.x + TEXT_MARGIN,

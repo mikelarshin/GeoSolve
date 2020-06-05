@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.view.screens.canvasScreen
 
-import android.text.SpannableString
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -8,13 +7,8 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.App.Companion.figureList
+import open.geosolve.geosolve.GlobalFiguresController.figureList
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.status.Mode
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
@@ -33,8 +27,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.canvas.onTouchDown = { x, y -> presenter.onTouchDown(x, y) }
         layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
 
-        layout.calc_button.setOnClickListener {
-            presenter.solveButtonClicked()
+        layout.show_solve_button.setOnClickListener {
+            presenter.showSolveClick()
         }
 
         layout.mark_mode_button.setOnClickListener {
@@ -42,7 +36,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         }
 
         layout.edit_mode_button.setOnClickListener {
-            presenter.setMode(Mode.ADD_MOVE_FIN)
+            presenter.setMode(Mode.ADD)
         }
 
         layout.delete_mode_button.setOnClickListener {
@@ -55,15 +49,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
         layout.clear_button.setOnClickListener {
             presenter.clearButtonClicked()
-        }
-
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(50)
-            App.widthCanvas = canvas.width
-            App.heightCanvas = canvas.height
-
-            showTypeFigure()
-            updateCanvas()
         }
     }
 

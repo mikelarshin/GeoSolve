@@ -1,22 +1,22 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.App.Companion.allNodes
-import open.geosolve.geosolve.App.Companion.find
+import open.geosolve.geosolve.GlobalFiguresController
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.Movable
+import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 import kotlin.properties.Delegates
 
 class Node(foundX: Float, foundY: Float) : Movable, Element {
 
     var x: Float = foundX
-        get() = App.systemCoordinate.convertX(field)
+        get() = systemCoordinate.convertX(field)
     var y: Float = foundY
-        get() = App.systemCoordinate.convertY(field)
+        get() = systemCoordinate.convertY(field)
 
-    var char by Delegates.notNull<Char>()
+    var char by Delegates.notNull<String>()
     override fun toString(): String = char.toString()
 
     var centerAngle: Angle? = null
@@ -44,16 +44,18 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
             this.x = x
             this.y = y
         }
+
+        // allNodes.forEach { it.updateXYbyBind() }  TODO(move centerCircleEvent)
     }
 
     // Element
-    override fun delConnection() {
+    override fun remove() {
         for (element in  neighborLines + neighborAngles + centerAngle) {
             if (find == element)
                 find = null
-            (element as Element?)?.delConnection()
-            (element as Element?)?.let { App.delElementFromFigure(it) }
+            (element as Element?)?.remove()
         }
+        GlobalFiguresController.removeElementGlobal(this)
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {

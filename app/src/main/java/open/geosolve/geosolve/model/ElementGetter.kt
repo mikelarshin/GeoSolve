@@ -1,8 +1,8 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.App.Companion.allCircles
-import open.geosolve.geosolve.App.Companion.allLines
+import open.geosolve.geosolve.GlobalFiguresController.allCircles
+import open.geosolve.geosolve.GlobalFiguresController.allLines
+import open.geosolve.geosolve.GlobalFiguresController.allNodes
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Line
@@ -14,7 +14,7 @@ import open.geosolve.geosolve.model.data.generalized.SolveGraph
 object ElementGetter {
     // getters
     private fun getNode(touchX: Float, touchY: Float): Node? {
-        for (node in App.allNodes + allCircles.map { it.centerNode })
+        for (node in allNodes + allCircles.map { it.centerNode }) // все точки + точки из центра круга
             if (node.inRadius(touchX, touchY))
                 return node
         return null
@@ -43,7 +43,7 @@ object ElementGetter {
     }
 
     // generalized getters
-    fun getDeleteElement(x: Float, y: Float): Element? {
+    fun getDeletableElement(x: Float, y: Float): Element? {
         getCircle(x, y)?.let { circle ->
             return circle
         }

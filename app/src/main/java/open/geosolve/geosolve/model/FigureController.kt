@@ -1,7 +1,7 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.App.Companion.figureList
-import open.geosolve.geosolve.App.Companion.find
+import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.*
 
 object FigureController {
@@ -31,10 +31,9 @@ object FigureController {
         figure.mCircle = Circle(Node(x, y))
     }
 
-    fun removeDependent() {
-        for (element in figure.mAngles + figure.mLines + figure.mCircle)
-            if (find == element)
-                find = null
+    fun updateFind() {
+        if (find !in figure.mAngles + figure.mLines + figure.mCircle)
+            find = null
 
     }
 }

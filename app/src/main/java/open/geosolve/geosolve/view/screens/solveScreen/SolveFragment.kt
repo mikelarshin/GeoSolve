@@ -27,14 +27,6 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
         }
 
         setupRecycler()
-
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(50)
-            App.widthCanvas = canvas.width
-            App.heightCanvas = canvas.height
-
-            canvas.invalidate()
-        }
     }
 
     private fun setupRecycler() {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#000</color>
-    <color name="colorPrimaryDark">#3213FF</color>
+    <color name="colorPrimaryDark">#4000FF</color>
     <color name="colorAccent">#DDD</color>
 
-    <color name="all_lines">#3000</color> // #ССС
+    <color name="all_lines">#CCC</color> // Debug value 3000
 
     <color name="color_node">@color/colorPrimary</color>
     <color name="color_mark">@color/colorPrimaryDark</color>

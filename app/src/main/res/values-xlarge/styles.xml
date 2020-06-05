@@ -14,7 +14,7 @@
 
     <style name="AnswerText" parent="Theme.AppCompat">
         <item name="android:textColor">@color/color_mark</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

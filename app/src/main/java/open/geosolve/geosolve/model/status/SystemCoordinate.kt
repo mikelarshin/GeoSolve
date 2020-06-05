@@ -1,8 +1,8 @@
 package open.geosolve.geosolve.model.status
 
-import open.geosolve.geosolve.App.Companion.heightCanvas
-import open.geosolve.geosolve.App.Companion.scale
-import open.geosolve.geosolve.App.Companion.widthCanvas
+import open.geosolve.geosolve.view.view.draw.DrawConstant.heightCanvas
+import open.geosolve.geosolve.view.view.draw.DrawConstant.scale
+import open.geosolve.geosolve.view.view.draw.DrawConstant.widthCanvas
 
 enum class SystemCoordinate(val convertX: (Float) -> Float,
                             val convertY: (Float) -> Float) {

@@ -1,12 +1,12 @@
 package open.geosolve.geosolve.model.data
 
+import open.geosolve.geosolve.GlobalFiguresController
 import open.geosolve.geosolve.model.MathUtil
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
 import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
-import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 
 class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
 
@@ -20,6 +20,8 @@ class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
         get() = startLine.finalNode
     val finalNode: Node
         get() = finalLine.finalNode
+    val lines: List<Line>
+        get() = listOf(startLine, finalLine)
 
     init {
         check(startNode != finalNode){"Angle constructor get the same startNode & finalNode"}
@@ -47,12 +49,14 @@ class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
         return distanceToAngleArc < useTouchZone
     }
 
-    override fun delConnection(){
+    override fun remove(){
         val nodeList = listOf(startNode, angleNode, finalNode)
         for (node in nodeList) {
             if (node.centerAngle == this)
                 node.centerAngle = null
             node.neighborAngles.remove(this)
         }
+
+        GlobalFiguresController.removeElementGlobal(this)
     }
 }
