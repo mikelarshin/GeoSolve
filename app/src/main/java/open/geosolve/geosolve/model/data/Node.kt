@@ -1,6 +1,7 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.GlobalFiguresController
+import open.geosolve.geosolve.GlobalFiguresController.allNodes
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element

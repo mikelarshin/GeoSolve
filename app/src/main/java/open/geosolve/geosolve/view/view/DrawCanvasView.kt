@@ -10,6 +10,7 @@ import open.geosolve.geosolve.view.view.draw.DrawAngles.drawAnglesMark
 import open.geosolve.geosolve.view.view.draw.DrawAngles.drawAnglesValue
 import open.geosolve.geosolve.view.view.draw.DrawCircles.drawCircles
 import open.geosolve.geosolve.view.view.draw.DrawCircles.drawCirclesMark
+import open.geosolve.geosolve.view.view.draw.DrawCircles.drawCirclesValue
 import open.geosolve.geosolve.view.view.draw.DrawConstant
 import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.view.draw.DrawLines.drawLines
@@ -56,6 +57,7 @@ open class DrawCanvasView : View {
         // Text
         drawAnglesValue(canvas)
         drawLinesValue(canvas)
+        drawCirclesValue(canvas)
         drawNodesName(canvas)
 
         systemCoordinate = SystemCoordinate.DECART
