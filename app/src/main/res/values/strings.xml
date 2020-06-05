@@ -12,7 +12,8 @@
 
     // Alert title
     <string name="alert_set_line">Введите длину линии</string>
-    <string name="alert_set_angle">Введите значение угла</string>
+    <string name="alert_set_angle">Введите градус угла</string>
+    <string name="alert_set_circle">Введите периметр круга</string>
     
     // Verbal Template
     <string name="verbal_rectangle_parallel_line_2">Присваиваем линии %s значение противоположной линии %s, так как у прямоугольника противоположные линии равны.</string>

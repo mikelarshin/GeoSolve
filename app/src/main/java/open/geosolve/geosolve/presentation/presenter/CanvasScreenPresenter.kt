@@ -242,6 +242,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             val message = when (element) {
                 is Line -> R.string.alert_set_line
                 is Angle -> R.string.alert_set_angle
+                is Circle -> R.string.alert_set_circle
                 else -> null!!
             }
 
