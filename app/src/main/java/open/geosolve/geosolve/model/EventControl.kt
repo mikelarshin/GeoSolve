@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.model
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -14,13 +15,16 @@ object EventControl {
         val circleNodeList = allCircles.map { it.centerNode }
         circleNodeList.forEach { it.char = "O" }
 
-        val alphabet = ('A'..'Z').toList()
-        allNodes.filter { it !in circleNodeList }.forEachIndexed { index, node ->
-            if (node !in circleNodeList)
-                node.char = alphabet[index].toString()
-        }
+        val alphabet1 = listOf("") + (('A'..'Z').toList())
+        val alphabet2 = ('A'..'Z').toList()
 
-        // TODO(create char AA AB AC)
+        Log.e("alphabet1", "$alphabet1")
+        Log.e("alphabet2", "$alphabet2")
+
+        val nodes = allNodes.filter { it !in circleNodeList }
+
+        for (index in nodes.indices)
+            nodes[index].char = "${alphabet1[index / 26]}${alphabet2[index % 26]}"
     }
 
     fun solve(solveUiCallBack: () -> Unit) {
