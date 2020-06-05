@@ -18,9 +18,6 @@ object EventControl {
         val alphabet1 = listOf("") + (('A'..'Z').toList())
         val alphabet2 = ('A'..'Z').toList()
 
-        Log.e("alphabet1", "$alphabet1")
-        Log.e("alphabet2", "$alphabet2")
-
         val nodes = allNodes.filter { it !in circleNodeList }
 
         for (index in nodes.indices)
