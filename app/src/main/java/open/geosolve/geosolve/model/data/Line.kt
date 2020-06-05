@@ -1,7 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.App
-import open.geosolve.geosolve.GlobalFiguresController
+import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.model.MathUtil.getDistanceToLine
 import open.geosolve.geosolve.model.MathUtil.isTouchOnSegment
 import open.geosolve.geosolve.model.data.generalized.Bind
@@ -32,7 +31,8 @@ class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Eleme
     override fun remove() {
         startNode.neighborLines.remove(this)
         finalNode.neighborLines.remove(this)
-        GlobalFiguresController.removeElementGlobal(this)
+
+        AllLines.remove(this)
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {

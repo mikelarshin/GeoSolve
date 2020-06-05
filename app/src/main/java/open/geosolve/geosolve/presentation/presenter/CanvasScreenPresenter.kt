@@ -1,10 +1,11 @@
 package open.geosolve.geosolve.presentation.presenter
 
+import android.util.Log
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import open.geosolve.geosolve.AllAngles
+import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.App
-import open.geosolve.geosolve.GlobalFiguresController.allAngles
-import open.geosolve.geosolve.GlobalFiguresController.allLines
 import open.geosolve.geosolve.GlobalFiguresController.figureList
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.R
@@ -141,6 +142,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     private fun solveAndCallBack() { // TODO(нужно чтобы эта функция не выполнялась когда мы двигаем точки)
         solve(
             solveUiCallBack = {
+                Log.e("event", "solveUiCallBack")
                 viewState.showTypeFigure()
                 viewState.updateCanvas()
             })
@@ -198,7 +200,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun updateLines() {
-        val lineList = allLines - figure.mLines
+        val lineList = AllLines - figure.mLines
         for (line in lineList)
             if (figure.mNodes.contains(line.startNode) && figure.mNodes.contains(line.finalNode))
                 FigureController.addLine(line)
@@ -219,7 +221,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun equalsContainsAngle(newAngle: Angle): Boolean {
-        for (angle in allAngles)
+        for (angle in AllAngles)
             if (angle.startNode == newAngle.startNode &&
                 angle.finalNode == newAngle.finalNode &&
                 angle.angleNode == newAngle.angleNode
@@ -229,7 +231,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     private fun equalsContainsLine(newLine: Line): Boolean {
-        for (line in allLines)
+        for (line in AllLines)
             if ((line.startNode == newLine.startNode && line.finalNode == newLine.finalNode) ||
                 (line.startNode == newLine.finalNode && line.finalNode == newLine.startNode)
             )

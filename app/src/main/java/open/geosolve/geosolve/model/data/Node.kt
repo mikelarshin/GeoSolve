@@ -1,7 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.GlobalFiguresController
-import open.geosolve.geosolve.GlobalFiguresController.allNodes
+import open.geosolve.geosolve.AllNodes
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
@@ -18,7 +17,7 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
         get() = systemCoordinate.convertY(field)
 
     var char by Delegates.notNull<String>()
-    override fun toString(): String = char.toString()
+    override fun toString(): String = char
 
     var centerAngle: Angle? = null
     val neighborAngles: MutableList<Angle> = mutableListOf()
@@ -56,7 +55,8 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
                 find = null
             (element as Element?)?.remove()
         }
-        GlobalFiguresController.removeElementGlobal(this)
+
+        AllNodes.remove(this)
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {

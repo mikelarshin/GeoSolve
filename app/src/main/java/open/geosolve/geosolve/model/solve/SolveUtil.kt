@@ -1,8 +1,9 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.GlobalFiguresController.allAngles
-import open.geosolve.geosolve.GlobalFiguresController.allCircles
-import open.geosolve.geosolve.GlobalFiguresController.allLines
+
+import open.geosolve.geosolve.AllAngles
+import open.geosolve.geosolve.AllCircles
+import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
@@ -29,7 +30,7 @@ object SolveUtil {
             figure.subTypeFigure.setGraphs(figure)
         }
 
-        for (element in (allLines + allAngles + allCircles))
+        for (element in (AllLines + AllAngles + AllCircles))
             (element as SolveGraph).solve()
     }
 

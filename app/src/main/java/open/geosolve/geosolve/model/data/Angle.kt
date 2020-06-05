@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.GlobalFiguresController
+import open.geosolve.geosolve.AllAngles
 import open.geosolve.geosolve.model.MathUtil
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
@@ -57,6 +57,6 @@ class Angle(val startLine: Line, val finalLine: Line) : SolveGraph(), Element {
             node.neighborAngles.remove(this)
         }
 
-        GlobalFiguresController.removeElementGlobal(this)
+        AllAngles.remove(this)
     }
 }

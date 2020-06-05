@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.GlobalFiguresController
+import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.model.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
@@ -53,7 +53,8 @@ class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
     // Element
     override fun remove() {
         centerNode.remove()
-        GlobalFiguresController.removeElementGlobal(this)
+
+        AllCircles.remove(this)
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {

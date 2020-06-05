@@ -2,7 +2,7 @@ package open.geosolve.geosolve.view.view.draw
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import open.geosolve.geosolve.GlobalFiguresController.allLines
+import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
@@ -13,7 +13,7 @@ import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintText
 
 object DrawLines {
     fun drawLines(canvas: Canvas) {
-        for (line in allLines)
+        for (line in AllLines)
             drawLine(canvas, line)
     }
 
@@ -24,7 +24,7 @@ object DrawLines {
     }
 
     fun drawLinesValue(canvas: Canvas) {
-        for (line in allLines) {
+        for (line in AllLines) {
             if (line.getValue() == null) continue
 
             val text = formatValueString(line)

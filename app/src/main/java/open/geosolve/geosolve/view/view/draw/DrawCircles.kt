@@ -1,8 +1,7 @@
 package open.geosolve.geosolve.view.view.draw
 
 import android.graphics.Canvas
-import open.geosolve.geosolve.GlobalFiguresController
-import open.geosolve.geosolve.GlobalFiguresController.allCircles
+import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.view.screens.DesignUtil
@@ -10,7 +9,7 @@ import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_SIZE
 
 object DrawCircles {
     fun drawCircles(canvas: Canvas) {
-        for (circle in allCircles) {
+        for (circle in AllCircles) {
             val centerNode = circle.centerNode
 
             canvas.drawCircle(
@@ -50,7 +49,7 @@ object DrawCircles {
     }
 
     fun drawCirclesValue(canvas: Canvas) {
-        for (circle in allCircles) {
+        for (circle in AllCircles) {
             if (circle.getValue() == null) continue
 
             val text = DesignUtil.formatValueString(circle)

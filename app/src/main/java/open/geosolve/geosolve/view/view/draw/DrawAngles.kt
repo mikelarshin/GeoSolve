@@ -3,7 +3,7 @@ package open.geosolve.geosolve.view.view.draw
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import open.geosolve.geosolve.GlobalFiguresController.allAngles
+import open.geosolve.geosolve.AllAngles
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.MathUtil.getAngle
 import open.geosolve.geosolve.model.data.Angle
@@ -19,7 +19,7 @@ import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintText
 
 object DrawAngles {
     fun drawAngles(canvas: Canvas) {
-        for (angle in allAngles) {
+        for (angle in AllAngles) {
             drawAngle(canvas, angle)
         }
     }
@@ -31,7 +31,7 @@ object DrawAngles {
     }
 
     fun drawAnglesValue(canvas: Canvas) {
-        for (angle in allAngles) {
+        for (angle in AllAngles) {
             if (angle.getValue() == null) continue
                 // TODO() сделать отрисовку относительно угла
             canvas.drawText(
