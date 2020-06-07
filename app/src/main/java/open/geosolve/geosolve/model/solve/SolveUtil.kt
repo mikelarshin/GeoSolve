@@ -4,6 +4,7 @@ package open.geosolve.geosolve.model.solve
 import open.geosolve.geosolve.AllAngles
 import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.AllLines
+import open.geosolve.geosolve.GlobalFiguresController.figureList
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
@@ -22,7 +23,7 @@ object SolveUtil {
         figure.typeFigure.setSubType(figure)
     }
 
-    fun solve(figureList: List<Figure>) {
+    fun solveGraphs() {
         for (figure in figureList) {
             setTypeSolve(figure)
             zeroGraph(figure)

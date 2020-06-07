@@ -5,5 +5,5 @@ import open.geosolve.geosolve.model.data.Node
 interface Bind {
     fun toBindNodeXY(node: Node, newX: Float, newY: Float)
     fun updateAllBind()
-    val bindNodeList: MutableList<Node>
+    val bindNodes: MutableList<Node>
 }

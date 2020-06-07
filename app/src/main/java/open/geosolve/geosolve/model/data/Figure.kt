@@ -18,6 +18,7 @@ class Figure {
     fun isComplete(): Boolean = isClose() || mCircle != null
     fun isClose(): Boolean = if (mLines.size != 0) mLines.first().startNode == mLines.last().finalNode else false
     fun isEmpty(): Boolean = mNodes.isEmpty() && mLines.isEmpty() && mAngles.isEmpty() && mCircle == null
+    fun isNotEmpty(): Boolean = !isEmpty()
 
     // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {

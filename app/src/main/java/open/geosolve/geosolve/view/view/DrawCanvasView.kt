@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import open.geosolve.geosolve.model.status.SystemCoordinate
+import open.geosolve.geosolve.view.view.draw.SystemCoordinate
 import open.geosolve.geosolve.view.view.draw.DrawAngles.drawAngles
 import open.geosolve.geosolve.view.view.draw.DrawAngles.drawAnglesMark
 import open.geosolve.geosolve.view.view.draw.DrawAngles.drawAnglesValue

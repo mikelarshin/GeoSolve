@@ -1,41 +1,36 @@
-package open.geosolve.geosolve.model
+package open.geosolve.geosolve.model.math
 
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
-import kotlin.math.PI
-import kotlin.math.atan2
-import kotlin.math.hypot
-import kotlin.math.sqrt
+import kotlin.math.*
 
 object MathUtil {
+
+    // Distance
     fun distanceBetweenPoints(a: Node, b: Node) = hypot(a.x - b.x, a.y - b.y)
     fun distanceBetweenPoints(a: Node, x: Float, y: Float) = hypot(a.x - x, a.y - y)
     fun distanceBetweenPoints(x1: Float, y1: Float, x2: Float, y2: Float) = hypot(x1 - x2, y1 - y2)
 
-    fun getAngle(startNode: Node, centerNode: Node, finalNode: Node): Float {
+    fun getDegree(startNode: Node, centerNode: Node, finalNode: Node): Float {
         val startVector = getVectorNode(centerNode, startNode)
         val finalVector = getVectorNode(centerNode, finalNode)
 
         val radianAngle =
             atan2(crossProduct(startVector, finalVector), scalarProduct(startVector, finalVector))
+
         return fromRadianToDegrees(radianAngle)
     }
 
-//    private fun pseudoScalarProduct(a: MathPoint, b: MathPoint) = a.x * b.y - b.x * a.y
-//
-//    fun dont(angle: Angle, x: Float, y: Float): Float {
-//        val BA = getVectorNode(angle.angleNode, angle.startNode)
-//        val BC = getVectorNode(angle.angleNode, angle.finalNode)
-//        val BP = getVectorNode(angle.angleNode, Node(x, y)) // TODO(fix to MathPoint)
-//
-//        val ads = pseudoScalarProduct(BC, BP)
-//        val
-////        BC x BP
-////        BP x BA
-//    }
+    fun isPointInAngle(angle: Angle, x: Float, y: Float): Boolean {
+        val node = Node(x, y) // TODO(Replace Node with MathPoint)
+        val startAngle = getDegree(node, angle.angleNode, angle.startNode)
+        val finalAngle = getDegree(node, angle.angleNode, angle.finalNode)
 
+        return (startAngle.absoluteValue + finalAngle.absoluteValue) < 180
+    }
 
+    // formulae
     private fun fromRadianToDegrees(x: Float): Float = x * 180 / PI.toFloat()
     private fun crossProduct(a: MathPoint, b: MathPoint) = a.x * b.y - a.y * b.x
     private fun scalarProduct(a: MathPoint, b: MathPoint) = a.x * b.x + a.y * b.y
@@ -52,6 +47,7 @@ object MathUtil {
 
         return sqrt(per * (per - distanceStart) * (per - distanceFin) * (per - lineLength)) / lineLength
     }
+
     fun isTouchOnSegment(line: Line, x: Float, y: Float): Boolean {
         val dot = { x1: Float, y1: Float,
                     x2: Float, y2: Float ->
@@ -70,6 +66,4 @@ object MathUtil {
 
         return angleLeft >= 0 && angleRight >= 0
     }
-
-    private data class MathPoint(val x: Float, val y: Float)
 }

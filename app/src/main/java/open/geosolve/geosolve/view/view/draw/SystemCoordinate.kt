@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.model.status
+package open.geosolve.geosolve.view.view.draw
 
 import open.geosolve.geosolve.view.view.draw.DrawConstant.heightCanvas
 import open.geosolve.geosolve.view.view.draw.DrawConstant.scale

@@ -10,7 +10,10 @@ import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.GlobalFiguresController.figureList
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.status.Mode
+import open.geosolve.geosolve.model.tools.AddTool
+import open.geosolve.geosolve.model.tools.DeleteTool
+import open.geosolve.geosolve.model.tools.MarkTool
+import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.MvpFragmentX
@@ -32,23 +35,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         }
 
         layout.mark_mode_button.setOnClickListener {
-            presenter.setMode(Mode.MARK_FIND)
+            presenter.tool = MarkTool
         }
 
         layout.edit_mode_button.setOnClickListener {
-            presenter.setMode(Mode.ADD)
+            presenter.tool = AddTool
         }
 
         layout.delete_mode_button.setOnClickListener {
-            presenter.setMode(Mode.DELETE)
+            presenter.tool = DeleteTool
         }
 
         layout.set_value_mode_button.setOnClickListener {
-            presenter.setMode(Mode.SET_VALUE)
+            presenter.tool = SetValueTool
         }
 
         layout.clear_button.setOnClickListener {
-            presenter.clearButtonClicked()
+            presenter.clearButtonClick()
         }
     }
 

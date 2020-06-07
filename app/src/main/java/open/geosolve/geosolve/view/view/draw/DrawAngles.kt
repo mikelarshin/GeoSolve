@@ -5,10 +5,9 @@ import android.graphics.Paint
 import android.graphics.RectF
 import open.geosolve.geosolve.AllAngles
 import open.geosolve.geosolve.GlobalFiguresController.find
-import open.geosolve.geosolve.model.MathUtil.getAngle
+import open.geosolve.geosolve.model.math.MathUtil.getDegree
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.status.SystemCoordinate
 import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
 import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
@@ -47,8 +46,7 @@ object DrawAngles {
         val centerX = angle.angleNode.x
         val centerY = angle.angleNode.y
 
-        // Данный код деактивирован до появления блокировки перемещения угла
-        if (angle.getValue() == 90f && false) {
+        if (angle.getValue() == 90f) {
             val rectDraw = RectF(
                 centerX,
                 centerY - ANGLE_ARC_RADIUS,
@@ -65,7 +63,7 @@ object DrawAngles {
                 centerY + ANGLE_ARC_RADIUS
             )
 
-            val sweepAngle = getAngle(angle.startNode, angle.angleNode, angle.finalNode)
+            val sweepAngle = getDegree(angle.startNode, angle.angleNode, angle.finalNode)
 
             systemCoordinate = SystemCoordinate.DECART
             val startNode = Node(  // TODO(Replace Node with MathPoint)
@@ -74,7 +72,7 @@ object DrawAngles {
             )
             systemCoordinate = SystemCoordinate.ABSOLUTE
 
-            val startAngle = getAngle(startNode, angle.angleNode, angle.startNode) - 90f
+            val startAngle = getDegree(startNode, angle.angleNode, angle.startNode) - 90f
 
             canvas.drawArc(rectDraw, startAngle, sweepAngle, false, mPaint)
         }

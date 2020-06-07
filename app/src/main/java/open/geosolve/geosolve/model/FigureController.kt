@@ -27,8 +27,8 @@ object FigureController {
         angle.finalLine.finalNode.neighborAngles.add(angle)
     }
 
-    fun addCircle(x: Float, y: Float) {
-        figure.mCircle = Circle(Node(x, y))
+    fun addCircle(circle: Circle) {
+        figure.mCircle = circle
     }
 
     fun updateFind() {

@@ -1,8 +1,8 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.AllLines
-import open.geosolve.geosolve.model.MathUtil.getDistanceToLine
-import open.geosolve.geosolve.model.MathUtil.isTouchOnSegment
+import open.geosolve.geosolve.model.math.MathUtil.getDistanceToLine
+import open.geosolve.geosolve.model.math.MathUtil.isTouchOnSegment
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
@@ -10,14 +10,14 @@ import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
 
 class Line(val startNode: Node, val finalNode: Node) : SolveGraph(), Bind, Element {
 
-    override fun toString(): String = (startNode.char + finalNode.char.toString())
+    override fun toString(): String = (startNode.char + finalNode.char)
 
     init {
         check(startNode != finalNode) { "Line constructor get the same Node" }
     }
 
     // Bind
-    override val bindNodeList: MutableList<Node> = mutableListOf()
+    override val bindNodes: MutableList<Node> = mutableListOf()
 
     override fun updateAllBind() {
         TODO()
