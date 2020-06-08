@@ -25,7 +25,7 @@ object NodeList : ArrayList<Node>(), ElementList {
 
     override fun update(): NodeList {
         this.clear()
-        this.addAll(figureList.flatMap { it.mNodes })
+        this.addAll(LinkedHashSet(figureList.flatMap { it.mNodes })) // Set for delete du
         return this
     }
 
@@ -41,7 +41,7 @@ object LineList : ArrayList<Line>(), ElementList {
 
     override fun update(): LineList {
         this.clear()
-        this.addAll(figureList.flatMap { it.mLines })
+        this.addAll(LinkedHashSet(figureList.flatMap { it.mLines }))
         return this
     }
 
@@ -57,7 +57,7 @@ object AngleList : ArrayList<Angle>(), ElementList {
 
     override fun update(): AngleList {
         this.clear()
-        this.addAll(figureList.flatMap { it.mAngles })
+        this.addAll(LinkedHashSet(figureList.flatMap { it.mAngles }))
         return this
     }
 
@@ -73,7 +73,7 @@ object CircleList : ArrayList<Circle>(), ElementList {
 
     override fun update(): CircleList {
         this.clear()
-        this.addAll(figureList.flatMap { listOf(it.mCircle) }.filterNotNull())
+        this.addAll(LinkedHashSet(figureList.flatMap { listOf(it.mCircle) }.filterNotNull()))
         return this
     }
 
