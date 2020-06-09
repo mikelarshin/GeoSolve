@@ -4,12 +4,11 @@ import open.geosolve.geosolve.AllNodes
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.model.data.generalized.Movable
 import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 import kotlin.properties.Delegates
 
-class Node(foundX: Float, foundY: Float) : Movable, Element {
+class Node(foundX: Float, foundY: Float) : Element {
 
     var x: Float = foundX
         get() = systemCoordinate.convertX(field)
@@ -38,15 +37,16 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
     }
 
     // Movable
-    override fun move(x: Float, y: Float) {
-        when {
-            circle != null -> circle?.move(x, y)
-            bind != null -> bind?.toBindNodeXY(this, x, y)
-            else -> {
-                this.x = x
-                this.y = y
-            }
-        }
+    fun move(x: Float, y: Float) {
+        if (neighborLines.isNotEmpty())
+            neighborLines.forEach { it.moveEvent() }
+        circle?.moveEvent()
+
+        if (bind == null) {
+            this.x = x
+            this.y = y
+        } else
+            bind?.toBindNodeXY(this, x, y)
     }
 
     // Element
@@ -69,4 +69,7 @@ class Node(foundX: Float, foundY: Float) : Movable, Element {
 
         return xBool && yBool
     }
+
+    operator fun component1() = x
+    operator fun component2() = y
 }

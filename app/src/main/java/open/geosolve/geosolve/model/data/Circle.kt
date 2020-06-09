@@ -4,7 +4,6 @@ import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.model.math.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.model.data.generalized.Movable
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.view.draw.SystemCoordinate.ABSOLUTE
 import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
@@ -13,7 +12,7 @@ import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
+class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
 
     init {
         centerNode.char = "O"
@@ -40,25 +39,12 @@ class Circle(val centerNode: Node) : SolveGraph(), Movable, Bind, Element {
     // Bind
     override val bindNodes: MutableList<Node> = mutableListOf()
 
-    override fun updateAllBind() {
-        bindNodes.forEach { it.updateXYbyBind() }
-    }
-
     override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
         node.x = centerNode.x + (decartRadius * (newX - centerNode.x) /
                 sqrt((newX - centerNode.x).pow(2) + (newY - centerNode.y).pow(2)))
 
         node.y = centerNode.y + (decartRadius * (newY - centerNode.y) /
                 sqrt((newX - centerNode.x).pow(2) + (newY - centerNode.y).pow(2)))
-    }
-
-    // Movable
-    override fun move(x: Float, y: Float) {
-        centerNode.circle = null // обходим рекурсию
-        centerNode.move(x, y)
-        centerNode.circle = this
-
-        updateAllBind()
     }
 
     // Element

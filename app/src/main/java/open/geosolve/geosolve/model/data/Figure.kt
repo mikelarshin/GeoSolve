@@ -20,6 +20,7 @@ class Figure {
     fun isEmpty(): Boolean = mNodes.isEmpty() && mLines.isEmpty() && mAngles.isEmpty() && mCircle == null
     fun isNotEmpty(): Boolean = !isEmpty()
 
+
     // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {
         val typeFigureName = typeFigure::class.simpleName

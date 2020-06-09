@@ -49,12 +49,12 @@ object DrawAngles {
         if (angle.getValue() == 90f) {
             val rectDraw = RectF(
                 centerX,
-                centerY - ANGLE_ARC_RADIUS,
-                centerX + ANGLE_ARC_RADIUS,
+                centerY - ANGLE_ARC_RADIUS / 1.5f,
+                centerX + ANGLE_ARC_RADIUS / 1.5f,
                 centerY
             )
 
-            canvas.drawRect(rectDraw, mPaint)
+            canvas.drawRect(rectDraw, mPaint) // TODO(построение такого квадратика работает только если угол слева внизу)
         } else {
             val rectDraw = RectF(
                 centerX - ANGLE_ARC_RADIUS,

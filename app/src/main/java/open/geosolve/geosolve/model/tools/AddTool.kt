@@ -28,7 +28,7 @@ object AddTool : BaseTool() {
         if (movementWasNot) {
             when (selectElement) {
                 is Node -> onTouchPoint(selectElement as Node)
-                is Line -> 0 // onTouchLine(selectElement as Line, x, y)
+                is Line -> onTouchLine(selectElement as Line, x, y)
                 is Circle -> onTouchCircleLine(selectElement as Circle, x, y)
                 null -> onTouchCanvas(x, y)
             }
