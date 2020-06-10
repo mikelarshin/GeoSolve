@@ -5,7 +5,7 @@ import open.geosolve.euclid2d.element.primitive.Line
 import open.geosolve.euclid2d.element.primitive.Point
 
 @Suppress("MemberVisibilityCanBePrivate")
-class Polygon : ComplexElement() {
+open class Polygon : ComplexElement() {
 
     protected val _points = mutableListOf<Point>()
     val points: List<Point> get() = _points
@@ -71,12 +71,20 @@ class Polygon : ComplexElement() {
         if (_points.size > 1) {
             _lines += Line(_points[_points.lastIndex - 1], _points[_points.lastIndex])
         }
+
+        // Угол
+        if (_points.size > 3) {
+            _angles += Angle(_lines[_lines.lastIndex], _lines[_lines.lastIndex - 1])
+        }
     }
 
     fun close() {
 
         // Замыкаем фигуру, соединяя первую и последнюю точку
         _lines += Line(_points.last(), _points.first())
+
+        // Замыкаем фигуру, создаём угол ммежду первой и последней линиями
+        _angles += Angle(_lines.last(), _lines.first())
     }
 
     override fun equals(other: Any?): Boolean {
@@ -92,5 +100,13 @@ class Polygon : ComplexElement() {
         lines.forEach { str += it }
 
         return str
+    }
+
+    override fun hashCode(): Int {
+        var result = _points.hashCode()
+        result = 31 * result + _lines.hashCode()
+        result = 31 * result + _angles.hashCode()
+        result = 31 * result + letters.hashCode()
+        return result
     }
 }
