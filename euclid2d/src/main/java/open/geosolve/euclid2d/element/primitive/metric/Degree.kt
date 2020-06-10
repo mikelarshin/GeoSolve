@@ -12,6 +12,16 @@ class Degree(
     val minute = LimitFloat(minute, 0f, 60f)
     val second = LimitFloat(second, 0f, 60f)
 
+    // TODO(CODE) Compare with other angle values
+    override fun equals(other: Any?): Boolean {
+        if (other !is Degree)
+            return false
+        else
+            return degree == other.degree &&
+                    minute == other.minute &&
+                    second == other.second
+    }
+
     override fun toString(): String =
         "$degree°$minute′$second″"
 }
