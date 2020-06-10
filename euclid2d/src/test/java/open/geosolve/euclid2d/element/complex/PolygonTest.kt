@@ -51,6 +51,9 @@ class PolygonTest {
         test("Проверка корректности длины сторон треугольника")
         description("Проверка длин катетов и гипотенузы")
 
+        polygon.lines.forEach { it.autoCalculateLength() }
+        ok("Вычислены дилны сторон")
+
         assert(polygon.lines[0].length == LEG_SIZE)
         ok("Первый катет корректен")
 
