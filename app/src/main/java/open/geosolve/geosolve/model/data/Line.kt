@@ -1,69 +1,66 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.AllLines
-import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.math.MathUtil.getDistanceToLine
-import open.geosolve.geosolve.model.math.MathUtil.getPointProjectToLine
-import open.geosolve.geosolve.model.math.MathUtil.isTouchLeftSegment
-import open.geosolve.geosolve.model.math.MathUtil.isTouchOnSegment
-import open.geosolve.geosolve.model.math.MathUtil.isTouchRightSegment
-import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
+import open.geosolve.geosolve.model.helper.MathHelper.distanceBetweenPoints
+import kotlin.math.sqrt
 
-class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
+/*
+ * TODO(DOC) Документировать математику в методе
+ * TODO(CODE) Убрать хардкод POINT_SIZE
+ * FIXME(CHECK) Работает ли корректно inRadius?
+ */
 
-    // all solve logic in abstract SolveGraph
+class Line(
+    var startNode: Node,
+    var finalNode: Node
+) : Element() {
 
-    val nodes = setOf(first, second)
-    val firstNode = nodes.first()
-    val secondNode = nodes.first { it != firstNode }
-
-    override fun toString(): String = "$firstNode$secondNode"
+    private val pointSize = 20f
 
     init {
-        check(firstNode != secondNode) { "Line constructor get the same Node" }
+        check(startNode != finalNode) { "Line get's the same node" }
     }
 
-    // Bind
-    override val bindNodes: MutableSet<Node> = mutableSetOf()
+    fun deleteConnections() {
+        startNode.finalLine = null
+        finalNode.startLine = null
+    }
 
-    override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
-        when {
-            isTouchOnSegment(this, newX, newY) -> {
-                val point = getPointProjectToLine(this, newX, newY)
-                node.x = point.x
-                node.y = point.y
-            }
-            isTouchLeftSegment(this, newX, newY) -> {
-                node.x = firstNode.x
-                node.y = firstNode.y
-            }
-            isTouchRightSegment(this, newX, newY) -> {
-                node.x = secondNode.x
-                node.y = secondNode.y
-            }
+    fun inRadius(x: Float, y: Float): Boolean {
+
+        val dot = { x1: Float, y1: Float,
+                    x2: Float, y2: Float ->
+            (x1 * x2) + (y1 * y2)
+        }
+
+        val distanceStart = distanceBetweenPoints(startNode.x, startNode.y, x, y)
+        val distanceFinal = distanceBetweenPoints(finalNode.x, finalNode.y, x, y)
+        val lineLength = distanceBetweenPoints(startNode.x, startNode.y, finalNode.x, finalNode.y)
+
+        val per: Float = (distanceStart + distanceFinal + lineLength) / 2
+
+        val distance: Float = sqrt(
+            per * (per - distanceStart) *
+                    (per - distanceFinal) *
+                    (per - lineLength)
+        ) / lineLength
+
+        return when {
+            dot(
+                x - startNode.x,
+                y - startNode.y,
+                finalNode.x - startNode.x,
+                finalNode.y - startNode.y
+            ) >= 0 &&
+                    dot(
+                        x - finalNode.x,
+                        y - finalNode.y,
+                        startNode.x - finalNode.x,
+                        startNode.y - finalNode.y
+                    ) >= 0 -> distance < pointSize / 40
+
+            else -> false
         }
     }
 
-    // Element
-    override fun remove() {
-        firstNode.lines.remove(this)
-        secondNode.lines.remove(this)
-
-        AllLines.remove(this)
-    }
-
-    override fun inRadius(x: Float, y: Float): Boolean {
-        val useTouchZone = LINE_WIDTH / 30
-
-        return if (isTouchOnSegment(this, x, y))
-            getDistanceToLine(this, x, y) < useTouchZone
-        else
-            false
-    }
-
-    fun equal(line: Line): Boolean =
-                (this.firstNode == line.firstNode && this.secondNode == line.secondNode) ||
-                (this.firstNode == line.secondNode && this.secondNode == line.firstNode)
+    override fun toString(): String = "${startNode.char}${finalNode.char}"
 }

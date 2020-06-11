@@ -1,76 +1,49 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.AllNodes
-import open.geosolve.geosolve.GlobalFiguresController.find
-import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
-import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
 import kotlin.properties.Delegates
 
-class Node(foundX: Float, foundY: Float) : Element {
+/*
+ * TODO(CODE) Убрать хардкод POINT_SIZE
+ */
 
-    var x: Float = foundX
-        get() = systemCoordinate.convertX(field)
-    var y: Float = foundY
-        get() = systemCoordinate.convertY(field)
+class Node(
+    var x: Float,
+    var y: Float
+) {
 
-    var char by Delegates.notNull<String>()
-    override fun toString(): String = char
+    private val POINT_SIZE = 20f
 
-    var circle: Circle? = null
-    val angles: MutableSet<Angle> = mutableSetOf()
-    val lines: MutableSet<Line> = mutableSetOf()
+    var char by Delegates.notNull<Char>()
 
-    val centerAngles
-        get() = angles.filter { it.angleNode == this }
+    var startLine: Line? = null
+    var finalLine: Line? = null
 
-    // Bind
-    var bind: Bind? = null
-        set(value) {
-            field?.bindNodes?.remove(this)
-            value?.bindNodes?.add(this)
-            field = value
-            updateXYbyBind()
-        }
+    var startAngle: Angle? = null
+    var centerAngle: Angle? = null
+    var finalAngle: Angle? = null
 
-    fun updateXYbyBind() {
-        bind?.toBindNodeXY(this, x, y)
+    fun deleteConnections() {
+        startLine?.deleteConnections()
+        finalLine?.deleteConnections()
+
+        startAngle?.deleteConnections()
+        centerAngle?.deleteConnections()
+        finalAngle?.deleteConnections()
     }
 
-    // Movable
-    fun move(x: Float, y: Float) {
-        lines.forEach { it.moveEvent() }
-        circle?.moveEvent()
-
-        if (bind == null) {
-            this.x = x
-            this.y = y
-        } else
-            bind?.toBindNodeXY(this, x, y)
+    fun moveNode(x: Float, y: Float) {
+        this.x = x
+        this.y = y
     }
 
-    // Element
-    override fun remove() {
-        for (element in lines + angles + centerAngles) {
-            if (find == element)
-                find = null
-            (element as Element?)?.remove()
-        }
+    fun inRadius(x: Float, y: Float): Boolean {
+        val radius = POINT_SIZE / 20
 
-        AllNodes.remove(this)
-    }
-
-    override fun inRadius(x: Float, y: Float): Boolean {
-        val useTouchZone = POINT_SIZE / 30
-
-        val xBool = this.x - useTouchZone < x && x < this.x + useTouchZone
-
-        val yBool = this.y - useTouchZone < y && y < this.y + useTouchZone
+        val xBool = this.x - radius < x && x < this.x + radius
+        val yBool = this.y - radius < y && y < this.y + radius
 
         return xBool && yBool
     }
 
-    operator fun component1() = x
-    operator fun component2() = y
+    override fun toString(): String = char.toString()
 }

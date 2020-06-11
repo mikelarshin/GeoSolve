@@ -1,78 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="16dp">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/formula"
         style="@style/TemplateText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="CA = √(BC² - AB²)"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/description_group"
+        app:layout_constraintEnd_toStartOf="@id/toggle_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/openButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
+        android:id="@+id/toggle_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_down"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_arrow_down" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rule_layout"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/description_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="arrow_down_image,verbal,expression" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrow_down_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/formula"
+        app:srcCompat="@drawable/ic_arrow_long_down" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/verbal"
+        style="@style/TemplateText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone"
+        android:padding="4dp"
+        android:text="Присваиваем катету %s корень разности квадратов гипотенузы %s и катета %s."
+        app:layout_constraintBottom_toBottomOf="@id/arrow_down_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/arrow_down_image"
+        app:layout_constraintTop_toTopOf="@id/arrow_down_image" />
+
+    <TextView
+        android:id="@+id/expression"
+        style="@style/TemplateText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="4.3 = √(5² - 2.5²)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/formula"
-        app:layout_constraintTop_toBottomOf="@+id/formula">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/arrow_down_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_long_down"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/verbal"
-            style="@style/TemplateText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="Присваиваем катету %s корень разности квадратов гипотенузы %s и катета %s."
-            app:layout_constraintBottom_toBottomOf="@+id/arrow_down_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/arrow_down_image"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/expression"
-            style="@style/TemplateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="4.3 = √(5² - 2.5²)"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/arrow_down_image" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrow_down_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
