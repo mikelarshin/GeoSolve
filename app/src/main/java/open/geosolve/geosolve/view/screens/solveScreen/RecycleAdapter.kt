@@ -52,7 +52,7 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
                 } else {
                     it.rule_layout.visibility = View.VISIBLE
                     itemParams.bottomToBottom = -1
-                    it.openButton.setImageResource(R.drawable.ic_close)
+                    it.openButton.setImageResource(R.drawable.ic_close_button)
                     holder.isOpen = true
                 }
             }

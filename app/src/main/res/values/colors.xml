@@ -3,6 +3,7 @@
     <color name="colorPrimary">#000</color>
     <color name="colorPrimaryDark">#673AB7</color>
     <color name="colorAccent">#DDD</color>
+    <color name="buttonIcon">@color/colorPrimary</color>
 
     <color name="all_lines">#3000</color> // Normal value #CCC
 
