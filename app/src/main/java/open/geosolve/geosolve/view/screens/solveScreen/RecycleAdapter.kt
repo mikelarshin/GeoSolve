@@ -16,10 +16,6 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
     companion object {
         private var stepSolveList: MutableList<SolveGraph> = ArrayList()
 
-        fun addItem(stepSolve: SolveGraph) {
-            stepSolveList.add(stepSolve)
-        }
-
         fun clear() {
             stepSolveList.clear()
         }

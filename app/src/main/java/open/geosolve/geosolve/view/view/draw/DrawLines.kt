@@ -29,8 +29,8 @@ object DrawLines {
 
             val text = formatValueString(line)
 
-            val centerX = (line.startNode.x + line.finalNode.x) / 2 - TEXT_SIZE * text.length / 3.5f
-            val centerY = (line.startNode.y + line.finalNode.y) / 2 + TEXT_SIZE / 3.5f
+            val centerX = (line.firstNode.x + line.secondNode.x) / 2 - TEXT_SIZE * text.length / 3.5f
+            val centerY = (line.firstNode.y + line.secondNode.y) / 2 + TEXT_SIZE / 3.5f
 
             canvas.drawText(text, centerX, centerY, mPaintText)
         }
@@ -38,8 +38,8 @@ object DrawLines {
 
     private fun drawLine(canvas: Canvas, line: Line, mPaint: Paint = mPaintLine) {
         canvas.drawLine(
-            line.startNode.x, line.startNode.y,
-            line.finalNode.x, line.finalNode.y,
+            line.firstNode.x, line.firstNode.y,
+            line.secondNode.x, line.secondNode.y,
             mPaint
         )
     }

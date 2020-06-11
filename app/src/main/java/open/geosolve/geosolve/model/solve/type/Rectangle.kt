@@ -13,7 +13,7 @@ object Rectangle : SolveFigure {
 
     override fun setGraphs(figure: Figure) {
         for (i in 0..3)
-            figure.mLines[i].onKnownFunList.add { thisElement ->
+            figure.mLines[i].onKnownFunctions.add { thisElement ->
                 if ((thisElement.getValue() != null) and (figure.mLines[(i + 2) % 4].getValue() == null))
                     figure.mLines[(i + 2) % 4].setDependentValueGraph(
                         { thisElement.getValue() },
@@ -28,7 +28,7 @@ object Rectangle : SolveFigure {
             }
 
         for (i in 0..3) {
-            figure.mAngles[i].onKnownFunList.add { thisElement ->
+            figure.mAngles[i].onKnownFunctions.add { thisElement ->
                 for (j in 1..3)
                     if (figure.mAngles[(i + j) % 4].getValue() == null)
                         figure.mAngles[(i + j) % 4].setValueGraph(

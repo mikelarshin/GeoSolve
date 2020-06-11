@@ -5,10 +5,9 @@ import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
-import org.w3c.dom.Element
 
 val AllNodes
-    get() = NodeList.update()
+    get() = NodeSet.update()
 val AllLines
     get() = LineList.update()
 val AllAngles
@@ -17,15 +16,15 @@ val AllCircles: CircleList
     get() = CircleList.update()
 
 
-interface ElementList {
+private interface ElementList {
     fun update(): ElementList
 }
 
-object NodeList : ArrayList<Node>(), ElementList {
+object NodeSet : LinkedHashSet<Node>(), ElementList {
 
-    override fun update(): NodeList {
+    override fun update(): NodeSet {
         this.clear()
-        this.addAll(LinkedHashSet(figureList.flatMap { it.mNodes })) // Set for delete du
+        this.addAll(figureList.flatMap { it.mNodes })
         return this
     }
 
@@ -37,11 +36,11 @@ object NodeList : ArrayList<Node>(), ElementList {
     }
 }
 
-object LineList : ArrayList<Line>(), ElementList {
+object LineList : HashSet<Line>(), ElementList {
 
     override fun update(): LineList {
         this.clear()
-        this.addAll(LinkedHashSet(figureList.flatMap { it.mLines }))
+        this.addAll(figureList.flatMap { it.mLines })
         return this
     }
 
@@ -53,11 +52,11 @@ object LineList : ArrayList<Line>(), ElementList {
     }
 }
 
-object AngleList : ArrayList<Angle>(), ElementList {
+object AngleList : HashSet<Angle>(), ElementList {
 
     override fun update(): AngleList {
         this.clear()
-        this.addAll(LinkedHashSet(figureList.flatMap { it.mAngles }))
+        this.addAll(figureList.flatMap { it.mAngles })
         return this
     }
 
@@ -69,11 +68,11 @@ object AngleList : ArrayList<Angle>(), ElementList {
     }
 }
 
-object CircleList : ArrayList<Circle>(), ElementList {
+object CircleList : HashSet<Circle>(), ElementList {
 
     override fun update(): CircleList {
         this.clear()
-        this.addAll(LinkedHashSet(figureList.flatMap { listOf(it.mCircle) }.filterNotNull()))
+        this.addAll(figureList.flatMap { listOf(it.mCircle) }.filterNotNull())
         return this
     }
 

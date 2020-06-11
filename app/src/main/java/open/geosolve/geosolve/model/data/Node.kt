@@ -19,9 +19,11 @@ class Node(foundX: Float, foundY: Float) : Element {
     override fun toString(): String = char
 
     var circle: Circle? = null
-    var centerAngle: Angle? = null
-    val neighborAngles: MutableList<Angle> = mutableListOf()
-    val neighborLines: MutableList<Line> = mutableListOf()
+    val angles: MutableSet<Angle> = mutableSetOf()
+    val lines: MutableSet<Line> = mutableSetOf()
+
+    val centerAngles
+        get() = angles.filter { it.angleNode == this }
 
     // Bind
     var bind: Bind? = null
@@ -38,8 +40,7 @@ class Node(foundX: Float, foundY: Float) : Element {
 
     // Movable
     fun move(x: Float, y: Float) {
-        if (neighborLines.isNotEmpty())
-            neighborLines.forEach { it.moveEvent() }
+        lines.forEach { it.moveEvent() }
         circle?.moveEvent()
 
         if (bind == null) {
@@ -51,7 +52,7 @@ class Node(foundX: Float, foundY: Float) : Element {
 
     // Element
     override fun remove() {
-        for (element in neighborLines + neighborAngles + centerAngle) {
+        for (element in lines + angles + centerAngles) {
             if (find == element)
                 find = null
             (element as Element?)?.remove()

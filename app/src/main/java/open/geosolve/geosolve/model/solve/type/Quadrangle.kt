@@ -14,7 +14,7 @@ object Quadrangle : SolveFigure {
     }
 
     override fun setSubType(figure: Figure) {
-        figure.subTypeFigure = when {
+        figure.subTypeSolve = when {
             Rectangle.isMatch(figure) -> Rectangle
             else -> UnknownFigure
         }

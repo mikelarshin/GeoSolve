@@ -27,7 +27,7 @@ object DrawCircles {
             )
 
             canvas.drawText(
-                centerNode.char,
+                centerNode.toString(),
                 centerNode.x - PaintConstant.TEXT_MARGIN,
                 centerNode.y - PaintConstant.TEXT_MARGIN,
                 PaintConstant.mPaintText

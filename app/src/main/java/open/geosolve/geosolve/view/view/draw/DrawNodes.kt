@@ -19,7 +19,7 @@ object DrawNodes {
     fun drawNodesName(canvas: Canvas) {
         for (node in AllNodes) {
             canvas.drawText(
-                node.char,
+                node.toString(),
                 node.x - TEXT_MARGIN,
                 node.y - TEXT_MARGIN,
                 mPaintText

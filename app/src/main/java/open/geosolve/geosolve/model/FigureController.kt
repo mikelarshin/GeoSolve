@@ -15,16 +15,15 @@ object FigureController {
     fun addLine(line: Line) {
         figure.mLines.add(line)
 
-        line.startNode.neighborLines.add(line)
-        line.finalNode.neighborLines.add(line)
+        line.firstNode.lines.add(line)
+        line.secondNode.lines.add(line)
     }
 
     fun addAngle(angle: Angle) {
         figure.mAngles.add(angle)
 
-        angle.startLine.startNode.neighborAngles.add(angle)
-        angle.startLine.finalNode.centerAngle = angle
-        angle.finalLine.finalNode.neighborAngles.add(angle)
+        angle.startNode.angles.add(angle)
+        angle.finalNode.angles.add(angle)
     }
 
     fun addCircle(circle: Circle) {
@@ -34,6 +33,5 @@ object FigureController {
     fun updateFind() {
         if (find !in figure.mAngles + figure.mLines + figure.mCircle)
             find = null
-
     }
 }

@@ -51,7 +51,6 @@ abstract class BaseTool : Tool {
         val alphabet2 = ('A'..'Z').toList()
 
         val nodes = AllNodes.filter { it !in circleNodeList }
-        val nodesFix = figureList.flatMap { it.mNodes }
 
         for (index in nodes.indices)
             nodes[index].char = "${alphabet1[index / 26]}${alphabet2[index % 26]}"

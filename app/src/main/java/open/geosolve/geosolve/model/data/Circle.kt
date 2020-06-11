@@ -14,6 +14,8 @@ import kotlin.math.sqrt
 
 class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
 
+    // all solve logic in abstract SolveGraph
+
     init {
         centerNode.char = "O"
         centerNode.circle = this
@@ -37,7 +39,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
     }
 
     // Bind
-    override val bindNodes: MutableList<Node> = mutableListOf()
+    override val bindNodes: MutableSet<Node> = mutableSetOf()
 
     override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
         node.x = centerNode.x + (decartRadius * (newX - centerNode.x) /

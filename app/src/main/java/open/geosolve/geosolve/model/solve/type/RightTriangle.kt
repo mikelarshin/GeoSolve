@@ -18,7 +18,7 @@ object RightTriangle : SolveFigure {
     override fun setGraphs(figure: Figure) {
         val rightAngle = figure.mAngles.first { it.getValue() == 90f }
 
-        val legs: List<Line> = listOf(rightAngle.startLine, rightAngle.finalLine)
+        val legs: List<Line> = rightAngle.lines
         val hypotenuse = figure.mLines.first { !legs.contains(it) }
         val noRightAngles: List<Angle> = figure.mAngles.filter { it != rightAngle }
 
@@ -31,7 +31,7 @@ object RightTriangle : SolveFigure {
 
     private fun legsKnownHypotenuseUnknown(legs: List<Line>, hypotenuse: Line) { // известны катеты, ищем гипотенузу
         for (i in 0..1) {
-            legs[i].onKnownFunList.add { oneLeg ->
+            legs[i].onKnownFunctions.add { oneLeg ->
                 val twoLeg = legs[(i + 1) % 2]
                 // TODO(создать функцию которая берёт следующий по списку элемент как здесь)
 
@@ -57,7 +57,7 @@ object RightTriangle : SolveFigure {
 
     private fun degrees30Rule(noRightAngles: List<Angle>, hypotenuse: Line) {
         noRightAngles.forEach { angle ->
-            angle.onKnownFunList.add { thisAngle ->
+            angle.onKnownFunctions.add { thisAngle ->
                 if (thisAngle.getValue() == 30f && // новый угол в 30 градусов
                     hypotenuse.getValue() != null) { // есть значение гипотенузы
 
@@ -83,7 +83,7 @@ object RightTriangle : SolveFigure {
 
     private fun findLegKnownLegAndHypotRule(hypotenuse: Line, legs: List<Line>) {
         for (i in 0..1) {
-            legs[i].onKnownFunList.add { thisLeg ->
+            legs[i].onKnownFunctions.add { thisLeg ->
                 if (hypotenuse.getValue() != null) {
                     val unknownLeg = legs[(i + 1) % 2]
 

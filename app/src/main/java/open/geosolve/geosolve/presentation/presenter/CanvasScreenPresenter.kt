@@ -8,6 +8,7 @@ import moxy.MvpPresenter
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.GlobalFiguresController.figureList
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.ElementUpdaters
 import open.geosolve.geosolve.model.FigureController
 import open.geosolve.geosolve.model.FigureController.figure
 import open.geosolve.geosolve.model.data.Figure

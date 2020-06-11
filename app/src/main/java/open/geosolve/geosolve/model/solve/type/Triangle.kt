@@ -18,7 +18,7 @@ object Triangle : SolveFigure {
             throw Exception("Received triangle with sum of all angle not equal 180 TODO()") // TODO say this for user
 
         for (i in 0..2)
-            figure.mAngles[i].onKnownFunList.add { thisElement ->
+            figure.mAngles[i].onKnownFunctions.add { thisElement ->
                 if (figure.mAngles.filter { it.getValue() != null }.size == 2) {
 
                     val known_angles = figure.mAngles.filter { it.getValue() != null }
@@ -41,7 +41,7 @@ object Triangle : SolveFigure {
     }
 
     override fun setSubType(figure: Figure) {
-        figure.subTypeFigure = when {
+        figure.subTypeSolve = when {
             RightTriangle.isMatch(figure) -> RightTriangle
             else -> UnknownFigure
         }

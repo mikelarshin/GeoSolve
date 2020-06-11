@@ -13,22 +13,22 @@ import open.geosolve.geosolve.model.solve.type.*
 object SolveUtil {
 
     private fun setTypeSolve(figure: Figure) {
-        figure.typeFigure = when {
+        figure.typeSolve = when {
             CircleFigure.isMatch(figure) -> CircleFigure
             Quadrangle.isMatch(figure) -> Quadrangle
             Triangle.isMatch(figure) -> Triangle
             AngleFigure.isMatch(figure) -> AngleFigure
             else -> UnknownFigure
         }
-        figure.typeFigure.setSubType(figure)
+        figure.typeSolve.setSubType(figure)
     }
 
     fun solveGraphs() {
         for (figure in figureList) {
             setTypeSolve(figure)
             zeroGraph(figure)
-            figure.typeFigure.setGraphs(figure)
-            figure.subTypeFigure.setGraphs(figure)
+            figure.typeSolve.setGraphs(figure)
+            figure.subTypeSolve.setGraphs(figure)
         }
 
         for (element in (AllLines + AllAngles + AllCircles))
@@ -36,8 +36,8 @@ object SolveUtil {
     }
 
     private fun zeroGraph(figure: Figure) {
-        figure.mLines.map { it.onKnownFunList.clear() }
-        figure.mAngles.map { it.onKnownFunList.clear() }
+        figure.mLines.map { it.onKnownFunctions.clear() }
+        figure.mAngles.map { it.onKnownFunctions.clear() }
     }
 
     fun showStepSolveList(callback: CallBackSolveUi) {

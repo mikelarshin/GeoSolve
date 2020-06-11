@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#673AB7</color>
     <color name="colorAccent">#DDD</color>
 
-    <color name="all_lines">#CCC</color> // Debug value 3000
+    <color name="all_lines">#3000</color> // Normal value #CCC
 
     <color name="color_node">@color/colorPrimary</color>
     <color name="color_mark">@color/colorPrimaryDark</color>

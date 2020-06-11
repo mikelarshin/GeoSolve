@@ -45,9 +45,9 @@ object MathUtil {
 
     // Line
     fun getDistanceToLine(line: Line, x: Float, y: Float): Float {
-        val distanceStart: Float = distanceBetweenPoints(line.startNode, x, y)
-        val distanceFin: Float = distanceBetweenPoints(line.finalNode, x, y)
-        val lineLength: Float = distanceBetweenPoints(line.startNode, line.finalNode)
+        val distanceStart: Float = distanceBetweenPoints(line.firstNode, x, y)
+        val distanceFin: Float = distanceBetweenPoints(line.secondNode, x, y)
+        val lineLength: Float = distanceBetweenPoints(line.firstNode, line.secondNode)
 
         val per = (distanceStart + distanceFin + lineLength) / 2
 
@@ -55,7 +55,7 @@ object MathUtil {
     }
 
     fun getPointProjectToLine(line: Line, x: Float, y: Float): MathPoint {
-        val vectorAB = normalize(getVectorPoint(line.startNode, line.finalNode))
+        val vectorAB = normalize(getVectorPoint(line.firstNode, line.secondNode))
         val length = scalarProduct(vectorAB, MathPoint(x, y))
         return MathPoint(vectorAB.x * length, vectorAB.y * length)
     }
@@ -66,8 +66,8 @@ object MathUtil {
 
     fun isTouchRightSegment(line: Line, x: Float, y: Float): Boolean {
         val angleRight = scalarProduct(
-            MathPoint(x - line.startNode.x, y - line.startNode.y),
-            MathPoint(line.finalNode.x - line.startNode.x, line.finalNode.y - line.startNode.y)
+            MathPoint(x - line.firstNode.x, y - line.firstNode.y),
+            MathPoint(line.secondNode.x - line.firstNode.x, line.secondNode.y - line.firstNode.y)
         )
 
         return angleRight >= 0
@@ -75,8 +75,8 @@ object MathUtil {
 
     fun isTouchLeftSegment(line: Line, x: Float, y: Float): Boolean {
         val angleLeft = scalarProduct(
-            MathPoint(x - line.finalNode.x, y - line.finalNode.y),
-            MathPoint(line.startNode.x - line.finalNode.x, line.startNode.y - line.finalNode.y)
+            MathPoint(x - line.secondNode.x, y - line.secondNode.y),
+            MathPoint(line.firstNode.x - line.secondNode.x, line.firstNode.y - line.secondNode.y)
         )
 
         return angleLeft >= 0
