@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#000</color>
+    <color name="colorPrimaryDark">#673AB7</color>
+    <color name="colorAccent">#DDD</color>
 
-    <color name="primary">#000</color>
-    <color name="primaryDark">#8072E5</color>
-    <color name="accent">#FFF</color>
-    <color name="secondary">#FFF</color>
+    <color name="all_lines">#3000</color> // Normal value #CCC
 
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <color name="color_node">@color/colorPrimary</color>
+    <color name="color_mark">@color/colorPrimaryDark</color>
 
-    <color name="field_node">#000</color>
-    <color name="field_line">#CCC</color>
-    <color name="field_angle">#000</color>
-    <color name="field_mark">#DF1616</color>
-    <color name="field_text">#000</color>
+    <color name="color_line">@color/all_lines</color>
+    <color name="color_circle">@color/all_lines</color>
+    <color name="color_angle_arc">@color/all_lines</color>
 
-    <color name="color_selected">#8072E5</color>
-    <color name="color_unselected">#FFFFFF</color>
-
+    <color name="canvas_text_color">@color/colorPrimary</color>
 </resources>

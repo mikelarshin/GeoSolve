@@ -1,30 +1,48 @@
 package open.geosolve.geosolve.model.data
 
-import java.util.*
-
-/*
- * TODO(DOC) Документировать хранение фигуры в классе
- */
+import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.solve.SolveFigure
+import open.geosolve.geosolve.model.solve.type.UnknownFigure
 
 class Figure {
 
-    val isClose: Boolean get() = if (lines.size != 0) lines.first().startNode == lines.last().finalNode else false
+    val mNodes: MutableSet<Node> = linkedSetOf()
+    val mLines: MutableList<Line> = mutableListOf()
+    val mAngles: MutableList<Angle> = mutableListOf()
+    var mCircle: Circle? = null
 
-    var find: Element? = null
-    val nodes: MutableList<Node> = ArrayList()
-    val lines: MutableList<Line> = ArrayList()
-    val angles: MutableList<Angle> = ArrayList()
+    var square: Int? = null // TODO(implement this)
 
-    fun clear() {
-        find = null
-        nodes.clear()
-        lines.clear()
-        angles.clear()
-    }
+    var typeSolve: SolveFigure = UnknownFigure
+    var subTypeSolve: SolveFigure = UnknownFigure
 
+    fun isComplete(): Boolean = isClose() || mCircle != null
+    fun isClose(): Boolean = mLines.size != 0 && mLines.first().firstNode == mLines.last().secondNode // TODO(Обязательно переписать это)
+    fun isEmpty(): Boolean = mNodes.isEmpty() && mLines.isEmpty() && mAngles.isEmpty() && mCircle == null
+    fun isNotEmpty(): Boolean = !isEmpty()
+
+    fun contains(element: Element) =
+                mNodes .contains(element) ||
+                mLines .contains(element) ||
+                mAngles.contains(element) ||
+                mCircle == element
+
+
+    // TODO(DELETE THIS DEBUGGER)
     override fun toString(): String {
-        return "Nodes: ${nodes.size} \n" +
-                "Lines: ${lines.size} \n" +
-                "Angles: ${angles.size} \n\n"
+        val typeFigureName = typeSolve::class.simpleName
+//        val subTypeFigureName = subTypeFigure::class.simpleName
+
+        return "$typeFigureName\n" +
+                when {
+                    isEmpty() -> ""
+
+                    mCircle == null -> "Nodes: ${mNodes.joinToString { "$it" }}   \n" +
+                            "Lines: ${mLines.joinToString { "$it" }}   \n" +
+                            "Angles: ${mAngles.joinToString { "$it" }}"
+
+                    else -> "Circle"
+                }
+
     }
 }

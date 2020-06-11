@@ -2,20 +2,19 @@
 <resources>
 
     <style name="TemplateText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/primary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="Bold" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/primary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AnswerText" parent="Theme.AppCompat">
-        <item name="android:textColor">@color/field_mark</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/color_mark</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

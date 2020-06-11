@@ -4,11 +4,14 @@ import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.SolveFigure
 
 object AngleFigure : SolveFigure {
-    override fun isMatch(figure: Figure): Boolean {
-        return figure.nodes.size == 3 && figure.angles.size == 1 && figure.lines.size == 2
-    }
+    override fun isMatch(figure: Figure): Boolean =
+        figure.mNodes.size == 3
+                && figure.mAngles.size == 1
+                && figure.mLines.size == 2
+
 
     override fun setGraphs(figure: Figure) {
-        // TODO(CODE) Create graph
+        // TODO("Not yet implemented")
     }
+    override fun setSubType(figure: Figure) {}
 }
