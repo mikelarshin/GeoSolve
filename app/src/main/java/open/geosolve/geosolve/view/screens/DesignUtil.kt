@@ -78,14 +78,12 @@ object DesignUtil {
         return sb.subSequence(0, sb.length)
     }
 
-    fun formatAlertMessage(messageId: Int): CharSequence {
-        val text = App.instance.getString(messageId).split(" ")
-        val templateText = "${text[0]} ${text[1]} "
-        val importantText = text[2]
+    fun formatAlertMessage(messageId: Int, element: String): CharSequence {
+        val templateText = App.instance.getString(messageId) + " "
 
         val sb = SpannableStringBuilder()
             .append(formatText(templateText, R.style.TemplateText))
-            .append(formatText(importantText, R.style.AnswerText))
+            .append(formatText(element, R.style.AnswerText))
         return sb.subSequence(0, sb.length)
     }
 

@@ -26,7 +26,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
 
     init {
         SetValueTool.callBack = { message: Int, element: SolveGraph ->
-            viewState.showDialog(message) {
+            viewState.showDialog(message, element.toString()) {
                 element.setValueDraw(it)
                 solveAndCallBack()
             }

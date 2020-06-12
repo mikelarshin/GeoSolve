@@ -21,6 +21,8 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
         centerNode.circle = this
     }
 
+    override fun toString() = "" // TODO(implement)
+
     var radiusLineList: MutableList<Line> = mutableListOf() // TODO(implement this)
 
     var drawRadius: Float = 0f

@@ -67,8 +67,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         Toast.makeText(context, messageID, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showDialog(titleID: Int, inputCallback: (value: Float) -> Unit) {
-        val alertMessage = DesignUtil.formatAlertMessage(titleID)
+    override fun showDialog(titleID: Int, element: String, inputCallback: (value: Float) -> Unit) {
+        val alertMessage = DesignUtil.formatAlertMessage(titleID, element)
 
         AlertDialog.Builder(activity)
             .setTitle(alertMessage)
