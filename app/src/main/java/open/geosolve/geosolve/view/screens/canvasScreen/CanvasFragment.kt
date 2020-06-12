@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
-import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.tools.AddTool
 import open.geosolve.geosolve.model.tools.DeleteTool
@@ -86,6 +86,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showTypeFigure() {
-        DELETE_THIS_DEBUGGER.text = figureList.joinToString(separator = "\n\n") { "$it" }
+        DELETE_THIS_DEBUGGER.text = FigureList.joinToString(separator = "\n\n") { "$it" }
     }
 }

@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.tools
 
-import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.model.FigureController.addCircle
 import open.geosolve.geosolve.model.FigureController.figure
 import open.geosolve.geosolve.model.TouchEvent.onTouchCanvas
@@ -20,7 +20,7 @@ object AddTool : BaseTool() {
 
         if (selectElement == null && moveQuantity == 6) {
             if (figure.isNotEmpty())
-                figureList.add(Figure()) // переходим на следующую фигуру
+                FigureList.add(Figure()) // переходим на следующую фигуру
 
             val circle = Circle(Node(x, y))
             addCircle(circle)

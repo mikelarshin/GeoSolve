@@ -50,7 +50,8 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
     }
 
     // Element
-    override fun remove() {
+    override fun remove() { // TODO(rewrite remove system)
+        centerNode.circle = null
         centerNode.remove()
 
         AllCircles.remove(this)

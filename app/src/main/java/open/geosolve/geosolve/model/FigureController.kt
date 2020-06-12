@@ -1,12 +1,12 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.*
 
 object FigureController {
 
-    val figure: Figure get() = figureList.last()
+    val figure: Figure get() = FigureList.last()
 
     fun addNode(node: Node) {
         figure.mNodes.add(node)
@@ -22,8 +22,8 @@ object FigureController {
     fun addAngle(angle: Angle) {
         figure.mAngles.add(angle)
 
-        angle.startNode.angles.add(angle)
-        angle.finalNode.angles.add(angle)
+        angle.lines.forEach { it.angles.add(angle) }
+        angle.nodes.forEach { it.angles.add(angle) }
     }
 
     fun addCircle(circle: Circle) {

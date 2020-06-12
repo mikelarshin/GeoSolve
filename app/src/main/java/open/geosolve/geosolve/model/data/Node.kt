@@ -1,7 +1,6 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.AllNodes
-import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
@@ -51,12 +50,10 @@ class Node(foundX: Float, foundY: Float) : Element {
     }
 
     // Element
-    override fun remove() {
-        for (element in lines + angles + centerAngles) {
-            if (find == element)
-                find = null
-            (element as Element?)?.remove()
-        }
+    override fun remove() { // TODO(rewrite remove system)
+        lines.forEach { it.remove() }
+        angles.forEach { it.remove() }
+        circle?.remove()
 
         AllNodes.remove(this)
     }

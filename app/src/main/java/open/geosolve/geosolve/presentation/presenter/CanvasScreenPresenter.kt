@@ -6,12 +6,8 @@ import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.App
-import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.ElementUpdaters
-import open.geosolve.geosolve.model.FigureController
-import open.geosolve.geosolve.model.FigureController.figure
-import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil
@@ -86,18 +82,9 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
     }
 
     fun clearButtonClick() {
-        if (figureList.size > 1 && figure.isEmpty()) {
-            FigureController.updateFind()
-            figureList.remove(figure)
-        }
-        if (figureList.isNotEmpty()) {
-            FigureController.updateFind()
-            figureList.remove(figure)
-        }
-
         lastNode = null
 
-        figureList.add(Figure())
+        FigureList.clear()
 
         viewState.showTypeFigure()
         viewState.updateCanvas()

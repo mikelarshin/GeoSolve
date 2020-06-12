@@ -2,11 +2,10 @@ package open.geosolve.geosolve.model.tools
 
 import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.AllNodes
-import open.geosolve.geosolve.GlobalFiguresController.figureList
+import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.model.ElementGetter.getElement
 import open.geosolve.geosolve.model.FigureController.figure
 import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.data.generalized.Element
 
@@ -40,7 +39,7 @@ abstract class BaseTool : Tool {
         setNodeChars()
 
         if (figure.isComplete())
-            figureList.add(Figure()) // переход на следующую фигуру
+            FigureList.nextFigure() // переход на следующую фигуру
     }
 
     fun setNodeChars() {

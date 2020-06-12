@@ -56,11 +56,9 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
         return (distanceToAngleArc < useTouchZone) && isPointInAngle(this, x, y)
     }
 
-    override fun remove() {
-        val nodeList = listOf(startNode, angleNode, finalNode)
-        for (node in nodeList) {
-            node.angles.remove(this)
-        }
+    override fun remove() { // TODO(rewrite remove system)
+//        startLine.remove()
+//        finalLine.remove()
 
         AllAngles.remove(this)
     }

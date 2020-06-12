@@ -24,7 +24,7 @@ internal object ElementUpdaters {
     }
 
     fun updateAngles() {
-        for (startLine in figure.mLines)
+        for (startLine in figure.mLines) // TODO(сделай по всем линиям но только как перепишешь isClose)
             for (finalLine in figure.mLines)
                 if (startLine != finalLine && isCorrectNodes(startLine, finalLine) && !AllAngles.any { it.equal(startLine, finalLine) })
                     addAngle(Angle(startLine, finalLine))

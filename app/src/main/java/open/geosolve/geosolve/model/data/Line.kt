@@ -16,6 +16,7 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
     // all solve logic in abstract SolveGraph
 
     val nodes = setOf(first, second)
+    val angles = mutableSetOf<Angle>()
     val firstNode = nodes.first()
     val secondNode = nodes.first { it != firstNode }
 
@@ -47,9 +48,10 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
     }
 
     // Element
-    override fun remove() {
-        firstNode.lines.remove(this)
-        secondNode.lines.remove(this)
+    override fun remove() { // TODO(rewrite remove system)
+//        firstNode.lines.remove(this)
+//        secondNode.lines.remove(this)
+//        angles.forEach { it.remove() }
 
         AllLines.remove(this)
     }
@@ -64,6 +66,6 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
     }
 
     fun equal(line: Line): Boolean =
-                (this.firstNode == line.firstNode && this.secondNode == line.secondNode) ||
+        (this.firstNode == line.firstNode && this.secondNode == line.secondNode) ||
                 (this.firstNode == line.secondNode && this.secondNode == line.firstNode)
 }
