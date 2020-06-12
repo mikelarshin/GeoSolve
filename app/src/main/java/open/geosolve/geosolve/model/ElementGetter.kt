@@ -18,12 +18,12 @@ object ElementGetter {
             return angle
         }
 
-        getCircle(x, y)?.let { circle ->
-            return circle
-        }
-
         getNode(x, y)?.let { node ->
             return node
+        }
+
+        getCircle(x, y)?.let { circle ->
+            return circle
         }
 
         getLine(x, y)?.let { line ->
