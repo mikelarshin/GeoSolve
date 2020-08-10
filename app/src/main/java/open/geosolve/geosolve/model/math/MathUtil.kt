@@ -3,6 +3,8 @@ package open.geosolve.geosolve.model.math
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
+import open.geosolve.geosolve.view.view.draw.SystemCoordinate
 import kotlin.math.*
 
 
@@ -55,9 +57,18 @@ object MathUtil {
     }
 
     fun getPointProjectToLine(line: Line, x: Float, y: Float): MathPoint {
-        val vectorAB = normalize(getVectorPoint(line.firstNode, line.secondNode))
-        val length = scalarProduct(vectorAB, MathPoint(x, y))
-        return MathPoint(vectorAB.x * length, vectorAB.y * length)
+        val k = (line.firstNode.y - line.secondNode.y) / (line.firstNode.x - line.secondNode.x)
+        val b = line.firstNode.y - k*line.firstNode.x
+        val perpendecular_k = -1/k
+        val perpendecular_b = y-perpendecular_k*x
+
+        val return_x = (perpendecular_b - b) / (k - perpendecular_k)
+        val return_y = k*return_x + b
+
+//        val vectorAB = normalize(getVectorPoint(line.firstNode, line.secondNode))
+//        val length = scalarProduct(vectorAB, MathPoint(x, y))
+//        return MathPoint(vectorAB.x * length, vectorAB.y * length)
+        return MathPoint(return_x, return_y)
     }
 
     fun isTouchOnSegment(line: Line, x: Float, y: Float): Boolean {

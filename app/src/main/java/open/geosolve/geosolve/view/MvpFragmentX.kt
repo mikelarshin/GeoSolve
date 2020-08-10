@@ -10,9 +10,7 @@ import moxy.MvpAppCompatActivity
 import moxy.MvpAppCompatFragment
 import open.geosolve.geosolve.App
 
-abstract class MvpFragmentX(
-    private val layoutRes: Int
-) : MvpAppCompatFragment() {
+abstract class MvpFragmentX(private val layoutRes: Int) : MvpAppCompatFragment() {
 
     protected lateinit var layout: View
 

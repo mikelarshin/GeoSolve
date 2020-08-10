@@ -47,7 +47,7 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
     override fun inRadius(x: Float, y: Float): Boolean {
         val receivedRadius = MathUtil.distanceBetweenPoints(angleNode, x, y)
 
-        val myRadius = ANGLE_ARC_RADIUS / 50
+        val myRadius = ANGLE_ARC_RADIUS / 30
 
         val distanceToAngleArc = max(myRadius, receivedRadius) - min(myRadius, receivedRadius)
 

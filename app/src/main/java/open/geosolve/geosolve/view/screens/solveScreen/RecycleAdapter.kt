@@ -37,9 +37,11 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val item = holder.itemView
 
+        val stepSolve = stepSolveList[position]
+
         if (position + 1 == stepSolveList.size) {
             item.openButton.visibility = View.GONE
-            item.formula.text = formatAnswer(stepSolveList[position])
+            item.formula.text = formatAnswer(stepSolve)
         } else {
             item.setOnClickListener {
                 val itemParams = it.formula.layoutParams as ConstraintLayout.LayoutParams
@@ -57,9 +59,9 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
                 }
             }
 
-            item.formula.text = stepSolveList[position].getFormula()
-            item.verbal.text = stepSolveList[position].getVerbal()
-            item.expression.text = stepSolveList[position].getExpression()
+            item.formula.text = stepSolve.getFormula()
+            item.verbal.text = stepSolve.getVerbal()
+            item.expression.text = stepSolve.getExpression()
         }
     }
 

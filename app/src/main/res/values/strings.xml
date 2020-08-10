@@ -18,7 +18,7 @@
     // Verbal Template
     <string name="verbal_rectangle_parallel_line_2">Присваиваем линии %s значение противоположной линии %s, так как у прямоугольника противоположные линии равны.</string>
     <string name="verbal_rectangle_angle_90_1">Присваиваем углу %s градус 90°, так как у прямоугольника все углы прямые.</string>
-    <string name="verbal_triangle_2_known_angle_1_unknown_2">Присваиваем углу %s разность 180° и сумму %s и %s, так как в треугольнике сумма углов равна 180°.</string>
+    <string name="verbal_triangle_2_known_angle_1_unknown_2">Присваиваем углу %s разность 180° и суммы %s и %s. \nСумма углов треугольника равна 180°.</string>
     <string name="verbal_triangle_right_pythagorean_theorem_3">Присваиваем гипотенузе %s корень из суммы квадратов катетов %s и %s.</string>
     <string name="verbal_triangle_right_30_degrees_2">Присваиваем катету %s протвоположному углу в 30° длину половины длины гипотенузы %s.</string>
     <string name="verbal_triangle_right_find_leg_known_leg_hypot_3">Присваиваем катету %s корень разности квадратов гипотенузы %s и катета %s.</string>

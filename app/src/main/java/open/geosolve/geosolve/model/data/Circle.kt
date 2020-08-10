@@ -60,10 +60,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
     }
 
     override fun inRadius(x: Float, y: Float): Boolean {
-        val receivedRadius = distanceBetweenPoints(
-            centerNode,
-            x, y
-        )
+        val receivedRadius = distanceBetweenPoints(centerNode, x, y)
 
         val distanceToCircle = max(decartRadius, receivedRadius) - min(decartRadius, receivedRadius)
 

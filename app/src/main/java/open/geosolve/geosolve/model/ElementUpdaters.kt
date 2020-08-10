@@ -8,7 +8,7 @@ import open.geosolve.geosolve.model.FigureController.figure
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Angle.Companion.isCorrectNodes
 
-internal object ElementUpdaters {
+object ElementUpdaters {
     fun updateNodes() {
         figure.mNodes.addAll(figure.mLines.flatMap { it.nodes }) // mNodes это Set так что повторок не будет
         figure.mNodes.addAll(figure.mAngles.flatMap { it.nodes })
