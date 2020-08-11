@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.model.solve.type
 
-import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Figure
+import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.view.DesignUtil.formatSolve
+import open.geosolve.geosolve.view.rules.RectangleRules
 
 object Rectangle : SolveFigure {
     override fun isMatch(figure: Figure): Boolean =
@@ -13,33 +13,28 @@ object Rectangle : SolveFigure {
 
     override fun setGraphs(figure: Figure) {
         for (i in 0..3)
-            figure.mLines[i].onKnownFunctions.add { thisElement ->
-                if ((thisElement.getValue() != null) and (figure.mLines[(i + 2) % 4].getValue() == null))
+            figure.mLines[i].onKnownFunctions.add { knownElement ->
+                if ((knownElement.getValue() != null) and (figure.mLines[(i + 2) % 4].getValue() == null))
                     figure.mLines[(i + 2) % 4].setDependentValueGraph(
-                        { thisElement.getValue() },
-                        listOf(thisElement),
-                        formatSolve(
-                            R.string.verbal_rectangle_parallel_line_2,
-                            R.string.expression_rectangle_parallel_line_2,
-                            figure.mLines[(i + 2) % 4],
-                            thisElement
-                        )
+                        { knownElement.getValue() },
+                        listOf(knownElement),
+                        RectangleRules.parallel_line(knownElement as Line, figure.mLines[(i + 2) % 4])
                     )
             }
 
         for (i in 0..3) {
-            figure.mAngles[i].onKnownFunctions.add { thisElement ->
-                for (j in 1..3)
-                    if (figure.mAngles[(i + j) % 4].getValue() == null)
-                        figure.mAngles[(i + j) % 4].setValueGraph(
+            figure.mAngles[i].onKnownFunctions.add { knownElement ->
+                val anglesWithoutValue = figure.mAngles.filter { it.getValue() == null }
+                val anglesWithValue = figure.mAngles.filter { it.getValue() != null }
+
+                if (anglesWithoutValue.size <= 2)
+                    anglesWithoutValue.forEach {
+                        it.setValueGraph(
                             90f,
-                            emptyList(),
-                            formatSolve(
-                                R.string.verbal_rectangle_angle_90_1,
-                                R.string.expression_rectangle_angle_90_1,
-                                figure.mAngles[(i + j) % 4]
-                            )
+                            anglesWithValue,
+                            RectangleRules.right_angles(it)
                         )
+                    }
             }
         }
     }

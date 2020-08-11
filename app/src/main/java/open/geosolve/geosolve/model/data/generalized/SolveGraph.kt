@@ -1,5 +1,7 @@
 package open.geosolve.geosolve.model.data.generalized
 
+import open.geosolve.geosolve.view.rules.Rule
+
 abstract class SolveGraph {
 
     private var value: Float? = null
@@ -10,12 +12,7 @@ abstract class SolveGraph {
     var whereFromValueList: List<SolveGraph>? = null
         private set
 
-    lateinit var getFormula: () -> CharSequence
-        private set
-    lateinit var getVerbal: () -> CharSequence
-        private set
-    lateinit var getExpression: () -> CharSequence
-        private set
+    lateinit var rule: Rule
 
     // setDraw - use it in work with canvas
     // setGraph - use it in work with solve
@@ -29,24 +26,20 @@ abstract class SolveGraph {
         this.dependence = dependence
     }
 
-    fun setValueGraph(value: Float, whereFromValueList: List<SolveGraph>,
-                      args: Array<out () -> CharSequence> ) {
+    fun setValueGraph(value: Float, whereFromValueList: List<SolveGraph>, rule: Rule) {
         this.value = value
-        setValueGraph(whereFromValueList, args)
+        setValueGraph(whereFromValueList, rule)
     }
 
-    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<SolveGraph>,
-                               args: Array<out () -> CharSequence>) {
+    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<SolveGraph>, rule: Rule) {
         this.dependence = dependence
-        setValueGraph(whereFromValueList, args)
+        setValueGraph(whereFromValueList, rule)
     }
 
-    private fun setValueGraph(whereFromValueList: List<SolveGraph>,
-                              args: Array<out () -> CharSequence>){
+    private fun setValueGraph(whereFromValueList: List<SolveGraph>, rule: Rule){
         this.whereFromValueList = whereFromValueList
-        this.getFormula = args[0]
-        this.getVerbal = args[1]
-        this.getExpression = args[2]
+        this.rule = rule
+
         for (onKnownFun in onKnownFunctions)
             onKnownFun(this)
     }

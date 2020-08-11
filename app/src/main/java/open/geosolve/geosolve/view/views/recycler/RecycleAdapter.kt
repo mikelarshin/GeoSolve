@@ -4,15 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_step.view.*
-import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil.formatAnswer
+import open.geosolve.geosolve.view.rules.Rule
 import java.util.*
 
 class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
@@ -67,9 +65,9 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
                 holder.open_item()
         }
 
-        item.formula.text = stepSolve.getFormula()
-        item.verbal.text = stepSolve.getVerbal()
-        item.expression.text = stepSolve.getExpression()
+        item.formula.text = stepSolve.rule.formula
+        item.verbal.text = stepSolve.rule.verbal
+        item.expression.text = stepSolve.rule.expression
 
         if (position + 1 == itemCount) { // если это последний item
             item.openButton.visibility = View.GONE

@@ -1,9 +1,8 @@
 package open.geosolve.geosolve.model.solve.type
 
-import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.view.DesignUtil.formatSolve
+import open.geosolve.geosolve.view.rules.TriangleRules
 
 object Triangle : SolveFigure {
     override fun isMatch(figure: Figure): Boolean {
@@ -18,7 +17,7 @@ object Triangle : SolveFigure {
             throw Exception("Received triangle with sum of all angle not equal 180 TODO()") // TODO say this for user
 
         for (i in 0..2)
-            figure.mAngles[i].onKnownFunctions.add { thisElement ->
+            figure.mAngles[i].onKnownFunctions.add { knownElement ->
                 if (figure.mAngles.filter { it.getValue() != null }.size == 2) {
 
                     val known_angles = figure.mAngles.filter { it.getValue() != null }
@@ -28,14 +27,7 @@ object Triangle : SolveFigure {
                     figure.mAngles.first { it.getValue() == null }.setDependentValueGraph(
                         valueGetter,
                         known_angles,
-                        formatSolve(
-                            R.string.verbal_triangle_2_known_angle_1_unknown_2,
-                            R.string.expression_triangle_2_known_angle_1_unknown_3,
-                            unknown_angle,
-                            known_angles[0],
-                            known_angles[1]
-                        )
-                    )
+                        TriangleRules.know_2_unknown_1_angle(unknown_angle, known_angles[0], known_angles[1]))
                 }
             }
     }

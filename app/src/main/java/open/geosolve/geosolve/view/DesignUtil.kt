@@ -7,34 +7,26 @@ import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.view.rules.Rule
 
 object DesignUtil {
 
-    fun formatSolve(templateVerbalId: Int, templateExpressionId: Int, vararg formatArgs: SolveGraph): Array<out () -> CharSequence> {
+    private fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
+        val sb = SpannableStringBuilder().append(formatText(App.instance.getString(templateId), R.style.TemplateText))
 
-        fun format_answer(templateId: Int, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
-            val sb = SpannableStringBuilder().append(
-                formatText(
-                    App.instance.getString(templateId),
-                    R.style.TemplateText)
-            )
-
-            for (i in 0 until sb.filter { it == '%' }.length) {
-                val index = sb.indexOf('%')
-                val style = if (i == 0) R.style.AnswerText else R.style.Bold
-                sb.replace(index, index + 2, formatText(by(formatArgs[i]), style))
-            }
-            return sb.subSequence(0, sb.length)
+        for (i in 0 until sb.filter { it == '%' }.length) {
+            val index = sb.indexOf('%')
+            val style = if (i == 0) R.style.AnswerText else R.style.Bold
+            sb.replace(index, index + 2, formatText(by(order[i]), style))
         }
-
-        val formula: CharSequence = format_answer(templateExpressionId)
-        val verbal: CharSequence = format_answer(templateVerbalId)
-
-        return arrayOf(
-            { formula },
-            { verbal },
-            { format_answer(templateExpressionId) { formatValueString(it) } })
+        return sb.subSequence(0, sb.length)
     }
+
+    fun formatVerbal(rule: Rule) = formatSolveText(rule.verbalID, rule.order_for_verbal)
+
+    fun formatFormula(rule: Rule) = formatSolveText(rule.expressionID, rule.order_for_expression)
+
+    fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.order_for_expression) { formatValueString(it) }
 
     private fun formatText(string: String, styleId: Int): SpannableString {
         val spannableString = SpannableString(string)
@@ -50,6 +42,7 @@ object DesignUtil {
 
         return sb.subSequence(0, sb.length)
     }
+
 
     fun formatAlertMessage(messageId: Int, element: String): CharSequence {
         val templateText = App.instance.getString(messageId) + " "

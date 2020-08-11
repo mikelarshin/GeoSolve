@@ -5,7 +5,7 @@ import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.view.DesignUtil.formatSolve
+import open.geosolve.geosolve.view.rules.RightTriangleRules
 import kotlin.math.hypot
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -22,33 +22,28 @@ object RightTriangle : SolveFigure {
         val hypotenuse = figure.mLines.first { !legs.contains(it) }
         val noRightAngles: List<Angle> = figure.mAngles.filter { it != rightAngle }
 
-        legsKnownHypotenuseUnknown(legs, hypotenuse)
+        knownLegsUnknownHypotenuse(legs, hypotenuse)
         degrees30Rule(noRightAngles, hypotenuse)
         findLegKnownLegAndHypotRule(hypotenuse, legs)
     }
 
     override fun setSubType(figure: Figure) {}
 
-    private fun legsKnownHypotenuseUnknown(legs: List<Line>, hypotenuse: Line) { // известны катеты, ищем гипотенузу
+    private fun knownLegsUnknownHypotenuse(legs: List<Line>, hypotenuse: Line) { // известны катеты, ищем гипотенузу
         for (i in 0..1) {
             legs[i].onKnownFunctions.add { oneLeg ->
                 val twoLeg = legs[(i + 1) % 2]
+                oneLeg as Line
                 // TODO(создать функцию которая берёт следующий по списку элемент как здесь)
 
-                // TODO(сднлпть функцию которая проверяет на входные данные и искомое)
+                // TODO(сделать функцию которая проверяет на входные данные и искомое)
                 if (twoLeg.getValue() != null && hypotenuse.getValue() == null) {
                     val valueGetter: (Float?) -> Float? = { hypot(oneLeg.getValue()!!, twoLeg.getValue()!!) }
 
                     hypotenuse.setDependentValueGraph(
                         valueGetter,
                         listOf(oneLeg, twoLeg),
-                        formatSolve(
-                            R.string.verbal_triangle_right_pythagorean_theorem_3,
-                            R.string.expression_triangle_right_pythagorean_theorem_3,
-                            hypotenuse,
-                            oneLeg,
-                            twoLeg
-                        )
+                        RightTriangleRules.pythagorean_theorem(hypotenuse, oneLeg, twoLeg)
                     )
                 }
             }
@@ -57,24 +52,20 @@ object RightTriangle : SolveFigure {
 
     private fun degrees30Rule(noRightAngles: List<Angle>, hypotenuse: Line) {
         noRightAngles.forEach { angle ->
-            angle.onKnownFunctions.add { thisAngle ->
-                if (thisAngle.getValue() == 30f && // новый угол в 30 градусов
+            angle.onKnownFunctions.add { degree30Angle ->
+                degree30Angle as Angle
+                if (degree30Angle.getValue() == 30f && // угол в 30 градусов
                     hypotenuse.getValue() != null) { // есть значение гипотенузы
 
-                    val not30AngleLegs = noRightAngles.first { it != thisAngle }.lines // линии угла не в 30
+                    val not30AngleLegs = noRightAngles.first { it != degree30Angle }.lines // линии угла не в 30
                     val legOpposite30Angle = not30AngleLegs.first { it != hypotenuse }
 
                     val valueGetter: (Float?) -> Float? = { hypotenuse.getValue()!! / 2 }
 
                     legOpposite30Angle.setDependentValueGraph(
                         valueGetter,
-                        listOf(thisAngle, hypotenuse),
-                        formatSolve(
-                            R.string.verbal_triangle_right_30_degrees_2,
-                            R.string.expression_triangle_right_30_degrees_2,
-                            legOpposite30Angle,
-                            hypotenuse
-                        )
+                        listOf(degree30Angle, hypotenuse),
+                        RightTriangleRules.angle_30_degrees(degree30Angle, legOpposite30Angle, hypotenuse)
                     )
                 }
             }
@@ -83,7 +74,8 @@ object RightTriangle : SolveFigure {
 
     private fun findLegKnownLegAndHypotRule(hypotenuse: Line, legs: List<Line>) {
         for (i in 0..1) {
-            legs[i].onKnownFunctions.add { thisLeg ->
+            legs[i].onKnownFunctions.add { knownLeg ->
+                knownLeg as Line
                 if (hypotenuse.getValue() != null) {
                     val unknownLeg = legs[(i + 1) % 2]
 
@@ -91,20 +83,14 @@ object RightTriangle : SolveFigure {
                         val valueGetter: (Float?) -> Float? = {
                             sqrt(
                                 hypotenuse.getValue()!!.pow(2) -
-                                        thisLeg.getValue()!!.pow(2)
+                                        knownLeg.getValue()!!.pow(2)
                             )
                         }
 
                         unknownLeg.setDependentValueGraph(
                             valueGetter,
-                            listOf(thisLeg, hypotenuse),
-                            formatSolve(
-                                R.string.verbal_triangle_right_find_leg_known_leg_hypot_3,
-                                R.string.expression_triangle_right_find_leg_known_leg_hypot_3,
-                                unknownLeg,
-                                hypotenuse,
-                                thisLeg
-                            )
+                            listOf(knownLeg, hypotenuse),
+                            RightTriangleRules.unknown_leg_known_leg_and_hypot(unknownLeg, hypotenuse, knownLeg)
                         )
                     }
                 }

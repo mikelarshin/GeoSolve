@@ -16,6 +16,7 @@ import open.geosolve.geosolve.model.tools.BaseTool
 import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.model.tools.Tool
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
+import open.geosolve.geosolve.view.rules.Rule
 import open.geosolve.geosolve.view.views.recycler.RecycleAdapter
 
 @InjectViewState
