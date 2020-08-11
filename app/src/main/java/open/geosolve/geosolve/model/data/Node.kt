@@ -3,8 +3,8 @@ package open.geosolve.geosolve.model.data
 import open.geosolve.geosolve.AllNodes
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
-import open.geosolve.geosolve.view.view.draw.PaintConstant.POINT_SIZE
+import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
 import kotlin.properties.Delegates
 
 class Node(foundX: Float, foundY: Float) : Element {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <open.geosolve.geosolve.view.view.TouchCanvasView
+    <open.geosolve.geosolve.view.views.canvas.TouchCanvasView
         android:id="@+id/canvas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -35,7 +35,7 @@
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close_button"
+        app:srcCompat="@drawable/ic_close"
         tools:ignore="VectorDrawableCompat" />
 
 

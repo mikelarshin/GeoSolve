@@ -3,8 +3,6 @@ package open.geosolve.geosolve.model.math
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
-import open.geosolve.geosolve.view.view.draw.SystemCoordinate
 import kotlin.math.*
 
 

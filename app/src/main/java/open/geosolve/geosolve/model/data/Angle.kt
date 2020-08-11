@@ -1,14 +1,13 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.AllAngles
-import open.geosolve.geosolve.AllNodes
 import open.geosolve.geosolve.initOnce
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.math.MathUtil
 import open.geosolve.geosolve.model.math.MathUtil.isPointInAngle
-import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
-import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 import kotlin.math.max
 import kotlin.math.min
 

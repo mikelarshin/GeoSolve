@@ -5,7 +5,7 @@
     <color name="colorAccent">#DDD</color>
     <color name="buttonIcon">@color/colorPrimary</color>
 
-    <color name="all_lines">#CCC</color> // Normal value #3000
+    <color name="all_lines">#CCC</color> // Debug color #3000
 
     <color name="color_node">@color/colorPrimary</color>
     <color name="color_mark">@color/colorPrimaryDark</color>

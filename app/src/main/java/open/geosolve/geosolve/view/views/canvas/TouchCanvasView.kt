@@ -1,10 +1,10 @@
-package open.geosolve.geosolve.view.view
+package open.geosolve.geosolve.view.views.canvas
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import open.geosolve.geosolve.view.view.draw.DrawConstant.scale
+import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.scale
 
 class TouchCanvasView : DrawCanvasView {
 

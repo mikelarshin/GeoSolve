@@ -5,7 +5,7 @@ import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.view.screens.DesignUtil.formatSolve
+import open.geosolve.geosolve.view.DesignUtil.formatSolve
 import kotlin.math.hypot
 import kotlin.math.pow
 import kotlin.math.sqrt

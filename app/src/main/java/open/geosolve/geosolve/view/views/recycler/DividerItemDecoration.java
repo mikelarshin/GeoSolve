@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.screens.solveScreen;
+package open.geosolve.geosolve.view.views.recycler;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,7 +9,7 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DividerItemDecoration extends RecyclerView.ItemDecoration {
+public class DividerItemDecoration extends RecyclerView.ItemDecoration { // ставит divider'ы и убирает на последнем
 
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 

@@ -1,15 +1,15 @@
-package open.geosolve.geosolve.view.view.draw
+package open.geosolve.geosolve.view.views.canvas.draw
 
 import android.graphics.Canvas
 import android.graphics.Paint
 import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
-import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_SIZE
-import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintLine
-import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintLineMark
-import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintText
+import open.geosolve.geosolve.view.DesignUtil.formatValueString
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.TEXT_SIZE
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintLine
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintLineMark
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintText
 
 object DrawLines {
     fun drawLines(canvas: Canvas) {

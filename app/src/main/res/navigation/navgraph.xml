@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/canvasFragment"
-        android:name="open.geosolve.geosolve.view.screens.canvasScreen.CanvasFragment"
+        android:name="open.geosolve.geosolve.view.fragments.CanvasFragment"
         android:label="fragment_canvas"
         tools:layout="@layout/fragment_canvas">
         <action
@@ -16,7 +16,15 @@
     </fragment>
     <fragment
         android:id="@+id/solveFragment"
-        android:name="open.geosolve.geosolve.view.screens.solveScreen.SolveFragment"
+        android:name="open.geosolve.geosolve.view.fragments.SolveFragment"
         android:label="fragment_solve"
-        tools:layout="@layout/fragment_solve" />
+        tools:layout="@layout/fragment_solve" >
+        <action
+            android:id="@+id/action_to_rule"
+            app:destination="@id/ruleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ruleFragment"
+        android:name="open.geosolve.geosolve.view.fragments.RuleFragment"
+        android:label="RuleFragment" />
 </navigation>

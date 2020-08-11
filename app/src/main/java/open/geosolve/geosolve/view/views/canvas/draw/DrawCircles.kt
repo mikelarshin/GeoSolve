@@ -1,11 +1,11 @@
-package open.geosolve.geosolve.view.view.draw
+package open.geosolve.geosolve.view.views.canvas.draw
 
 import android.graphics.Canvas
 import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.view.screens.DesignUtil
-import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_SIZE
+import open.geosolve.geosolve.view.DesignUtil
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.TEXT_SIZE
 
 object DrawCircles {
     fun drawCircles(canvas: Canvas) {

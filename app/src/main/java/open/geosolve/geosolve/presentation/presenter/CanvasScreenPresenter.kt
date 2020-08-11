@@ -5,7 +5,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
-import open.geosolve.geosolve.App
 import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
@@ -17,10 +16,10 @@ import open.geosolve.geosolve.model.tools.BaseTool
 import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.model.tools.Tool
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.view.screens.solveScreen.RecycleAdapter
+import open.geosolve.geosolve.view.views.recycler.RecycleAdapter
 
 @InjectViewState
-class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
+class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
 
     var tool: Tool = AddTool
 
@@ -48,7 +47,7 @@ class CanvasScreenPresenter(val app: App) : MvpPresenter<CanvasScreenView>() {
             solveAndCallBack() // решать только когда было не передвижение
     }
 
-    fun solveAndCallBack() {
+    private fun solveAndCallBack() {
         val solveUiCallBack = {
             viewState.showTypeFigure()
             viewState.updateCanvas()

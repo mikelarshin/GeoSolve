@@ -3,7 +3,7 @@ package open.geosolve.geosolve.model.solve.type
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.view.screens.DesignUtil.formatSolve
+import open.geosolve.geosolve.view.DesignUtil.formatSolve
 
 object Triangle : SolveFigure {
     override fun isMatch(figure: Figure): Boolean {

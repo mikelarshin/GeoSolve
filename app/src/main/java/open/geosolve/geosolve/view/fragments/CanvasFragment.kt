@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.screens.canvasScreen
+package open.geosolve.geosolve.view.fragments
 
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -16,13 +16,12 @@ import open.geosolve.geosolve.model.tools.MarkTool
 import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.view.MvpFragmentX
-import open.geosolve.geosolve.view.screens.DesignUtil
+import open.geosolve.geosolve.view.DesignUtil
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
-    private val presenter by moxyPresenter { CanvasScreenPresenter(app) }
+    private val presenter by moxyPresenter { CanvasScreenPresenter() }
 
     override fun setupLayout() {
 
@@ -70,10 +69,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     override fun showDialog(titleID: Int, element: String, inputCallback: (value: Float) -> Unit) {
         val alertMessage = DesignUtil.formatAlertMessage(titleID, element)
 
-        AlertDialog.Builder(activity)
+        AlertDialog.Builder(activity!!)
             .setTitle(alertMessage)
             .setView(
-                LayoutInflater.from(activity).inflate(R.layout.dialog_input_value, null)
+                LayoutInflater.from(activity!!).inflate(R.layout.dialog_input_value, null)
             )
             .setPositiveButton(android.R.string.ok) { dialog, _ ->
                 if (!(dialog as AlertDialog).input.text.isNullOrBlank())

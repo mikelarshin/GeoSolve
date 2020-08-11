@@ -9,7 +9,7 @@ import open.geosolve.geosolve.model.math.MathUtil.getPointProjectToLine
 import open.geosolve.geosolve.model.math.MathUtil.isTouchLeftSegment
 import open.geosolve.geosolve.model.math.MathUtil.isTouchOnSegment
 import open.geosolve.geosolve.model.math.MathUtil.isTouchRightSegment
-import open.geosolve.geosolve.view.view.draw.PaintConstant.LINE_WIDTH
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 
 class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
 

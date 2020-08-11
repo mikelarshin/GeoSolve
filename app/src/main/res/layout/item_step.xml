@@ -25,7 +25,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_arrow_down" />
+        app:srcCompat="@drawable/ic_arrow_down" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rule_layout"
@@ -72,6 +72,16 @@
             android:text="4.3 = √(5² - 2.5²)"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/arrow_down_image" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/read_rule_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/expression"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_question_mark" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.screens
+package open.geosolve.geosolve.view
 
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -10,40 +10,30 @@ import open.geosolve.geosolve.model.data.generalized.SolveGraph
 
 object DesignUtil {
 
-    fun formatSolve(templateVerbalId: Int, templateExpressionId: Int, vararg formatArgs: SolveGraph)
-            : Array<out () -> CharSequence> {
+    fun formatSolve(templateVerbalId: Int, templateExpressionId: Int, vararg formatArgs: SolveGraph): Array<out () -> CharSequence> {
 
-        fun getFormat(templateId: Int, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
+        fun format_answer(templateId: Int, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
             val sb = SpannableStringBuilder().append(
                 formatText(
                     App.instance.getString(templateId),
-                    R.style.TemplateText
-                )
+                    R.style.TemplateText)
             )
 
             for (i in 0 until sb.filter { it == '%' }.length) {
                 val index = sb.indexOf('%')
                 val style = if (i == 0) R.style.AnswerText else R.style.Bold
-                sb.replace(index, index + 2,
-                    formatText(
-                        by(formatArgs[i]), style
-                    )
-                )
+                sb.replace(index, index + 2, formatText(by(formatArgs[i]), style))
             }
             return sb.subSequence(0, sb.length)
         }
 
-        val formula: CharSequence = getFormat(templateExpressionId)
-        val verbal: CharSequence = getFormat(templateVerbalId)
+        val formula: CharSequence = format_answer(templateExpressionId)
+        val verbal: CharSequence = format_answer(templateVerbalId)
 
         return arrayOf(
             { formula },
             { verbal },
-            { getFormat(templateExpressionId, { element ->
-                formatValueString(
-                    element
-                )
-            }) })
+            { format_answer(templateExpressionId) { formatValueString(it) } })
     }
 
     private fun formatText(string: String, styleId: Int): SpannableString {
@@ -54,26 +44,9 @@ object DesignUtil {
 
     fun formatAnswer(solveGraph: SolveGraph): CharSequence {
         val sb = SpannableStringBuilder()
-            .append(
-                formatText(
-                    solveGraph.toString(),
-                    R.style.AnswerText
-                )
-            )
-            .append(
-                formatText(
-                    " = ",
-                    R.style.TemplateText
-                )
-            )
-            .append(
-                formatText(
-                    formatValueString(
-                        solveGraph
-                    ),
-                    R.style.AnswerText
-                )
-            )
+            .append(formatText(solveGraph.toString(), R.style.AnswerText))
+            .append(formatText(" = ", R.style.TemplateText))
+            .append(formatText(formatValueString(solveGraph), R.style.AnswerText))
 
         return sb.subSequence(0, sb.length)
     }

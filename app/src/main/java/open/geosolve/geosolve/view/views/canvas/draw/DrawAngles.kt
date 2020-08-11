@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.view.draw
+package open.geosolve.geosolve.view.views.canvas.draw
 
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -8,13 +8,13 @@ import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.math.MathUtil.getDegree
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.view.screens.DesignUtil.formatValueString
-import open.geosolve.geosolve.view.view.draw.DrawConstant.systemCoordinate
-import open.geosolve.geosolve.view.view.draw.PaintConstant.ANGLE_ARC_RADIUS
-import open.geosolve.geosolve.view.view.draw.PaintConstant.TEXT_MARGIN
-import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintAngle
-import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintAngleMark
-import open.geosolve.geosolve.view.view.draw.PaintConstant.mPaintText
+import open.geosolve.geosolve.view.DesignUtil.formatValueString
+import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.TEXT_MARGIN
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintAngle
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintAngleMark
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintText
 
 object DrawAngles {
     fun drawAngles(canvas: Canvas) {
