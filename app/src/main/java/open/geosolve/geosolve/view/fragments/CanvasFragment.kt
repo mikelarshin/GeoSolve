@@ -1,6 +1,8 @@
 package open.geosolve.geosolve.view.fragments
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
@@ -23,6 +25,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     private val presenter by moxyPresenter { CanvasScreenPresenter() }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
 
         layout.canvas.onTouchUp = { x, y -> presenter.onTouchUp(x, y) }
@@ -35,6 +38,16 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
         layout.mark_mode_button.setOnClickListener {
             presenter.tool = MarkTool
+        }
+
+        layout.mark_mode_button.setOnTouchListener { v, event ->
+            v.onTouchEvent(event)
+
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> presenter.onPressMark()
+            }
+
+            true
         }
 
         layout.edit_mode_button.setOnClickListener {
@@ -84,7 +97,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             .show()
     }
 
-    override fun showTypeFigure() {
+    override fun showTypeFigure() { // TODO(DELETE_THIS_DEBUGGER)
         DELETE_THIS_DEBUGGER.text = FigureList.joinToString(separator = "\n\n") { "$it" }
     }
 }

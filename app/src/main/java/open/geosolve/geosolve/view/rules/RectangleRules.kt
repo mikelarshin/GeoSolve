@@ -11,6 +11,9 @@ object RectangleRules {
 
         override val order_for_verbal = listOf(parallelLine, knownLine)
         override val order_for_expression = listOf(parallelLine, knownLine)
+
+        override val ruleTitle = R.string.ruleTitle_rectangle_parallel_line
+        override val ruleText = R.string.ruleText_rectangle_parallel_line
     }
 
     class right_angles(unknownAngle: Angle) : Rule() {
@@ -19,5 +22,8 @@ object RectangleRules {
 
         override val order_for_verbal = listOf(unknownAngle)
         override val order_for_expression = listOf(unknownAngle)
+
+        override val ruleTitle = R.string.ruleTitle_rectangle_right_angles
+        override val ruleText = R.string.ruleText_rectangle_right_angles
     }
 }

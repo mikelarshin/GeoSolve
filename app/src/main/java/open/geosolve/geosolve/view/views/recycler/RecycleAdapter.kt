@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.view.views.recycler
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil.formatAnswer
+import open.geosolve.geosolve.view.fragments.RuleFragment
 import open.geosolve.geosolve.view.rules.Rule
 import java.util.*
 
@@ -77,6 +79,7 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
         }
 
         item.read_rule_button.setOnClickListener {
+            RuleFragment.rule = stepSolve.rule // CRUNCH
             it.findNavController().navigate(R.id.action_to_rule)
         }
     }

@@ -10,5 +10,8 @@ object TriangleRules {
 
         override val order_for_verbal = listOf(unknown_angle, known_angle_1, known_angle_2)
         override val order_for_expression = listOf(unknown_angle, known_angle_1, known_angle_2)
+
+        override val ruleTitle = R.string.ruleTitle_triangle_know_2_unknown_1_angle
+        override val ruleText = R.string.ruleText_triangle_know_2_unknown_1_angle
     }
 }

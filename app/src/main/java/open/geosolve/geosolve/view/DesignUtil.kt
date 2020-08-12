@@ -28,7 +28,10 @@ object DesignUtil {
 
     fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.order_for_expression) { formatValueString(it) }
 
-    private fun formatText(string: String, styleId: Int): SpannableString {
+    fun formatRuleTitle(rule: Rule) = App.instance.getString(rule.ruleTitle)
+    fun formatRuleText(rule: Rule) = App.instance.getString(rule.ruleText)
+
+        private fun formatText(string: String, styleId: Int): SpannableString {
         val spannableString = SpannableString(string)
         spannableString.setSpan(TextAppearanceSpan(App.instance, styleId), 0, string.length, 0)
         return spannableString

@@ -14,7 +14,7 @@
     <string name="alert_set_angle">Введите градус угла</string>
     <string name="alert_set_circle">Введите периметр круга</string>
 
-    // Verbal Template
+    // Verbal Templates
     <string name="verbal_rectangle_parallel_line">Присваиваем линии %s значение противоположной линии %s.</string>
     <string name="verbal_rectangle_right_angles">Присваиваем углу %s градус 90°, так как у прямоугольника все углы прямые.</string>
     <string name="verbal_triangle_know_2_unknown_1_angle">Присваиваем углу %s разность 180° и суммы %s и %s.</string>
@@ -23,13 +23,29 @@
     <string name="verbal_rightTriangle_unknown_leg_known_leg_and_hypot">Присваиваем катету %s корень разности квадратов гипотенузы %s и катета %s.</string>
 
 
-    // Expression Template
+    // Expression Templates
     <string name="expression_rectangle_parallel_line">%s = %s</string>
     <string name="expression_rectangle_right_angles">%s = 90°</string>
     <string name="expression_triangle_know_2_unknown_1_angle">%s = 180° - (%s + %s)</string>
-    <string name="expression_triangle_right_pythagorean_theorem_3">%s = √(%s² + %s²)</string>
+    <string name="expression_rightTriangle_pythagorean_theorem_3">%s = √(%s² + %s²)</string>
     <string name="expression_rightTriangle_angle_30_degrees">%s = %s / 2</string>
     <string name="expression_rightTriangle_unknown_leg_known_leg_and_hypot">%s = √(%s² - %s²)</string>
+
+    // Rule Titles
+    <string name="ruleTitle_triangle_know_2_unknown_1_angle">Сумма углов треугольника 180°</string>
+    <string name="ruleTitle_rectangle_parallel_line">…</string>
+    <string name="ruleTitle_rectangle_right_angles">…</string>
+    <string name="ruleTitle_rightTriangle_pythagorean_theorem_3">…</string>
+    <string name="ruleTitle_rightTriangle_angle_30_degrees">…</string>
+    <string name="ruleTitle_rightTriangle_unknown_leg_known_leg_and_hypot">…</string>
+
+    // Rule Texts
+    <string name="ruleText_triangle_know_2_unknown_1_angle">Напиши здесь чё нить ёпта</string>
+    <string name="ruleText_rectangle_parallel_line">…</string>
+    <string name="ruleText_rectangle_right_angles">…</string>
+    <string name="ruleText_rightTriangle_pythagorean_theorem_3">…</string>
+    <string name="ruleText_rightTriangle_angle_30_degrees">…</string>
+    <string name="ruleText_rightTriangle_unknown_leg_known_leg_and_hypot">…</string>
 
     // needs symbol: ° √ ²
 </resources>

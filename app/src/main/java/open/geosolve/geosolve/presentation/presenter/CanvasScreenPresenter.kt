@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.presentation.presenter
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -88,5 +89,10 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
 
         viewState.showTypeFigure()
         viewState.updateCanvas()
+    }
+
+    fun onPressMark() {
+        // Площадь и периметр
+        // TODO(implement this)
     }
 }

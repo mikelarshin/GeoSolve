@@ -1,17 +1,17 @@
 package open.geosolve.geosolve.view.rules
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil
 import open.geosolve.geosolve.view.DesignUtil.formatFormula
 import open.geosolve.geosolve.view.DesignUtil.formatVerbal
+import java.io.Serializable
 
-abstract class Rule {
+abstract class Rule : Serializable {
     abstract val verbalID: Int
     abstract val expressionID: Int
+
+    abstract val ruleTitle: Int
+    abstract val ruleText: Int
 
     abstract val order_for_verbal: List<SolveGraph>
     abstract val order_for_expression: List<SolveGraph>
