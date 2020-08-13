@@ -1,6 +1,5 @@
-package open.geosolve.geosolve.view.views.recycler
+package open.geosolve.geosolve.view.views.recyclers
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,25 +10,18 @@ import kotlinx.android.synthetic.main.item_step.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil.formatAnswer
-import open.geosolve.geosolve.view.fragments.RuleFragment
-import open.geosolve.geosolve.view.rules.Rule
-import java.util.*
+import open.geosolve.geosolve.view.fragments.SolveFragmentDirections
 
-class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() {
+class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecycleHolder>() {
 
-    companion object {
-        private var stepSolveList: MutableList<SolveGraph> = ArrayList()
+    val stepSolveList: MutableList<SolveGraph> = mutableListOf()
 
-        fun clear() {
-            stepSolveList.clear()
-        }
-
-        fun addAll(steps: List<SolveGraph>) {
-            stepSolveList.addAll(steps)
-        }
+    fun addAll(solveList: List<SolveGraph>) {
+        stepSolveList.clear()
+        stepSolveList.addAll(solveList)
     }
 
-    class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SolveRecycleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var isOpen = false
         private val itemParams = itemView.formula.layoutParams as ConstraintLayout.LayoutParams
 
@@ -48,14 +40,12 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolveRecycleHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_step, parent, false)
-        return RecycleViewHolder(
-            view
-        )
+        return SolveRecycleHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SolveRecycleHolder, position: Int) {
         val item = holder.itemView
 
         val stepSolve = stepSolveList[position]
@@ -79,8 +69,8 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.RecycleViewHolder>() 
         }
 
         item.read_rule_button.setOnClickListener {
-            RuleFragment.rule = stepSolve.rule // CRUNCH
-            it.findNavController().navigate(R.id.action_to_rule)
+            val action = SolveFragmentDirections.actionToRule(stepSolve.rule)
+            it.findNavController().navigate(action)
         }
     }
 

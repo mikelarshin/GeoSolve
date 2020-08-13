@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view.views.recycler;
+package open.geosolve.geosolve.view.views.recyclers;
 
 import android.content.Context;
 import android.content.res.TypedArray;

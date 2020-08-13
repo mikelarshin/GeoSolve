@@ -6,5 +6,5 @@ interface CallBackSolveUi {
     fun findNotMark()
     fun solveIsNotFound()
     fun userInputValue()
-    fun solveIsFound(list: List<SolveGraph>)
+    fun solveIsFound(solveList: List<SolveGraph>)
 }

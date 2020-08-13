@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.presentation.presenter
 
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -17,8 +16,7 @@ import open.geosolve.geosolve.model.tools.BaseTool
 import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.model.tools.Tool
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.view.rules.Rule
-import open.geosolve.geosolve.view.views.recycler.RecycleAdapter
+import open.geosolve.geosolve.view.views.recyclers.SolveRecyclerAdapter
 
 @InjectViewState
 class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
@@ -75,9 +73,8 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
                 viewState.showMessage(R.string.user_input_value)
             }
 
-            override fun solveIsFound(list: List<SolveGraph>) {
-                RecycleAdapter.addAll(list)
-                viewState.goToSolveScreen()
+            override fun solveIsFound(solveList: List<SolveGraph>) {
+                viewState.goToSolveScreen(solveList)
             }
         })
     }

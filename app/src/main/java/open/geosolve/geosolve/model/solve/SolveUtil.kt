@@ -56,9 +56,9 @@ object SolveUtil {
             }
         }
 
-        val list = getList(find!!).reversed() + listOf(find!!)
+        val solveList = getList(find!!).reversed() + listOf(find!!)
 
-        callback.solveIsFound(list)
+        callback.solveIsFound(solveList)
     }
 
     private fun getList(found: SolveGraph, stepList: MutableList<SolveGraph> = mutableListOf()): List<SolveGraph> {

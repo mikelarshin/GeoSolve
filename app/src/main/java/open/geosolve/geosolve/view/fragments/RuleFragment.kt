@@ -6,18 +6,19 @@ import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.RuleScreenPresenter
 import open.geosolve.geosolve.presentation.view.RuleScreenView
 import open.geosolve.geosolve.view.DesignUtil
+import open.geosolve.geosolve.view.DesignUtil.formatRuleText
+import open.geosolve.geosolve.view.DesignUtil.formatRuleTitle
 import open.geosolve.geosolve.view.rules.Rule
 
 class RuleFragment : MvpFragmentX(R.layout.fragment_rule), RuleScreenView {
 
     private val presenter by moxyPresenter { RuleScreenPresenter() }
-
-    companion object {
-        lateinit var rule: Rule // CRUNCH
-    }
+    private lateinit var rule: Rule
 
     override fun setupLayout() {
-        layout.rule_title.text = DesignUtil.formatRuleTitle(rule)
-        layout.rule_text.text = DesignUtil.formatRuleText(rule)
+        rule = RuleFragmentArgs.fromBundle(arguments!!).rule
+
+        layout.rule_title.text = formatRuleTitle(rule)
+        layout.rule_text.text = formatRuleText(rule)
     }
 }
