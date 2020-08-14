@@ -5,7 +5,7 @@ import open.geosolve.geosolve.AllCircles
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.view.DesignUtil
-import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.TEXT_SIZE
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.CHAR_SIZE
 
 object DrawCircles {
     fun drawCircles(canvas: Canvas) {
@@ -28,8 +28,8 @@ object DrawCircles {
 
             canvas.drawText(
                 centerNode.toString(),
-                centerNode.x - PaintConstant.TEXT_MARGIN,
-                centerNode.y - PaintConstant.TEXT_MARGIN,
+                centerNode.x - PaintConstant.CHAR_MARGIN,
+                centerNode.y - PaintConstant.CHAR_MARGIN,
                 PaintConstant.mPaintText
             )
         }
@@ -54,8 +54,8 @@ object DrawCircles {
 
             val text = DesignUtil.formatValueString(circle)
 
-            val x = circle.centerNode.x - TEXT_SIZE * text.length / 3.5f
-            val y = circle.centerNode.y + TEXT_SIZE / 3.5f
+            val x = circle.centerNode.x - CHAR_SIZE * text.length / 3.5f
+            val y = circle.centerNode.y + CHAR_SIZE / 3.5f
 
             canvas.drawText(text, x, y - circle.drawRadius, PaintConstant.mPaintText)
         }

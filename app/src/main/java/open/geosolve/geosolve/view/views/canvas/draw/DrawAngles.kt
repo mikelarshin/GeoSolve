@@ -11,7 +11,7 @@ import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.view.DesignUtil.formatValueString
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
-import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.TEXT_MARGIN
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.CHAR_MARGIN
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintAngle
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintAngleMark
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintText
@@ -35,8 +35,8 @@ object DrawAngles {
                 // TODO() сделать отрисовку относительно угла
             canvas.drawText(
                 formatValueString(angle),
-                angle.angleNode.x + TEXT_MARGIN,
-                angle.angleNode.y + TEXT_MARGIN,
+                angle.angleNode.x + CHAR_MARGIN,
+                angle.angleNode.y + CHAR_MARGIN,
                 mPaintText
             )
         }

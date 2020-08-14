@@ -17,12 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/recycler"
+        app:layout_constraintBottom_toTopOf="@+id/solveRecycler"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
         tools:layout_editor_absoluteX="34dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+        android:id="@+id/solveRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

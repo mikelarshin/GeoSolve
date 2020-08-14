@@ -12,7 +12,7 @@ import open.geosolve.geosolve.view.rules.Rule
 object DesignUtil {
 
     private fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
-        val sb = SpannableStringBuilder().append(formatText(App.instance.getString(templateId), R.style.TemplateText))
+        val sb = SpannableStringBuilder().append(formatText(getText(templateId), R.style.TemplateText))
 
         for (i in 0 until sb.filter { it == '%' }.length) {
             val index = sb.indexOf('%')
@@ -28,10 +28,9 @@ object DesignUtil {
 
     fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.order_for_expression) { formatValueString(it) }
 
-    fun formatRuleTitle(rule: Rule) = App.instance.getString(rule.ruleTitle)
-    fun formatRuleText(rule: Rule) = App.instance.getString(rule.ruleText)
+    fun getText(textID: Int) = App.instance.getString(textID)
 
-        private fun formatText(string: String, styleId: Int): SpannableString {
+    private fun formatText(string: String, styleId: Int): SpannableString {
         val spannableString = SpannableString(string)
         spannableString.setSpan(TextAppearanceSpan(App.instance, styleId), 0, string.length, 0)
         return spannableString
@@ -48,7 +47,7 @@ object DesignUtil {
 
 
     fun formatAlertMessage(messageId: Int, element: String): CharSequence {
-        val templateText = App.instance.getString(messageId) + " "
+        val templateText = getText(messageId) + " "
 
         val sb = SpannableStringBuilder()
             .append(formatText(templateText, R.style.TemplateText))

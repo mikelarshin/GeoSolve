@@ -15,7 +15,7 @@ import open.geosolve.geosolve.view.views.recyclers.SolveRecyclerAdapter
 class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
 
     private val presenter by moxyPresenter { SolveScreenPresenter() }
-    private val adapter: SolveRecyclerAdapter = SolveRecyclerAdapter()
+    private val adapter = SolveRecyclerAdapter()
 
     override fun setupLayout() {
 
@@ -27,11 +27,11 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     }
 
     private fun setupRecycler() {
-        layout.recycler.adapter = adapter
-        layout.recycler.layoutManager = LinearLayoutManager(activity)
-        layout.recycler.addItemDecoration(DividerItemDecoration(activity))
+        layout.solveRecycler.adapter = adapter
+        layout.solveRecycler.layoutManager = LinearLayoutManager(activity)
+        layout.solveRecycler.addItemDecoration(DividerItemDecoration(activity))
 
         val solveList = fromBundle(arguments!!).solveList as List<SolveGraph>
-        adapter.addAll(solveList)
+        adapter.fill(solveList)
     }
 }

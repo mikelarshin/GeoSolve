@@ -1,20 +1,21 @@
 package open.geosolve.geosolve.view.rules
 
+import android.view.View
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil
 import open.geosolve.geosolve.view.DesignUtil.formatFormula
 import open.geosolve.geosolve.view.DesignUtil.formatVerbal
+import open.geosolve.geosolve.view.views.recyclers.items.RuleItem
 import java.io.Serializable
 
 abstract class Rule : Serializable {
     abstract val verbalID: Int
     abstract val expressionID: Int
 
-    abstract val ruleTitle: Int
-    abstract val ruleText: Int
-
     abstract val order_for_verbal: List<SolveGraph>
     abstract val order_for_expression: List<SolveGraph>
+
+    abstract val ruleItems: List<RuleItem>
 
     val verbal: CharSequence
         get() = formatVerbal(this)

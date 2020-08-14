@@ -51,7 +51,7 @@ object PaintConstant {
             }
             mPaintText.apply {
                 color = canvasContext!!.getColor(R.color.canvas_text_color) // Not error
-                textSize = TEXT_SIZE
+                textSize = CHAR_SIZE
             }
             mPaintAngle.apply {
                 color = canvasContext!!.getColor(R.color.color_angle_arc) // Not error
@@ -69,7 +69,7 @@ object PaintConstant {
 
     val POINT_SIZE: Float = getDimen(R.dimen.POINT_SIZE)
     val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)
-    val TEXT_SIZE: Float = getDimen(R.dimen.TEXT_SIZE)
-    val TEXT_MARGIN = getDimen(R.dimen.TEXT_MARGIN)
+    val CHAR_SIZE: Float = getDimen(R.dimen.CHAR_SIZE)
+    val CHAR_MARGIN = getDimen(R.dimen.TEXT_MARGIN)
     val ANGLE_ARC_RADIUS = getDimen(R.dimen.ANGLE_ARC_RADIUS)
 }

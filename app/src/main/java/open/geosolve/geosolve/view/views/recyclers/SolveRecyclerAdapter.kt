@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_step.view.*
+import kotlinx.android.synthetic.main.solve_item.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil.formatAnswer
@@ -14,11 +14,11 @@ import open.geosolve.geosolve.view.fragments.SolveFragmentDirections
 
 class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecycleHolder>() {
 
-    val stepSolveList: MutableList<SolveGraph> = mutableListOf()
+    private val stepSolveList: MutableList<SolveGraph> = mutableListOf()
 
-    fun addAll(solveList: List<SolveGraph>) {
+    fun fill(addList: List<SolveGraph>) {
         stepSolveList.clear()
-        stepSolveList.addAll(solveList)
+        stepSolveList.addAll(addList)
     }
 
     class SolveRecycleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,7 +41,7 @@ class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolveRecycleHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_step, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.solve_item, parent, false)
         return SolveRecycleHolder(view)
     }
 

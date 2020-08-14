@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="TEXT_SIZE">30sp</dimen>
-    <dimen name="POINT_SIZE">17dp</dimen>
-    <dimen name="LINE_WIDTH">4.5dp</dimen>
-    <dimen name="TEXT_MARGIN">20dp</dimen>
-</resources>

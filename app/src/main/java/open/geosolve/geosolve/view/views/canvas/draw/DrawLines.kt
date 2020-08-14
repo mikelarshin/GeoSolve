@@ -6,7 +6,7 @@ import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.Line
 import open.geosolve.geosolve.view.DesignUtil.formatValueString
-import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.TEXT_SIZE
+import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.CHAR_SIZE
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintLine
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintLineMark
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintText
@@ -29,8 +29,8 @@ object DrawLines {
 
             val text = formatValueString(line)
 
-            val centerX = (line.firstNode.x + line.secondNode.x) / 2 - TEXT_SIZE * text.length / 3.5f
-            val centerY = (line.firstNode.y + line.secondNode.y) / 2 + TEXT_SIZE / 3.5f
+            val centerX = (line.firstNode.x + line.secondNode.x) / 2 - CHAR_SIZE * text.length / 3.5f
+            val centerY = (line.firstNode.y + line.secondNode.y) / 2 + CHAR_SIZE / 3.5f
 
             canvas.drawText(text, centerX, centerY, mPaintText)
         }
