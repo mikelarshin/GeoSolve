@@ -5,9 +5,9 @@ import android.graphics.Paint
 import android.graphics.RectF
 import open.geosolve.geosolve.AllAngles
 import open.geosolve.geosolve.GlobalFiguresController.find
-import open.geosolve.geosolve.model.math.MathUtil.getDegree
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.math.MathUtil.getDegree
 import open.geosolve.geosolve.view.DesignUtil.formatValueString
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
@@ -46,16 +46,16 @@ object DrawAngles {
         val centerX = angle.angleNode.x
         val centerY = angle.angleNode.y
 
-        if (angle.getValue() == 90f) {
-            val rectDraw = RectF(
-                centerX,
-                centerY - ANGLE_ARC_RADIUS / 1.5f,
-                centerX + ANGLE_ARC_RADIUS / 1.5f,
-                centerY
-            )
-
-            canvas.drawRect(rectDraw, mPaint) // TODO(построение такого квадратика работает только если угол слева внизу)
-        } else {
+//        if (angle.getValue() == 90f) {
+//            val rectDraw = RectF(
+//                centerX,
+//                centerY - ANGLE_ARC_RADIUS / 1.5f,
+//                centerX + ANGLE_ARC_RADIUS / 1.5f,
+//                centerY
+//            )
+//
+//            canvas.drawRect(rectDraw, mPaint) // TODO(построение такого квадратика работает только если угол слева внизу)
+//        } else {
             val rectDraw = RectF(
                 centerX - ANGLE_ARC_RADIUS,
                 centerY - ANGLE_ARC_RADIUS,
@@ -75,6 +75,6 @@ object DrawAngles {
             val startAngle = getDegree(startNode, angle.angleNode, angle.startNode) - 90f
 
             canvas.drawArc(rectDraw, startAngle, sweepAngle, false, mPaint)
-        }
+//        }
     }
 }

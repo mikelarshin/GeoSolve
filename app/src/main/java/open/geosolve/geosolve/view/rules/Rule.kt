@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.view.rules
 
-import android.view.View
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.DesignUtil
 import open.geosolve.geosolve.view.DesignUtil.formatFormula

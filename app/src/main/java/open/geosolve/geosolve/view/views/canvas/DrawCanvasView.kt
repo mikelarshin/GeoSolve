@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import open.geosolve.geosolve.view.views.canvas.draw.SystemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.DrawAngles.drawAngles
 import open.geosolve.geosolve.view.views.canvas.draw.DrawAngles.drawAnglesMark
 import open.geosolve.geosolve.view.views.canvas.draw.DrawAngles.drawAnglesValue
@@ -20,6 +19,7 @@ import open.geosolve.geosolve.view.views.canvas.draw.DrawNodes.drawNodes
 import open.geosolve.geosolve.view.views.canvas.draw.DrawNodes.drawNodesName
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
+import open.geosolve.geosolve.view.views.canvas.draw.SystemCoordinate
 
 open class DrawCanvasView : View {
 

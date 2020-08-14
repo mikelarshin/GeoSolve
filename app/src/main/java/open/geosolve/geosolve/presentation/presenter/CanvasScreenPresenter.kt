@@ -16,7 +16,6 @@ import open.geosolve.geosolve.model.tools.BaseTool
 import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.model.tools.Tool
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.view.views.recyclers.SolveRecyclerAdapter
 
 @InjectViewState
 class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {

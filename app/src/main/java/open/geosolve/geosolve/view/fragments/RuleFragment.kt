@@ -2,14 +2,12 @@ package open.geosolve.geosolve.view.fragments
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_rule.view.*
-import kotlinx.android.synthetic.main.fragment_solve.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.presentation.presenter.RuleScreenPresenter
 import open.geosolve.geosolve.presentation.view.RuleScreenView
 import open.geosolve.geosolve.view.rules.Rule
 import open.geosolve.geosolve.view.views.recyclers.RuleRecyclerAdapter
-import open.geosolve.geosolve.view.views.recyclers.SolveRecyclerAdapter
 
 class RuleFragment : MvpFragmentX(R.layout.fragment_rule), RuleScreenView {
 

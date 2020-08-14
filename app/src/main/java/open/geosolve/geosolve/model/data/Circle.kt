@@ -1,12 +1,12 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.AllCircles
-import open.geosolve.geosolve.model.math.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.views.canvas.draw.SystemCoordinate.ABSOLUTE
+import open.geosolve.geosolve.model.math.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
+import open.geosolve.geosolve.view.views.canvas.draw.SystemCoordinate.ABSOLUTE
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow

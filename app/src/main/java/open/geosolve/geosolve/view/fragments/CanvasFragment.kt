@@ -1,13 +1,10 @@
 package open.geosolve.geosolve.view.fragments
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
@@ -23,8 +20,7 @@ import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.DesignUtil
-import java.io.Serializable
-import java.util.ArrayList
+import java.util.*
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {

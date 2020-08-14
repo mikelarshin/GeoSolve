@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.model.solve.type
 
-import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.Line
