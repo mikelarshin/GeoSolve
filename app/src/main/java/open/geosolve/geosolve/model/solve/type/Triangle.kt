@@ -3,6 +3,7 @@ package open.geosolve.geosolve.model.solve.type
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.solve.SolveFigure
 import open.geosolve.geosolve.view.rules.TriangleRules
+import kotlin.math.round
 
 object Triangle : SolveFigure {
     override fun isMatch(figure: Figure): Boolean {
@@ -10,9 +11,9 @@ object Triangle : SolveFigure {
     }
 
     override fun setGraphs(figure: Figure) {
-        if (figure.mAngles.sumByDouble { (it.getValue() ?: 0f).toDouble() } > 180.0)
+        if (round(figure.mAngles.sumByDouble { (it.getValue() ?: 0f).toDouble() }) > 180.0)
             throw Exception("Received triangle with sum of known angle higher 180 TODO()") // TODO say this for user
-        if (figure.mAngles.sumByDouble { (it.getValue() ?: 0f).toDouble() } != 180.0
+        if (round(figure.mAngles.sumByDouble { (it.getValue() ?: 0f).toDouble() }) != 180.0
             && figure.mAngles.none { it.getValue() == null })
             throw Exception("Received triangle with sum of all angle not equal 180 TODO()") // TODO say this for user
 

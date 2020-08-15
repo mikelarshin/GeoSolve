@@ -2,6 +2,7 @@ package open.geosolve.geosolve.view.fragments
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.exemple_figure_item.view.*
 import kotlinx.android.synthetic.main.fragment_solve.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
@@ -27,6 +28,7 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     }
 
     private fun setupRecycler() {
+        layout.solveTouchCanvasView.touchEnabled = false
         layout.solveRecycler.adapter = adapter
         layout.solveRecycler.layoutManager = LinearLayoutManager(activity)
         layout.solveRecycler.addItemDecoration(DividerItemDecoration(activity))

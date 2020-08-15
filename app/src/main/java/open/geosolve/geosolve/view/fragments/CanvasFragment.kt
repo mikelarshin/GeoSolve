@@ -10,10 +10,14 @@ import kotlinx.android.synthetic.main.dialog_input_value.*
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
+import open.geosolve.geosolve.AllAngles
 import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.math.MathUtil.getDegree
 import open.geosolve.geosolve.model.tools.AddTool
+import open.geosolve.geosolve.model.tools.AddTool.setNodeChars
 import open.geosolve.geosolve.model.tools.DeleteTool
 import open.geosolve.geosolve.model.tools.MarkTool
 import open.geosolve.geosolve.model.tools.SetValueTool
@@ -21,6 +25,7 @@ import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.DesignUtil
 import java.util.*
+import kotlin.math.absoluteValue
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
@@ -30,9 +35,9 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
 
-        layout.canvas.onTouchUp = { x, y -> presenter.onTouchUp(x, y) }
-        layout.canvas.onTouchDown = { x, y -> presenter.onTouchDown(x, y) }
-        layout.canvas.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
+        layout.touchCanvasView.onTouchUp = { x, y -> presenter.onTouchUp(x, y) }
+        layout.touchCanvasView.onTouchDown = { x, y -> presenter.onTouchDown(x, y) }
+        layout.touchCanvasView.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
 
         layout.show_solve_button.setOnClickListener {
             presenter.showSolveClick()
@@ -67,6 +72,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.clear_button.setOnClickListener {
             presenter.clearButtonClick()
         }
+
+        setupFigure()
+    }
+
+    fun setupFigure() {
+        AddTool.cycleTouch(-10f, -10f)
+        AddTool.cycleTouch(10f, -10f)
+        AddTool.cycleTouch(-10f, 10f)
+        AddTool.cycleTouch(-10f, -10f)
+
+        val angleList: List<Angle> = AllAngles.toList()
+
+        angleList[0].setDependentValueDraw { getDegree(angleList[0].startNode, angleList[0].angleNode, angleList[0].finalNode).absoluteValue }
+        angleList[1].setDependentValueDraw { getDegree(angleList[1].startNode, angleList[1].angleNode, angleList[1].finalNode).absoluteValue }
+        angleList[2].setDependentValueDraw { 180f - (angleList[0].getValue()!! + angleList[1].getValue()!!) }
+
+        setNodeChars()
     }
 
     override fun goToSolveScreen(solveList: List<SolveGraph>) {
@@ -76,7 +98,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun updateCanvas() {
-        canvas.invalidate()
+        touchCanvasView.invalidate()
     }
 
     override fun showMessage(messageID: Int) {

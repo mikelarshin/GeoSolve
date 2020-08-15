@@ -2,10 +2,7 @@ package open.geosolve.geosolve.view.rules
 
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.view.views.recyclers.items.RuleItem
-import open.geosolve.geosolve.view.views.recyclers.items.SubTitleItem
-import open.geosolve.geosolve.view.views.recyclers.items.TextItem
-import open.geosolve.geosolve.view.views.recyclers.items.TitleItem
+import open.geosolve.geosolve.view.views.recyclers.items.*
 
 object TriangleRules {
     class know_2_unknown_1_angle(unknown_angle: Angle, known_angle_1: Angle, known_angle_2: Angle) : Rule() {
@@ -20,7 +17,8 @@ object TriangleRules {
             SubTitleItem(R.string.ruleSubTitle_wording),
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_wording),
             SubTitleItem(R.string.ruleSubTitle_evidence),
-            TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_evidence)
+            TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_evidence),
+            ExempleFigureItem()
         )
     }
 }

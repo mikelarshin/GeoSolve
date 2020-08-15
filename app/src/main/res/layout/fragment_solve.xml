@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <open.geosolve.geosolve.view.views.canvas.TouchCanvasView
-        android:id="@+id/canvas"
+        android:id="@+id/solveTouchCanvasView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/black_line"
@@ -18,7 +18,7 @@
         android:layout_height="1dp"
         android:src="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/solveRecycler"
-        app:layout_constraintTop_toBottomOf="@+id/canvas"
+        app:layout_constraintTop_toBottomOf="@+id/solveTouchCanvasView"
         tools:layout_editor_absoluteX="34dp" />
 
     <androidx.recyclerview.widget.RecyclerView

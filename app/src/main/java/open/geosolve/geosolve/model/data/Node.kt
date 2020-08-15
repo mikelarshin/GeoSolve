@@ -5,7 +5,6 @@ import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
-import kotlin.properties.Delegates
 
 class Node(foundX: Float, foundY: Float) : Element {
 
@@ -14,7 +13,7 @@ class Node(foundX: Float, foundY: Float) : Element {
     var y: Float = foundY
         get() = systemCoordinate.convertY(field)
 
-    var char by Delegates.notNull<String>()
+    var char = "Error"
     override fun toString(): String = char
 
     var circle: Circle? = null

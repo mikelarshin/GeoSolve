@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <open.geosolve.geosolve.view.views.canvas.TouchCanvasView
-        android:id="@+id/canvas"
+        android:id="@+id/touchCanvasView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

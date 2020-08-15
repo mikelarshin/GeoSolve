@@ -12,3 +12,6 @@ enum class SystemCoordinate(val convertX: (Float) -> Float,
     DECART({ x -> x },
         { y -> y })
 }
+
+fun xToDecart(x: Float) = (x - widthCanvas / 2) / scale
+fun yToDecart(y: Float) = (heightCanvas / 2 - y) / scale

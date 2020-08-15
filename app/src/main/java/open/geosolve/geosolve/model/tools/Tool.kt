@@ -4,6 +4,12 @@ interface Tool {
     fun onTouchDown(x: Float, y: Float)
     fun onTouchMove(x: Float, y: Float)
     fun onTouchUp(x: Float, y: Float)
+
+    fun cycleTouch(x: Float, y: Float) {
+        onTouchDown(x, y)
+        onTouchMove(x, y)
+        onTouchUp(x, y)
+    }
 }
 
 
