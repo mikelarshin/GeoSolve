@@ -37,9 +37,12 @@ open class DrawCanvasView : View {
         super.onLayout(changed, left, top, right, bottom)
     }
 
+    var dataCanvas = CanvasData()
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         systemCoordinate = SystemCoordinate.ABSOLUTE
+        dataCanvas.selectIt()
 
         // Elements
         drawAngles(canvas)

@@ -2,7 +2,7 @@ package open.geosolve.geosolve.view.fragments
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.exemple_figure_item.view.*
+import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import kotlinx.android.synthetic.main.fragment_solve.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
@@ -32,7 +32,9 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
         layout.solveRecycler.layoutManager = LinearLayoutManager(activity)
         layout.solveRecycler.addItemDecoration(DividerItemDecoration(activity))
 
-        val solveList = fromBundle(arguments!!).solveList as List<SolveGraph>
+        val args = fromBundle(arguments!!)
+        val solveList = args.solveList as List<SolveGraph>
         adapter.fill(solveList)
+        layout.solveCanvasView.dataCanvas = args.dataCanvas
     }
 }

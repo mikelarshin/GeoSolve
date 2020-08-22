@@ -6,9 +6,10 @@
     android:layout_height="match_parent">
 
     <open.geosolve.geosolve.view.views.canvas.TouchCanvasView
-        android:id="@+id/touchCanvasView"
+        android:id="@+id/canvasView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:touchEnabled="true" />
 
     <!--TODO(DELETE THIS DEBUGGER)-->
     <TextView

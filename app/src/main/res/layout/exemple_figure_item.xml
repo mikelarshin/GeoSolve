@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <open.geosolve.geosolve.view.views.canvas.TouchCanvasView
-        android:id="@+id/exempleTouchCanvasView"
+        android:id="@+id/exempleCanvasView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="32dp"
@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:touchEnabled="false"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -25,7 +26,7 @@
         android:background="@android:color/transparent"
         android:padding="2dp"
         android:src="@drawable/ic_full_screen"
-        app:layout_constraintBottom_toBottomOf="@+id/exempleTouchCanvasView"
-        app:layout_constraintEnd_toEndOf="@+id/exempleTouchCanvasView" />
+        app:layout_constraintBottom_toBottomOf="@+id/exempleCanvasView"
+        app:layout_constraintEnd_toEndOf="@+id/exempleCanvasView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

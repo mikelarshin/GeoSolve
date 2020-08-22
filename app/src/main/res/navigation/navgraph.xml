@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_to_solve"
             app:destination="@id/solveFragment" />
+        <argument
+            android:name="dataCanvas"
+            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
     </fragment>
 
     <fragment
@@ -28,6 +31,8 @@
         <action
             android:id="@+id/action_to_rule"
             app:destination="@id/ruleFragment" />
+        <argument android:name="dataCanvas"
+            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
     </fragment>
 
     <fragment
