@@ -20,11 +20,12 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
         android:background="@android:color/transparent"
         android:padding="2dp"
         android:src="@drawable/ic_full_screen"
-        app:layout_constraintBottom_toBottomOf="@+id/solveTouchCanvasView"
-        app:layout_constraintEnd_toEndOf="@+id/solveTouchCanvasView" />
+        app:layout_constraintBottom_toBottomOf="@+id/exempleTouchCanvasView"
+        app:layout_constraintEnd_toEndOf="@+id/exempleTouchCanvasView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

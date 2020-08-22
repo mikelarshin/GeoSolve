@@ -1,7 +1,6 @@
 package open.geosolve.geosolve.model.data
 
 import open.geosolve.geosolve.AllAngles
-import open.geosolve.geosolve.initOnce
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.math.MathUtil
@@ -15,20 +14,17 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
 
     // all solve logic in abstract SolveGraph
 
-    var startNode: Node by initOnce()
-    var angleNode: Node by initOnce()
-    var finalNode: Node by initOnce()
+    val startNode: Node
+    val angleNode: Node
+    val finalNode: Node
 
     init {
         check(startLine != finalLine) { "Линии угла должны быть разными" }
         check(isCorrectNodes(startLine, finalLine)) { "В угле должно быть 3 уникальных точки" }
 
-        startNode =
-            startLine.nodes.first { !finalLine.nodes.contains(it) } // стартовая точка - только в стартовой линии
-        angleNode =
-            startLine.nodes.first { finalLine.nodes.contains(it) }  // угловая точка - есть во всех линиях
-        finalNode =
-            finalLine.nodes.first { !startLine.nodes.contains(it) } // финальная точка - только в финальной линии
+        startNode = startLine.nodes.first { !finalLine.nodes.contains(it) } // стартовая точка - только в стартовой линии
+        angleNode = startLine.nodes.first { finalLine.nodes.contains(it) }  // угловая точка - есть во всех линиях
+        finalNode = finalLine.nodes.first { !startLine.nodes.contains(it) } // финальная точка - только в финальной линии
     }
 
     companion object {

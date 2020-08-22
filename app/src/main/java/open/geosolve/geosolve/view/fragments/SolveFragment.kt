@@ -28,7 +28,6 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     }
 
     private fun setupRecycler() {
-        layout.solveTouchCanvasView.touchEnabled = false
         layout.solveRecycler.adapter = adapter
         layout.solveRecycler.layoutManager = LinearLayoutManager(activity)
         layout.solveRecycler.addItemDecoration(DividerItemDecoration(activity))

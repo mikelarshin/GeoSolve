@@ -65,7 +65,7 @@ object PaintConstant {
             }
         }
 
-    private fun getDimen(dimenId: Int) = App.instance.resources.getDimension(dimenId)
+    private fun getDimen(dimenId: Int) = App.context.resources.getDimension(dimenId)
 
     val POINT_SIZE: Float = getDimen(R.dimen.POINT_SIZE)
     val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)

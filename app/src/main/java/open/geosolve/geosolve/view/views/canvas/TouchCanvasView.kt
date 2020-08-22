@@ -4,17 +4,27 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import open.geosolve.geosolve.R
 import open.geosolve.geosolve.view.views.canvas.draw.xToDecart
 import open.geosolve.geosolve.view.views.canvas.draw.yToDecart
-import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.scale
+import kotlin.properties.Delegates
+
 
 class TouchCanvasView : DrawCanvasView {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    @SuppressLint("CustomViewStyleable")
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        attrs?.let {
+            val attributes = context.obtainStyledAttributes(attrs, R.styleable.CanvasView)
+            touchEnabled = attributes.getBoolean(R.styleable.CanvasView_touchEnabled, true)
 
-    var touchEnabled: Boolean = true
+            attributes.recycle()
+        }
+    }
+
+    private var touchEnabled by Delegates.notNull<Boolean>()
 
     lateinit var onTouchDown: (x: Float, y: Float) -> Unit
     lateinit var onTouchMove: (x: Float, y: Float) -> Unit
