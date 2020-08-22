@@ -46,7 +46,7 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
             solveAndCallBack() // решать только когда было не передвижение
     }
 
-    private fun solveAndCallBack() {
+    fun solveAndCallBack() {
         val solveUiCallBack = {
             viewState.showTypeFigure()
             viewState.updateCanvas()

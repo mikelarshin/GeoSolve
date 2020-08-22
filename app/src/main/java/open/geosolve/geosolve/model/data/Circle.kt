@@ -25,16 +25,11 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
 
     var radiusLineList: MutableList<Line> = mutableListOf() // TODO(implement this)
 
-    var drawRadius: Float = 0f
+    val drawRadius get() = decartRadius*31.5f
     var decartRadius: Float = 0f
 
     //Circle
     fun moveRadius(x: Float, y: Float) {
-        drawRadius = distanceBetweenPoints(
-            ABSOLUTE.convertX(centerNode.x), ABSOLUTE.convertY(centerNode.y),
-            ABSOLUTE.convertX(x), ABSOLUTE.convertY(y)
-        )
-
         decartRadius = distanceBetweenPoints(centerNode, x, y)
 
         updateAllBind()

@@ -2,9 +2,14 @@ package open.geosolve.geosolve.view.views.canvas
 
 import open.geosolve.geosolve.model.canvasData
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import java.io.Serializable
 
-class CanvasData {
+class CanvasData : Serializable {
     init {
+        selectIt()
+    }
+
+    fun selectIt() {
         canvasData = this
     }
 

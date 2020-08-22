@@ -2,10 +2,10 @@ package open.geosolve.geosolve.view.rules
 
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.AllAngles
-import open.geosolve.geosolve.model.canvasData
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.math.MathUtil
 import open.geosolve.geosolve.model.tools.AddTool
+import open.geosolve.geosolve.model.tools.BaseTool
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import open.geosolve.geosolve.view.views.recyclers.items.*
 import kotlin.math.absoluteValue
@@ -24,14 +24,13 @@ object TriangleRules {
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_wording),
             SubTitleItem(R.string.ruleSubTitle_evidence),
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_evidence),
-            ExempleFigureItem(exempleFigure),
-            ExempleFigureItem(exempleFigure2),
-            ExempleFigureItem(exempleFigure),
-            ExempleFigureItem(exempleFigure2),
-            ExempleFigureItem(exempleFigure)
+            ExempleFigureItem(exempleTriangle),
+            ExempleFigureItem(exempleTriangle2),
+            ExempleFigureItem(exempleCircle),
+            ExempleFigureItem(exempleReactangle)
         )
 
-        private val exempleFigure: CanvasData
+        private val exempleTriangle: CanvasData
             get() {
                 val dataCanvas = CanvasData()
 
@@ -44,12 +43,11 @@ object TriangleRules {
                 angleList[0].setDependentValueDraw { MathUtil.getDegree(angleList[0].startNode, angleList[0].angleNode, angleList[0].finalNode).absoluteValue }
                 angleList[1].setDependentValueDraw { MathUtil.getDegree(angleList[1].startNode, angleList[1].angleNode, angleList[1].finalNode).absoluteValue }
                 angleList[2].setDependentValueDraw { 180f - (angleList[0].getValue()!! + angleList[1].getValue()!!) }
-                AddTool.setNodeChars()
 
                 return dataCanvas
         }
 
-        private val exempleFigure2: CanvasData
+        private val exempleTriangle2: CanvasData
             get() {
                 val dataCanvas = CanvasData()
 
@@ -62,7 +60,31 @@ object TriangleRules {
                 angleList[0].setDependentValueDraw { MathUtil.getDegree(angleList[0].startNode, angleList[0].angleNode, angleList[0].finalNode).absoluteValue }
                 angleList[1].setDependentValueDraw { MathUtil.getDegree(angleList[1].startNode, angleList[1].angleNode, angleList[1].finalNode).absoluteValue }
                 angleList[2].setDependentValueDraw { 180f - (angleList[0].getValue()!! + angleList[1].getValue()!!) }
-                AddTool.setNodeChars()
+
+                return dataCanvas
+            }
+
+        private val exempleCircle: CanvasData
+            get() {
+                val dataCanvas = CanvasData()
+
+                BaseTool.moveQuantity = 5
+                AddTool.onTouchMove(0f, 0f)
+                AddTool.onTouchMove(10f, 0f)
+                AddTool.onTouchUp(10f, 0f)
+
+                return dataCanvas
+            }
+
+        private val exempleReactangle: CanvasData
+            get() {
+                val dataCanvas = CanvasData()
+
+                AddTool.cycleTouch(-10f, -10f)
+                AddTool.cycleTouch(10f, -10f)
+                AddTool.cycleTouch(10f, 10f)
+                AddTool.cycleTouch(-10f, 10f)
+                AddTool.cycleTouch(-10f, -10f)
 
                 return dataCanvas
             }

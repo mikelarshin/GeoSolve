@@ -13,7 +13,7 @@ abstract class BaseTool : Tool {
 
     companion object {
         var moveQuantity = 0
-        val movementWasNot: Boolean // нужно чтобы пользователь совершал действие только при чётком нажатии
+        val movementWasNot: Boolean // нужно чтобы совершал действие совершалось только при чётком нажатии
             get() = moveQuantity < 5
         var selectElement: Element? = null
     }
@@ -43,7 +43,7 @@ abstract class BaseTool : Tool {
             FigureList.nextFigure() // переход на следующую фигуру
     }
 
-    fun setNodeChars() {
+    private fun setNodeChars() {
         val circleNodeList = AllCircles.map { it.centerNode }
         circleNodeList.forEach { it.char = "O" }
 

@@ -13,8 +13,11 @@ import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.AllAngles
 import open.geosolve.geosolve.model.FigureList
+import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.math.MathUtil
 import open.geosolve.geosolve.model.tools.*
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
@@ -22,6 +25,7 @@ import open.geosolve.geosolve.view.formatAlertMessage
 import open.geosolve.geosolve.view.fragments.CanvasFragmentArgs.fromBundle
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import java.util.*
+import kotlin.math.absoluteValue
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
@@ -58,6 +62,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
             true
         }
+
+        FOR_TEST()
+    }
+
+    fun FOR_TEST() { // TODO(DELETE THAT IS)
+        dataCanvas.selectIt()
+        AddTool.cycleTouch(-10f, -10f)
+        AddTool.cycleTouch(10f, -10f)
+        AddTool.cycleTouch(-10f, 10f)
+        AddTool.cycleTouch(-10f, -10f)
+        MarkTool.cycleTouch(-7f, -7f)
+
+        val angleList: List<Angle> = AllAngles.toList()
+        angleList[0].setValueDraw(90f)
+        angleList[1].setValueDraw(60f)
+
+        presenter.solveAndCallBack()
     }
 
     private fun setToolButton(button: FloatingActionButton, tool: Tool) {
