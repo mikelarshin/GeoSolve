@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.solve_item.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.DesignUtil.formatAnswer
+import open.geosolve.geosolve.view.formatAnswer
 import open.geosolve.geosolve.view.fragments.SolveFragmentDirections
 
 class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecycleHolder>() {

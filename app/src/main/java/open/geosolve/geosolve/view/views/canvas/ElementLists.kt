@@ -3,64 +3,79 @@ package open.geosolve.geosolve.view.views.canvas
 import open.geosolve.geosolve.model.data.*
 
 
-private interface ElementList {
+private interface ElementSet {
     fun update()
 }
 
-class NodeSet(val figureList: List<Figure>) : LinkedHashSet<Node>(), ElementList {
+class FigureSet : LinkedHashSet<Figure>() {
+    init {
+        this.add(Figure())
+    }
+
+    override fun clear() {
+        super.clear()
+        this.add(Figure())
+    }
+
+    fun nextFigure() {
+        this.add(Figure())
+    }
+}
+
+class NodeSet(private val figureSet: FigureSet) : LinkedHashSet<Node>(), ElementSet {
 
     override fun update() {
         this.clear()
-        this.addAll(figureList.flatMap { it.mNodes })
+        this.addAll(figureSet.flatMap { it.mNodes })
     }
 
     override fun remove(node: Node): Boolean {
-        for (figure in figureList)
+        for (figure in figureSet)
             if (node in figure.mNodes)
                 figure.mNodes.remove(node)
         return true
     }
 }
 
-class LineList(val figureList: List<Figure>) : HashSet<Line>(), ElementList {
+class LineSet(private val figureSet: FigureSet) : HashSet<Line>(), ElementSet {
 
     override fun update() {
         this.clear()
-        this.addAll(figureList.flatMap { it.mLines })
+        this.addAll(figureSet.flatMap { it.mLines })
     }
 
     override fun remove(line: Line): Boolean {
-        for (figure in figureList)
+        for (figure in figureSet)
             if (line in figure.mLines)
                 figure.mLines.remove(line)
         return true
     }
 }
 
-class AngleList(val figureList: List<Figure>) : HashSet<Angle>(), ElementList {
+class AngleSet(private val figureSet: FigureSet) : HashSet<Angle>(), ElementSet {
 
     override fun update() {
         this.clear()
-        this.addAll(figureList.flatMap { it.mAngles })
+        this.addAll(figureSet.flatMap { it.mAngles })
     }
 
     override fun remove(angle: Angle): Boolean {
-        for (figure in figureList)
+        for (figure in figureSet)
             if (angle in figure.mAngles)
                 figure.mAngles.remove(angle)
         return true
     }
 }
 
-class CircleList(val figureList: List<Figure>) : HashSet<Circle>(), ElementList {
+class CircleSet(private val figureSet: FigureSet) : HashSet<Circle>(), ElementSet {
 
     override fun update() {
         this.clear()
-        this.addAll(figureList.flatMap { listOf(it.mCircle) }.filterNotNull())
+        this.addAll(figureSet.flatMap { listOf(it.mCircle) }.filterNotNull())
     }
 
     override fun remove(circle: Circle): Boolean {
-        for (figure in figureList)
+        for (figure in figureSet)
             if (circle == figure.mCircle)
                 figure.mCircle = null
         return true

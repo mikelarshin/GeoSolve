@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.tools
 
-import open.geosolve.geosolve.GlobalFiguresController.find
+import open.geosolve.geosolve.model.find
 import open.geosolve.geosolve.model.tools.AddTool.lastNode
 
 object DeleteTool : BaseTool() {

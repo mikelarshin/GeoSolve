@@ -13,7 +13,6 @@ interface Tool {
 }
 
 
-
 // То как у Валеры
 //    fun onTouchCanvas(figure: Figure, x: Float, y: Float)
 //    fun onTouchNode(figure: Figure, node: Node)

@@ -2,10 +2,10 @@ package open.geosolve.geosolve.view.views.canvas.draw
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import open.geosolve.geosolve.AllLines
-import open.geosolve.geosolve.GlobalFiguresController.find
+import open.geosolve.geosolve.model.AllLines
 import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.view.DesignUtil.formatValueString
+import open.geosolve.geosolve.model.find
+import open.geosolve.geosolve.view.formatValueString
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.CHAR_SIZE
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintLine
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintLineMark

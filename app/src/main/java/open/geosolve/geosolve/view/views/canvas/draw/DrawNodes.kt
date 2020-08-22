@@ -1,7 +1,7 @@
 package open.geosolve.geosolve.view.views.canvas.draw
 
 import android.graphics.Canvas
-import open.geosolve.geosolve.AllNodes
+import open.geosolve.geosolve.model.AllNodes
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.CHAR_MARGIN
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.mPaintNode

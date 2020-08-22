@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.AllCircles
+import open.geosolve.geosolve.model.AllCircles
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph

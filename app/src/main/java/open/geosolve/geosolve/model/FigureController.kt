@@ -1,7 +1,5 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.GlobalFiguresController.FigureList
-import open.geosolve.geosolve.GlobalFiguresController.find
 import open.geosolve.geosolve.model.data.*
 
 object FigureController {

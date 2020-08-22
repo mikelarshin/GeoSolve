@@ -1,9 +1,5 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.AllAngles
-import open.geosolve.geosolve.AllCircles
-import open.geosolve.geosolve.AllLines
-import open.geosolve.geosolve.AllNodes
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Line

@@ -1,11 +1,6 @@
 package open.geosolve.geosolve.model.solve
 
-
-import open.geosolve.geosolve.AllAngles
-import open.geosolve.geosolve.AllCircles
-import open.geosolve.geosolve.AllLines
-import open.geosolve.geosolve.GlobalFiguresController.FigureList
-import open.geosolve.geosolve.GlobalFiguresController.find
+import open.geosolve.geosolve.model.*
 import open.geosolve.geosolve.model.data.Figure
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.type.*

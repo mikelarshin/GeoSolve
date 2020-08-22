@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.AllNodes
+import open.geosolve.geosolve.model.AllNodes
 import open.geosolve.geosolve.model.data.generalized.Bind
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate

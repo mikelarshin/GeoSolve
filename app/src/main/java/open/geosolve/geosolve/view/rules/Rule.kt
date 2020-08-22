@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.view.rules
 
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.DesignUtil
-import open.geosolve.geosolve.view.DesignUtil.formatFormula
-import open.geosolve.geosolve.view.DesignUtil.formatVerbal
+import open.geosolve.geosolve.view.formatExpression
+import open.geosolve.geosolve.view.formatFormula
+import open.geosolve.geosolve.view.formatVerbal
 import open.geosolve.geosolve.view.views.recyclers.items.RuleItem
 import java.io.Serializable
 
@@ -21,5 +21,5 @@ abstract class Rule : Serializable {
     val formula: CharSequence
         get() = formatFormula(this)
     val expression: CharSequence
-        get() = DesignUtil.formatExpression(this)
+        get() = formatExpression(this)
 }

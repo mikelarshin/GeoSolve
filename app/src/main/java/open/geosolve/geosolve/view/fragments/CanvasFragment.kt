@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.AllAngles
+import open.geosolve.geosolve.model.FigureList
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.math.MathUtil.getDegree
@@ -21,7 +23,7 @@ import open.geosolve.geosolve.model.tools.MarkTool
 import open.geosolve.geosolve.model.tools.SetValueTool
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
-import open.geosolve.geosolve.view.DesignUtil
+import open.geosolve.geosolve.view.formatAlertMessage
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import java.util.*
 import kotlin.math.absoluteValue
@@ -30,6 +32,8 @@ import kotlin.math.absoluteValue
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
     private val presenter by moxyPresenter { CanvasScreenPresenter() }
+
+    val dataCanvas = CanvasData()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
@@ -90,8 +94,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         setNodeChars()
     }
 
-    override val dataCanvas = CanvasData()
-
     override fun goToSolveScreen(solveList: List<SolveGraph>) {
         solveList as ArrayList<SolveGraph>
         val action = CanvasFragmentDirections.actionToSolve(solveList)
@@ -107,7 +109,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showDialog(titleID: Int, element: String, inputCallback: (value: Float) -> Unit) {
-        val alertMessage = DesignUtil.formatAlertMessage(titleID, element)
+        val alertMessage = formatAlertMessage(titleID, element)
 
         AlertDialog.Builder(activity!!)
             .setTitle(alertMessage)

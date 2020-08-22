@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.data
 
-import open.geosolve.geosolve.AllAngles
+import open.geosolve.geosolve.model.AllAngles
 import open.geosolve.geosolve.model.data.generalized.Element
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.math.MathUtil

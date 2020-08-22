@@ -2,7 +2,7 @@ package open.geosolve.geosolve.view.views.recyclers.items
 
 import kotlinx.android.synthetic.main.text_item.view.*
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.view.DesignUtil.getText
+import open.geosolve.geosolve.view.getText
 import open.geosolve.geosolve.view.views.recyclers.RuleRecyclerAdapter
 
 

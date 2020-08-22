@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.model.ElementUpdaters.updateAngles
 import open.geosolve.geosolve.model.ElementUpdaters.updateLines
 import open.geosolve.geosolve.model.ElementUpdaters.updateNodes

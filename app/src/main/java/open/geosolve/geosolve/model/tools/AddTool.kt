@@ -1,8 +1,8 @@
 package open.geosolve.geosolve.model.tools
 
-import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.model.FigureController.addCircle
 import open.geosolve.geosolve.model.FigureController.figure
+import open.geosolve.geosolve.model.FigureList
 import open.geosolve.geosolve.model.TouchEvent.onTouchCanvas
 import open.geosolve.geosolve.model.TouchEvent.onTouchCircleLine
 import open.geosolve.geosolve.model.TouchEvent.onTouchLine

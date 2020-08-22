@@ -1,15 +1,16 @@
 package open.geosolve.geosolve.model.tools
 
-import open.geosolve.geosolve.AllCircles
-import open.geosolve.geosolve.AllNodes
-import open.geosolve.geosolve.GlobalFiguresController.FigureList
+import open.geosolve.geosolve.model.AllCircles
+import open.geosolve.geosolve.model.AllNodes
 import open.geosolve.geosolve.model.ElementGetter.getElement
 import open.geosolve.geosolve.model.FigureController.figure
+import open.geosolve.geosolve.model.FigureList
 import open.geosolve.geosolve.model.data.Circle
 import open.geosolve.geosolve.model.data.Node
 import open.geosolve.geosolve.model.data.generalized.Element
 
 abstract class BaseTool : Tool {
+
     companion object {
         var moveQuantity = 0
         val movementWasNot: Boolean // нужно чтобы пользователь совершал действие только при чётком нажатии

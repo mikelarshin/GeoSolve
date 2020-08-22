@@ -5,8 +5,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
-import open.geosolve.geosolve.GlobalFiguresController.FigureList
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.FigureList
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil

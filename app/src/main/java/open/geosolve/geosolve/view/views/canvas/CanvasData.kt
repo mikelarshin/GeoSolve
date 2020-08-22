@@ -1,43 +1,33 @@
 package open.geosolve.geosolve.view.views.canvas
 
-import open.geosolve.geosolve.model.data.Figure
+import open.geosolve.geosolve.model.canvasData
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 
 class CanvasData {
-    var find: SolveGraph? = null
-
-    val figureList = object : ArrayList<Figure>() {
-        init {
-            this.add(Figure())
-        }
-
-        override fun clear() {
-            super.clear()
-            find = null
-            this.add(Figure())
-        }
-
-        fun nextFigure() {
-            this.add(Figure())
-        }
+    init {
+        canvasData = this
     }
 
-    val AllNodes = NodeSet(figureList)
+    var find: SolveGraph? = null
+
+    val figureList = FigureSet()
+
+    val allNodes = NodeSet(figureList)
         get() {
             field.update()
             return field
         }
-    val AllLines = LineList(figureList)
+    val allLines = LineSet(figureList)
         get() {
             field.update()
             return field
         }
-    val AllAngles = AngleList(figureList)
+    val allAngles = AngleSet(figureList)
         get() {
             field.update()
             return field
         }
-    val AllCircles = CircleList(figureList)
+    val allCircles = CircleSet(figureList)
         get() {
             field.update()
             return field

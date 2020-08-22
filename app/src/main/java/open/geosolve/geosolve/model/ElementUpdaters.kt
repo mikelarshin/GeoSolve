@@ -1,7 +1,5 @@
 package open.geosolve.geosolve.model
 
-import open.geosolve.geosolve.AllAngles
-import open.geosolve.geosolve.AllLines
 import open.geosolve.geosolve.model.FigureController.addAngle
 import open.geosolve.geosolve.model.FigureController.addLine
 import open.geosolve.geosolve.model.FigureController.figure
