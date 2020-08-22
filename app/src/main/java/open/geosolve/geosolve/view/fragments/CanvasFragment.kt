@@ -36,10 +36,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
         layout.canvasView.dataCanvas = dataCanvas
-
-        layout.canvasView.onTouchUp = { x, y -> presenter.onTouchUp(x, y) }
-        layout.canvasView.onTouchDown = { x, y -> presenter.onTouchDown(x, y) }
-        layout.canvasView.onTouchMove = { x, y -> presenter.onTouchMove(x, y) }
+        layout.canvasView.canvasPresenter.canvasScreenPresenter = presenter
 
         layout.show_solve_button.setOnClickListener {
             presenter.showSolveClick()
@@ -57,8 +54,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
         layout.mark_mode_button.setOnTouchListener { v, event ->
             v.onTouchEvent(event)
 
-            if (event.action == MotionEvent.ACTION_DOWN)
-                presenter.onPressMark()
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                // Площадь и периметр
+                // TODO(implement this)
+            }
 
             true
         }
@@ -83,7 +82,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     private fun setToolButton(button: FloatingActionButton, tool: Tool) {
         button.setOnClickListener {
-            presenter.tool = tool
+            layout.canvasView.canvasPresenter.tool = tool
         }
     }
 

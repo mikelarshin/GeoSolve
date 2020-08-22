@@ -20,8 +20,6 @@ import open.geosolve.geosolve.presentation.view.CanvasScreenView
 @InjectViewState
 class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
 
-    var tool: Tool = AddTool
-
     init {
         SetValueTool.callBack = { message: Int, element: SolveGraph ->
             viewState.showDialog(message, element.toString()) {
@@ -29,21 +27,6 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
                 solveAndCallBack()
             }
         }
-    }
-
-    fun onTouchDown(touchX: Float, touchY: Float) {
-        tool.onTouchDown(touchX, touchY)
-    }
-
-    fun onTouchMove(touchX: Float, touchY: Float) {
-        tool.onTouchMove(touchX, touchY)
-    }
-
-    fun onTouchUp(touchX: Float, touchY: Float) {
-        tool.onTouchUp(touchX, touchY)
-
-        if (BaseTool.movementWasNot)
-            solveAndCallBack() // решать только когда было не передвижение
     }
 
     fun solveAndCallBack() {
@@ -85,10 +68,5 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
 
         viewState.showTypeFigure()
         viewState.updateCanvas()
-    }
-
-    fun onPressMark() {
-        // Площадь и периметр
-        // TODO(implement this)
     }
 }

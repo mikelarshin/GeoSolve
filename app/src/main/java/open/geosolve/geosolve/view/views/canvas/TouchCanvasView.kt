@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.presentation.presenter.CanvasPresenter
 import open.geosolve.geosolve.view.views.canvas.draw.xToDecart
 import open.geosolve.geosolve.view.views.canvas.draw.yToDecart
 import kotlin.properties.Delegates
@@ -25,10 +26,7 @@ class TouchCanvasView : DrawCanvasView {
     }
 
     private var touchEnabled by Delegates.notNull<Boolean>()
-
-    lateinit var onTouchDown: (x: Float, y: Float) -> Unit
-    lateinit var onTouchMove: (x: Float, y: Float) -> Unit
-    lateinit var onTouchUp: (x: Float, y: Float) -> Unit
+    val canvasPresenter = CanvasPresenter()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -38,9 +36,9 @@ class TouchCanvasView : DrawCanvasView {
         val my = yToDecart(event.y)
 
         when (event.action) {
-            MotionEvent.ACTION_DOWN -> onTouchDown.invoke(mx, my)
-            MotionEvent.ACTION_MOVE -> onTouchMove.invoke(mx, my)
-            MotionEvent.ACTION_UP -> onTouchUp.invoke(mx, my)
+            MotionEvent.ACTION_DOWN -> canvasPresenter.onTouchDown(mx, my)
+            MotionEvent.ACTION_MOVE -> canvasPresenter.onTouchMove(mx, my)
+            MotionEvent.ACTION_UP -> canvasPresenter.onTouchUp(mx, my)
         }
 
         invalidate()
