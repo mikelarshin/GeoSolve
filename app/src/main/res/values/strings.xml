@@ -48,6 +48,9 @@
     <string name="ruleText_rightTriangle_angle_30_degrees">@string/in_progress</string>
     <string name="ruleText_rightTriangle_unknown_leg_known_leg_and_hypot">@string/in_progress</string>
 
+    // Rule example
+    <string name="ruleExample_triangle_know_2_unknown_1_angle">180° = %s + %s + %s</string>
+
     // Rule SubTitles
     <string name="ruleSubTitle_wording">Формулировка</string>
     <string name="ruleSubTitle_evidence">Доказательство</string>

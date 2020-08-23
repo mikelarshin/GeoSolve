@@ -18,7 +18,7 @@ class ExampleFigureItem(private val dataCanvas: CanvasData, private val updateFo
 
         holder.itemView.open_example_figure.setOnClickListener {
             val lambda = updateForString as Serializable
-            val cloneData = dataCanvas.clone() as CanvasData // TODO(make clone dataCanvas)
+            val cloneData = dataCanvas // TODO(make clone dataCanvas)
 
             val action = RuleFragmentDirections.actionToExampleFigure(cloneData, lambda)
 

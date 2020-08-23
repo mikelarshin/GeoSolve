@@ -12,8 +12,8 @@ object RectangleRules {
         override val verbalID = R.string.verbal_rectangle_parallel_line
         override val expressionID = R.string.expression_rectangle_parallel_line
 
-        override val order_for_verbal = listOf(parallelLine, knownLine)
-        override val order_for_expression = listOf(parallelLine, knownLine)
+        override val verbalOrder = listOf(parallelLine, knownLine)
+        override val expressionOrder = listOf(parallelLine, knownLine)
 
         override val ruleItems: List<RuleItem> = listOf(
             TitleItem(R.string.ruleTitle_rectangle_parallel_line),
@@ -24,8 +24,8 @@ object RectangleRules {
         override val verbalID = R.string.verbal_rectangle_right_angles
         override val expressionID = R.string.expression_rectangle_right_angles
 
-        override val order_for_verbal = listOf(unknownAngle)
-        override val order_for_expression = listOf(unknownAngle)
+        override val verbalOrder = listOf(unknownAngle)
+        override val expressionOrder = listOf(unknownAngle)
 
         override val ruleItems: List<RuleItem> = listOf(
             TitleItem(R.string.ruleTitle_rectangle_right_angles),
