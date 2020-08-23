@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.view.getDimen
 
 object PaintConstant {
     var mPaintNode:       Paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -64,8 +65,6 @@ object PaintConstant {
                 style = Paint.Style.STROKE
             }
         }
-
-    private fun getDimen(dimenId: Int) = App.context.resources.getDimension(dimenId)
 
     val POINT_SIZE: Float = getDimen(R.dimen.POINT_SIZE)
     val LINE_WIDTH: Float = getDimen(R.dimen.LINE_WIDTH)

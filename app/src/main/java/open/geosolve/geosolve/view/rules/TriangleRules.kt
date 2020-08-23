@@ -27,7 +27,11 @@ object TriangleRules {
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_wording),
             SubTitleItem(R.string.ruleSubTitle_evidence),
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_evidence),
-            ExampleFigureItem(exampleTriangle, stringUpdater)
+            SubTitleItem(R.string.ruleSubTitle_experiment),
+            ExampleFigureItem(exampleTriangle, stringUpdater),
+            SubTitleItem(R.string.ruleSubTitle_conclusion),
+            TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_conclusion),
+            FormulaItem(R.string.ruleFormula_triangle_know_2_unknown_1_angle)
         )
 
         private val exampleTriangle: CanvasData

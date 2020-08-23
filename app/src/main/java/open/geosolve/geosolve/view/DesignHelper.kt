@@ -35,10 +35,10 @@ fun formatExample(rule: Rule): CharSequence {
         val index = sb.indexOf('%')
         val style = R.style.Bold
 
-        sb.replace(index, index + 2, formatText(formatValueString(solveGraph), style))
+        sb.replace(index, index + 2, formatText(formatValueString(solveGraph, 1f), style))
     }
 
-    sb.setSpan(AbsoluteSizeSpan(70), 0, sb.length, 0)
+    sb.setSpan(AbsoluteSizeSpan(getDimen(R.dimen.BIG_TEXT_SIZE).toInt()), 0, sb.length, 0)
 
     return sb.subSequence(0, sb.length)
 }
@@ -57,6 +57,7 @@ private fun formatAllDigital(templateId: Int, styleId: Int): CharSequence {
 }
 
 fun getText(textID: Int) = App.context.getString(textID)
+fun getDimen(dimenId: Int) = App.context.resources.getDimension(dimenId)
 
 private fun formatText(string: CharSequence, styleId: Int): SpannableString {
     val spannableString = SpannableString(string)
@@ -82,11 +83,11 @@ fun formatAlertMessage(messageId: Int, element: String): CharSequence {
     return sb.subSequence(0, sb.length)
 }
 
-fun formatValueString(solveGraph: SolveGraph): String {
+fun formatValueString(solveGraph: SolveGraph, round: Float = 0.1f): String {
     val value: Float = solveGraph.getValue()!!
 
     val add_note = if (solveGraph is Angle) "°" else ""
 
-    return (if (value - value.toInt() < 0.1f) value.toInt()
+    return (if (value - value.toInt() < round) value.toInt()
         .toString() else "%.1f".format(value)) + add_note
 }
