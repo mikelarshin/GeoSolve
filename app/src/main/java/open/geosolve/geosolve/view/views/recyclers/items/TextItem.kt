@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.view.views.recyclers.items
 
-import kotlinx.android.synthetic.main.text_item.view.*
+import kotlinx.android.synthetic.main.item_text.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.view.getText
 import open.geosolve.geosolve.view.views.recyclers.RuleRecyclerAdapter
@@ -9,7 +9,7 @@ import open.geosolve.geosolve.view.views.recyclers.RuleRecyclerAdapter
 class TextItem(textID: Int) : RuleItem {
     val text: String = getText(textID)
 
-    override val layoutRes = R.layout.text_item
+    override val layoutRes = R.layout.item_text
 
     override fun onBindViewHolder(holder: RuleRecyclerAdapter.RuleRecycleHolder) {
         holder.itemView.rule_text.text = text

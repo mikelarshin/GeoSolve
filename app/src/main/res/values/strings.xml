@@ -33,24 +33,26 @@
 
     // Rule Titles
     <string name="ruleTitle_triangle_know_2_unknown_1_angle">Сумма углов треугольника 180°</string>
-    <string name="ruleTitle_rectangle_parallel_line">…</string>
-    <string name="ruleTitle_rectangle_right_angles">…</string>
-    <string name="ruleTitle_rightTriangle_pythagorean_theorem_3">…</string>
-    <string name="ruleTitle_rightTriangle_angle_30_degrees">…</string>
-    <string name="ruleTitle_rightTriangle_unknown_leg_known_leg_and_hypot">…</string>
+    <string name="ruleTitle_rectangle_parallel_line">@string/in_progress</string>
+    <string name="ruleTitle_rectangle_right_angles">@string/in_progress</string>
+    <string name="ruleTitle_rightTriangle_pythagorean_theorem_3">@string/in_progress</string>
+    <string name="ruleTitle_rightTriangle_angle_30_degrees">@string/in_progress</string>
+    <string name="ruleTitle_rightTriangle_unknown_leg_known_leg_and_hypot">@string/in_progress</string>
 
     // Rule Texts
     <string name="ruleText_triangle_know_2_unknown_1_angle_wording">Сумма углов треугольника на евклидовой плоскости равна 180°</string>
     <string name="ruleText_triangle_know_2_unknown_1_angle_evidence">Пусть ΔABC — произвольный треугольник. Проведём через вершину B прямую, параллельную прямой AC. Отметим на ней точку D так, чтобы точки A и D лежали по разные стороны от прямой BC. Углы DBC и ACB равны как внутренние накрест лежащие, образованные секущей BC с параллельными прямыми AC и BD. Поэтому сумма углов треугольника при вершинах B и С равна углу ABD. Сумма всех трёх углов треугольника равна сумме углов ABD и BAC. Так как эти углы внутренние односторонние для параллельных AC и BD при секущей AB, то их сумма равна 180°. Что и требовалось доказать.</string>
-    <string name="ruleText_rectangle_parallel_line">…</string>
-    <string name="ruleText_rectangle_right_angles">…</string>
-    <string name="ruleText_rightTriangle_pythagorean_theorem_3">…</string>
-    <string name="ruleText_rightTriangle_angle_30_degrees">…</string>
-    <string name="ruleText_rightTriangle_unknown_leg_known_leg_and_hypot">…</string>
+    <string name="ruleText_rectangle_parallel_line">@string/in_progress</string>
+    <string name="ruleText_rectangle_right_angles">@string/in_progress</string>
+    <string name="ruleText_rightTriangle_pythagorean_theorem_3">@string/in_progress</string>
+    <string name="ruleText_rightTriangle_angle_30_degrees">@string/in_progress</string>
+    <string name="ruleText_rightTriangle_unknown_leg_known_leg_and_hypot">@string/in_progress</string>
 
     // Rule SubTitles
     <string name="ruleSubTitle_wording">Формулировка</string>
     <string name="ruleSubTitle_evidence">Доказательство</string>
+
+    <string name="in_progress">В разработке</string>
 
     // needs symbol: ° √ ²
 </resources>

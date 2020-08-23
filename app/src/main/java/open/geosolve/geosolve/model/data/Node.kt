@@ -66,7 +66,4 @@ class Node(foundX: Float, foundY: Float) : Element {
 
         return xBool && yBool
     }
-
-    operator fun component1() = x
-    operator fun component2() = y
 }

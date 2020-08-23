@@ -43,6 +43,20 @@
         <argument
             android:name="rule"
             app:argType="open.geosolve.geosolve.view.rules.Rule" />
+        <action
+            android:id="@+id/action_to_exampleFigure"
+            app:destination="@id/exampleFigureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exampleFigureFragment"
+        android:name="open.geosolve.geosolve.view.fragments.ExampleFigureFragment"
+        android:label="fragment_example_figure"
+        tools:layout="@layout/fragment_example_figure" >
+        <argument
+            android:name="dataCanvas"
+            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+        <argument android:name="updateForString"
+            app:argType="java.io.Serializable" />
     </fragment>
 
 </navigation>

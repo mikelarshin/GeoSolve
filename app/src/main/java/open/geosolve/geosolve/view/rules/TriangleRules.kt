@@ -6,6 +6,8 @@ import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.math.MathUtil
 import open.geosolve.geosolve.model.tools.AddTool
 import open.geosolve.geosolve.model.tools.BaseTool
+import open.geosolve.geosolve.view.formatExpression
+import open.geosolve.geosolve.view.formatValueString
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import open.geosolve.geosolve.view.views.recyclers.items.*
 import kotlin.math.absoluteValue
@@ -24,13 +26,13 @@ object TriangleRules {
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_wording),
             SubTitleItem(R.string.ruleSubTitle_evidence),
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_evidence),
-            ExempleFigureItem(exempleTriangle),
-            ExempleFigureItem(exempleTriangle2),
-            ExempleFigureItem(exempleCircle),
-            ExempleFigureItem(exempleReactangle)
+            ExampleFigureItem(exampleTriangle) {
+                val angleList: List<Angle> = AllAngles.toList()
+                "180° = ${formatValueString(angleList[0])} + ${formatValueString(angleList[1])} + ${formatValueString(angleList[2])}"
+            }
         )
 
-        private val exempleTriangle: CanvasData
+        private val exampleTriangle: CanvasData
             get() {
                 val dataCanvas = CanvasData()
 
@@ -47,7 +49,7 @@ object TriangleRules {
                 return dataCanvas
         }
 
-        private val exempleTriangle2: CanvasData
+        private val exampleTriangle2: CanvasData
             get() {
                 val dataCanvas = CanvasData()
 
@@ -64,7 +66,7 @@ object TriangleRules {
                 return dataCanvas
             }
 
-        private val exempleCircle: CanvasData
+        private val exampleCircle: CanvasData
             get() {
                 val dataCanvas = CanvasData()
 
@@ -76,7 +78,7 @@ object TriangleRules {
                 return dataCanvas
             }
 
-        private val exempleReactangle: CanvasData
+        private val exampleReactangle: CanvasData
             get() {
                 val dataCanvas = CanvasData()
 
