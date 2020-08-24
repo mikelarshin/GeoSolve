@@ -23,6 +23,7 @@ import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.formatAlertMessage
 import open.geosolve.geosolve.view.fragments.CanvasFragmentArgs.fromBundle
+import open.geosolve.geosolve.view.rules.makeTriangle
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import java.util.*
 import kotlin.math.absoluteValue
@@ -67,11 +68,8 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     fun FOR_TEST() { // TODO(DELETE THAT IS)
         dataCanvas.selectIt()
-        AddTool.cycleTouch(-10f, -10f)
-        AddTool.cycleTouch(10f, -10f)
-        AddTool.cycleTouch(-10f, 10f)
-        AddTool.cycleTouch(-10f, -10f)
-        MarkTool.cycleTouch(-7f, -7f)
+        makeTriangle()
+        MarkTool.cycleTouch(-7f, 7f)
 
         val angleList: List<Angle> = AllAngles.toList()
         angleList[0].setValueDraw(90f)

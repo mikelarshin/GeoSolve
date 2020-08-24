@@ -31,7 +31,8 @@ object TriangleRules {
             ExampleFigureItem(exampleTriangle, stringUpdater),
             SubTitleItem(R.string.ruleSubTitle_conclusion),
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_conclusion),
-            FormulaItem(R.string.ruleFormula_triangle_know_2_unknown_1_angle)
+            FormulaItem(R.string.ruleFormula_triangle_know_2_unknown_1_angle),
+            EndItem()
         )
 
         private val exampleTriangle: CanvasData
