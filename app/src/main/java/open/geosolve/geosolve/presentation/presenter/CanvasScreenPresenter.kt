@@ -7,7 +7,9 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.FigureList
+import open.geosolve.geosolve.model.canvasData
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.find
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil
 import open.geosolve.geosolve.model.tools.AddTool
@@ -65,6 +67,7 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
         lastNode = null
 
         FigureList.clear()
+        canvasData.find = null
 
         viewState.showTypeFigure()
         viewState.updateCanvas()

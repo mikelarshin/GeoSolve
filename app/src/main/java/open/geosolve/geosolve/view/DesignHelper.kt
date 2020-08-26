@@ -39,7 +39,7 @@ fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): Ch
         sb.replace(index, index + 2, formatText(formatValueString(solveGraph, 0), style))
     }
 
-    return setSize(sb.subSequence(0, sb.length), R.dimen.SO_BIG_TEXT_SIZE)
+    return setSize(sb.subSequence(0, sb.length), R.dimen.BIG_TEXT_SIZE)
 }
 
 fun formatExample(exampleTextID: Int, exampleOrder: List<SolveGraph>): CharSequence {

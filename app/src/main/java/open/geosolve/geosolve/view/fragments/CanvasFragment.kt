@@ -61,10 +61,10 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
             true
         }
 
-        FOR_TEST()
+//        FOR_TEST()
     }
 
-    fun FOR_TEST() { // TODO(DELETE THAT IS)
+    fun FOR_TEST() { // TODO(DELETE IT IS)
         dataCanvas.selectIt()
         makeTriangleOne()
         MarkTool.cycleTouch(-7f, 7f)

@@ -1,10 +1,8 @@
 package open.geosolve.geosolve.presentation.presenter
 
-import open.geosolve.geosolve.model.canvasData
 import open.geosolve.geosolve.model.tools.AddTool
 import open.geosolve.geosolve.model.tools.BaseTool
 import open.geosolve.geosolve.model.tools.Tool
-import open.geosolve.geosolve.view.views.canvas.CanvasData
 
 class CanvasPresenter {
     var updateEvent: () -> Unit = {}

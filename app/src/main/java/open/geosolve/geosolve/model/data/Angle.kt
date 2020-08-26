@@ -59,6 +59,7 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
     }
 
     override fun toString(): String = "∠$startNode$angleNode$finalNode"
+    fun toSmallString(): String = "∠$angleNode"
 
     fun equal(startLine: Line, finalLine: Line): Boolean {
         return (startLine.equal(this.startLine) && finalLine.equal(this.finalLine)) ||

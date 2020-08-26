@@ -30,7 +30,7 @@ object TriangleRules {
                     ),
                     AllAngles.toList()
                 ),
-                R.dimen.SO_BIG_TEXT_SIZE
+                R.dimen.BIG_TEXT_SIZE
             )
         }
 
@@ -43,7 +43,7 @@ object TriangleRules {
                 formatSolveText(
                     R.string.ruleExample_triangle_know_2_unknown_1_angle_experiment,
                     angles
-                ),
+                ) { (it as Angle).toSmallString() },
                 R.dimen.BIG_TEXT_SIZE
             ))
             sb.append("\n")
@@ -52,7 +52,7 @@ object TriangleRules {
                     R.string.ruleExample_triangle_know_2_unknown_1_angle_experiment,
                     angles
                 ) { formatValueString(it, 0) },
-                R.dimen.SO_BIG_TEXT_SIZE
+                R.dimen.BIG_TEXT_SIZE
             ))
         }
 

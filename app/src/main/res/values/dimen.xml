@@ -12,8 +12,7 @@
     <dimen name="SMALL_TEXT_SIZE">15sp</dimen>
 
     // Rule TextSize
-    <dimen name="SO_BIG_TEXT_SIZE">35sp</dimen>
-    <dimen name="BIG_TEXT_SIZE">28sp</dimen>
+    <dimen name="BIG_TEXT_SIZE">35sp</dimen>
 
     <dimen name="TITLE_TEXT_SIZE">30sp</dimen>
     <dimen name="SUB_TITLE_TEXT_SIZE">20sp</dimen>
