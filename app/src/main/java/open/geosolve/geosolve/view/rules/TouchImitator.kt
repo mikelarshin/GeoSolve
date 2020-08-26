@@ -3,10 +3,17 @@ package open.geosolve.geosolve.view.rules
 import open.geosolve.geosolve.model.tools.AddTool
 import open.geosolve.geosolve.model.tools.BaseTool
 
-fun makeTriangle() {
+fun makeTriangleOne() {
     AddTool.cycleTouch(-10f, -10f)
     AddTool.cycleTouch(10f, -10f)
     AddTool.cycleTouch(-10f, 10f)
+    AddTool.cycleTouch(-10f, -10f)
+}
+
+fun makeTriangleTwo() {
+    AddTool.cycleTouch(-10f, -10f)
+    AddTool.cycleTouch(10f, -10f)
+    AddTool.cycleTouch(10f, 10f)
     AddTool.cycleTouch(-10f, -10f)
 }
 

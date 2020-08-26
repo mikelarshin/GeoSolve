@@ -9,8 +9,9 @@ import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.rules.Rule
+import kotlin.math.roundToInt
 
-private fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
+fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
     val sb = SpannableStringBuilder().append(formatAllDigital(templateId, R.style.Bold))
 
     for (solveGraph in order) {
@@ -28,22 +29,30 @@ fun formatFormula(rule: Rule) = formatSolveText(rule.expressionID, rule.expressi
 
 fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.expressionOrder) { formatValueString(it) }
 
-fun formatExample(rule: Rule): CharSequence {
-    val sb = SpannableStringBuilder().append(formatAllDigital(rule.exampleID, R.style.AnswerText))
+fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): CharSequence {
+    val sb = SpannableStringBuilder().append(exampleText)
 
-    for (solveGraph in rule.exampleOrder) {
+    for (solveGraph in exampleOrder) {
         val index = sb.indexOf('%')
         val style = R.style.Bold
 
-        sb.replace(index, index + 2, formatText(formatValueString(solveGraph, 1f), style))
+        sb.replace(index, index + 2, formatText(formatValueString(solveGraph, 0), style))
     }
 
-    sb.setSpan(AbsoluteSizeSpan(getDimen(R.dimen.BIG_TEXT_SIZE).toInt()), 0, sb.length, 0)
+    return setSize(sb.subSequence(0, sb.length), R.dimen.SO_BIG_TEXT_SIZE)
+}
 
+fun formatExample(exampleTextID: Int, exampleOrder: List<SolveGraph>): CharSequence {
+    return formatExample(getText(exampleTextID), exampleOrder)
+}
+fun setSize(text: CharSequence, dimenId: Int): CharSequence {
+    val sb = SpannableStringBuilder().append(text)
+
+    sb.setSpan(AbsoluteSizeSpan(getDimen(dimenId).toInt()), 0, sb.length, 0)
     return sb.subSequence(0, sb.length)
 }
 
-private fun formatAllDigital(templateId: Int, styleId: Int): CharSequence {
+fun formatAllDigital(templateId: Int, styleId: Int): CharSequence {
     val sb = SpannableStringBuilder().append(formatText(getText(templateId), R.style.TemplateText))
 
     for (charIndex in 0..sb.length - 2) {
@@ -83,11 +92,16 @@ fun formatAlertMessage(messageId: Int, element: String): CharSequence {
     return sb.subSequence(0, sb.length)
 }
 
-fun formatValueString(solveGraph: SolveGraph, round: Float = 0.1f): String {
+fun formatValueString(solveGraph: SolveGraph, round: Int = 1): String {
     val value: Float = solveGraph.getValue()!!
 
     val add_note = if (solveGraph is Angle) "°" else ""
 
-    return (if (value - value.toInt() < round) value.toInt()
-        .toString() else "%.1f".format(value)) + add_note
+    val roundValue = "%.${round}f".format(value)
+
+    return (
+            if (roundValue.last() == '0')
+                value.roundToInt().toString()
+            else
+                roundValue) + add_note
 }

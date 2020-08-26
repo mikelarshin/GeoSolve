@@ -8,7 +8,7 @@ class ExampleFigureFragment : MvpFragmentX(R.layout.fragment_example_figure) {
     override fun setupLayout() {
         val args = ExampleFigureFragmentArgs.fromBundle(arguments!!)
         layout.fullExampleCanvasView.dataCanvas = args.dataCanvas
-        layout.fullExampleCanvasView.canvasPresenter.tool = MoveTool
+        layout.fullExampleCanvasView.canvasPresenter.tool = args.tool
 
         val updateForString = args.updateForString as () -> CharSequence
 

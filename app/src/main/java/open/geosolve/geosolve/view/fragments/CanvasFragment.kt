@@ -17,16 +17,14 @@ import open.geosolve.geosolve.model.AllAngles
 import open.geosolve.geosolve.model.FigureList
 import open.geosolve.geosolve.model.data.Angle
 import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.math.MathUtil
 import open.geosolve.geosolve.model.tools.*
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.formatAlertMessage
 import open.geosolve.geosolve.view.fragments.CanvasFragmentArgs.fromBundle
-import open.geosolve.geosolve.view.rules.makeTriangle
+import open.geosolve.geosolve.view.rules.makeTriangleOne
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import java.util.*
-import kotlin.math.absoluteValue
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
@@ -68,7 +66,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     fun FOR_TEST() { // TODO(DELETE THAT IS)
         dataCanvas.selectIt()
-        makeTriangle()
+        makeTriangleOne()
         MarkTool.cycleTouch(-7f, 7f)
 
         val angleList: List<Angle> = AllAngles.toList()

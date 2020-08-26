@@ -1,6 +1,8 @@
 package open.geosolve.geosolve.model.tools
 
-interface Tool {
+import java.io.Serializable
+
+interface Tool : Serializable {
     fun onTouchDown(x: Float, y: Float)
     fun onTouchMove(x: Float, y: Float)
     fun onTouchUp(x: Float, y: Float)

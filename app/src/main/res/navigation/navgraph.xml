@@ -57,6 +57,9 @@
             app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
         <argument android:name="updateForString"
             app:argType="java.io.Serializable" />
+        <argument
+            android:name="tool"
+            app:argType="open.geosolve.geosolve.model.tools.Tool" />
     </fragment>
 
 </navigation>
