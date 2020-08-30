@@ -1,16 +1,16 @@
-package open.geosolve.geosolve.model.tools
+package open.geosolve.geosolve.model.canvas.tools
 
-import open.geosolve.geosolve.model.FigureController.addCircle
-import open.geosolve.geosolve.model.FigureController.figure
-import open.geosolve.geosolve.model.FigureList
-import open.geosolve.geosolve.model.TouchEvent.onTouchCanvas
-import open.geosolve.geosolve.model.TouchEvent.onTouchCircleLine
-import open.geosolve.geosolve.model.TouchEvent.onTouchLine
-import open.geosolve.geosolve.model.TouchEvent.onTouchPoint
-import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.data.Figure
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.canvas.FigureController.addCircle
+import open.geosolve.geosolve.model.canvas.FigureController.figure
+import open.geosolve.geosolve.model.canvas.FigureList
+import open.geosolve.geosolve.model.canvas.TouchEvent.onTouchCanvas
+import open.geosolve.geosolve.model.canvas.TouchEvent.onTouchCircleLine
+import open.geosolve.geosolve.model.canvas.TouchEvent.onTouchLine
+import open.geosolve.geosolve.model.canvas.TouchEvent.onTouchPoint
+import open.geosolve.geosolve.model.canvas.data.Circle
+import open.geosolve.geosolve.model.canvas.data.Figure
+import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.model.canvas.data.Node
 
 object AddTool : BaseTool() {
     var lastNode: Node? = null

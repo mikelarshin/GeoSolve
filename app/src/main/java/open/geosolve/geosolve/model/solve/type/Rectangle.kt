@@ -1,7 +1,7 @@
 package open.geosolve.geosolve.model.solve.type
 
-import open.geosolve.geosolve.model.data.Figure
-import open.geosolve.geosolve.model.data.Line
+import open.geosolve.geosolve.model.canvas.data.Figure
+import open.geosolve.geosolve.model.canvas.data.Line
 import open.geosolve.geosolve.model.solve.SolveFigure
 import open.geosolve.geosolve.view.rules.RectangleRules
 
@@ -38,7 +38,5 @@ object Rectangle : SolveFigure {
             }
         }
     }
-
-    override fun setSubType(figure: Figure) {}
 }
 

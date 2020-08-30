@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.view.rules
 
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.views.recyclers.items.RuleItem
 import open.geosolve.geosolve.view.views.recyclers.items.TextItem
 import open.geosolve.geosolve.view.views.recyclers.items.TitleItem

@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.view.rules
 
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.formatExpression
 import open.geosolve.geosolve.view.formatFormula
 import open.geosolve.geosolve.view.formatVerbal

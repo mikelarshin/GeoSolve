@@ -1,10 +1,10 @@
-package open.geosolve.geosolve.model.tools
+package open.geosolve.geosolve.model.canvas.tools
 
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Circle
+import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 
 object SetValueTool : BaseTool() {
 

@@ -1,10 +1,10 @@
-package open.geosolve.geosolve.model.data
+package open.geosolve.geosolve.model.canvas.data
 
-import open.geosolve.geosolve.model.AllAngles
-import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.math.MathUtil
-import open.geosolve.geosolve.model.math.MathUtil.isPointInAngle
+import open.geosolve.geosolve.model.canvas.AllAngles
+import open.geosolve.geosolve.model.canvas.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.math.MathUtil
+import open.geosolve.geosolve.model.canvas.math.MathUtil.isPointInAngle
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 import kotlin.math.max
@@ -51,7 +51,7 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
         return (distanceToAngleArc < useTouchZone) && isPointInAngle(this, x, y)
     }
 
-    override fun remove() { // TODO(rewrite remove system)
+    override fun remove() {
 //        startLine.remove()
 //        finalLine.remove()
 

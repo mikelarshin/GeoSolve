@@ -1,6 +1,6 @@
-package open.geosolve.geosolve.model.data.generalized
+package open.geosolve.geosolve.model.canvas.data.generalized
 
-import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.canvas.data.Node
 
 interface Bind {
     fun toBindNodeXY(node: Node, newX: Float, newY: Float)

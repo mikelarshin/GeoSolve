@@ -13,11 +13,11 @@ import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.AllAngles
-import open.geosolve.geosolve.model.FigureList
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.tools.*
+import open.geosolve.geosolve.model.canvas.AllAngles
+import open.geosolve.geosolve.model.canvas.FigureList
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.tools.*
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.formatAlertMessage

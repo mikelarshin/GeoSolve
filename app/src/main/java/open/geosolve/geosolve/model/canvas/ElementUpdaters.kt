@@ -1,10 +1,10 @@
-package open.geosolve.geosolve.model
+package open.geosolve.geosolve.model.canvas
 
-import open.geosolve.geosolve.model.FigureController.addAngle
-import open.geosolve.geosolve.model.FigureController.addLine
-import open.geosolve.geosolve.model.FigureController.figure
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Angle.Companion.isCorrectNodes
+import open.geosolve.geosolve.model.canvas.FigureController.addAngle
+import open.geosolve.geosolve.model.canvas.FigureController.addLine
+import open.geosolve.geosolve.model.canvas.FigureController.figure
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Angle.Companion.isCorrectNodes
 
 object ElementUpdaters {
     fun updateNodes() {

@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.view.views.canvas.draw
 
 import android.graphics.Canvas
-import open.geosolve.geosolve.model.AllCircles
-import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.find
+import open.geosolve.geosolve.model.canvas.AllCircles
+import open.geosolve.geosolve.model.canvas.data.Circle
+import open.geosolve.geosolve.model.canvas.find
 import open.geosolve.geosolve.view.formatValueString
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.CHAR_SIZE
 

@@ -1,14 +1,14 @@
-package open.geosolve.geosolve.model.data
+package open.geosolve.geosolve.model.canvas.data
 
-import open.geosolve.geosolve.model.AllLines
-import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.math.MathUtil.getDistanceToLine
-import open.geosolve.geosolve.model.math.MathUtil.getPointProjectToLine
-import open.geosolve.geosolve.model.math.MathUtil.isTouchLeftSegment
-import open.geosolve.geosolve.model.math.MathUtil.isTouchOnSegment
-import open.geosolve.geosolve.model.math.MathUtil.isTouchRightSegment
+import open.geosolve.geosolve.model.canvas.AllLines
+import open.geosolve.geosolve.model.canvas.data.generalized.Bind
+import open.geosolve.geosolve.model.canvas.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.math.MathUtil.getDistanceToLine
+import open.geosolve.geosolve.model.canvas.math.MathUtil.getPointProjectToLine
+import open.geosolve.geosolve.model.canvas.math.MathUtil.isTouchLeftSegment
+import open.geosolve.geosolve.model.canvas.math.MathUtil.isTouchOnSegment
+import open.geosolve.geosolve.model.canvas.math.MathUtil.isTouchRightSegment
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 
 class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
@@ -48,7 +48,7 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
     }
 
     // Element
-    override fun remove() { // TODO(rewrite remove system)
+    override fun remove() {
 //        firstNode.lines.remove(this)
 //        secondNode.lines.remove(this)
 //        angles.forEach { it.remove() }

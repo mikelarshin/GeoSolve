@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.view.views.canvas
 
-import open.geosolve.geosolve.model.data.*
+import open.geosolve.geosolve.model.canvas.data.*
 
 
 private interface ElementSet {

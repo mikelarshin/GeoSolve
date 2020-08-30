@@ -6,8 +6,8 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.TextAppearanceSpan
 import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.rules.Rule
 import kotlin.math.roundToInt
 
@@ -29,7 +29,7 @@ fun formatFormula(rule: Rule) = formatSolveText(rule.expressionID, rule.expressi
 
 fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.expressionOrder) { formatValueString(it) }
 
-fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): CharSequence {
+fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): CharSequence { // TODO(rewrite this shit)
     val sb = SpannableStringBuilder().append(exampleText)
 
     for (solveGraph in exampleOrder) {
@@ -42,9 +42,6 @@ fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): Ch
     return setSize(sb.subSequence(0, sb.length), R.dimen.BIG_TEXT_SIZE)
 }
 
-fun formatExample(exampleTextID: Int, exampleOrder: List<SolveGraph>): CharSequence {
-    return formatExample(getText(exampleTextID), exampleOrder)
-}
 fun setSize(text: CharSequence, dimenId: Int): CharSequence {
     val sb = SpannableStringBuilder().append(text)
 

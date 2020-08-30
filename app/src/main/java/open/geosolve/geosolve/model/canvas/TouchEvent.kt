@@ -1,15 +1,15 @@
-package open.geosolve.geosolve.model
+package open.geosolve.geosolve.model.canvas
 
-import open.geosolve.geosolve.model.ElementUpdaters.updateAngles
-import open.geosolve.geosolve.model.ElementUpdaters.updateLines
-import open.geosolve.geosolve.model.ElementUpdaters.updateNodes
-import open.geosolve.geosolve.model.FigureController.addLine
-import open.geosolve.geosolve.model.FigureController.addNode
-import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.tools.AddTool.lastNode
+import open.geosolve.geosolve.model.canvas.ElementUpdaters.updateAngles
+import open.geosolve.geosolve.model.canvas.ElementUpdaters.updateLines
+import open.geosolve.geosolve.model.canvas.ElementUpdaters.updateNodes
+import open.geosolve.geosolve.model.canvas.FigureController.addLine
+import open.geosolve.geosolve.model.canvas.FigureController.addNode
+import open.geosolve.geosolve.model.canvas.data.Circle
+import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.model.canvas.data.Node
+import open.geosolve.geosolve.model.canvas.data.generalized.Bind
+import open.geosolve.geosolve.model.canvas.tools.AddTool.lastNode
 
 object TouchEvent {
     fun onTouchCanvas(touchX: Float, touchY: Float) {

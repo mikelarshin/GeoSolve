@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.model.data.generalized
+package open.geosolve.geosolve.model.canvas.data.generalized
 
 import open.geosolve.geosolve.view.rules.Rule
 

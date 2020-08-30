@@ -2,11 +2,10 @@ package open.geosolve.geosolve.view.fragments
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import kotlinx.android.synthetic.main.fragment_solve.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.presentation.presenter.SolveScreenPresenter
 import open.geosolve.geosolve.presentation.view.SolveScreenView
 import open.geosolve.geosolve.view.fragments.SolveFragmentArgs.fromBundle

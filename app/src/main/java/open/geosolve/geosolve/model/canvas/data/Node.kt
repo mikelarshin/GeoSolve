@@ -1,8 +1,8 @@
-package open.geosolve.geosolve.model.data
+package open.geosolve.geosolve.model.canvas.data
 
-import open.geosolve.geosolve.model.AllNodes
-import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.AllNodes
+import open.geosolve.geosolve.model.canvas.data.generalized.Bind
+import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
 
@@ -49,7 +49,7 @@ class Node(foundX: Float, foundY: Float) : Element {
     }
 
     // Element
-    override fun remove() { // TODO(rewrite remove system)
+    override fun remove() {
         lines.forEach { it.remove() }
         angles.forEach { it.remove() }
         circle?.remove()

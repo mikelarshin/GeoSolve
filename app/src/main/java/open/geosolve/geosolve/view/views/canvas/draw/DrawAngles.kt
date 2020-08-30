@@ -3,11 +3,11 @@ package open.geosolve.geosolve.view.views.canvas.draw
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import open.geosolve.geosolve.model.AllAngles
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.find
-import open.geosolve.geosolve.model.math.MathUtil.getDegree
+import open.geosolve.geosolve.model.canvas.AllAngles
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Node
+import open.geosolve.geosolve.model.canvas.find
+import open.geosolve.geosolve.model.canvas.math.MathUtil.getDegree
 import open.geosolve.geosolve.view.formatValueString
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS

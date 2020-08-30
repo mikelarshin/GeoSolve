@@ -1,8 +1,8 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.model.*
-import open.geosolve.geosolve.model.data.Figure
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.*
+import open.geosolve.geosolve.model.canvas.data.Figure
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.type.*
 
 object SolveUtil {

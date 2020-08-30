@@ -1,8 +1,8 @@
-package open.geosolve.geosolve.model.math
+package open.geosolve.geosolve.model.canvas.math
 
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.Node
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.model.canvas.data.Node
 import kotlin.math.*
 
 
@@ -31,15 +31,10 @@ object MathUtil {
         return (startAngle.absoluteValue + finalAngle.absoluteValue) < 180
     }
 
-    // formulae
+    // formulas
     private fun fromRadianToDegrees(x: Float): Float = x * 180 / PI.toFloat()
     private fun crossProduct(a: MathPoint, b: MathPoint) = a.x * b.y - a.y * b.x
     private fun scalarProduct(a: MathPoint, b: MathPoint) = a.x * b.x + a.y * b.y // this is dot()
-    private fun length(v: MathPoint) = sqrt(v.x * v.x + v.y * v.y)
-    private fun normalize(v: MathPoint): MathPoint {
-        val normalizeLength = 1 / length(v)
-        return MathPoint(v.x * normalizeLength, v.y * normalizeLength)
-    }
 
     private fun getVectorPoint(a: Node, b: Node) = MathPoint(b.x - a.x, b.y - a.y)
 
@@ -63,9 +58,6 @@ object MathUtil {
         val return_x = (perpendecular_b - b) / (k - perpendecular_k)
         val return_y = k*return_x + b
 
-//        val vectorAB = normalize(getVectorPoint(line.firstNode, line.secondNode))
-//        val length = scalarProduct(vectorAB, MathPoint(x, y))
-//        return MathPoint(vectorAB.x * length, vectorAB.y * length)
         return MathPoint(return_x, return_y)
     }
 

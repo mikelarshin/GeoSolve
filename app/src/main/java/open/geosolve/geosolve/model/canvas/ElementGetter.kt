@@ -1,10 +1,10 @@
-package open.geosolve.geosolve.model
+package open.geosolve.geosolve.model.canvas
 
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.data.Line
-import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Circle
+import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.model.canvas.data.Node
+import open.geosolve.geosolve.model.canvas.data.generalized.Element
 
 object ElementGetter {
     // generalized getters

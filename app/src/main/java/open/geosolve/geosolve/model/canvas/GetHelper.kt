@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.model
+package open.geosolve.geosolve.model.canvas
 
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 

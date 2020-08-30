@@ -1,7 +1,7 @@
-package open.geosolve.geosolve.model.tools
+package open.geosolve.geosolve.model.canvas.tools
 
-import open.geosolve.geosolve.model.find
-import open.geosolve.geosolve.model.tools.AddTool.lastNode
+import open.geosolve.geosolve.model.canvas.find
+import open.geosolve.geosolve.model.canvas.tools.AddTool.lastNode
 
 object DeleteTool : BaseTool() {
     override fun onTouchUp(x: Float, y: Float) {

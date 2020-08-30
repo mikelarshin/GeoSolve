@@ -1,8 +1,8 @@
 package open.geosolve.geosolve.model.solve.type
 
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.data.Figure
-import open.geosolve.geosolve.model.data.Line
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.data.Figure
+import open.geosolve.geosolve.model.canvas.data.Line
 import open.geosolve.geosolve.model.solve.SolveFigure
 import open.geosolve.geosolve.view.rules.RightTriangleRules
 import kotlin.math.hypot
@@ -26,16 +26,12 @@ object RightTriangle : SolveFigure {
         findLegKnownLegAndHypotRule(hypotenuse, legs)
     }
 
-    override fun setSubType(figure: Figure) {}
-
     private fun knownLegsUnknownHypotenuse(legs: List<Line>, hypotenuse: Line) { // известны катеты, ищем гипотенузу
         for (i in 0..1) {
             legs[i].onKnownFunctions.add { oneLeg ->
                 val twoLeg = legs[(i + 1) % 2]
                 oneLeg as Line
-                // TODO(создать функцию которая берёт следующий по списку элемент как здесь)
 
-                // TODO(сделать функцию которая проверяет на входные данные и искомое)
                 if (twoLeg.getValue() != null && hypotenuse.getValue() == null) {
                     val valueGetter: (Float?) -> Float? = { hypot(oneLeg.getValue()!!, twoLeg.getValue()!!) }
 

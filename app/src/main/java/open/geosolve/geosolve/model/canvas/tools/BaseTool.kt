@@ -1,13 +1,13 @@
-package open.geosolve.geosolve.model.tools
+package open.geosolve.geosolve.model.canvas.tools
 
-import open.geosolve.geosolve.model.AllCircles
-import open.geosolve.geosolve.model.AllNodes
-import open.geosolve.geosolve.model.ElementGetter.getElement
-import open.geosolve.geosolve.model.FigureController.figure
-import open.geosolve.geosolve.model.FigureList
-import open.geosolve.geosolve.model.data.Circle
-import open.geosolve.geosolve.model.data.Node
-import open.geosolve.geosolve.model.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.AllCircles
+import open.geosolve.geosolve.model.canvas.AllNodes
+import open.geosolve.geosolve.model.canvas.ElementGetter.getElement
+import open.geosolve.geosolve.model.canvas.FigureController.figure
+import open.geosolve.geosolve.model.canvas.FigureList
+import open.geosolve.geosolve.model.canvas.data.Circle
+import open.geosolve.geosolve.model.canvas.data.Node
+import open.geosolve.geosolve.model.canvas.data.generalized.Element
 
 abstract class BaseTool : Tool {
 

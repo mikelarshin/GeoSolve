@@ -1,7 +1,7 @@
 package open.geosolve.geosolve.view.rules
 
-import open.geosolve.geosolve.model.tools.AddTool
-import open.geosolve.geosolve.model.tools.BaseTool
+import open.geosolve.geosolve.model.canvas.tools.AddTool
+import open.geosolve.geosolve.model.canvas.tools.BaseTool
 
 fun makeTriangleOne() {
     AddTool.cycleTouch(-10f, -10f)

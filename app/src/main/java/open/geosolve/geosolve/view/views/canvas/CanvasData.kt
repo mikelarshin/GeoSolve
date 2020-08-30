@@ -1,7 +1,7 @@
 package open.geosolve.geosolve.view.views.canvas
 
-import open.geosolve.geosolve.model.canvasData
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.canvasData
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import java.io.Serializable
 
 class CanvasData : Serializable {

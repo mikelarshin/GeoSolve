@@ -1,11 +1,11 @@
-package open.geosolve.geosolve.model.tools
+package open.geosolve.geosolve.model.canvas.tools
 
 import java.io.Serializable
 
 interface Tool : Serializable {
-    fun onTouchDown(x: Float, y: Float)
-    fun onTouchMove(x: Float, y: Float)
-    fun onTouchUp(x: Float, y: Float)
+    fun onTouchDown(x: Float, y: Float) {}
+    fun onTouchMove(x: Float, y: Float) {}
+    fun onTouchUp(x: Float, y: Float) {}
 
     fun cycleTouch(x: Float, y: Float) {
         onTouchDown(x, y)

@@ -1,10 +1,10 @@
-package open.geosolve.geosolve.model.data
+package open.geosolve.geosolve.model.canvas.data
 
-import open.geosolve.geosolve.model.AllCircles
-import open.geosolve.geosolve.model.data.generalized.Bind
-import open.geosolve.geosolve.model.data.generalized.Element
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.math.MathUtil.distanceBetweenPoints
+import open.geosolve.geosolve.model.canvas.AllCircles
+import open.geosolve.geosolve.model.canvas.data.generalized.Bind
+import open.geosolve.geosolve.model.canvas.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.math.MathUtil.distanceBetweenPoints
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 import kotlin.math.max
 import kotlin.math.min
@@ -20,7 +20,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
         centerNode.circle = this
     }
 
-    override fun toString() = "" // TODO(implement)
+    override fun toString() = "Circle: radius-$decartRadius"
 
     var radiusLineList: MutableList<Line> = mutableListOf() // TODO(implement this)
 
@@ -46,7 +46,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
     }
 
     // Element
-    override fun remove() { // TODO(rewrite remove system)
+    override fun remove() {
         centerNode.circle = null
         centerNode.remove()
 

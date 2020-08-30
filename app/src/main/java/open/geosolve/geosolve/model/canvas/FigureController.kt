@@ -1,6 +1,6 @@
-package open.geosolve.geosolve.model
+package open.geosolve.geosolve.model.canvas
 
-import open.geosolve.geosolve.model.data.*
+import open.geosolve.geosolve.model.canvas.data.*
 
 object FigureController {
 

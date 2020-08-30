@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.model.data.generalized.SolveGraph
+import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 
 interface CallBackSolveUi {
     fun findNotMark()

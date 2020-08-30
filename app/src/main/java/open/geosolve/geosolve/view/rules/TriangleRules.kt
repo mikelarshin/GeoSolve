@@ -2,12 +2,12 @@ package open.geosolve.geosolve.view.rules
 
 import android.text.SpannableStringBuilder
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.AllAngles
-import open.geosolve.geosolve.model.data.Angle
-import open.geosolve.geosolve.model.find
-import open.geosolve.geosolve.model.math.MathUtil
-import open.geosolve.geosolve.model.tools.MarkTool
-import open.geosolve.geosolve.model.tools.MoveTool
+import open.geosolve.geosolve.model.canvas.AllAngles
+import open.geosolve.geosolve.model.canvas.data.Angle
+import open.geosolve.geosolve.model.canvas.find
+import open.geosolve.geosolve.model.canvas.math.MathUtil
+import open.geosolve.geosolve.model.canvas.tools.MarkTool
+import open.geosolve.geosolve.model.canvas.tools.MoveTool
 import open.geosolve.geosolve.view.*
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import open.geosolve.geosolve.view.views.recyclers.items.*
