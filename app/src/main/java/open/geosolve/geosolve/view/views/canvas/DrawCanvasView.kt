@@ -21,7 +21,7 @@ import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
 import open.geosolve.geosolve.view.views.canvas.draw.SystemCoordinate
 
-open class DrawCanvasView : View {
+abstract class DrawCanvasView : View {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)

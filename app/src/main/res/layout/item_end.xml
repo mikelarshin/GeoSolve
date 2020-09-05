@@ -13,7 +13,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/imageGeoSolve"
-        app:srcCompat="@drawable/ic_launcher_foreground_rainbow" />
+        app:srcCompat="@drawable/ic_geosolve_rainbow" />
 
     <ImageView
         android:id="@+id/imageGeoSolve"
@@ -23,6 +23,6 @@
         app:layout_constraintEnd_toStartOf="@+id/imageGeoSolveRainbow"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/ic_geosolve" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,7 @@
         app:srcCompat="@drawable/ic_calculator"
         tools:ignore="VectorDrawableCompat" />
 
+    <!--TODO(replace tool buttons for tabBar)-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mark_mode_button"
         android:layout_width="wrap_content"

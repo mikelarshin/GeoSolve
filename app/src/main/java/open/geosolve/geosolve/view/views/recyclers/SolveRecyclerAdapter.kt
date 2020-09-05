@@ -74,7 +74,5 @@ class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecy
         }
     }
 
-    override fun getItemCount(): Int {
-        return stepSolveList.size
-    }
+    override fun getItemCount() = stepSolveList.size
 }

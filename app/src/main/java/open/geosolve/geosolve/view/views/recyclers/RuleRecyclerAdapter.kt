@@ -17,10 +17,7 @@ class RuleRecyclerAdapter : RecyclerView.Adapter<RuleRecyclerAdapter.RuleRecycle
 
     class RuleRecycleHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    override fun getItemViewType(position: Int): Int {
-        val ruleItem = itemList[position]
-        return ruleItem.layoutRes
-    }
+    override fun getItemViewType(position: Int) = itemList[position].layoutRes
 
     override fun onCreateViewHolder(parent: ViewGroup, layoutRes: Int): RuleRecycleHolder {
         val view = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
@@ -32,7 +29,5 @@ class RuleRecyclerAdapter : RecyclerView.Adapter<RuleRecyclerAdapter.RuleRecycle
         ruleItem.onBindViewHolder(holder)
     }
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount() = itemList.size
 }
