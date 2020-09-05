@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/book"
+        android:icon="@drawable/ic_book"
+        android:title="@string/menu_title_book" />
+    <item
+        android:id="@+id/calculator"
+        android:icon="@drawable/ic_triangle"
+        android:title="@string/menu_title_calculator" />
+
+</menu>

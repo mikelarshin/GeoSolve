@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import moxy.MvpAppCompatFragment
+import open.geosolve.geosolve.view.inflate
 
-abstract class MvpFragmentX(private val layoutRes: Int) : MvpAppCompatFragment() {
+open class MvpFragmentX(val layoutRes: Int) : MvpAppCompatFragment() {
 
     protected lateinit var layout: View
 
@@ -20,9 +21,9 @@ abstract class MvpFragmentX(private val layoutRes: Int) : MvpAppCompatFragment()
         return layout
     }
 
-    protected abstract fun setupLayout()
-    protected open fun saveData(bundle: Bundle) {}
+    protected open fun setupLayout() {}
     protected open fun setupData(bundle: Bundle) {}
+    protected open fun saveData(bundle: Bundle) {}
 
     override fun onSaveInstanceState(outState: Bundle) {
         saveData(outState)

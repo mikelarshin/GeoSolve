@@ -2,6 +2,10 @@
 <resources>
     <string name="app_name">GeoSolve</string>
 
+    // Menu Titles
+    <string name="menu_title_book">Учебник</string>
+    <string name="menu_title_calculator">Калькулятор</string>
+
     // Toast
     <string name="toast_not_set_value">Нельзя задать значение, на этой точке нет угла</string>
     <string name="toast_not_mark_find">Нельзя задать искомое, на этой точке нет угла</string>

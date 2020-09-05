@@ -4,17 +4,17 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="TemplateText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/plain_text</item>
         <item name="android:textSize">@dimen/SMALL_TEXT_SIZE</item>
     </style>
 
     <style name="Bold" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/plain_text</item>
         <item name="android:textSize">@dimen/BOLD_TEXT_SIZE</item>
         <item name="android:textStyle">bold</item>
     </style>

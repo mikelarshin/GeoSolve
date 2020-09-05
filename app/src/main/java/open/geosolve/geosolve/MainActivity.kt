@@ -1,4 +1,4 @@
-package open.geosolve.geosolve.view
+package open.geosolve.geosolve
 
 import android.os.Bundle
 import moxy.MvpAppCompatActivity

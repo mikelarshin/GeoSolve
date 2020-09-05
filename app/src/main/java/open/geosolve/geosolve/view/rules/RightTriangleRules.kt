@@ -15,10 +15,6 @@ object RightTriangleRules {
 
         override val verbalOrder = listOf(hypotenuse, oneLeg, twoLeg)
         override val expressionOrder = listOf(hypotenuse, oneLeg, twoLeg)
-
-        override val ruleItems: List<RuleItem> = listOf(
-            TitleItem(R.string.ruleTitle_rightTriangle_pythagorean_theorem_3),
-            TextItem(R.string.ruleText_rightTriangle_pythagorean_theorem_3))
     }
 
     class angle_30_degrees(angle30Degrees: Angle, legOpposite30Angle: Line, hypotenuse: Line) : Rule() {
@@ -27,10 +23,6 @@ object RightTriangleRules {
 
         override val verbalOrder: List<SolveGraph> = listOf(legOpposite30Angle, angle30Degrees, hypotenuse)
         override val expressionOrder = listOf(legOpposite30Angle, hypotenuse)
-
-        override val ruleItems: List<RuleItem> = listOf(
-            TitleItem(R.string.ruleTitle_rightTriangle_angle_30_degrees),
-            TextItem(R.string.ruleText_rightTriangle_angle_30_degrees))
     }
 
     class unknown_leg_known_leg_and_hypot(unknownLeg: Line, hypotenuse: Line, knownLeg: Line) : Rule() {
@@ -39,9 +31,5 @@ object RightTriangleRules {
 
         override val verbalOrder = listOf(unknownLeg, hypotenuse, knownLeg)
         override val expressionOrder = listOf(unknownLeg, hypotenuse, knownLeg)
-
-        override val ruleItems: List<RuleItem> = listOf(
-            TitleItem(R.string.ruleTitle_rightTriangle_unknown_leg_known_leg_and_hypot),
-            TextItem(R.string.ruleText_rightTriangle_unknown_leg_known_leg_and_hypot))
     }
 }

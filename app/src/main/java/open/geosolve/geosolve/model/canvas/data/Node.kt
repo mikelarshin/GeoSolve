@@ -3,14 +3,15 @@ package open.geosolve.geosolve.model.canvas.data
 import open.geosolve.geosolve.model.canvas.AllNodes
 import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
+import open.geosolve.geosolve.model.canvas.math.XY
 import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.POINT_SIZE
 
-class Node(foundX: Float, foundY: Float) : Element {
+class Node(foundX: Float, foundY: Float) : Element, XY {
 
-    var x: Float = foundX
+    override var x: Float = foundX
         get() = systemCoordinate.convertX(field)
-    var y: Float = foundY
+    override var y: Float = foundY
         get() = systemCoordinate.convertY(field)
 
     var char = "Error"

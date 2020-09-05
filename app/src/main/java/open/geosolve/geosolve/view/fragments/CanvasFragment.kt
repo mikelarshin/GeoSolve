@@ -30,7 +30,7 @@ import java.util.*
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
     private val presenter by moxyPresenter { CanvasScreenPresenter() }
-    private var dataCanvas = CanvasData()
+    private var dataCanvas = CanvasData() // TODO(save tool at bundle)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
@@ -85,6 +85,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     override fun goToSolveScreen(solveList: List<SolveGraph>) {
         solveList as ArrayList<SolveGraph>
         val action = CanvasFragmentDirections.actionToSolve(solveList, dataCanvas)
+        parentFragment.
         findNavController().navigate(action)
     }
 

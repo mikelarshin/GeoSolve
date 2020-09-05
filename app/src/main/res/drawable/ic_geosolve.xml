@@ -1,10 +1,8 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:width="150dp"
     android:height="150dp"
     android:viewportWidth="1023"
-    android:viewportHeight="1023"
-    tools:ignore="MissingDefaultResource">
+    android:viewportHeight="1023">
     <group
         android:translateX="283"
         android:translateY="249">

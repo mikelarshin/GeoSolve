@@ -9,6 +9,7 @@ import open.geosolve.geosolve.model.canvas.math.MathUtil.getPointProjectToLine
 import open.geosolve.geosolve.model.canvas.math.MathUtil.isTouchLeftSegment
 import open.geosolve.geosolve.model.canvas.math.MathUtil.isTouchOnSegment
 import open.geosolve.geosolve.model.canvas.math.MathUtil.isTouchRightSegment
+import open.geosolve.geosolve.model.canvas.math.XY
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 
 class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
@@ -30,21 +31,14 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
     override val bindNodes: MutableSet<Node> = mutableSetOf()
 
     override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
-        when {
-            isTouchOnSegment(this, newX, newY) -> {
-                val point = getPointProjectToLine(this, newX, newY)
-                node.x = point.x
-                node.y = point.y
-            }
-            isTouchLeftSegment(this, newX, newY) -> {
-                node.x = firstNode.x
-                node.y = firstNode.y
-            }
-            isTouchRightSegment(this, newX, newY) -> {
-                node.x = secondNode.x
-                node.y = secondNode.y
-            }
+        val point: XY = when {
+            isTouchOnSegment(this, newX, newY) -> getPointProjectToLine(this, newX, newY)
+            isTouchLeftSegment(this, newX, newY) -> firstNode
+            isTouchRightSegment(this, newX, newY) -> secondNode
+            else -> null!!
         }
+
+        node.x = point.x.also { node.y = point.y }
     }
 
     // Element

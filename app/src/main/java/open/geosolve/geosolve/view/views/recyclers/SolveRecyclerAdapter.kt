@@ -11,6 +11,7 @@ import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.formatAnswer
 import open.geosolve.geosolve.view.fragments.SolveFragmentDirections
+import open.geosolve.geosolve.view.inflate
 
 class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecycleHolder>() {
 
@@ -40,10 +41,8 @@ class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecy
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolveRecycleHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_solve, parent, false)
-        return SolveRecycleHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        SolveRecycleHolder(parent.inflate(R.layout.item_solve))
 
     override fun onBindViewHolder(holder: SolveRecycleHolder, position: Int) {
         val item = holder.itemView

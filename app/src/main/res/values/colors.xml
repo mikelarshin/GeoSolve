@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000</color>
-    <color name="colorPrimaryDark">#009688</color>
+    <color name="colorPrimary">#009688</color>
     <color name="colorAccent">#DDD</color>
-    <color name="buttonIcon">@color/colorPrimary</color>
+
+    <color name="buttonIcon">#000</color>
+    <color name="plain_text">#000</color>
 
     <color name="all_lines">#CCC</color> // Debug color #3000
 
-    <color name="color_node">@color/colorPrimary</color>
-    <color name="color_mark">@color/colorPrimaryDark</color>
+    <color name="color_node">@color/buttonIcon</color>
+    <color name="color_mark">@color/colorPrimary</color>
 
     <color name="color_line">@color/all_lines</color>
     <color name="color_circle">@color/all_lines</color>
     <color name="color_angle_arc">@color/all_lines</color>
 
-    <color name="canvas_text_color">@color/colorPrimary</color>
+    <color name="canvas_text_color">@color/color_node</color>
 </resources>

@@ -11,17 +11,20 @@ import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.rules.Rule
 import kotlin.math.roundToInt
 
-fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }): CharSequence {
-    val sb = SpannableStringBuilder().append(formatAllDigital(templateId, R.style.Bold))
+fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }) =
+    SpannableStringBuilder().apply {
+        append(formatAllDigital(templateId, R.style.Bold))
 
-    for (solveGraph in order) {
-        val index = sb.indexOf('%')
-        val style = if (solveGraph == order[0]) R.style.AnswerText else R.style.Bold
+        for (solveGraph in order) {
+            val index = indexOf('%')
+            val style = if (solveGraph == order[0]) R.style.AnswerText else R.style.Bold
 
-        sb.replace(index, index + 2, formatText(by(solveGraph), style))
+            replace(index, index + 2, formatText(by(solveGraph), style))
+        }
+
+        subSequence(0, length)
     }
-    return sb.subSequence(0, sb.length)
-}
+
 
 fun formatVerbal(rule: Rule) = formatSolveText(rule.verbalID, rule.verbalOrder)
 
@@ -29,65 +32,64 @@ fun formatFormula(rule: Rule) = formatSolveText(rule.expressionID, rule.expressi
 
 fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.expressionOrder) { formatValueString(it) }
 
-fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): CharSequence { // TODO(rewrite this shit)
-    val sb = SpannableStringBuilder().append(exampleText)
+fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): CharSequence = // TODO(rewrite this shit)
+    SpannableStringBuilder().apply {
+        append(exampleText)
 
-    for (solveGraph in exampleOrder) {
-        val index = sb.indexOf('%')
-        val style = R.style.Bold
+        for (solveGraph in exampleOrder) {
+            val index = indexOf('%')
+            val style = R.style.Bold
 
-        sb.replace(index, index + 2, formatText(formatValueString(solveGraph, 0), style))
+            replace(index, index + 2, formatText(formatValueString(solveGraph, 0), style))
+        }
+
+        setSize(subSequence(0, length), R.dimen.BIG_TEXT_SIZE)
     }
 
-    return setSize(sb.subSequence(0, sb.length), R.dimen.BIG_TEXT_SIZE)
-}
-
-fun setSize(text: CharSequence, dimenId: Int): CharSequence {
-    val sb = SpannableStringBuilder().append(text)
-
-    sb.setSpan(AbsoluteSizeSpan(getDimen(dimenId).toInt()), 0, sb.length, 0)
-    return sb.subSequence(0, sb.length)
-}
-
-fun formatAllDigital(templateId: Int, styleId: Int): CharSequence {
-    val sb = SpannableStringBuilder().append(formatText(getText(templateId), R.style.TemplateText))
-
-    for (charIndex in 0..sb.length - 2) {
-        val char = sb[charIndex]
-        val style = if (char.isDigit()) styleId else R.style.TemplateText
-
-        sb.replace(charIndex, charIndex + 2, formatText(sb[charIndex].toString() + sb[charIndex + 1], style))
+fun setSize(text: CharSequence, dimenId: Int): CharSequence =
+    SpannableStringBuilder().apply {
+        append(text)
+        setSpan(AbsoluteSizeSpan(getDimen(dimenId).toInt()), 0, length, 0)
+        subSequence(0, length)
     }
 
-    return sb
-}
+fun formatAllDigital(templateId: Int, styleId: Int): CharSequence =
+    SpannableStringBuilder().apply {
+        append(formatText(getText(templateId), R.style.TemplateText))
+
+        for (charIndex in 0..length - 2) {
+            val char = get(charIndex)
+            val style = if (char.isDigit()) styleId else R.style.TemplateText
+
+            replace(charIndex, charIndex + 2, formatText(get(charIndex).toString() + get(charIndex + 1), style))
+        }
+    }
 
 fun getText(textID: Int) = App.context.getString(textID)
 fun getDimen(dimenId: Int) = App.context.resources.getDimension(dimenId)
 
-private fun formatText(string: CharSequence, styleId: Int): SpannableString {
-    val spannableString = SpannableString(string)
-    spannableString.setSpan(TextAppearanceSpan(App.context, styleId), 0, string.length, 0)
-    return spannableString
-}
+private fun formatText(string: CharSequence, styleId: Int): SpannableString =
+    SpannableString(string).apply {
+        setSpan(TextAppearanceSpan(App.context, styleId), 0, length, 0)
+    }
 
-fun formatAnswer(solveGraph: SolveGraph): CharSequence {
-    val sb = SpannableStringBuilder()
-        .append(formatText(solveGraph.toString(), R.style.AnswerText))
-        .append(formatText(" = ", R.style.TemplateText))
-        .append(formatText(formatValueString(solveGraph), R.style.AnswerText))
+fun formatAnswer(solveGraph: SolveGraph): CharSequence =
+    SpannableStringBuilder().apply {
+        append(formatText(solveGraph.toString(), R.style.AnswerText))
+        append(formatText(" = ", R.style.TemplateText))
+        append(formatText(formatValueString(solveGraph), R.style.AnswerText))
 
-    return sb.subSequence(0, sb.length)
-}
+        subSequence(0, length)
+    }
 
-fun formatAlertMessage(messageId: Int, element: String): CharSequence {
-    val templateText = getText(messageId) + " "
+fun formatAlertMessage(messageId: Int, element: String): CharSequence =
+    SpannableStringBuilder().apply {
+        val templateText = getText(messageId) + " "
+        append(formatText(templateText, R.style.TemplateText))
+        append(formatText(element, R.style.AnswerText))
 
-    val sb = SpannableStringBuilder()
-        .append(formatText(templateText, R.style.TemplateText))
-        .append(formatText(element, R.style.AnswerText))
-    return sb.subSequence(0, sb.length)
-}
+        subSequence(0, length)
+    }
 
 fun formatValueString(solveGraph: SolveGraph, round: Int = 1): String {
     val value: Float = solveGraph.getValue()!!

@@ -3,6 +3,7 @@ package open.geosolve.geosolve.view.rules
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.data.Angle
 import open.geosolve.geosolve.model.canvas.data.Line
+import open.geosolve.geosolve.view.views.recyclers.items.EndItem
 import open.geosolve.geosolve.view.views.recyclers.items.RuleItem
 import open.geosolve.geosolve.view.views.recyclers.items.TextItem
 import open.geosolve.geosolve.view.views.recyclers.items.TitleItem
@@ -14,10 +15,6 @@ object RectangleRules {
 
         override val verbalOrder = listOf(parallelLine, knownLine)
         override val expressionOrder = listOf(parallelLine, knownLine)
-
-        override val ruleItems: List<RuleItem> = listOf(
-            TitleItem(R.string.ruleTitle_rectangle_parallel_line),
-            TextItem(R.string.ruleText_rectangle_parallel_line))
     }
 
     class right_angles(unknownAngle: Angle) : Rule() {

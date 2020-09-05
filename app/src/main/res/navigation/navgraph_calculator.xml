@@ -6,7 +6,6 @@
     android:label="fragment_canvas"
     app:startDestination="@id/canvasFragment">
 
-
     <fragment
         android:id="@+id/canvasFragment"
         android:name="open.geosolve.geosolve.view.fragments.CanvasFragment"
@@ -31,7 +30,8 @@
         <action
             android:id="@+id/action_to_rule"
             app:destination="@id/ruleFragment" />
-        <argument android:name="dataCanvas"
+        <argument
+            android:name="dataCanvas"
             app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
     </fragment>
 
@@ -51,15 +51,16 @@
         android:id="@+id/exampleFigureFragment"
         android:name="open.geosolve.geosolve.view.fragments.ExampleFigureFragment"
         android:label="fragment_example_figure"
-        tools:layout="@layout/fragment_example_figure" >
+        tools:layout="@layout/fragment_example_figure">
         <argument
             android:name="dataCanvas"
             app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
-        <argument android:name="updateForString"
+        <argument
+            android:name="updateForString"
             app:argType="java.io.Serializable" />
         <argument
             android:name="tool"
-            app:argType="open.geosolve.geosolve.model.tools.Tool" />
+            app:argType="open.geosolve.geosolve.model.canvas.tools.Tool" />
     </fragment>
 
 </navigation>
