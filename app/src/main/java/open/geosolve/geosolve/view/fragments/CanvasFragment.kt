@@ -22,20 +22,24 @@ import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.formatAlertMessage
 import open.geosolve.geosolve.view.fragments.CanvasFragmentArgs.fromBundle
+import open.geosolve.geosolve.view.inflate
 import open.geosolve.geosolve.view.rules.makeTriangleOne
 import open.geosolve.geosolve.view.views.canvas.CanvasData
+import open.geosolve.geosolve.view.views.canvas.TouchCanvasView
 import java.util.*
 
 
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
     private val presenter by moxyPresenter { CanvasScreenPresenter() }
-    private var dataCanvas = CanvasData() // TODO(save tool at bundle)
+    private var dataCanvas = CanvasData()
+    private lateinit var canvasView: TouchCanvasView
 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
-        layout.canvasView.dataCanvas = dataCanvas
-        layout.canvasView.canvasPresenter.canvasScreenPresenter = presenter
+        canvasView = layout.canvasView
+        canvasView.dataCanvas = dataCanvas
+        canvasView.canvasPresenter.canvasScreenPresenter = presenter
 
         layout.show_solve_button.setOnClickListener {
             presenter.showSolveClick()
@@ -78,14 +82,13 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     private fun setToolButton(button: FloatingActionButton, tool: Tool) {
         button.setOnClickListener {
-            layout.canvasView.canvasPresenter.tool = tool
+            canvasView.canvasPresenter.tool = tool
         }
     }
 
     override fun goToSolveScreen(solveList: List<SolveGraph>) {
         solveList as ArrayList<SolveGraph>
         val action = CanvasFragmentDirections.actionToSolve(solveList, dataCanvas)
-        parentFragment.
         findNavController().navigate(action)
     }
 
@@ -98,21 +101,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showDialog(titleID: Int, element: String, inputCallback: (value: Float) -> Unit) {
-        val alertMessage = formatAlertMessage(titleID, element)
+        val builder = AlertDialog.Builder(requireContext())
 
-        AlertDialog.Builder(activity!!)
-            .setTitle(alertMessage)
-            .setView(
-                LayoutInflater.from(activity!!).inflate(R.layout.dialog_input_value, null)
-            )
-            .setPositiveButton(android.R.string.ok) { dialog, _ ->
+        builder.apply {
+            val alertMessage = formatAlertMessage(titleID, element)
+            setTitle(alertMessage)
+            setView(context.inflate(R.layout.dialog_input_value))
+
+            setPositiveButton(android.R.string.ok) { dialog, _ ->
                 if (!(dialog as AlertDialog).input.text.isNullOrBlank())
                     inputCallback(dialog.input.text.toString().toFloat())
             }
-            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+            setNegativeButton(android.R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
             }
-            .show()
+
+            show()
+        }
     }
 
     override fun showTypeFigure() { // TODO(DELETE_THIS_DEBUGGER)
@@ -120,12 +125,14 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun saveData(bundle: Bundle) {
-        bundle.putSerializable("dataCanvas", layout.canvasView.dataCanvas)
+        bundle.putSerializable("dataCanvas", canvasView.dataCanvas)
+        bundle.putSerializable("tool", canvasView.canvasPresenter.tool)
     }
 
     override fun setupData(bundle: Bundle) {
         val args = fromBundle(bundle)
         dataCanvas = args.dataCanvas
-        layout.canvasView.dataCanvas = dataCanvas
+        canvasView.dataCanvas = dataCanvas
+        canvasView.canvasPresenter.tool = args.tool
     }
 }

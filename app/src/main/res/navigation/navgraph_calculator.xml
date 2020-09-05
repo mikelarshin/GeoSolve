@@ -17,6 +17,9 @@
         <argument
             android:name="dataCanvas"
             app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+        <argument
+            android:name="tool"
+            app:argType="open.geosolve.geosolve.model.canvas.tools.Tool" />
     </fragment>
 
     <fragment
