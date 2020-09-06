@@ -6,13 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.BookFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/articlesRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/article_title"
+        style="@style/Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Статьи"
+        android:textSize="@dimen/TITLE_TEXT_SIZE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/articlesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/article_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

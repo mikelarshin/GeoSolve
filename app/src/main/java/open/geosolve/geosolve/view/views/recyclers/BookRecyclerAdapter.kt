@@ -21,7 +21,6 @@ class BookRecyclerAdapter : RecyclerView.Adapter<BookRecyclerAdapter.BookHolder>
         TriangleRules.know_2_unknown_1_angle,
         RightTriangleRules.angle_30_degrees,
         RightTriangleRules.pythagorean_theorem,
-        RightTriangleRules.unknown_leg_known_leg_and_hypot,
         RectangleRules.parallel_line,
         RectangleRules.right_angles
     )

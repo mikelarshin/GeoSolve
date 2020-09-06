@@ -9,8 +9,8 @@ import java.io.Serializable
 
 abstract class Article : Serializable {
     open val articleItems: List<ArticleItem> = listOf(
-        TitleItem(R.string.ruleTitle_rectangle_parallel_line),
-        TextItem(R.string.ruleText_rectangle_parallel_line),
+        TitleItem(R.string.in_progress),
+        TextItem(R.string.in_progress),
         EndItem()
     )
 }

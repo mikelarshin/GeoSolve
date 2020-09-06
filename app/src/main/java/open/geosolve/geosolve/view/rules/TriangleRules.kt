@@ -94,12 +94,8 @@ object TriangleRules {
 
         override val articleItems: List<ArticleItem> = listOf(
             TitleItem(R.string.ruleTitle_triangle_know_2_unknown_1_angle),
-//            SubTitleItem(R.string.ruleSubTitle_wording),
-//            TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_wording), TODO(make smth with that)
             SubTitleItem(R.string.ruleSubTitle_check),
             ExampleFigureItem(exampleTriangleCheck, stringUpdaterCheck, MoveTool),
-//            SubTitleItem(R.string.ruleSubTitle_evidence),
-//            TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_evidence), TODO(make smth with that)
             SubTitleItem(R.string.ruleSubTitle_use),
             TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_use),
             FormulaItem(R.string.ruleFormula_triangle_know_2_unknown_1_angle),
