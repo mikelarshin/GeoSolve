@@ -9,7 +9,7 @@ import open.geosolve.geosolve.view.inflate
 
 class PagerAdapter : RecyclerView.Adapter<PagerAdapter.PagerHolder>() {
 
-    private val fragments = listOf(
+    val fragments = listOf(
         MvpFragmentX(R.layout.host_book_fragment),
         MvpFragmentX(R.layout.host_calclulator_fragment)
     )

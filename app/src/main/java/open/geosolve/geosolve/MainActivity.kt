@@ -2,7 +2,6 @@ package open.geosolve.geosolve
 
 import android.os.Bundle
 import moxy.MvpAppCompatActivity
-import open.geosolve.geosolve.R
 
 class MainActivity : MvpAppCompatActivity() {
 
