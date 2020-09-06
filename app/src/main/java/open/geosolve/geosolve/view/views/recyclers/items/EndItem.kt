@@ -1,10 +1,10 @@
 package open.geosolve.geosolve.view.views.recyclers.items
 
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.view.views.recyclers.RuleRecyclerAdapter
+import open.geosolve.geosolve.view.views.recyclers.ArticleRecyclerAdapter
 
-class EndItem : RuleItem {
+class EndItem : ArticleItem {
     override val layoutRes = R.layout.item_end
 
-    override fun onBindViewHolder(holder: RuleRecyclerAdapter.RuleRecycleHolder) {}
+    override fun onBindViewHolder(holder: ArticleRecyclerAdapter.RuleHolder) {}
 }

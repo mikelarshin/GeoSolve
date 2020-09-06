@@ -1,6 +1,5 @@
 package open.geosolve.geosolve.view.views.recyclers
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -8,21 +7,20 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_solve.view.*
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.view.formatAnswer
 import open.geosolve.geosolve.view.fragments.SolveFragmentDirections
 import open.geosolve.geosolve.view.inflate
 
-class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecycleHolder>() {
+class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveHolder>() {
 
-    private val stepSolveList: MutableList<SolveGraph> = mutableListOf()
+    private val stepSolveList: MutableList<StepSolve> = mutableListOf()
 
-    fun fill(addList: List<SolveGraph>) {
+    fun fill(addList: List<StepSolve>) {
         stepSolveList.clear()
         stepSolveList.addAll(addList)
     }
 
-    class SolveRecycleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SolveHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var isOpen = false
         private val itemParams = itemView.formula.layoutParams as ConstraintLayout.LayoutParams
 
@@ -42,9 +40,9 @@ class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        SolveRecycleHolder(parent.inflate(R.layout.item_solve))
+        SolveHolder(parent.inflate(R.layout.item_solve))
 
-    override fun onBindViewHolder(holder: SolveRecycleHolder, position: Int) {
+    override fun onBindViewHolder(holder: SolveHolder, position: Int) {
         val item = holder.itemView
 
         val stepSolve = stepSolveList[position]
@@ -56,9 +54,9 @@ class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecy
                 holder.open_item()
         }
 
-        item.formula.text = stepSolve.rule.formula
-        item.verbal.text = stepSolve.rule.verbal
-        item.expression.text = stepSolve.rule.expression
+        item.formula.text = stepSolve.formula
+        item.verbal.text = stepSolve.verbal
+        item.expression.text = stepSolve.expression
 
         if (position + 1 == itemCount) { // если это последний item
             item.openButton.visibility = View.GONE
@@ -68,7 +66,7 @@ class SolveRecyclerAdapter : RecyclerView.Adapter<SolveRecyclerAdapter.SolveRecy
         }
 
         item.read_rule_button.setOnClickListener {
-            val action = SolveFragmentDirections.actionToRule(stepSolve.rule)
+            val action = SolveFragmentDirections.actionToArticle(stepSolve.article)
             it.findNavController().navigate(action)
         }
     }

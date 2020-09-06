@@ -38,7 +38,7 @@ object RightTriangle : SolveFigure {
                     hypotenuse.setDependentValueGraph(
                         valueGetter,
                         listOf(oneLeg, twoLeg),
-                        RightTriangleRules.pythagorean_theorem(hypotenuse, oneLeg, twoLeg)
+                        RightTriangleRules.pythagorean_theorem.MyStep(hypotenuse, oneLeg, twoLeg)
                     )
                 }
             }
@@ -60,7 +60,7 @@ object RightTriangle : SolveFigure {
                     legOpposite30Angle.setDependentValueGraph(
                         valueGetter,
                         listOf(degree30Angle, hypotenuse),
-                        RightTriangleRules.angle_30_degrees(degree30Angle, legOpposite30Angle, hypotenuse)
+                        RightTriangleRules.angle_30_degrees.MyStep(degree30Angle, legOpposite30Angle, hypotenuse)
                     )
                 }
             }
@@ -85,7 +85,7 @@ object RightTriangle : SolveFigure {
                         unknownLeg.setDependentValueGraph(
                             valueGetter,
                             listOf(knownLeg, hypotenuse),
-                            RightTriangleRules.unknown_leg_known_leg_and_hypot(unknownLeg, hypotenuse, knownLeg)
+                            RightTriangleRules.unknown_leg_known_leg_and_hypot.MyStep(unknownLeg, hypotenuse, knownLeg)
                         )
                     }
                 }

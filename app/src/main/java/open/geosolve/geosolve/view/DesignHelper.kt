@@ -8,7 +8,7 @@ import open.geosolve.geosolve.App
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.data.Angle
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
-import open.geosolve.geosolve.view.rules.Rule
+import open.geosolve.geosolve.view.views.recyclers.StepSolve
 import kotlin.math.roundToInt
 
 fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -> String = { element -> element.toString() }) =
@@ -26,11 +26,11 @@ fun formatSolveText(templateId: Int, order: List<SolveGraph>, by: (SolveGraph) -
     }
 
 
-fun formatVerbal(rule: Rule) = formatSolveText(rule.verbalID, rule.verbalOrder)
+fun formatVerbal(stepSolve: StepSolve) = formatSolveText(stepSolve.verbalID, stepSolve.verbalOrder)
 
-fun formatFormula(rule: Rule) = formatSolveText(rule.expressionID, rule.expressionOrder)
+fun formatFormula(stepSolve: StepSolve) = formatSolveText(stepSolve.expressionID, stepSolve.expressionOrder)
 
-fun formatExpression(rule: Rule) = formatSolveText(rule.expressionID, rule.expressionOrder) { formatValueString(it) }
+fun formatExpression(stepSolve: StepSolve) = formatSolveText(stepSolve.expressionID, stepSolve.expressionOrder) { formatValueString(it) }
 
 fun formatExample(exampleText: CharSequence, exampleOrder: List<SolveGraph>): CharSequence = // TODO(rewrite this shit)
     SpannableStringBuilder().apply {
@@ -73,8 +73,10 @@ private fun formatText(string: CharSequence, styleId: Int): SpannableString =
         setSpan(TextAppearanceSpan(App.context, styleId), 0, length, 0)
     }
 
-fun formatAnswer(solveGraph: SolveGraph): CharSequence =
+fun formatAnswer(stepSolve: StepSolve): CharSequence =
     SpannableStringBuilder().apply {
+        val solveGraph = stepSolve.verbalOrder.first()
+
         append(formatText(solveGraph.toString(), R.style.AnswerText))
         append(formatText(" = ", R.style.TemplateText))
         append(formatText(formatValueString(solveGraph), R.style.AnswerText))

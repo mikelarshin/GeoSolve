@@ -31,9 +31,9 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
         layout.solveRecycler.layoutManager = LinearLayoutManager(activity)
         layout.solveRecycler.addItemDecoration(DividerItemDecoration(activity))
 
-        val args = fromBundle(arguments!!)
+        val args = fromBundle(requireArguments())
         val solveList = args.solveList as List<SolveGraph>
-        adapter.fill(solveList)
+        adapter.fill(solveList.map { it.stepSolve })
         layout.solveCanvasView.dataCanvas = args.dataCanvas
     }
 }

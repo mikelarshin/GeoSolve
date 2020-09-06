@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.generalized
 
-import open.geosolve.geosolve.view.rules.Rule
+import open.geosolve.geosolve.view.views.recyclers.StepSolve
 
 abstract class SolveGraph {
 
@@ -12,7 +12,7 @@ abstract class SolveGraph {
     var whereFromValueList: List<SolveGraph>? = null
         private set
 
-    lateinit var rule: Rule
+    lateinit var stepSolve: StepSolve
 
     // setDraw - use it in work with canvas
     // setGraph - use it in work with solve
@@ -26,19 +26,19 @@ abstract class SolveGraph {
         this.dependence = dependence
     }
 
-    fun setValueGraph(value: Float, whereFromValueList: List<SolveGraph>, rule: Rule) {
+    fun setValueGraph(value: Float, whereFromValueList: List<SolveGraph>, stepSolve: StepSolve) {
         this.value = value
-        setValueGraph(whereFromValueList, rule)
+        setValueGraph(whereFromValueList, stepSolve)
     }
 
-    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<SolveGraph>, rule: Rule) {
+    fun setDependentValueGraph(dependence: (Float?) -> Float?, whereFromValueList: List<SolveGraph>, stepSolve: StepSolve) {
         this.dependence = dependence
-        setValueGraph(whereFromValueList, rule)
+        setValueGraph(whereFromValueList, stepSolve)
     }
 
-    private fun setValueGraph(whereFromValueList: List<SolveGraph>, rule: Rule){
+    private fun setValueGraph(whereFromValueList: List<SolveGraph>, stepSolve: StepSolve){
         this.whereFromValueList = whereFromValueList
-        this.rule = rule
+        this.stepSolve = stepSolve
 
         for (onKnownFun in onKnownFunctions)
             onKnownFun(this)

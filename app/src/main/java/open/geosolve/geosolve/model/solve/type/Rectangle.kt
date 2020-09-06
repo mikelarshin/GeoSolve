@@ -18,7 +18,7 @@ object Rectangle : SolveFigure {
                     figure.mLines[(i + 2) % 4].setDependentValueGraph(
                         { knownElement.getValue() },
                         listOf(knownElement),
-                        RectangleRules.parallel_line(knownElement as Line, figure.mLines[(i + 2) % 4])
+                        RectangleRules.parallel_line.MyStep(knownElement as Line, figure.mLines[(i + 2) % 4])
                     )
             }
 
@@ -32,7 +32,7 @@ object Rectangle : SolveFigure {
                         it.setValueGraph(
                             90f,
                             anglesWithValue,
-                            RectangleRules.right_angles(it)
+                            RectangleRules.right_angles.MyStep(it)
                         )
                     }
             }

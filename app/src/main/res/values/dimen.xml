@@ -11,7 +11,7 @@
     <dimen name="BOLD_TEXT_SIZE">17sp</dimen>
     <dimen name="SMALL_TEXT_SIZE">15sp</dimen>
 
-    // Rule TextSize
+    // Article TextSize
     <dimen name="BIG_TEXT_SIZE">35sp</dimen>
 
     <dimen name="TITLE_TEXT_SIZE">30sp</dimen>

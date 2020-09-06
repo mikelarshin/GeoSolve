@@ -10,25 +10,24 @@
         android:id="@+id/solveCanvasView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/black_line"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintTop_toTopOf="parent"
         app:touchEnabled="false" />
 
-    <ImageView
-        android:id="@+id/black_line"
+    <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:src="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/solveRecycler"
         app:layout_constraintTop_toBottomOf="@+id/solveCanvasView"
-        tools:layout_editor_absoluteX="34dp" />
+        android:background="?android:attr/listDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/solveRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/black_line" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_button"

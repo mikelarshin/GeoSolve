@@ -1,6 +1,9 @@
 package open.geosolve.geosolve.view.rules
 
 import android.text.SpannableStringBuilder
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.AllAngles
 import open.geosolve.geosolve.model.canvas.data.Angle
@@ -9,19 +12,26 @@ import open.geosolve.geosolve.model.canvas.math.MathUtil
 import open.geosolve.geosolve.model.canvas.tools.MarkTool
 import open.geosolve.geosolve.model.canvas.tools.MoveTool
 import open.geosolve.geosolve.view.*
+import open.geosolve.geosolve.view.fragments.BookFragment
 import open.geosolve.geosolve.view.views.canvas.CanvasData
+import open.geosolve.geosolve.view.views.recyclers.BookRecyclerAdapter
+import open.geosolve.geosolve.view.views.recyclers.StepSolve
 import open.geosolve.geosolve.view.views.recyclers.items.*
 import kotlin.math.absoluteValue
 
 object TriangleRules {
-    class know_2_unknown_1_angle(unknown_angle: Angle, known_angle_1: Angle, known_angle_2: Angle) : Rule() {
-        override val verbalID = R.string.verbal_triangle_know_2_unknown_1_angle
-        override val expressionID = R.string.expression_triangle_know_2_unknown_1_angle
+    object know_2_unknown_1_angle : Article() {
+        class MyStep(unknown_angle: Angle, known_angle_1: Angle, known_angle_2: Angle) : StepSolve() {
+            override val verbalID = R.string.verbal_triangle_know_2_unknown_1_angle
+            override val expressionID = R.string.expression_triangle_know_2_unknown_1_angle
 
-        override val verbalOrder = listOf(unknown_angle, known_angle_1, known_angle_2)
-        override val expressionOrder = listOf(unknown_angle, known_angle_1, known_angle_2)
+            override val verbalOrder = listOf(unknown_angle, known_angle_1, known_angle_2)
+            override val expressionOrder = listOf(unknown_angle, known_angle_1, known_angle_2)
 
-        private val stringUpdaterCheck = { // TODO(rewrite this shit)
+            override val article = know_2_unknown_1_angle
+        }
+
+        private val stringUpdaterCheck = {
             setSize(
                 formatExample(
                     formatAllDigital(
@@ -34,7 +44,7 @@ object TriangleRules {
             )
         }
 
-        private val stringUpdaterExperiment = {
+        private val stringUpdaterExperiment = { // TODO(rewrite this shit)
             val angles = (linkedSetOf(find!!) + AllAngles).toList()
 
             val sb = SpannableStringBuilder()
@@ -82,7 +92,7 @@ object TriangleRules {
             dataCanvas
         }
 
-        override val ruleItems: List<RuleItem> = listOf(
+        override val articleItems: List<ArticleItem> = listOf(
             TitleItem(R.string.ruleTitle_triangle_know_2_unknown_1_angle),
 //            SubTitleItem(R.string.ruleSubTitle_wording),
 //            TextItem(R.string.ruleText_triangle_know_2_unknown_1_angle_wording), TODO(make smth with that)

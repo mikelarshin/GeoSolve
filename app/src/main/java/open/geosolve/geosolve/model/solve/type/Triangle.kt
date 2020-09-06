@@ -28,7 +28,7 @@ object Triangle : SolveFigure {
                     figure.mAngles.first { it.getValue() == null }.setDependentValueGraph(
                         valueGetter,
                         known_angles,
-                        TriangleRules.know_2_unknown_1_angle(unknown_angle, known_angles[0], known_angles[1]))
+                        TriangleRules.know_2_unknown_1_angle.MyStep(unknown_angle, known_angles[0], known_angles[1]))
                 }
             }
     }

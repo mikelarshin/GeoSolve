@@ -6,7 +6,7 @@ import open.geosolve.geosolve.model.canvas.tools.Tool
 
 class ExampleFigureFragment : MvpFragmentX(R.layout.fragment_example_figure) {
     override fun setupLayout() {
-        val args = ExampleFigureFragmentArgs.fromBundle(arguments!!)
+        val args = ExampleFigureFragmentArgs.fromBundle(requireArguments())
         layout.fullExampleCanvasView.dataCanvas = args.dataCanvas
         layout.fullExampleCanvasView.canvasPresenter.tool = args.tool
 

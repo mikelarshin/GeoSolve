@@ -6,9 +6,41 @@
     app:startDestination="@id/bookFragment">
 
     <fragment
+        android:id="@+id/articleFragment2"
+        android:name="open.geosolve.geosolve.view.fragments.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article">
+        <argument
+            android:name="article
+"
+            app:argType="open.geosolve.geosolve.view.rules.Article" />
+        <action
+            android:id="@+id/action_to_exampleFigure"
+            app:destination="@id/exampleFigureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exampleFigureFragment"
+        android:name="open.geosolve.geosolve.view.fragments.ExampleFigureFragment"
+        android:label="fragment_example_figure"
+        tools:layout="@layout/fragment_example_figure">
+        <argument
+            android:name="dataCanvas"
+            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+        <argument
+            android:name="updateForString"
+            app:argType="java.io.Serializable" />
+        <argument
+            android:name="tool"
+            app:argType="open.geosolve.geosolve.model.canvas.tools.Tool" />
+    </fragment>
+    <fragment
         android:id="@+id/bookFragment"
         android:name="open.geosolve.geosolve.view.fragments.BookFragment"
         android:label="BookFragment"
-        tools:layout="@layout/fragment_book" />
+        tools:layout="@layout/fragment_book" >
+        <action
+            android:id="@+id/action_to_article"
+            app:destination="@id/articleFragment2" />
+    </fragment>
 
 </navigation>

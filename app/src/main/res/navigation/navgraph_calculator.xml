@@ -31,21 +31,22 @@
             android:name="solveList"
             app:argType="java.util.ArrayList" />
         <action
-            android:id="@+id/action_to_rule"
-            app:destination="@id/ruleFragment" />
+            android:id="@+id/action_to_article"
+            app:destination="@id/articleFragment" />
         <argument
             android:name="dataCanvas"
             app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
     </fragment>
 
     <fragment
-        android:id="@+id/ruleFragment"
-        android:name="open.geosolve.geosolve.view.fragments.RuleFragment"
-        android:label="fragment_rule"
-        tools:layout="@layout/fragment_rule">
+        android:id="@+id/articleFragment"
+        android:name="open.geosolve.geosolve.view.fragments.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article">
         <argument
-            android:name="rule"
-            app:argType="open.geosolve.geosolve.view.rules.Rule" />
+            android:name="article
+"
+            app:argType="open.geosolve.geosolve.view.rules.Article" />
         <action
             android:id="@+id/action_to_exampleFigure"
             app:destination="@id/exampleFigureFragment" />
