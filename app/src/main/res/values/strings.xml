@@ -30,7 +30,8 @@
     <string name="expression_rectangle_parallel_line">%s = %s</string>
     <string name="expression_rectangle_right_angles">%s = 90°</string>
     <string name="expression_triangle_know_2_unknown_1_angle">%s = 180° - (%s + %s)</string>
-    <string name="expression_rightTriangle_pythagorean_theorem">%s = √(%s² + %s²)</string>
+    <string name="expression_rightTriangle_pythagorean_theorem_hypot">%s = √(%s² + %s²)</string>
+    <string name="expression_rightTriangle_pythagorean_theorem_leg">%s = √(%s² - %s²)</string>
     <string name="expression_rightTriangle_angle_30_degrees">%s = %s / 2</string>
 
 

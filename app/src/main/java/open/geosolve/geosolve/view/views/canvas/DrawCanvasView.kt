@@ -27,20 +27,18 @@ abstract class DrawCanvasView : View {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    var dataCanvas = CanvasData()
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+
         DrawConstant.heightCanvas = height
         DrawConstant.widthCanvas = width
 
         DrawConstant.scale = ((height + width) / 2) / POINT_SIZE // 1 coordinate unit equals 1 Node
 
         PaintConstant.canvasContext = context
-        super.onLayout(changed, left, top, right, bottom)
-    }
 
-    var dataCanvas = CanvasData()
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
         systemCoordinate = SystemCoordinate.ABSOLUTE
         dataCanvas.selectIt()
 

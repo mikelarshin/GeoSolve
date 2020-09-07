@@ -16,17 +16,17 @@ open class MvpFragmentX(val layoutRes: Int) : MvpAppCompatFragment() {
 
         layout = inflater.inflate(layoutRes, container, false)
         setupLayout()
-        savedInstanceState?.let { setupData(it) }
+        savedInstanceState?.let { setupData() }
 
         return layout
     }
 
     protected open fun setupLayout() {}
-    protected open fun setupData(bundle: Bundle) {}
-    protected open fun saveData(bundle: Bundle) {}
+    protected open fun setupData() {}
+    protected open fun saveData() {}
 
     override fun onSaveInstanceState(outState: Bundle) {
-        saveData(outState)
+        saveData()
         super.onSaveInstanceState(outState)
     }
 }

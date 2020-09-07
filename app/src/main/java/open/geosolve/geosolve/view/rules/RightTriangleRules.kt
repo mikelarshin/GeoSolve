@@ -13,7 +13,7 @@ object RightTriangleRules {
     object pythagorean_theorem : Article() {
         class UnknownHypotStep(hypotenuse: Line, oneLeg: Line, twoLeg: Line) : StepSolve() {
             override val verbalID = R.string.verbal_rightTriangle_pythagorean_theorem
-            override val expressionID = R.string.expression_rightTriangle_pythagorean_theorem
+            override val expressionID = R.string.expression_rightTriangle_pythagorean_theorem_hypot
 
             override val verbalOrder = listOf(hypotenuse, oneLeg, twoLeg)
             override val expressionOrder = listOf(hypotenuse, oneLeg, twoLeg)
@@ -23,7 +23,7 @@ object RightTriangleRules {
 
         class UnknownLegStep(unknownLeg: Line, hypotenuse: Line, knownLeg: Line) : StepSolve() {
             override val verbalID = R.string.verbal_rightTriangle_unknown_leg_known_leg_and_hypot
-            override val expressionID = R.string.expression_rightTriangle_pythagorean_theorem
+            override val expressionID = R.string.expression_rightTriangle_pythagorean_theorem_leg
 
             override val verbalOrder = listOf(unknownLeg, hypotenuse, knownLeg)
             override val expressionOrder = listOf(unknownLeg, hypotenuse, knownLeg)

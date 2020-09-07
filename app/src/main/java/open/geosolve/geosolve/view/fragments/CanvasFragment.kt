@@ -1,8 +1,6 @@
 package open.geosolve.geosolve.view.fragments
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -21,7 +19,6 @@ import open.geosolve.geosolve.model.canvas.tools.*
 import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.formatAlertMessage
-import open.geosolve.geosolve.view.fragments.CanvasFragmentArgs.fromBundle
 import open.geosolve.geosolve.view.inflate
 import open.geosolve.geosolve.view.rules.makeTriangleOne
 import open.geosolve.geosolve.view.views.canvas.CanvasData
@@ -32,6 +29,7 @@ import java.util.*
 class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView {
 
     private val presenter by moxyPresenter { CanvasScreenPresenter() }
+    private var tool: Tool = AddTool
     private var dataCanvas = CanvasData()
     private lateinit var canvasView: TouchCanvasView
 
@@ -39,6 +37,7 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     override fun setupLayout() {
         canvasView = layout.canvasView
         canvasView.dataCanvas = dataCanvas
+        canvasView.canvasPresenter.tool = tool
         canvasView.canvasPresenter.canvasScreenPresenter = presenter
 
         layout.show_solve_button.setOnClickListener {
@@ -67,22 +66,21 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
 //        FOR_TEST()
     }
-
-    fun FOR_TEST() { // TODO(DELETE IT IS)
-        dataCanvas.selectIt()
-        makeTriangleOne()
-        MarkTool.cycleTouch(-7f, 7f)
-
-        val angleList: List<Angle> = AllAngles.toList()
-        angleList[0].setValueDraw(90f)
-        angleList[1].setValueDraw(60f)
-
-        presenter.solveAndCallBack()
-    }
+//    fun FOR_TEST() { // TODO(DELETE IT IS)
+//        makeTriangleOne()
+//        MarkTool.cycleTouch(-7f, 7f)
+//
+//        val angleList: List<Angle> = AllAngles.toList()
+//        angleList[0].setValueDraw(90f)
+//        angleList[1].setValueDraw(60f)
+//
+//        presenter.solveAndCallBack()
+//    }
 
     private fun setToolButton(button: FloatingActionButton, tool: Tool) {
         button.setOnClickListener {
             canvasView.canvasPresenter.tool = tool
+            this.tool = tool
         }
     }
 
@@ -122,17 +120,5 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     override fun showTypeFigure() { // TODO(DELETE_THIS_DEBUGGER)
         DELETE_THIS_DEBUGGER.text = FigureList.joinToString(separator = "\n\n") { "$it" }
-    }
-
-    override fun saveData(bundle: Bundle) {
-        bundle.putSerializable("dataCanvas", canvasView.dataCanvas)
-        bundle.putSerializable("tool", canvasView.canvasPresenter.tool)
-    }
-
-    override fun setupData(bundle: Bundle) {
-        val args = fromBundle(bundle)
-        dataCanvas = args.dataCanvas
-        canvasView.dataCanvas = dataCanvas
-        canvasView.canvasPresenter.tool = args.tool
     }
 }
