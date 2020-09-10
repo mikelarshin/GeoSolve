@@ -5,6 +5,7 @@ import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.canvas.math.MathUtil
 import open.geosolve.geosolve.model.canvas.math.MathUtil.isPointInAngle
+import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.scale
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 import kotlin.math.max
@@ -42,11 +43,11 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
     override fun inRadius(x: Float, y: Float): Boolean {
         val receivedRadius = MathUtil.distanceBetweenPoints(angleNode, x, y)
 
-        val myRadius = ANGLE_ARC_RADIUS / 30
+        val myRadius = ANGLE_ARC_RADIUS / scale
 
         val distanceToAngleArc = max(myRadius, receivedRadius) - min(myRadius, receivedRadius)
 
-        val useTouchZone = LINE_WIDTH / 20
+        val useTouchZone = LINE_WIDTH / 10
 
         return (distanceToAngleArc < useTouchZone) && isPointInAngle(this, x, y)
     }

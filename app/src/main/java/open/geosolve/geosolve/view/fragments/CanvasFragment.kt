@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.AllAngles
+import open.geosolve.geosolve.model.canvas.AllCircles
 import open.geosolve.geosolve.model.canvas.FigureList
 import open.geosolve.geosolve.model.canvas.data.Angle
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
@@ -20,6 +21,7 @@ import open.geosolve.geosolve.presentation.presenter.CanvasScreenPresenter
 import open.geosolve.geosolve.presentation.view.CanvasScreenView
 import open.geosolve.geosolve.view.formatAlertMessage
 import open.geosolve.geosolve.view.inflate
+import open.geosolve.geosolve.view.rules.makeCircle
 import open.geosolve.geosolve.view.rules.makeTriangleOne
 import open.geosolve.geosolve.view.views.canvas.CanvasData
 import open.geosolve.geosolve.view.views.canvas.TouchCanvasView
@@ -67,12 +69,18 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 //        FOR_TEST()
     }
 //    fun FOR_TEST() { // TODO(DELETE IT IS)
+//        dataCanvas.selectIt()
+
 //        makeTriangleOne()
 //        MarkTool.cycleTouch(-7f, 7f)
 //
 //        val angleList: List<Angle> = AllAngles.toList()
 //        angleList[0].setValueDraw(90f)
 //        angleList[1].setValueDraw(60f)
+
+//        makeCircle()
+//        val circle = AllCircles.toList()[0]
+//        circle.setDependentValueDraw { circle.radius }
 //
 //        presenter.solveAndCallBack()
 //    }

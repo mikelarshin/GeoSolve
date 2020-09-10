@@ -34,7 +34,7 @@ class Node(foundX: Float, foundY: Float) : Element, XY {
         }
 
     fun updateXYbyBind() {
-        bind?.toBindNodeXY(this, x, y)
+        bind?.onBindNodeXY(this, x, y)
     }
 
     // Movable
@@ -46,7 +46,7 @@ class Node(foundX: Float, foundY: Float) : Element, XY {
             this.x = x
             this.y = y
         } else
-            bind?.toBindNodeXY(this, x, y)
+            bind?.onBindNodeXY(this, x, y)
     }
 
     // Element

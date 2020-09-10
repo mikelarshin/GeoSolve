@@ -15,7 +15,7 @@ object DrawCircles {
             canvas.drawCircle(
                 centerNode.x,
                 centerNode.y,
-                circle.drawRadius,
+                circle.radius,
                 PaintConstant.mPaintCircle
             )
 
@@ -43,7 +43,7 @@ object DrawCircles {
         canvas.drawCircle(
             markedCircle.centerNode.x,
             markedCircle.centerNode.y,
-            markedCircle.drawRadius,
+            markedCircle.radius,
             PaintConstant.mPaintMarkCircle
         )
     }
@@ -57,7 +57,7 @@ object DrawCircles {
             val x = circle.centerNode.x - CHAR_SIZE * text.length / 3.5f
             val y = circle.centerNode.y + CHAR_SIZE / 3.5f
 
-            canvas.drawText(text, x, y - circle.drawRadius, PaintConstant.mPaintText)
+            canvas.drawText(text, x, y - circle.radius, PaintConstant.mPaintText)
         }
     }
 }

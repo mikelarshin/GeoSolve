@@ -30,7 +30,7 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
     // Bind
     override val bindNodes: MutableSet<Node> = mutableSetOf()
 
-    override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
+    override fun onBindNodeXY(node: Node, newX: Float, newY: Float) {
         val point: XY = when {
             isTouchOnSegment(this, newX, newY) -> getPointProjectToLine(this, newX, newY)
             isTouchLeftSegment(this, newX, newY) -> firstNode
@@ -38,7 +38,7 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
             else -> null!!
         }
 
-        node.x = point.x.also { node.y = point.y }
+        node.x = point.x.also { node.y = point.y } // присвоение node XY point
     }
 
     // Element

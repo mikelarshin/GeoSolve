@@ -5,6 +5,8 @@ import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.canvas.math.MathUtil.distanceBetweenPoints
+import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant
+import open.geosolve.geosolve.view.views.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.views.canvas.draw.PaintConstant.LINE_WIDTH
 import kotlin.math.max
 import kotlin.math.min
@@ -20,16 +22,16 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
         centerNode.circle = this
     }
 
-    override fun toString() = "Circle: radius-$decartRadius"
+    override fun toString() = centerNode.char
 
     var radiusLineList: MutableList<Line> = mutableListOf() // TODO(implement this)
 
-    val drawRadius get() = decartRadius*31.5f
-    var decartRadius: Float = 0f
+    var radius: Float = 0f
+        get() = systemCoordinate.convertDistance(field)
 
     //Circle
     fun moveRadius(x: Float, y: Float) {
-        decartRadius = distanceBetweenPoints(centerNode, x, y)
+        radius = distanceBetweenPoints(centerNode, x, y)
 
         updateAllBind()
     }
@@ -37,12 +39,12 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
     // Bind
     override val bindNodes: MutableSet<Node> = mutableSetOf()
 
-    override fun toBindNodeXY(node: Node, newX: Float, newY: Float) {
-        node.x = centerNode.x + (decartRadius * (newX - centerNode.x) /
-                sqrt((newX - centerNode.x).pow(2) + (newY - centerNode.y).pow(2)))
+    override fun onBindNodeXY(node: Node, newX: Float, newY: Float) {
+        val legacyVar = sqrt((newX - centerNode.x).pow(2) + (newY - centerNode.y).pow(2))
 
-        node.y = centerNode.y + (decartRadius * (newY - centerNode.y) /
-                sqrt((newX - centerNode.x).pow(2) + (newY - centerNode.y).pow(2)))
+        node.x = centerNode.x + (radius * (newX - centerNode.x) / legacyVar)
+
+        node.y = centerNode.y + (radius * (newY - centerNode.y) / legacyVar)
     }
 
     // Element
@@ -56,7 +58,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
     override fun inRadius(x: Float, y: Float): Boolean {
         val receivedRadius = distanceBetweenPoints(centerNode, x, y)
 
-        val distanceToCircle = max(decartRadius, receivedRadius) - min(decartRadius, receivedRadius)
+        val distanceToCircle = max(radius, receivedRadius) - min(radius, receivedRadius)
 
         val useTouchZone = LINE_WIDTH / 10
         return distanceToCircle < useTouchZone
