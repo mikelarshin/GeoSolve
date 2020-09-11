@@ -16,7 +16,7 @@ class ExampleFigureFragment : MvpFragmentX(R.layout.fragment_example_figure) {
         layout.exampleText.text = updateForString()
 
         layout.fullExampleCanvasView.canvasPresenter.customTool = object : Tool {
-            override fun onTouchMove(x: Float, y: Float) {
+            override fun onTouch(x: Float, y: Float) {
                 layout.exampleText.text = updateForString()
             }
         }

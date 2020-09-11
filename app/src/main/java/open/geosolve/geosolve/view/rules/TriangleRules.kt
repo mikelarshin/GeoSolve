@@ -1,9 +1,6 @@
 package open.geosolve.geosolve.view.rules
 
 import android.text.SpannableStringBuilder
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.AllAngles
 import open.geosolve.geosolve.model.canvas.data.Angle
@@ -12,13 +9,10 @@ import open.geosolve.geosolve.model.canvas.math.MathUtil
 import open.geosolve.geosolve.model.canvas.tools.MarkTool
 import open.geosolve.geosolve.model.canvas.tools.MoveTool
 import open.geosolve.geosolve.view.*
-import open.geosolve.geosolve.view.fragments.BookFragment
 import open.geosolve.geosolve.view.views.canvas.CanvasData
-import open.geosolve.geosolve.view.views.recyclers.BookRecyclerAdapter
 import open.geosolve.geosolve.view.views.recyclers.StepSolve
 import open.geosolve.geosolve.view.views.recyclers.items.*
 import kotlin.math.absoluteValue
-
 object TriangleRules {
     object know_2_unknown_1_angle : Article() {
         class MyStep(unknown_angle: Angle, known_angle_1: Angle, known_angle_2: Angle) : StepSolve() {
@@ -45,25 +39,36 @@ object TriangleRules {
         }
 
         private val stringUpdaterExperiment = { // TODO(rewrite this shit)
-            val angles = (linkedSetOf(find!!) + AllAngles).toList()
-
             val sb = SpannableStringBuilder()
 
-            sb.append(setSize(
-                formatSolveText(
-                    R.string.ruleExample_triangle_know_2_unknown_1_angle_experiment,
-                    angles
-                ) { (it as Angle).toSmallString() },
-                R.dimen.BIG_TEXT_SIZE
-            ))
-            sb.append("\n")
-            sb.append(setSize(
-                formatSolveText(
-                    R.string.ruleExample_triangle_know_2_unknown_1_angle_experiment,
-                    angles
-                ) { formatValueString(it, 0) },
-                R.dimen.BIG_TEXT_SIZE
-            ))
+            if (find!! !is Angle) { // TODO(rewrite this shit)
+                sb
+            } else {
+
+                val angles = (linkedSetOf(find!!) + AllAngles).toList()
+
+                sb.apply {
+                    append(
+                        setSize(
+                            formatSolveText(
+                                R.string.ruleExample_triangle_know_2_unknown_1_angle_experiment,
+                                angles
+                            ) { (it as Angle).toSmallString() },
+                            R.dimen.BIG_TEXT_SIZE
+                        )
+                    )
+                    append("\n")
+                    append(
+                        setSize(
+                            formatSolveText(
+                                R.string.ruleExample_triangle_know_2_unknown_1_angle_experiment,
+                                angles
+                            ) { formatValueString(it, 0) },
+                            R.dimen.BIG_TEXT_SIZE
+                        )
+                    )
+                }
+            }
         }
 
         private val exampleTriangleCheck: () -> CanvasData = {
