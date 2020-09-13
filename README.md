@@ -7,11 +7,11 @@
 # <p align="center">GeoSolve</p>
 ### This is an Android app GeoSolve.
 
-This is an interactive geometry tutorial.
+- This is an **interactive** geometry **tutorial**.
 
-It can solve and explain geometric problems step by step.
+- It can **solve** and **explain** **geometric problems** step by step.
 
-To visualize the geometrical laws.
+- To **visualize** the **geometrical laws**.
 
 ## Links
 
@@ -22,6 +22,11 @@ To visualize the geometrical laws.
 ## Build
 
 I use **Kotlin**. To build this app, you need to install the **Kotlin** plugin in your IDE.
+
+## Technology stack
+
++ Moxy MVP Pattern
++ Navigation Architecture Component
 
 ## License
 
