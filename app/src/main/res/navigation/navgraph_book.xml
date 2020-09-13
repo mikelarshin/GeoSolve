@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph_book"
     app:startDestination="@id/bookFragment">
 
     <fragment
         android:id="@+id/articleFragment2"
-        android:name="open.geosolve.geosolve.view.fragments.ArticleFragment"
+        android:name="open.geosolve.geosolve.view.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article">
         <argument
-            android:name="article
-"
-            app:argType="open.geosolve.geosolve.view.rules.Article" />
+            android:name="article"
+            app:argType="open.geosolve.geosolve.view.book.articles.Article" />
         <action
             android:id="@+id/action_to_exampleFigure"
             app:destination="@id/exampleFigureFragment" />
     </fragment>
     <fragment
         android:id="@+id/exampleFigureFragment"
-        android:name="open.geosolve.geosolve.view.fragments.ExampleFigureFragment"
+        android:name="open.geosolve.geosolve.view.article.ExampleFigureFragment"
         android:label="fragment_example_figure"
         tools:layout="@layout/fragment_example_figure">
         <argument
             android:name="dataCanvas"
-            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+            app:argType="open.geosolve.geosolve.model.canvas.data.containers.CanvasData" />
         <argument
             android:name="updateForString"
             app:argType="java.io.Serializable" />
@@ -35,9 +34,9 @@
     </fragment>
     <fragment
         android:id="@+id/bookFragment"
-        android:name="open.geosolve.geosolve.view.fragments.BookFragment"
+        android:name="open.geosolve.geosolve.view.book.BookFragment"
         android:label="BookFragment"
-        tools:layout="@layout/fragment_book" >
+        tools:layout="@layout/fragment_book">
         <action
             android:id="@+id/action_to_article"
             app:destination="@id/articleFragment2" />

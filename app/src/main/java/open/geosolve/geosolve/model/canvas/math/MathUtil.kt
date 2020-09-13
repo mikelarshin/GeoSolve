@@ -1,19 +1,20 @@
 package open.geosolve.geosolve.model.canvas.math
 
-import open.geosolve.geosolve.model.canvas.data.Angle
-import open.geosolve.geosolve.model.canvas.data.Line
-import open.geosolve.geosolve.model.canvas.data.Node
+import open.geosolve.geosolve.model.canvas.data.elements.Angle
+import open.geosolve.geosolve.model.canvas.data.elements.Line
 import kotlin.math.*
 
 
 object MathUtil {
 
     // Distance
-    fun distanceBetweenPoints(a: Node, b: Node) = hypot(a.x - b.x, a.y - b.y)
-    fun distanceBetweenPoints(a: Node, x: Float, y: Float) = hypot(a.x - x, a.y - y)
-    fun distanceBetweenPoints(x1: Float, y1: Float, x2: Float, y2: Float) = hypot(x1 - x2, y1 - y2)
+    fun distanceBetweenPoints(a: XY, b: XY) = hypot(a.x - b.x, a.y - b.y)
 
-    fun getDegree(startNode: Node, centerNode: Node, finalNode: Node): Float {
+    fun getDegree(angle: Angle): Float {
+        return getDegree(angle.startNode, angle.angleNode, angle.finalNode)
+    }
+
+    fun getDegree(startNode: XY, centerNode: XY, finalNode: XY): Float {
         val startVector = getVectorPoint(centerNode, startNode)
         val finalVector = getVectorPoint(centerNode, finalNode)
 
@@ -23,25 +24,24 @@ object MathUtil {
         return fromRadianToDegrees(radianAngle)
     }
 
-    fun isPointInAngle(angle: Angle, x: Float, y: Float): Boolean {
-        val node = Node(x, y) // TODO(Replace Node with MathPoint)
-        val startAngle = getDegree(node, angle.angleNode, angle.startNode)
-        val finalAngle = getDegree(node, angle.angleNode, angle.finalNode)
+    fun isPointInAngle(angle: Angle, point: XYPoint): Boolean {
+        val startAngle = getDegree(point, angle.angleNode, angle.startNode)
+        val finalAngle = getDegree(point, angle.angleNode, angle.finalNode)
 
         return (startAngle.absoluteValue + finalAngle.absoluteValue) < 180
     }
 
     // formulas
-    private fun fromRadianToDegrees(x: Float): Float = x * 180 / PI.toFloat()
-    private fun crossProduct(a: MathPoint, b: MathPoint) = a.x * b.y - a.y * b.x
-    private fun scalarProduct(a: MathPoint, b: MathPoint) = a.x * b.x + a.y * b.y // this is dot()
+    private fun fromRadianToDegrees(r: Float): Float = r * 180 / PI.toFloat()
+    private fun crossProduct(a: XY, b: XY) = a.x * b.y - a.y * b.x
+    private fun scalarProduct(a: XY, b: XY) = a.x * b.x + a.y * b.y // this is dot()
 
-    private fun getVectorPoint(a: Node, b: Node) = MathPoint(b.x - a.x, b.y - a.y)
+    private fun getVectorPoint(a: XY, b: XY) = XYPoint(b.x - a.x, b.y - a.y)
 
     // Line
-    fun getDistanceToLine(line: Line, x: Float, y: Float): Float {
-        val distanceStart: Float = distanceBetweenPoints(line.firstNode, x, y)
-        val distanceFin: Float = distanceBetweenPoints(line.secondNode, x, y)
+    fun getDistanceToLine(line: Line, point: XYPoint): Float {
+        val distanceStart: Float = distanceBetweenPoints(line.firstNode, point)
+        val distanceFin: Float = distanceBetweenPoints(line.secondNode, point)
         val lineLength: Float = distanceBetweenPoints(line.firstNode, line.secondNode)
 
         val per = (distanceStart + distanceFin + lineLength) / 2
@@ -49,35 +49,35 @@ object MathUtil {
         return sqrt(per * (per - distanceStart) * (per - distanceFin) * (per - lineLength)) / lineLength
     }
 
-    fun getPointProjectToLine(line: Line, x: Float, y: Float): MathPoint {
+    fun getPointProjectToLine(line: Line, point: XYPoint): XYPoint {
         val k = (line.firstNode.y - line.secondNode.y) / (line.firstNode.x - line.secondNode.x)
         val b = line.firstNode.y - k*line.firstNode.x
         val perpendecular_k = -1/k
-        val perpendecular_b = y-perpendecular_k*x
+        val perpendecular_b = point.y-perpendecular_k*point.x
 
         val return_x = (perpendecular_b - b) / (k - perpendecular_k)
         val return_y = k*return_x + b
 
-        return MathPoint(return_x, return_y)
+        return XYPoint(return_x, return_y)
     }
 
-    fun isTouchOnSegment(line: Line, x: Float, y: Float): Boolean {
-        return isTouchLeftSegment(line, x, y) && isTouchRightSegment(line, x, y)
+    fun isTouchOnSegment(line: Line, point: XYPoint): Boolean {
+        return isTouchLeftSegment(line, point) && isTouchRightSegment(line, point)
     }
 
-    fun isTouchRightSegment(line: Line, x: Float, y: Float): Boolean {
+    fun isTouchRightSegment(line: Line, point: XYPoint): Boolean {
         val angleRight = scalarProduct(
-            MathPoint(x - line.firstNode.x, y - line.firstNode.y),
-            MathPoint(line.secondNode.x - line.firstNode.x, line.secondNode.y - line.firstNode.y)
+            XYPoint(point.x - line.firstNode.x, point.y - line.firstNode.y),
+            XYPoint(line.secondNode.x - line.firstNode.x, line.secondNode.y - line.firstNode.y)
         )
 
         return angleRight >= 0
     }
 
-    fun isTouchLeftSegment(line: Line, x: Float, y: Float): Boolean {
+    fun isTouchLeftSegment(line: Line, point: XYPoint): Boolean {
         val angleLeft = scalarProduct(
-            MathPoint(x - line.secondNode.x, y - line.secondNode.y),
-            MathPoint(line.firstNode.x - line.secondNode.x, line.firstNode.y - line.secondNode.y)
+            XYPoint(point.x - line.secondNode.x, point.y - line.secondNode.y),
+            XYPoint(line.firstNode.x - line.secondNode.x, line.firstNode.y - line.secondNode.y)
         )
 
         return angleLeft >= 0

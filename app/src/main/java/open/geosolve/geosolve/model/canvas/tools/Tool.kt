@@ -1,19 +1,20 @@
 package open.geosolve.geosolve.model.canvas.tools
 
+import open.geosolve.geosolve.model.canvas.math.XYPoint
 import java.io.Serializable
 
 interface Tool : Serializable {
-    fun onTouchDown(x: Float, y: Float) { onTouch(x, y) }
-    fun onTouchMove(x: Float, y: Float) { onTouch(x, y) }
-    fun onTouchUp(x: Float, y: Float) { onTouch(x, y) }
+    fun onTouchDown(point: XYPoint) { onTouch(point) }
+    fun onTouchMove(point: XYPoint) { onTouch(point) }
+    fun onTouchUp(point: XYPoint) { onTouch(point) }
 
-    fun cycleTouch(x: Float, y: Float) {
-        onTouchDown(x, y)
-        onTouchMove(x, y)
-        onTouchUp(x, y)
+    fun cycleTouch(point: XYPoint) {
+        onTouchDown(point)
+        onTouchMove(point)
+        onTouchUp(point)
     }
 
-    fun onTouch(x: Float, y: Float) {}
+    fun onTouch(point: XYPoint) {}
 }
 
 

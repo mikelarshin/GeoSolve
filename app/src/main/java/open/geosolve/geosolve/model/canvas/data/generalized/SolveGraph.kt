@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.generalized
 
-import open.geosolve.geosolve.view.views.recyclers.StepSolve
+import open.geosolve.geosolve.view.solve.StepSolve
 
 abstract class SolveGraph {
 

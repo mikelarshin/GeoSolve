@@ -1,9 +1,9 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.model.canvas.*
-import open.geosolve.geosolve.model.canvas.data.Figure
+import open.geosolve.geosolve.model.canvas.controllers.*
+import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
-import open.geosolve.geosolve.model.solve.type.*
+import open.geosolve.geosolve.model.solve.types.*
 
 object SolveUtil {
 

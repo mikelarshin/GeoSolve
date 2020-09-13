@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.model.canvas.data.Figure
+import open.geosolve.geosolve.model.canvas.data.containers.Figure
 
 interface SolveFigure {
     fun isMatch(figure: Figure): Boolean

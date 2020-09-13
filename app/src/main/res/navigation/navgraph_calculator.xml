@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/canvasFragment"
-        android:name="open.geosolve.geosolve.view.fragments.CanvasFragment"
+        android:name="open.geosolve.geosolve.view.canvas.CanvasFragment"
         android:label="fragment_canvas"
         tools:layout="@layout/fragment_canvas">
         <action
@@ -16,7 +16,7 @@
             app:destination="@id/solveFragment" />
         <argument
             android:name="dataCanvas"
-            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+            app:argType="open.geosolve.geosolve.model.canvas.data.containers.CanvasData" />
         <argument
             android:name="tool"
             app:argType="open.geosolve.geosolve.model.canvas.tools.Tool" />
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/solveFragment"
-        android:name="open.geosolve.geosolve.view.fragments.SolveFragment"
+        android:name="open.geosolve.geosolve.view.solve.SolveFragment"
         android:label="fragment_solve"
         tools:layout="@layout/fragment_solve">
         <argument
@@ -35,30 +35,29 @@
             app:destination="@id/articleFragment" />
         <argument
             android:name="dataCanvas"
-            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+            app:argType="open.geosolve.geosolve.model.canvas.data.containers.CanvasData" />
     </fragment>
 
     <fragment
         android:id="@+id/articleFragment"
-        android:name="open.geosolve.geosolve.view.fragments.ArticleFragment"
+        android:name="open.geosolve.geosolve.view.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article">
         <argument
-            android:name="article
-"
-            app:argType="open.geosolve.geosolve.view.rules.Article" />
+            android:name="article"
+            app:argType="open.geosolve.geosolve.view.book.articles.Article" />
         <action
             android:id="@+id/action_to_exampleFigure"
             app:destination="@id/exampleFigureFragment" />
     </fragment>
     <fragment
         android:id="@+id/exampleFigureFragment"
-        android:name="open.geosolve.geosolve.view.fragments.ExampleFigureFragment"
+        android:name="open.geosolve.geosolve.view.article.ExampleFigureFragment"
         android:label="fragment_example_figure"
         tools:layout="@layout/fragment_example_figure">
         <argument
             android:name="dataCanvas"
-            app:argType="open.geosolve.geosolve.view.views.canvas.CanvasData" />
+            app:argType="open.geosolve.geosolve.model.canvas.data.containers.CanvasData" />
         <argument
             android:name="updateForString"
             app:argType="java.io.Serializable" />

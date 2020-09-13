@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment"
-        android:name="open.geosolve.geosolve.view.fragments.PagerFragment"
+        android:name="open.geosolve.geosolve.view.main_pager.PagerFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

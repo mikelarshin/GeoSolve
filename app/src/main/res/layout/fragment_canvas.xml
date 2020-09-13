@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.CanvasFragment">
+    tools:context=".view.canvas.CanvasFragment">
 
-    <open.geosolve.geosolve.view.views.canvas.TouchCanvasView
+    <open.geosolve.geosolve.view.canvas.TouchCanvasView
         android:id="@+id/canvasView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
