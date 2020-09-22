@@ -3,13 +3,13 @@ package open.geosolve.geosolve.model.solve.types
 import open.geosolve.geosolve.model.canvas.data.elements.Angle
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.canvas.data.elements.Line
-import open.geosolve.geosolve.model.solve.SolveFigure
+import open.geosolve.geosolve.model.solve.TypeFigure
 import open.geosolve.geosolve.view.book.articles.RightTriangleRules
 import kotlin.math.hypot
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-object RightTriangle : SolveFigure {
+object RightTriangle : TypeFigure(Triangle) {
     override fun isMatch(figure: Figure): Boolean {
         return figure.mAngles.filter { it.getValue() == 90f }.size == 1
     }

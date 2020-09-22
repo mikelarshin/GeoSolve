@@ -5,8 +5,7 @@ import open.geosolve.geosolve.model.canvas.data.elements.Circle
 import open.geosolve.geosolve.model.canvas.data.elements.Line
 import open.geosolve.geosolve.model.canvas.data.elements.Node
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
-import open.geosolve.geosolve.model.solve.SolveFigure
-import open.geosolve.geosolve.model.solve.types.UnknownFigure
+import open.geosolve.geosolve.model.solve.TypeFigure
 
 class Figure {
 
@@ -15,11 +14,10 @@ class Figure {
     val mAngles: MutableList<Angle> = mutableListOf()
     var mCircle: Circle? = null
 
-    var square: Int? = null // TODO(implement square)
-    var perimeter: Int? = null // TODO(implement perimeter)
+    var typesDeque = ArrayDeque<TypeFigure>()
 
-    var typeSolve: SolveFigure = UnknownFigure
-    var subTypeSolve: SolveFigure = UnknownFigure
+    var perimeter: Int? = null // TODO(implement perimeter)
+    var square: Int? = null // TODO(implement square)
 
     fun isComplete() = isClose() || mCircle != null
     fun isClose() = mLines.size != 0 && mLines.first().firstNode == mLines.last().secondNode // TODO(rewrite this)
@@ -33,12 +31,10 @@ class Figure {
                 mCircle == element
 
 
-    // TODO(DELETE THIS DEBUGGER)
-    override fun toString(): String {
-        val typeFigureName = typeSolve::class.simpleName
-//        val subTypeFigureName = subTypeFigure::class.simpleName
+    override fun toString(): String { // for debug
+        val typesFigureName = typesDeque.joinToString(separator = " : ") { "${it::class.simpleName}" }
 
-        return "$typeFigureName\n" +
+        return "$typesFigureName\n" +
                 when {
                     isEmpty() -> ""
 

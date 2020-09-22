@@ -1,11 +1,11 @@
 package open.geosolve.geosolve.model.solve.types
 
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
-import open.geosolve.geosolve.model.solve.SolveFigure
+import open.geosolve.geosolve.model.solve.TypeFigure
 import open.geosolve.geosolve.view.book.articles.TriangleRules
 import kotlin.math.round
 
-object Triangle : SolveFigure {
+object Triangle : TypeFigure(Polygon) {
     override fun isMatch(figure: Figure): Boolean {
         return figure.mNodes.size == 3 && figure.mLines.size == 3 && figure.mAngles.size == 3
     }
@@ -31,12 +31,5 @@ object Triangle : SolveFigure {
                         TriangleRules.know_2_unknown_1_angle.MyStep(unknown_angle, known_angles[0], known_angles[1]))
                 }
             }
-    }
-
-    override fun setSubType(figure: Figure) {
-        figure.subTypeSolve = when {
-            RightTriangle.isMatch(figure) -> RightTriangle
-            else -> UnknownFigure
-        }
     }
 }

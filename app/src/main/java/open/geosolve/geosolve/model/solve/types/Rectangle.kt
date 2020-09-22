@@ -2,10 +2,10 @@ package open.geosolve.geosolve.model.solve.types
 
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.canvas.data.elements.Line
-import open.geosolve.geosolve.model.solve.SolveFigure
+import open.geosolve.geosolve.model.solve.TypeFigure
 import open.geosolve.geosolve.view.book.articles.RectangleRules
 
-object Rectangle : SolveFigure {
+object Rectangle : TypeFigure(Parallelogram) {
     override fun isMatch(figure: Figure): Boolean =
         figure.mAngles.filter { it.getValue() == 90f }.size >= 2
                 && figure.mAngles.none { if (it.getValue() != null) it.getValue() != 90f else false }

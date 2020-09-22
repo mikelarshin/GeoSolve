@@ -7,32 +7,38 @@ import open.geosolve.geosolve.model.solve.types.*
 
 object SolveUtil {
 
-    private fun setTypeSolve(figure: Figure) {
-        figure.typeSolve = when {
-            CircleFigure.isMatch(figure) -> CircleFigure
-            Quadrangle.isMatch(figure) -> Quadrangle
-            Triangle.isMatch(figure) -> Triangle
-            AngleFigure.isMatch(figure) -> AngleFigure
-            else -> UnknownFigure
+    private fun Figure.setType() {
+        while (typesDeque.last().childTypes.isNotEmpty()) {
+            val childSet = typesDeque.last().childTypes
+
+            val figureChild = childSet.find { child -> child.isMatch(this) }
+
+            if (figureChild != null)
+                typesDeque.add(figureChild)
+            else
+                break
         }
-        figure.typeSolve.setSubType(figure)
     }
 
     fun solveGraphs() {
         for (figure in FigureList) {
-            setTypeSolve(figure)
-            zeroGraph(figure)
-            figure.typeSolve.setGraphs(figure)
-            figure.subTypeSolve.setGraphs(figure)
+            figure.clearGraph()
+            figure.setType()
+            figure.typesDeque.forEach {
+                it.setGraphs(figure)
+            }
         }
 
         for (element in (AllLines + AllAngles + AllCircles))
             (element as SolveGraph).solve()
     }
 
-    private fun zeroGraph(figure: Figure) {
-        figure.mLines.map { it.onKnownFunctions.clear() }
-        figure.mAngles.map { it.onKnownFunctions.clear() }
+    private fun Figure.clearGraph() {
+        typesDeque.clear()
+        typesDeque.add(AnyFigure)
+
+        mLines.map { it.onKnownFunctions.clear() }
+        mAngles.map { it.onKnownFunctions.clear() }
     }
 
     fun showStepSolveList(callback: CallBackSolveUi) {
@@ -56,7 +62,10 @@ object SolveUtil {
         callback.solveIsFound(solveList)
     }
 
-    private fun getList(found: SolveGraph, stepList: MutableList<SolveGraph> = mutableListOf()): List<SolveGraph> {
+    private fun getList(
+        found: SolveGraph,
+        stepList: MutableList<SolveGraph> = mutableListOf()
+    ): List<SolveGraph> {
         if (found.whereFromValueList == null)
             return listOf() // dead end graph
 
@@ -73,4 +82,6 @@ object SolveUtil {
             return stepList
         return listOf(found) + stepList
     }
+
+    fun List<SolveGraph>.next(from: Int, to: Int = 1) = this[(from + to) % this.size]
 }

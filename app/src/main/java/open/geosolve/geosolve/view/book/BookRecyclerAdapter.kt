@@ -6,12 +6,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_article.view.*
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.view.helpers.inflate
-import open.geosolve.geosolve.view.book.articles.Article
-import open.geosolve.geosolve.view.book.articles.RectangleRules
-import open.geosolve.geosolve.view.book.articles.RightTriangleRules
-import open.geosolve.geosolve.view.book.articles.TriangleRules
 import open.geosolve.geosolve.view.article.items.TitleItem
+import open.geosolve.geosolve.view.book.articles.*
+import open.geosolve.geosolve.view.helpers.inflate
 
 class BookRecyclerAdapter : RecyclerView.Adapter<BookRecyclerAdapter.BookHolder>() {
 
@@ -19,8 +16,8 @@ class BookRecyclerAdapter : RecyclerView.Adapter<BookRecyclerAdapter.BookHolder>
         TriangleRules.know_2_unknown_1_angle,
         RightTriangleRules.angle_30_degrees,
         RightTriangleRules.pythagorean_theorem,
-        RectangleRules.parallel_line,
-        RectangleRules.right_angles
+        parallel_line,
+        right_angles
     )
 
     class BookHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
