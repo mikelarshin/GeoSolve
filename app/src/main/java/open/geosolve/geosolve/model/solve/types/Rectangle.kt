@@ -3,12 +3,13 @@ package open.geosolve.geosolve.model.solve.types
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.canvas.data.elements.Line
 import open.geosolve.geosolve.model.solve.TypeFigure
-import open.geosolve.geosolve.view.book.articles.RectangleRules
+import open.geosolve.geosolve.view.book.articles.polygon.quadrangle.ParallelLines
+import open.geosolve.geosolve.view.book.articles.polygon.quadrangle.RightAngles
 
 object Rectangle : TypeFigure(Parallelogram) {
     override fun isMatch(figure: Figure): Boolean =
         figure.mAngles.filter { it.getValue() == 90f }.size >= 2
-                && figure.mAngles.none { if (it.getValue() != null) it.getValue() != 90f else false }
+                && figure.mAngles.none { it.getValue() != 90f && it.getValue() != null }
 
 
     override fun setGraphs(figure: Figure) {
@@ -18,7 +19,7 @@ object Rectangle : TypeFigure(Parallelogram) {
                     figure.mLines[(i + 2) % 4].setDependentValueGraph(
                         { knownElement.getValue() },
                         listOf(knownElement),
-                        RectangleRules.parallel_line.MyStep(knownElement as Line, figure.mLines[(i + 2) % 4])
+                        ParallelLines.Step(knownElement as Line, figure.mLines[(i + 2) % 4])
                     )
             }
 
@@ -32,7 +33,7 @@ object Rectangle : TypeFigure(Parallelogram) {
                         it.setValueGraph(
                             90f,
                             anglesWithValue,
-                            RectangleRules.right_angles.MyStep(it)
+                            RightAngles.Step(it)
                         )
                     }
             }

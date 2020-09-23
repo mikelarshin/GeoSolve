@@ -1,10 +1,11 @@
 package open.geosolve.geosolve.model.solve.types
 
-import open.geosolve.geosolve.model.canvas.data.elements.Angle
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
+import open.geosolve.geosolve.model.canvas.data.elements.Angle
 import open.geosolve.geosolve.model.canvas.data.elements.Line
 import open.geosolve.geosolve.model.solve.TypeFigure
-import open.geosolve.geosolve.view.book.articles.RightTriangleRules
+import open.geosolve.geosolve.view.book.articles.polygon.triangle.Angle30Degrees
+import open.geosolve.geosolve.view.book.articles.polygon.triangle.PythagoreanTheorem
 import kotlin.math.hypot
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -38,7 +39,7 @@ object RightTriangle : TypeFigure(Triangle) {
                     hypotenuse.setDependentValueGraph(
                         valueGetter,
                         listOf(oneLeg, twoLeg),
-                        RightTriangleRules.pythagorean_theorem.UnknownHypotStep(hypotenuse, oneLeg, twoLeg)
+                        PythagoreanTheorem.UnknownHypotStep(hypotenuse, oneLeg, twoLeg)
                     )
                 }
             }
@@ -60,7 +61,7 @@ object RightTriangle : TypeFigure(Triangle) {
                     legOpposite30Angle.setDependentValueGraph(
                         valueGetter,
                         listOf(degree30Angle, hypotenuse),
-                        RightTriangleRules.angle_30_degrees.MyStep(degree30Angle, legOpposite30Angle, hypotenuse)
+                        Angle30Degrees.Step(degree30Angle, legOpposite30Angle, hypotenuse)
                     )
                 }
             }
@@ -85,7 +86,7 @@ object RightTriangle : TypeFigure(Triangle) {
                         unknownLeg.setDependentValueGraph(
                             valueGetter,
                             listOf(knownLeg, hypotenuse),
-                            RightTriangleRules.pythagorean_theorem.UnknownLegStep(unknownLeg, hypotenuse, knownLeg)
+                            PythagoreanTheorem.UnknownLegStep(unknownLeg, hypotenuse, knownLeg)
                         )
                     }
                 }

@@ -7,17 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_article.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.view.article.items.TitleItem
-import open.geosolve.geosolve.view.book.articles.*
+import open.geosolve.geosolve.view.book.articles.Article
+import open.geosolve.geosolve.view.book.articles.polygon.quadrangle.ParallelLines
+import open.geosolve.geosolve.view.book.articles.polygon.quadrangle.RightAngles
+import open.geosolve.geosolve.view.book.articles.polygon.triangle.Angle30Degrees
+import open.geosolve.geosolve.view.book.articles.polygon.triangle.TriangleAnglesSum
+import open.geosolve.geosolve.view.book.articles.polygon.triangle.PythagoreanTheorem
 import open.geosolve.geosolve.view.helpers.inflate
 
 class BookRecyclerAdapter : RecyclerView.Adapter<BookRecyclerAdapter.BookHolder>() {
 
-    private val articlesList: MutableList<Article> = mutableListOf( // TODO(i don't know what did with that)
-        TriangleRules.know_2_unknown_1_angle,
-        RightTriangleRules.angle_30_degrees,
-        RightTriangleRules.pythagorean_theorem,
-        parallel_line,
-        right_angles
+    val articlesList: MutableList<Article> = mutableListOf(
+        TriangleAnglesSum,
+        Angle30Degrees,
+        PythagoreanTheorem,
+        ParallelLines,
+        RightAngles
     )
 
     class BookHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

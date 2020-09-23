@@ -2,7 +2,7 @@ package open.geosolve.geosolve.model.solve.types
 
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.solve.TypeFigure
-import open.geosolve.geosolve.view.book.articles.TriangleRules
+import open.geosolve.geosolve.view.book.articles.polygon.triangle.TriangleAnglesSum
 import kotlin.math.round
 
 object Triangle : TypeFigure(Polygon) {
@@ -28,7 +28,7 @@ object Triangle : TypeFigure(Polygon) {
                     figure.mAngles.first { it.getValue() == null }.setDependentValueGraph(
                         valueGetter,
                         known_angles,
-                        TriangleRules.know_2_unknown_1_angle.MyStep(unknown_angle, known_angles[0], known_angles[1]))
+                        TriangleAnglesSum.Step(unknown_angle, known_angles[0], known_angles[1]))
                 }
             }
     }

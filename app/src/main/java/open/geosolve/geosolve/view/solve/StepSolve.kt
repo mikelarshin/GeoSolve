@@ -6,7 +6,7 @@ import open.geosolve.geosolve.view.helpers.formatFormula
 import open.geosolve.geosolve.view.helpers.formatVerbal
 import open.geosolve.geosolve.view.book.articles.Article
 
-abstract class StepSolve {
+abstract class StepSolve(val article: Article) {
     abstract val verbalID: Int
     abstract val expressionID: Int
 
@@ -19,6 +19,4 @@ abstract class StepSolve {
         get() = formatFormula(this)
     val expression: CharSequence
         get() = formatExpression(this)
-
-    abstract val article: Article
 }
