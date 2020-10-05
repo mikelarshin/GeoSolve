@@ -4,9 +4,9 @@
 </a>
 </p>
 
-<p align="center">GeoSolve</p>
+# <p align="center">GeoSolve</p>
 
-# Android app
+### Android app
 
 - This is an **interactive** geometry **tutorial**.
 
