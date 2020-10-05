@@ -5,13 +5,21 @@
 </p>
 
 # <p align="center">GeoSolve</p>
-### This is an Android app GeoSolve.
+
+# Android app
 
 - This is an **interactive** geometry **tutorial**.
 
 - It can **solve** and **explain** **geometric problems** step by step.
 
 - To **visualize** the **geometrical laws**.
+
+<p align="center">
+  <img width="400" src="http://quackest.ru/GeoSolve/img/four.gif" alt="GeoSolve logo">
+  <img width="400" src="http://quackest.ru/GeoSolve/img/three.gif" alt="GeoSolve logo">
+  <img width="400" src="http://quackest.ru/GeoSolve/img/two.gif" alt="GeoSolve logo">
+  <img width="400" src="http://quackest.ru/GeoSolve/img/one.gif" alt="GeoSolve logo">
+</p>
 
 ## Links
 
