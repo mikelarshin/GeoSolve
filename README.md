@@ -4,7 +4,7 @@
 </a>
 </p>
 
-# <p align="center">GeoSolve</p>
+<p align="center">GeoSolve</p>
 
 # Android app
 
