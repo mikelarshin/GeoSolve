@@ -4,6 +4,7 @@ import androidx.navigation.Navigation.findNavController
 import kotlinx.android.synthetic.main.item_example_figure.view.*
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
 import open.geosolve.geosolve.model.canvas.tools.Tool
 import open.geosolve.geosolve.view.article.ArticleFragmentDirections.actionToExampleFigure
 import open.geosolve.geosolve.view.article.ArticleRecyclerAdapter

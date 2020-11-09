@@ -27,21 +27,23 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
 
     private val presenter by moxyPresenter { CanvasScreenPresenter() }
     private var tool: Tool = AddTool
-    private var dataCanvas = CanvasData()
+    private lateinit var dataCanvas: CanvasData
     private lateinit var canvasView: TouchCanvasView
 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupLayout() {
         canvasView = layout.canvasView
-        canvasView.dataCanvas = dataCanvas
+        dataCanvas = canvasView.dataCanvas!!
         canvasView.canvasPresenter.tool = tool
         canvasView.canvasPresenter.canvasScreenPresenter = presenter
 
         layout.show_solve_button.setOnClickListener {
+            dataCanvas.makeActive()
             presenter.showSolveClick()
         }
 
         layout.clear_button.setOnClickListener {
+            dataCanvas.makeActive()
             presenter.clearButtonClick()
         }
 

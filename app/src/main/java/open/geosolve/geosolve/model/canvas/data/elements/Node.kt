@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.elements
 
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allNodes
 import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
@@ -9,6 +10,21 @@ import open.geosolve.geosolve.view.canvas.draw.DrawConstant.systemCoordinate
 import open.geosolve.geosolve.view.canvas.draw.PaintConstant.POINT_SIZE
 
 class Node(foundX: Float, foundY: Float) : Element, XY {
+
+    companion object {
+        fun setNodeChars() {
+            val circleNodeList = CanvasData.allCircles.map { it.centerNode }
+            circleNodeList.forEach { it.char = "O" }
+
+            val alphabet1 = listOf("") + (('A'..'Z').toList())
+            val alphabet2 = ('A'..'Z').toList()
+
+            val nodes = allNodes.filter { it !in circleNodeList }
+
+            for (index in nodes.indices)
+                nodes[index].char = "${alphabet1[index / 26]}${alphabet2[index % 26]}"
+        }
+    }
 
     override var x: Float = foundX
         get() = systemCoordinate.convertX(field)

@@ -7,6 +7,7 @@ import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allNodes
 import open.geosolve.geosolve.model.canvas.data.elements.Circle
 import open.geosolve.geosolve.model.canvas.data.elements.Node
+import open.geosolve.geosolve.model.canvas.data.elements.Node.Companion.setNodeChars
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.math.XYPoint
 
@@ -47,17 +48,4 @@ abstract class BaseTool : Tool { // BaseTool реализует передвиж
     }
 
     open fun onTouchElement(point: XYPoint) {}
-
-    private fun setNodeChars() {
-        val circleNodeList = allCircles.map { it.centerNode }
-        circleNodeList.forEach { it.char = "O" }
-
-        val alphabet1 = listOf("") + (('A'..'Z').toList())
-        val alphabet2 = ('A'..'Z').toList()
-
-        val nodes = allNodes.filter { it !in circleNodeList }
-
-        for (index in nodes.indices)
-            nodes[index].char = "${alphabet1[index / 26]}${alphabet2[index % 26]}"
-    }
 }

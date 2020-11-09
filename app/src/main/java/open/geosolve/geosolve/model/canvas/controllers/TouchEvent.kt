@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.model.canvas.controllers
 
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigure
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allLines
 import open.geosolve.geosolve.model.canvas.data.elements.Circle
@@ -7,7 +8,6 @@ import open.geosolve.geosolve.model.canvas.data.elements.Line
 import open.geosolve.geosolve.model.canvas.data.elements.Node
 import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.math.XYPoint
-import open.geosolve.geosolve.model.canvas.tools.AddTool.lastNode
 
 object TouchEvent {
 
@@ -32,9 +32,9 @@ object TouchEvent {
     }
 
     fun onTouchPoint(touchNode: Node) {
-        if (touchNode != lastNode && lastNode != null) {  // если нажатая точка и конечная точка линии не равны и прошлая точка есть
+        if (touchNode != activeCanvasData.lastNode && activeCanvasData.lastNode != null) {  // если нажатая точка и конечная точка линии не равны и прошлая точка есть
 
-            val newLine = Line(lastNode!!, touchNode)
+            val newLine = Line(activeCanvasData.lastNode!!, touchNode)
             if (!allLines.any { it.equal(newLine) }) { // добавляем линию только если нету такой же
                 activeFigure.addLine(newLine)
 
@@ -43,6 +43,6 @@ object TouchEvent {
                 activeFigure.updateAngles()
             }
         }
-        lastNode = touchNode
+        activeCanvasData.lastNode = touchNode
     }
 }

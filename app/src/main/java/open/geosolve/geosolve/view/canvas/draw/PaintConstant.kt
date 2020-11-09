@@ -24,42 +24,42 @@ object PaintConstant {
             field = value!!
 
             mPaintNode.apply {
-                color = canvasContext!!.getColor(R.color.color_node) // Not error
+                color = canvasContext!!.getColor(R.color.color_node)
                 strokeWidth = POINT_SIZE
             }
             mPaintLine.apply {
-                color = canvasContext!!.getColor(R.color.color_line) // Not error
+                color = canvasContext!!.getColor(R.color.color_line)
                 strokeWidth = LINE_WIDTH
             }
             mPaintCircle.apply {
-                color = canvasContext!!.getColor(R.color.color_circle) // Not error
+                color = canvasContext!!.getColor(R.color.color_circle)
                 style = Paint.Style.STROKE
                 strokeWidth = LINE_WIDTH
             }
             mPaintNodeMark.apply {
-                color = canvasContext!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark)
                 strokeWidth = POINT_SIZE
             }
             mPaintLineMark.apply {
-                color = canvasContext!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark)
                 strokeWidth = LINE_WIDTH
             }
             mPaintMarkCircle.apply {
-                color = canvasContext!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark)
                 style = Paint.Style.STROKE
                 strokeWidth = LINE_WIDTH
             }
             mPaintText.apply {
-                color = canvasContext!!.getColor(R.color.canvas_text_color) // Not error
+                color = canvasContext!!.getColor(R.color.canvas_text_color)
                 textSize = CHAR_SIZE
             }
             mPaintAngle.apply {
-                color = canvasContext!!.getColor(R.color.color_angle_arc) // Not error
+                color = canvasContext!!.getColor(R.color.color_angle_arc)
                 strokeWidth = LINE_WIDTH
                 style = Paint.Style.STROKE
             }
             mPaintAngleMark.apply {
-                color = canvasContext!!.getColor(R.color.color_mark) // Not error
+                color = canvasContext!!.getColor(R.color.color_mark)
                 strokeWidth = LINE_WIDTH
                 style = Paint.Style.STROKE
             }

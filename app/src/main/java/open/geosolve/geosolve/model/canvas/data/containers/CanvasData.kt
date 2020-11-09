@@ -10,6 +10,8 @@ import open.geosolve.geosolve.model.canvas.math.XYPoint
 import java.io.Serializable
 
 class CanvasData : Serializable {
+    var lastNode: Node? = null
+
     init {
         makeActive()
     }

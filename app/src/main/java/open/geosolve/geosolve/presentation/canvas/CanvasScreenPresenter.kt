@@ -6,12 +6,13 @@ import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import open.geosolve.geosolve.R
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigureList
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.CallBackSolveUi
 import open.geosolve.geosolve.model.solve.SolveUtil
-import open.geosolve.geosolve.model.canvas.tools.AddTool.lastNode
 import open.geosolve.geosolve.model.canvas.tools.SetValueTool
 
 @InjectViewState
@@ -59,7 +60,7 @@ class CanvasScreenPresenter : MvpPresenter<CanvasScreenView>() {
     }
 
     fun clearButtonClick() {
-        lastNode = null
+        activeCanvasData.lastNode = null
 
         activeFigureList.clear()
         find = null

@@ -14,7 +14,7 @@ class ExampleFigureFragment : MvpFragmentX(R.layout.fragment_example_figure) {
 
         val updateForString = args.updateForString as () -> CharSequence
 
-        layout.fullExampleCanvasView.dataCanvas.makeActive()
+        layout.fullExampleCanvasView.dataCanvas!!.makeActive()
         layout.exampleText.text = updateForString()
 
         layout.fullExampleCanvasView.canvasPresenter.customTool = object : Tool {

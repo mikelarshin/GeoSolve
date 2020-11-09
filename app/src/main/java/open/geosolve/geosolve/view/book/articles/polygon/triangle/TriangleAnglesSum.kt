@@ -3,6 +3,7 @@ package open.geosolve.geosolve.view.book.articles.polygon.triangle
 import android.text.SpannableStringBuilder
 import open.geosolve.geosolve.R
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allAngles
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.elements.Angle

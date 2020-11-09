@@ -28,7 +28,12 @@ abstract class DrawCanvasView : View {
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    var dataCanvas = CanvasData()
+    var dataCanvas: CanvasData? = null
+        get() {
+            if(field == null)
+                field = CanvasData()
+            return field
+        }
 
     fun updateScale() {
         DrawConstant.heightCanvas = height
@@ -38,7 +43,7 @@ abstract class DrawCanvasView : View {
 
         PaintConstant.canvasContext = context
 
-        dataCanvas.makeActive()
+        dataCanvas!!.makeActive()
     }
 
     override fun onDraw(canvas: Canvas) {

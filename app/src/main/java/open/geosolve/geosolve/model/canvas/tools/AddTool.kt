@@ -4,6 +4,7 @@ import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchCanvas
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchCircleLine
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchLine
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchPoint
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigure
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigureList
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
@@ -13,7 +14,6 @@ import open.geosolve.geosolve.model.canvas.data.elements.Node
 import open.geosolve.geosolve.model.canvas.math.XYPoint
 
 object AddTool : BaseTool() {
-    var lastNode: Node? = null
 
     override fun onTouchMove(point: XYPoint) {
         super.onTouchMove(point)
@@ -37,6 +37,6 @@ object AddTool : BaseTool() {
         }
 
         if (activeFigure.isClose())
-            lastNode = null
+            activeCanvasData.lastNode = null
     }
 }

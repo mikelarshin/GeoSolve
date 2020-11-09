@@ -1,5 +1,6 @@
 package open.geosolve.geosolve.model.canvas.tools
 
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.math.XYPoint
 
@@ -10,7 +11,7 @@ object DeleteTool : BaseTool() {
 
         if (find == selectElement)
             find = null
-        if (AddTool.lastNode == selectElement)
-            AddTool.lastNode = null
+        if (activeCanvasData.lastNode == selectElement)
+            activeCanvasData.lastNode = null
     }
 }
