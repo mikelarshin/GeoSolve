@@ -1,10 +1,10 @@
 package open.geosolve.geosolve.model.canvas.tools
 
-import open.geosolve.geosolve.model.canvas.controllers.AllCircles
-import open.geosolve.geosolve.model.canvas.controllers.AllNodes
-import open.geosolve.geosolve.model.canvas.controllers.ElementGetter.getElement
-import open.geosolve.geosolve.model.canvas.controllers.Figure
-import open.geosolve.geosolve.model.canvas.controllers.FigureList
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigure
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigureList
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allCircles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allNodes
 import open.geosolve.geosolve.model.canvas.data.elements.Circle
 import open.geosolve.geosolve.model.canvas.data.elements.Node
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
@@ -20,7 +20,7 @@ abstract class BaseTool : Tool { // BaseTool реализует передвиж
     }
 
     override fun onTouchDown(point: XYPoint) {
-        getElement(point)?.let { element ->
+        activeCanvasData.getElement(point)?.let { element ->
             selectElement = element
         }
     }
@@ -42,20 +42,20 @@ abstract class BaseTool : Tool { // BaseTool реализует передвиж
 
         setNodeChars()
 
-        if (Figure.isComplete())
-            FigureList.nextFigure() // переход на следующую фигуру
+        if (activeFigure.isComplete())
+            activeFigureList.nextFigure() // переход на следующую фигуру
     }
 
     open fun onTouchElement(point: XYPoint) {}
 
     private fun setNodeChars() {
-        val circleNodeList = AllCircles.map { it.centerNode }
+        val circleNodeList = allCircles.map { it.centerNode }
         circleNodeList.forEach { it.char = "O" }
 
         val alphabet1 = listOf("") + (('A'..'Z').toList())
         val alphabet2 = ('A'..'Z').toList()
 
-        val nodes = AllNodes.filter { it !in circleNodeList }
+        val nodes = allNodes.filter { it !in circleNodeList }
 
         for (index in nodes.indices)
             nodes[index].char = "${alphabet1[index / 26]}${alphabet2[index % 26]}"

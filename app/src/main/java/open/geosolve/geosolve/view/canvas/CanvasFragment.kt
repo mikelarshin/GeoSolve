@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.android.synthetic.main.fragment_canvas.view.*
 import moxy.ktx.moxyPresenter
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.canvas.controllers.FigureList
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigureList
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.canvas.tools.*
 import open.geosolve.geosolve.presentation.canvas.CanvasScreenPresenter
@@ -122,6 +122,6 @@ class CanvasFragment : MvpFragmentX(R.layout.fragment_canvas), CanvasScreenView 
     }
 
     override fun showTypeFigure() { // TODO(DELETE_THIS_DEBUGGER)
-        DELETE_THIS_DEBUGGER.text = FigureList.joinToString(separator = "\n\n") { "$it" }
+        DELETE_THIS_DEBUGGER.text = activeFigureList.joinToString(separator = "\n\n") { "$it" }
     }
 }

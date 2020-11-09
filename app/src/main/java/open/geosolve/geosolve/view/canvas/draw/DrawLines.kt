@@ -2,9 +2,9 @@ package open.geosolve.geosolve.view.canvas.draw
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import open.geosolve.geosolve.model.canvas.controllers.AllLines
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allLines
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.elements.Line
-import open.geosolve.geosolve.model.canvas.controllers.find
 import open.geosolve.geosolve.view.helpers.formatValueString
 import open.geosolve.geosolve.view.canvas.draw.PaintConstant.CHAR_SIZE
 import open.geosolve.geosolve.view.canvas.draw.PaintConstant.mPaintLine
@@ -13,7 +13,7 @@ import open.geosolve.geosolve.view.canvas.draw.PaintConstant.mPaintText
 
 object DrawLines {
     fun drawLines(canvas: Canvas) {
-        for (line in AllLines)
+        for (line in allLines)
             drawLine(canvas, line)
     }
 
@@ -24,7 +24,7 @@ object DrawLines {
     }
 
     fun drawLinesValue(canvas: Canvas) {
-        for (line in AllLines) {
+        for (line in allLines) {
             if (line.getValue() == null) continue
 
             val text = formatValueString(line)

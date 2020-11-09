@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.elements
 
-import open.geosolve.geosolve.model.canvas.controllers.AllLines
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allLines
 import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
@@ -48,7 +48,7 @@ class Line(first: Node, second: Node) : SolveGraph(), Bind, Element {
 //        secondNode.lines.remove(this)
 //        angles.forEach { it.remove() }
 
-        AllLines.remove(this)
+        allLines.remove(this)
     }
 
     override fun inRadius(point: XYPoint): Boolean {

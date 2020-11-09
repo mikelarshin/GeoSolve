@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.elements
 
-import open.geosolve.geosolve.model.canvas.controllers.AllNodes
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allNodes
 import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.math.XY
@@ -56,7 +56,7 @@ class Node(foundX: Float, foundY: Float) : Element, XY {
         angles.forEach { it.remove() }
         circle?.remove()
 
-        AllNodes.remove(this)
+        allNodes.remove(this)
     }
 
     override fun inRadius(point: XYPoint): Boolean {

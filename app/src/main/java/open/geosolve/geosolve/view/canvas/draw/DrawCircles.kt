@@ -1,15 +1,15 @@
 package open.geosolve.geosolve.view.canvas.draw
 
 import android.graphics.Canvas
-import open.geosolve.geosolve.model.canvas.controllers.AllCircles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allCircles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.elements.Circle
-import open.geosolve.geosolve.model.canvas.controllers.find
 import open.geosolve.geosolve.view.helpers.formatValueString
 import open.geosolve.geosolve.view.canvas.draw.PaintConstant.CHAR_SIZE
 
 object DrawCircles {
     fun drawCircles(canvas: Canvas) {
-        for (circle in AllCircles) {
+        for (circle in allCircles) {
             val centerNode = circle.centerNode
 
             canvas.drawCircle(
@@ -49,7 +49,7 @@ object DrawCircles {
     }
 
     fun drawCirclesValue(canvas: Canvas) {
-        for (circle in AllCircles) {
+        for (circle in allCircles) {
             if (circle.getValue() == null) continue
 
             val text = formatValueString(circle)

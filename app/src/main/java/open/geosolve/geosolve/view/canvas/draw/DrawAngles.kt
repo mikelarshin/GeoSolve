@@ -3,9 +3,9 @@ package open.geosolve.geosolve.view.canvas.draw
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import open.geosolve.geosolve.model.canvas.controllers.AllAngles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allAngles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.elements.Angle
-import open.geosolve.geosolve.model.canvas.controllers.find
 import open.geosolve.geosolve.model.canvas.math.XYPoint
 import open.geosolve.geosolve.model.canvas.math.MathUtil.getDegree
 import open.geosolve.geosolve.view.canvas.draw.PaintConstant.ANGLE_ARC_RADIUS
@@ -17,7 +17,7 @@ import open.geosolve.geosolve.view.helpers.formatValueString
 
 object DrawAngles {
     fun drawAngles(canvas: Canvas) {
-        for (angle in AllAngles) {
+        for (angle in allAngles) {
             drawAngle(canvas, angle)
         }
     }
@@ -29,7 +29,7 @@ object DrawAngles {
     }
 
     fun drawAnglesValue(canvas: Canvas) {
-        for (angle in AllAngles) {
+        for (angle in allAngles) {
             if (angle.getValue() == null) continue
                 // TODO() сделать отрисовку относительно угла
             canvas.drawText(

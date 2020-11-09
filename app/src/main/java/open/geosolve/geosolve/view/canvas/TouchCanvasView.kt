@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.canvas.controllers.canvasData
 import open.geosolve.geosolve.model.canvas.math.XYPoint
 import open.geosolve.geosolve.presentation.canvas.CanvasPresenter
 import open.geosolve.geosolve.view.canvas.draw.xToDecart

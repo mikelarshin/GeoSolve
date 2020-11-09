@@ -1,6 +1,7 @@
 package open.geosolve.geosolve.model.solve
 
-import open.geosolve.geosolve.model.canvas.controllers.*
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeCanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.solve.types.*
@@ -21,7 +22,7 @@ object SolveUtil {
     }
 
     fun solveGraphs() {
-        for (figure in FigureList) {
+        for (figure in activeCanvasData.figureList) {
             figure.clearGraph()
             figure.setType()
             figure.typesDeque.forEach {
@@ -29,7 +30,7 @@ object SolveUtil {
             }
         }
 
-        for (element in (AllLines + AllAngles + AllCircles))
+        for (element in (activeCanvasData.allLines + activeCanvasData.allAngles + activeCanvasData.allCircles))
             (element as SolveGraph).solve()
     }
 
@@ -62,10 +63,7 @@ object SolveUtil {
         callback.solveIsFound(solveList)
     }
 
-    private fun getList(
-        found: SolveGraph,
-        stepList: MutableList<SolveGraph> = mutableListOf()
-    ): List<SolveGraph> {
+    private fun getList(found: SolveGraph, stepList: MutableList<SolveGraph> = mutableListOf()): List<SolveGraph> {
         if (found.whereFromValueList == null)
             return listOf() // dead end graph
 

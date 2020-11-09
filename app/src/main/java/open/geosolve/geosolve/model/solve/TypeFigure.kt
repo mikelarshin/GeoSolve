@@ -2,7 +2,7 @@ package open.geosolve.geosolve.model.solve
 
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 
-abstract class TypeFigure(parentType: TypeFigure?) { // null only in AnyFigure
+abstract class TypeFigure(parentType: TypeFigure?) { // null only in root AnyFigure
     abstract fun isMatch(figure: Figure): Boolean
     open fun setGraphs(figure: Figure) {}
     val childTypes: MutableSet<TypeFigure> = mutableSetOf()

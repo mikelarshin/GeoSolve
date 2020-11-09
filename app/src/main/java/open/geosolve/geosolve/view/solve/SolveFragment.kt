@@ -29,11 +29,7 @@ class SolveFragment : MvpFragmentX(R.layout.fragment_solve), SolveScreenView {
     private fun setupRecycler() {
         layout.solveRecycler.adapter = adapter
         layout.solveRecycler.layoutManager = LinearLayoutManager(activity)
-        layout.solveRecycler.addItemDecoration(
-            DividerItemDecoration(
-                activity
-            )
-        )
+        layout.solveRecycler.addItemDecoration(DividerItemDecoration(activity))
 
         val args = fromBundle(requireArguments())
         val solveList = args.solveList as List<SolveGraph>

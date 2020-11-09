@@ -1,10 +1,7 @@
 package open.geosolve.geosolve.model.canvas.controllers
 
-import open.geosolve.geosolve.model.canvas.controllers.ElementUpdaters.updateAngles
-import open.geosolve.geosolve.model.canvas.controllers.ElementUpdaters.updateLines
-import open.geosolve.geosolve.model.canvas.controllers.ElementUpdaters.updateNodes
-import open.geosolve.geosolve.model.canvas.controllers.FigureController.addLine
-import open.geosolve.geosolve.model.canvas.controllers.FigureController.addNode
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigure
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allLines
 import open.geosolve.geosolve.model.canvas.data.elements.Circle
 import open.geosolve.geosolve.model.canvas.data.elements.Line
 import open.geosolve.geosolve.model.canvas.data.elements.Node
@@ -13,6 +10,7 @@ import open.geosolve.geosolve.model.canvas.math.XYPoint
 import open.geosolve.geosolve.model.canvas.tools.AddTool.lastNode
 
 object TouchEvent {
+
     fun onTouchCanvas(point: XYPoint) {
         onTouch(point)
     }
@@ -28,7 +26,7 @@ object TouchEvent {
     private fun onTouch(point: XYPoint, bind: Bind? = null) {
         val newNode = point.toNode()
         newNode.bind = bind
-        addNode(newNode)
+        activeFigure.addNode(newNode)
 
         onTouchPoint(newNode)
     }
@@ -37,12 +35,12 @@ object TouchEvent {
         if (touchNode != lastNode && lastNode != null) {  // если нажатая точка и конечная точка линии не равны и прошлая точка есть
 
             val newLine = Line(lastNode!!, touchNode)
-            if (!AllLines.any { it.equal(newLine) }) { // добавляем линию только если нету такой же
-                addLine(newLine)
+            if (!allLines.any { it.equal(newLine) }) { // добавляем линию только если нету такой же
+                activeFigure.addLine(newLine)
 
-                updateNodes()
-                updateLines()
-                updateAngles()
+                activeFigure.updateNodes()
+                activeFigure.updateLines()
+                activeFigure.updateAngles()
             }
         }
         lastNode = touchNode

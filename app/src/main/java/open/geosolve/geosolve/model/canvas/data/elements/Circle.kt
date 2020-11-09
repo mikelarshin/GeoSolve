@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.elements
 
-import open.geosolve.geosolve.model.canvas.controllers.AllCircles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allCircles
 import open.geosolve.geosolve.model.canvas.data.generalized.Bind
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
@@ -52,7 +52,7 @@ class Circle(val centerNode: Node) : SolveGraph(), Bind, Element {
         centerNode.circle = null
         centerNode.remove()
 
-        AllCircles.remove(this)
+        allCircles.remove(this)
     }
 
     override fun inRadius(point: XYPoint): Boolean {

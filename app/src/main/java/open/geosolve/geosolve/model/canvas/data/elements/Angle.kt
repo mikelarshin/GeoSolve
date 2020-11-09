@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.model.canvas.data.elements
 
-import open.geosolve.geosolve.model.canvas.controllers.AllAngles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allAngles
 import open.geosolve.geosolve.model.canvas.data.generalized.Element
 import open.geosolve.geosolve.model.canvas.data.generalized.SolveGraph
 import open.geosolve.geosolve.model.canvas.math.MathUtil
@@ -57,7 +57,7 @@ class Angle(private val startLine: Line, private val finalLine: Line) : SolveGra
 //        startLine.remove()
 //        finalLine.remove()
 
-        AllAngles.remove(this)
+        allAngles.remove(this)
     }
 
     override fun toString(): String = "∠$startNode$angleNode$finalNode"

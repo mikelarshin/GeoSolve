@@ -1,6 +1,6 @@
 package open.geosolve.geosolve.view.helpers
 
-import open.geosolve.geosolve.model.canvas.controllers.AllAngles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allAngles
 import open.geosolve.geosolve.model.canvas.math.MathUtil
 import open.geosolve.geosolve.model.canvas.math.XYPoint
 import open.geosolve.geosolve.model.canvas.tools.AddTool
@@ -22,7 +22,7 @@ fun makeTriangleTwo() {
 }
 
 fun makeRealAngles() {
-    AllAngles.forEach { angle ->
+    allAngles.forEach { angle ->
         angle.setDependentValueDraw { MathUtil.getDegree(angle).absoluteValue }
     }
 }

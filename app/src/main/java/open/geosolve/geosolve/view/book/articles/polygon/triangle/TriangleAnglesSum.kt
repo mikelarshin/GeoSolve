@@ -2,9 +2,9 @@ package open.geosolve.geosolve.view.book.articles.polygon.triangle
 
 import android.text.SpannableStringBuilder
 import open.geosolve.geosolve.R
-import open.geosolve.geosolve.model.canvas.controllers.AllAngles
-import open.geosolve.geosolve.model.canvas.controllers.find
 import open.geosolve.geosolve.model.canvas.data.containers.CanvasData
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.allAngles
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.find
 import open.geosolve.geosolve.model.canvas.data.elements.Angle
 import open.geosolve.geosolve.model.canvas.tools.MarkTool
 import open.geosolve.geosolve.model.canvas.tools.MoveTool
@@ -30,7 +30,7 @@ object TriangleAnglesSum : Article() {
                     R.string.ruleExample_triangle_know_2_unknown_1_angle_check,
                     R.style.AnswerText
                 ),
-                AllAngles.toList()
+                allAngles.toList()
             ),
             R.dimen.BIG_TEXT_SIZE
         )
@@ -43,7 +43,7 @@ object TriangleAnglesSum : Article() {
             sb
         } else {
 
-            val angles = (linkedSetOf(find!!) + AllAngles).toList()
+            val angles = (linkedSetOf(find!!) + allAngles).toList()
 
             sb.apply {
                 append(
@@ -81,7 +81,7 @@ object TriangleAnglesSum : Article() {
             makeTriangleTwo()
             makeRealAngles()
 
-            find = AllAngles.find { it.getValue() == 90f }
+            find = allAngles.find { it.getValue() == 90f }
         }
     }
 

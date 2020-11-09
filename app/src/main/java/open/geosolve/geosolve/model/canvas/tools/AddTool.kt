@@ -1,12 +1,11 @@
 package open.geosolve.geosolve.model.canvas.tools
 
-import open.geosolve.geosolve.model.canvas.controllers.Figure
-import open.geosolve.geosolve.model.canvas.controllers.FigureController.addCircle
-import open.geosolve.geosolve.model.canvas.controllers.FigureList
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchCanvas
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchCircleLine
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchLine
 import open.geosolve.geosolve.model.canvas.controllers.TouchEvent.onTouchPoint
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigure
+import open.geosolve.geosolve.model.canvas.data.containers.CanvasData.Companion.activeFigureList
 import open.geosolve.geosolve.model.canvas.data.containers.Figure
 import open.geosolve.geosolve.model.canvas.data.elements.Circle
 import open.geosolve.geosolve.model.canvas.data.elements.Line
@@ -20,11 +19,11 @@ object AddTool : BaseTool() {
         super.onTouchMove(point)
 
         if (selectElement == null && moveQuantity == 6) {
-            if (Figure.isNotEmpty())
-                FigureList.add(Figure()) // переходим на следующую фигуру
+            if (activeFigure.isNotEmpty())
+                activeFigureList.add(Figure()) // переходим на следующую фигуру
 
             val circle = Circle(point.toNode())
-            addCircle(circle)
+            activeFigure.addCircle(circle)
             selectElement = circle
         }
     }
@@ -37,7 +36,7 @@ object AddTool : BaseTool() {
             null -> onTouchCanvas(point)
         }
 
-        if (Figure.isClose())
+        if (activeFigure.isClose())
             lastNode = null
     }
 }

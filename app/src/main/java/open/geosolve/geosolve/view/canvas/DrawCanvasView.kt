@@ -38,7 +38,7 @@ abstract class DrawCanvasView : View {
 
         PaintConstant.canvasContext = context
 
-        dataCanvas.selectIt()
+        dataCanvas.makeActive()
     }
 
     override fun onDraw(canvas: Canvas) {
