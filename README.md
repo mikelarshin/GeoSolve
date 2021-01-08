@@ -8,11 +8,11 @@
 
 ### Android app
 
-- This is an `interactive` geometry `tutorial`.
+- This is an **interactive** geometry **tutorial**.
 
-- It can `solve` and `explain` `geometric problems` step by step.
+- It can **solve** and **explain** **geometric problems** step by step.
 
-- To `visualize` the `geometrical laws`.
+- To **visualize** the **geometrical laws**.
 
 <p align="center">
   <img width="400" src="http://quackest.ru/GeoSolve/img/four.gif" alt="GeoSolve logo">
@@ -33,8 +33,8 @@ I use `Kotlin`. To build this app, you need to install the `Kotlin plugin` in yo
 
 ## Technology stack
 
-+ Moxy MVP Pattern
-+ Navigation Architecture Component
++ `Moxy MVP Pattern`
++ `Navigation Architecture Component`
 
 ## License
 
