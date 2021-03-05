@@ -21,6 +21,14 @@
   <img width="400" src="http://quackest.ru/GeoSolve/img/one.gif" alt="GeoSolve logo">
 </p>
 
+## Algorithm for solving geometric problems
+
+- All possible figures detecting and classifying. Rectangle, Triangle, Circle, etc.
+
+- The figure have elements, element it's an any part of figure with value - length, angle. The value is either known or needs to be found. On the elements of figure building the graph of value dependencies.
+
+- The graph is used to find the shortest solution path.
+
 ## Links
 
 [Project presentation](https://docs.google.com/presentation/d/1nttQnlUxhy-nD0YibZ177cedeqCFM-qJlgAslnAMqkA/edit?usp=sharing)
